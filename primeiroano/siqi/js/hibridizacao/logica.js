@@ -73,7 +73,8 @@ function modHMudaTipo(tipo){
 function modHRenderLista(){
   var listDiv = $('redox-reactions-list');
   if(!listDiv) return;
-  var itens = HIBRIDIZACOES_NUVENS.filter(function(h){
+  var todos = (typeof modHObterListaCompleta === 'function') ? modHObterListaCompleta() : HIBRIDIZACOES_NUVENS;
+  var itens = todos.filter(function(h){
     return _modHTipoAtual === 'todos' || h.hibridizacao === _modHTipoAtual;
   });
 
@@ -90,6 +91,7 @@ function modHRenderLista(){
   }
 
   var LABEL_HIB = { sp:'sp', sp2:'sp²', sp3:'sp³', sp3d:'sp³d', sp3d2:'sp³d²' };
+  var LABEL_NIVEL = { basico:'básico', intermediario:'intermediário', avancado:'avançado', catalogo:'catálogo' };
   itens.forEach(function(h){
     var item = document.createElement('div');
     item.className = 'redox-reaction-item';
@@ -99,7 +101,7 @@ function modHRenderLista(){
     item.innerHTML =
       '<div class="reaction-head">'+
         '<span class="reaction-num">'+LABEL_HIB[h.hibridizacao]+'</span>'+
-        '<span class="reaction-diff">'+h.nivel+'</span>'+
+        '<span class="reaction-diff">'+(LABEL_NIVEL[h.nivel]||h.nivel)+'</span>'+
       '</div>'+
       '<div class="reaction-title">'+h.nome+'</div>'+
       '<code class="reaction-eq">'+h.formula+'</code>'+
@@ -132,6 +134,7 @@ function modHSelecionaComposto(h){
    Nomenclatura) ao lado da contagem de domínios. */
 function modHRenderDetalhe(h){
   var LABEL_HIB = { sp:'sp', sp2:'sp²', sp3:'sp³', sp3d:'sp³d', sp3d2:'sp³d²' };
+  var LABEL_NIVEL = { basico:'básico', intermediario:'intermediário', avancado:'avançado', catalogo:'catálogo' };
   var hibLabel = LABEL_HIB[h.hibridizacao];
 
   var domHtml = '';
@@ -155,8 +158,8 @@ function modHRenderDetalhe(h){
         '<span class="modh-hib-geo">'+h.geometriaEletronica+'</span>'+
       '</div>'+
 
-      '<p class="redox-subhead">Como os orbitais se misturam</p>'+
-      '<div class="orb-diagrama-wrap"><div id="modh-orbitais" class="orb-diagrama-canvas"></div></div>'+
+      '<p class="redox-subhead">Estrutura molecular <span class="silq-selo" title="Renderizado no estilo do SILQ">via SILQ</span></p>'+
+      '<div id="modh-lewis-2d" class="silq2d-canvas silq2d-canvas--compacto"></div>'+
 
       '<p class="redox-subhead">Geometria eletrônica × geometria molecular</p>'+
       '<div class="modh-geo-compara">'+
@@ -174,22 +177,30 @@ function modHRenderDetalhe(h){
       '<p class="redox-subhead">O que está acontecendo nos orbitais</p>'+
       '<p class="modh-explicacao">'+h.explicacaoOrbitais+'</p>'+
 
-      '<p class="redox-application"><strong>Aplicação:</strong> '+h.aplicacao+'</p>'+
+      (h.aplicacao ? '<p class="redox-application"><strong>Aplicação:</strong> '+h.aplicacao+'</p>' : '') +
       '<p class="redox-fonte"><strong>Fonte:</strong> '+h.fonte+'</p>';
 
-  /* ── Central (GERADO): hero + estrutura 2D real (motor do SILQ) + análise ── */
+  /* ── Central (GERADO): hero compacto + DIAGRAMA ANIMADO GRANDE
+     (elemento primário da view, pedido explícito do usuário: "uma
+     área grande no centro com gatilhos que disparem uma animação
+     controlada") + o resto da análise abaixo. ── */
   var central = $('redox-central-content');
   if(central){
     central.innerHTML =
-      '<div class="redox-hero">'+
-        '<p class="redox-hero-label">'+h.nivel+' · hibridização '+hibLabel+'</p>'+
+      '<div class="redox-hero redox-hero--compacto">'+
+        '<p class="redox-hero-label">'+(LABEL_NIVEL[h.nivel]||h.nivel)+' · hibridização '+hibLabel+'</p>'+
         '<h2 class="redox-hero-title">'+h.nome+' <code class="modh-hero-formula">'+h.formula+'</code></h2>'+
-        '<p class="redox-hero-desc">Átomo central: <strong>'+h.atomoCentral+'</strong> — '+h.nDominios+' domínios eletrônicos → hibridização <strong>'+hibLabel+'</strong></p>'+
       '</div>'+
-      '<div class="modh-estrutura-wrap">'+
-        '<p class="ficha-section-label">Estrutura <span class="silq-selo" title="Renderizado no estilo do SILQ">via SILQ</span></p>'+
-        '<div id="modh-lewis-2d" class="silq2d-canvas"></div>'+
+
+      '<div class="orb-anim-wrap">'+
+        '<div id="modh-orbitais-grande" class="orb-anim-canvas"></div>'+
+        '<div class="orb-anim-trigger-row">'+
+          '<button type="button" class="orb-anim-trigger-btn" id="modh-anim-play-central" '+
+            'onclick="if(_modHAnim.tocando)modHAnimPausar();else modHAnimTocar();">▶ Iniciar hibridização</button>'+
+          '<span class="orb-anim-trigger-hint">ou use os controles na barra lateral →</span>'+
+        '</div>'+
       '</div>'+
+
       '<div class="redox-detail redox-detail--central">'+corpoDetalhe+'</div>';
 
     /* Desenha a estrutura DEPOIS do innerHTML existir no DOM — mesmo
@@ -201,14 +212,15 @@ function modHRenderDetalhe(h){
       if(lewDiv && typeof desenharMoleculaHibridizacao === 'function'){
         desenharMoleculaHibridizacao(h, lewDiv);
       }
-      var orbDiv = document.getElementById('modh-orbitais');
-      if(orbDiv && typeof desenharDiagramaHibridizacao === 'function'){
-        desenharDiagramaHibridizacao(orbDiv, h.hibridizacao);
+      var orbGrandeDiv = document.getElementById('modh-orbitais-grande');
+      if(orbGrandeDiv && typeof modHAnimPreparar === 'function'){
+        modHAnimPreparar(orbGrandeDiv, h.hibridizacao);
       }
     }, 50);
   }
 
-  /* ── Lateral (CONTROLE): resumo compacto ── */
+  /* ── Lateral: painel "Compostos por Hibridização" mostra um resumo
+     compacto; painel "Controles da Animação" (recolhível) aparece. ── */
   var painel = $('redox-detail-panel');
   if(painel){
     painel.hidden = false;
@@ -218,6 +230,12 @@ function modHRenderDetalhe(h){
         '<code class="redox-eq-block redox-eq-final">'+hibLabel+' · '+h.geometriaMolecular+'</code>'+
       '</div>';
   }
+  var secaoControles = $('modh-controles-secao');
+  var vazioControles = $('modh-controles-vazio');
+  var ativosControles = $('modh-controles-ativos');
+  if(secaoControles){ secaoControles.hidden = false; }
+  if(vazioControles) vazioControles.hidden = true;
+  if(ativosControles) ativosControles.hidden = false;
 }
 
 /* ── Construtor de estrutura DIRETO a partir dos próprios dados de

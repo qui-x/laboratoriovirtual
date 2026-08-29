@@ -419,6 +419,80 @@ de orbital (fase +/fase −/híbrido) com contraste ≥5,6:1 contra o
 fundo do card. Suíte completa de regressão revalidada — 0 falhas, 0
 erros de JavaScript.
 
+### Área central grande + animação controlada + compatibilidade total com o catálogo
+
+Depois de entregue o diagrama estático "orbitais puros → híbridos", o
+usuário pediu 3 mudanças ao mesmo tempo: (1) uma área grande no
+centro com gatilhos que disparam uma animação controlada da
+hibridização acontecendo; (2) um menu recolhível na direita pra
+controlar essa animação; (3) o banco de dados compatível com TODOS os
+compostos que já existem no módulo de Nomenclatura, não só os 15
+exemplos curados à mão.
+
+**Compatibilidade total — de 15 pra 53 compostos.** Novo arquivo
+`js/hibridizacao/detector.js`: em vez de reaproveitar o despachante
+de `silqConstruirMolecula()` (que decide a receita certa consultando
+`c.funcao`, categorias da Nomenclatura), o detector analisa
+diretamente a TOPOLOGIA (átomos/ligações já construídos) — conta
+ligações covalentes distintas do átomo mais conectado, calcula pares
+isolados pela valência, e aplica a mesma regra de domínios já usada
+no motor VSEPR do SILQ. Funciona pra qualquer composto do catálogo,
+sem precisar de dado escrito à mão.
+
+Nem todo composto tem hibridização covalente pra mostrar — pares
+iônicos simples (NaCl, CaO) e metais puros (Zn, Al, Cu) não têm
+ligação covalente nenhuma, e o detector corretamente retorna "sem
+hibridização" pra esses 47 casos, em vez de inventar um número.
+Resultado: **53 dos 100 compostos do catálogo** ganham análise
+completa (15 curados com texto pedagógico rico + 38 detectados
+automaticamente, com uma explicação genérica do padrão de domínios).
+
+**2 bugs reais encontrados testando o detector contra os 100
+compostos:**
+1. A regex que decide "esse composto é covalente?" (usada desde a
+   integração original com o SILQ) não reconhecia a frase "iônica
+   **com** caráter covalente" (Al₂O₃) — só cobria "caráter iônico"
+   (ordem inversa). Corrigida.
+2. N₂O₅ e P₂O₅ têm DOIS átomos centrais (2 N, ou na real estrutura
+   P₄O₁₀) — o construtor de molécula deste app foi feito pra 1 único
+   centro por composto (o suficiente pra quase tudo), e nesses 2
+   casos específicos juntava todos os oxigênios num átomo central só,
+   inflando a contagem de domínios pra um valor que não existe de
+   verdade. Excluídos explicitamente do detector automático em vez de
+   mostrar um número errado.
+
+**Diagrama animado, canvas único centrado no núcleo.** O diagrama
+estático anterior (2 colunas lado a lado: "puros" à esquerda,
+"híbridos" à direita) virou uma animação de verdade: em progresso=0,
+todos os orbitais puros (s/p/d) aparecem SOBREPOSTOS no núcleo — a
+"situação de partida"; ao tocar, eles encolhem e desaparecem enquanto
+os híbridos crescem e aparecem já nos ângulos geométricos corretos;
+em progresso=1, só os híbridos ficam. `js/hibridizacao/animacao.js`
+controla um valor de progresso (0 a 1) com um loop de
+`requestAnimationFrame`, com easing suave (ease-in-out cúbico) pra um
+efeito de transição mais natural; `desenharOrbitaisAnimado()` (em
+`js/render/orbitais-atomicos.js`) sabe desenhar UM frame dado esse
+progresso — a separação entre "controlar o progresso" e "desenhar um
+frame" deixa os dois arquivos pequenos e testáveis separadamente.
+
+**Controles**: gatilho grande (▶ Iniciar hibridização) direto na área
+central, pra ficar óbvio que é interativo assim que a análise
+carrega; e um painel recolhível na sidebar-right ("Controles da
+Animação") com pausar, avançar/voltar por etapa (incrementos de
+20%), reiniciar, seletor de velocidade (0,5×/1×/2×) e uma barra de
+progresso clicável (pra pular direto pra qualquer ponto da mistura).
+Os dois botões de play (central e lateral) ficam sincronizados —
+pausar em qualquer um dos dois reflete no outro.
+
+**Validação:** os 53 compostos testados sistematicamente contra o
+diagrama animado e a estrutura molecular — 0 falhas. Todos os
+controles (tocar, pausar, etapa, velocidade, reiniciar, arrastar na
+barra) testados individualmente com valores exatos esperados — todos
+corretos. Contraste do botão de gatilho e da barra de progresso
+≥5,9:1. Suíte completa de regressão revalidada (accordion, os 3
+módulos, e a troca de composto no meio de uma animação em curso
+reseta corretamente) — 0 falhas, 0 erros de JavaScript.
+
 ## Uma curiosidade do maior arquivo de dados da coleção
 
 `dadossiqi.js` guarda o banco de reações do Laboratório
@@ -510,7 +584,9 @@ hoisting entre arquivos.
 | `js/construtor/bancada.js` | Módulo 2 | Bancada de montagem + validador (sem guia de regras) |
 | `js/redox/logica.js` | Módulo 3 (antigo) | **Esvaziado** — substituído por `js/hibridizacao/logica.js` |
 | `js/hibridizacao/logica.js` | Módulo 3 | Tipos de hibridização, lista de compostos, análise (domínios/geometria/estrutura) |
-| `js/render/orbitais-atomicos.js` | Renderização | Formas de orbitais s/p/d + diagrama "puros → híbridos" |
+| `js/render/orbitais-atomicos.js` | Renderização | Formas de orbitais s/p/d + diagrama animável "puros → híbridos" |
+| `js/hibridizacao/detector.js` | Módulo 3 | Detector genérico de hibridização (compatível com os 100 compostos do catálogo) |
+| `js/hibridizacao/animacao.js` | Módulo 3 | Controlador da animação (progresso, play/pause/etapa/velocidade) |
 | `js/redox/eventos-finais.js` | Entrada | Disparo final (≈"main.js") — continua no lugar, não é específico de um módulo |
 | `css/stylesiqi.css` | Estilo | Sincronizado com as atualizações (CSS morto do Guia de Regras removido) |
 

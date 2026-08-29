@@ -221,6 +221,113 @@ function desenharDiagramaHibridizacao(container, tipoHibridizacao){
   });
 }
 
+/* ════════════════════════════════════════════════════════════════
+   DIAGRAMA ANIMÁVEL — canvas único, centrado no núcleo. Ao contrário
+   do diagrama estático acima (2 colunas lado a lado), este é feito
+   pra ser redesenhado repetidamente com um `progresso` (0 a 1)
+   diferente a cada frame, dando a sensação de transformação real:
+   em progresso=0, todos os orbitais PUROS aparecem sobrepostos no
+   núcleo (a "situação de partida"); conforme progresso cresce, eles
+   encolhem/somem enquanto os híbridos crescem/aparecem já nos
+   ângulos geométricos corretos; em progresso=1, só os N híbridos
+   aparecem, exatamente como o diagrama estático final.
+   Pedido explícito do usuário: "gatilhos que disparem uma animação
+   controlada" — o controle de quando/como avançar o `progresso` fica
+   em js/hibridizacao/animacao.js; esta função só sabe desenhar UM
+   frame dado um progresso específico.
+════════════════════════════════════════════════════════════════ */
+function desenharOrbitaisAnimado(container, tipoHibridizacao, progresso){
+  if(!container) return;
+  var receita = RECEITA_HIBRIDIZACAO[tipoHibridizacao];
+  if(!receita) return;
+  progresso = Math.max(0, Math.min(1, progresso));
+
+  var rect = container.getBoundingClientRect();
+  var W = rect.width || 640, H = rect.height || 460;
+  if(!container.querySelector('.orb-anim-svg')){
+    container.innerHTML = '<svg class="orb-anim-svg"></svg>';
+  }
+  var svg = container.querySelector('.orb-anim-svg');
+  svg.setAttribute('viewBox', '0 0 '+W+' '+H);
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  var cx = W/2, cy = H/2 - 10;
+  var raioBase = Math.min(W, H) * 0.30;
+
+  /* ── Orbitais PUROS: todos centrados no núcleo, cada um na sua
+     orientação natural (s ocupa o centro; p's fanned em ângulos
+     diferentes; d's também) — encolhem e somem conforme progresso
+     cresce (opacidade e escala vão a 0). ── */
+  var opacidadePuros = 1 - progresso;
+  if(opacidadePuros > 0.01){
+    var puros = [];
+    for(var i=0;i<receita.s;i++) puros.push({tipo:'s', angulo:0});
+    for(var j=0;j<receita.p;j++) puros.push({tipo:'p', angulo: j*60 - 60});
+    for(var k=0;k<receita.d;k++) puros.push({tipo:'d', angulo: k*50 + 20});
+
+    var grupoPuros = _svgOrb('g', { opacity: opacidadePuros.toFixed(3), transform:'scale('+(1-progresso*0.25).toFixed(3)+')', 'transform-origin': cx+'px '+cy+'px' });
+    svg.appendChild(grupoPuros);
+    var tamPuro = raioBase * 0.62;
+    puros.forEach(function(orb){
+      if(orb.tipo === 's') orbDesenharS(svg, grupoPuros, cx, cy, tamPuro*0.30);
+      else if(orb.tipo === 'p') orbDesenharP(svg, grupoPuros, cx, cy, tamPuro, orb.angulo);
+      else orbDesenharD(svg, grupoPuros, cx, cy, tamPuro*0.8, orb.angulo);
+    });
+  }
+
+  /* ── Orbitais HÍBRIDOS: já nos ângulos geométricos finais desde o
+     início — só crescem (escala) e aparecem (opacidade) conforme
+     progresso avança. Manter o ângulo fixo (em vez de também animar
+     rotação) é uma simplificação deliberada: o efeito visual de
+     "crescer no lugar certo" já comunica bem o resultado, sem
+     precisar interpolar ângulos entre um estado "antes" que não
+     existe fisicamente (orbitais puros não têm a mesma orientação
+     dos híbridos) e o "depois". ── */
+  if(progresso > 0.01){
+    var grupoHib = _svgOrb('g', { opacity: progresso.toFixed(3) });
+    svg.appendChild(grupoHib);
+    var escalaHib = 0.35 + 0.65*progresso;
+    var anguloBase = -90;
+    for(var h=0; h<receita.resultado; h++){
+      var ang = anguloBase + h*receita.anguloResultado;
+      orbDesenharHibrido(svg, grupoHib, cx, cy, raioBase*escalaHib, ang);
+    }
+  }
+
+  var nucleo = _svgOrb('circle', { cx:cx, cy:cy, r:6, fill:'var(--tx1)' });
+  svg.appendChild(nucleo);
+
+  /* ── Legenda superior: fórmula da mistura + fase atual ── */
+  var formulaPartes = [];
+  if(receita.s) formulaPartes.push(receita.s+'s');
+  if(receita.p) formulaPartes.push(receita.p+'p');
+  if(receita.d) formulaPartes.push(receita.d+'d');
+  var fase = progresso < 0.02 ? 'Orbitais puros' : progresso > 0.98 ? 'Orbitais híbridos formados' : 'Misturando…';
+  var formulaTxt = _svgOrb('text', { x:cx, y:26, 'text-anchor':'middle', fill:'var(--tx1)', 'font-size':'14', 'font-weight':'700', 'font-family':'var(--mono)' });
+  formulaTxt.textContent = formulaPartes.join('+') + ' → ' + receita.resultado + tipoHibridizacaoLabel(tipoHibridizacao);
+  svg.appendChild(formulaTxt);
+  var faseTxt = _svgOrb('text', { x:cx, y:44, 'text-anchor':'middle', fill:'var(--tx2)', 'font-size':'10.5' });
+  faseTxt.textContent = fase;
+  svg.appendChild(faseTxt);
+
+  /* ── Legenda de cor (fase) ── */
+  var legY = H-14;
+  var legItens = [
+    { cor: ORBITAL_COR_POS, texto:'fase +' },
+    { cor: ORBITAL_COR_NEG, texto:'fase −' },
+    { cor: ORBITAL_COR_HIBRIDO, texto:'híbrido' },
+  ];
+  var legLarguraTotal = legItens.reduce(function(s,it){ return s + it.texto.length*5.2 + 26; }, 0);
+  var legX = cx - legLarguraTotal/2;
+  legItens.forEach(function(it){
+    svg.appendChild(_svgOrb('circle', { cx:legX, cy:legY, r:5, fill:it.cor }));
+    var t = _svgOrb('text', { x:legX+10, y:legY+3.5, fill:'var(--tx2)', 'font-size':'9.5' });
+    t.textContent = it.texto;
+    svg.appendChild(t);
+    legX += it.texto.length*5.2 + 26;
+  });
+}
+
 function tipoHibridizacaoLabel(tipo){
   var LABELS = { sp:'sp', sp2:'sp²', sp3:'sp³', sp3d:'sp³d', sp3d2:'sp³d²' };
   return ' ' + (LABELS[tipo]||tipo);

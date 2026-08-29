@@ -364,7 +364,7 @@ function silqConstruirMolecula(formula, c){
 
   if(c.funcao === 'oxido'){
     if(formula === 'CO2') return silqConstruirLinearSimetrico();
-    var ehCovalente = /Covalente/i.test(c.ligacao||'') && !/caráter iônico|iônico-covalente|misto/i.test(c.ligacao||'');
+    var ehCovalente = /Covalente/i.test(c.ligacao||'') && !/caráter iônico|iônico-covalente|misto|com caráter covalente/i.test(c.ligacao||'');
     var oTokOx = achar('O');
     var centralOx = tokens.find(function(t){ return t.simbolo!=='O'; });
     if(ehCovalente && centralOx && oTokOx) return silqConstruirCentralComOxigenios(centralOx.simbolo, oTokOx.qtd, 0);

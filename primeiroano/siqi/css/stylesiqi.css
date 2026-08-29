@@ -2399,6 +2399,63 @@ html[data-reading="on"] .fact-value{ font-size:.74rem; }
 .orb-diagrama-canvas{ width:100%; height:220px; }
 .orb-diagrama-svg{ width:100%; height:100%; display:block; }
 
+/* ── Diagrama ANIMADO grande — pedido explícito do usuário: "uma
+   área grande no centro com gatilhos que disparem uma animação
+   controlada". Ocupa a maior parte da largura/altura disponível na
+   view central; o botão de disparo fica logo abaixo, dentro do
+   próprio card, pra ficar óbvio que é interativo assim que a análise
+   carrega. ── */
+.redox-hero--compacto{ margin-bottom:.6rem; }
+.orb-anim-wrap{
+  background:var(--bg2); border:1px solid var(--bdr); border-radius:var(--r);
+  padding:.8rem; margin:0 0 .9rem;
+}
+.orb-anim-canvas{ width:100%; height:min(58vh, 460px); min-height:320px; }
+.orb-anim-svg{ width:100%; height:100%; display:block; }
+.orb-anim-trigger-row{
+  display:flex; align-items:center; justify-content:center; gap:.7rem;
+  margin-top:.5rem; flex-wrap:wrap;
+}
+.orb-anim-trigger-btn{
+  background:var(--coral); color:#09090b; border:none; border-radius:var(--r);
+  padding:.55rem 1.3rem; font-size:.86rem; font-weight:800; cursor:pointer;
+  transition:filter .15s;
+}
+.orb-anim-trigger-btn:hover{ filter:brightness(1.12); }
+.orb-anim-trigger-btn:focus-visible{ outline:2px solid var(--tx1); outline-offset:2px; }
+.orb-anim-trigger-hint{ font-size:.68rem; color:var(--tx2); }
+
+/* Estrutura molecular (bola-e-vareta) agora é secundária nesta view
+   — o diagrama animado de orbitais é o elemento primário — por isso
+   fica bem mais compacta do que na Ficha da Nomenclatura. */
+.silq2d-canvas--compacto{ height:150px; max-width:320px; margin:0 auto .4rem; }
+
+/* ── Painel lateral "Controles da Animação" (recolhível) ── */
+.modh-anim-progresso-row{ margin:.7rem 0 .5rem; }
+.modh-anim-progresso-wrap{
+  position:relative; width:100%; height:10px; border-radius:6px;
+  background:var(--bg1); border:1px solid var(--bdr); cursor:pointer; overflow:hidden;
+}
+.modh-anim-progresso-wrap:focus-visible{ outline:2px solid var(--coral); outline-offset:2px; }
+.modh-anim-progresso-fill{
+  position:absolute; left:0; top:0; bottom:0; width:0%;
+  background:var(--coral); border-radius:6px 0 0 6px;
+}
+.modh-anim-etapas-row{ display:flex; gap:.4rem; margin:.5rem 0; }
+.modh-anim-etapa-btn{
+  flex:1; background:var(--bg1); border:1px solid var(--bdr); color:var(--tx1);
+  border-radius:var(--rs); padding:.4rem .3rem; font-size:.66rem; font-weight:600; cursor:pointer;
+}
+.modh-anim-etapa-btn:hover{ border-color:var(--coral); color:var(--coral); }
+.modh-anim-vel-label{ font-size:.62rem; color:var(--tx2); text-transform:uppercase; letter-spacing:.04em; margin:.5rem 0 .3rem; }
+.modh-anim-vel-row{ display:flex; gap:.35rem; }
+.modh-anim-vel-btn{
+  flex:1; background:var(--bg1); border:1px solid var(--bdr); color:var(--tx2);
+  border-radius:var(--rs); padding:.35rem 0; font-size:.7rem; font-weight:700; cursor:pointer;
+}
+.modh-anim-vel-btn--ativo{ background:rgba(112,136,255,.15); border-color:var(--coral); color:var(--coral); }
+.modh-anim-nota{ font-size:.66rem; color:var(--tx2); line-height:1.5; margin-top:.6rem; font-style:italic; }
+
 /* ═══════════════════════════════════════════════════════════════════
    CONSTRUTOR DE NOMENCLATURA — Módulo 2 (química de coordenação)
    ---------------------------------------------------------------------

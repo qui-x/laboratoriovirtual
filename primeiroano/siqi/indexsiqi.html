@@ -44,7 +44,7 @@
   <!-- ═══ CABEÇALHO ═══ -->
   <header class="app-header">
     <div class="header-brand">
-      <a class="header-back" href="indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
+      <a class="header-back" href="../indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
         <span>1º Ano</span>
       </a>
@@ -221,7 +221,7 @@
                 aria-expanded="false" aria-controls="body-mode-redox">
           <span class="panel-icon" aria-hidden="true">🧬</span>
           <span class="panel-label">Hibridização</span>
-          <span class="panel-badge">15</span>
+          <span class="panel-badge" id="modh-badge-total">15</span>
           <span class="mode-active-tag">Ativo</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -627,6 +627,53 @@
         </div>
       </section>
 
+      <!-- ══ Painel recolhível de controles da animação — pedido
+           explícito do usuário: os GATILHOS da animação ficam na área
+           central (junto com o próprio desenho grande), e este painel
+           lateral traz os controles FINOS (tocar/pausar, avançar por
+           etapa, velocidade, barra de progresso arrastável). Some
+           quando nenhum composto foi selecionado ainda (nada pra
+           controlar) — controlado por js/hibridizacao/logica.js. ══ -->
+      <section class="panel" data-open="true" data-module-content="redox" id="modh-controles-secao" hidden>
+        <button class="panel-header" id="hdr-modh-controles" type="button" aria-expanded="true" aria-controls="body-modh-controles">
+          <span class="panel-icon" aria-hidden="true">🎬</span>
+          <span class="panel-label">Controles da Animação</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-modh-controles" role="region" aria-labelledby="hdr-modh-controles">
+          <p class="mode-define" id="modh-controles-vazio">Selecione um composto pra liberar os controles da animação.</p>
+
+          <div id="modh-controles-ativos" hidden>
+            <button type="button" class="action-btn" id="modh-anim-play" onclick="if(_modHAnim.tocando)modHAnimPausar();else modHAnimTocar();">
+              ▶ Iniciar hibridização
+            </button>
+
+            <div class="modh-anim-progresso-row">
+              <div class="modh-anim-progresso-wrap" id="modh-anim-progresso-wrap"
+                   role="slider" aria-label="Progresso da animação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
+                   tabindex="0" onclick="modHAnimClicarBarra(event)">
+                <div class="modh-anim-progresso-fill" id="modh-anim-progresso"></div>
+              </div>
+            </div>
+
+            <div class="modh-anim-etapas-row">
+              <button type="button" class="modh-anim-etapa-btn" title="Voltar uma etapa" onclick="modHAnimEtapa(-1)">⏮ Etapa</button>
+              <button type="button" class="modh-anim-etapa-btn" title="Avançar uma etapa" onclick="modHAnimEtapa(1)">Etapa ⏭</button>
+              <button type="button" class="modh-anim-etapa-btn" title="Reiniciar do zero" onclick="modHAnimReiniciar()">↺ Zero</button>
+            </div>
+
+            <p class="modh-anim-vel-label">Velocidade</p>
+            <div class="modh-anim-vel-row">
+              <button type="button" class="modh-anim-vel-btn" data-vel="0.5" onclick="modHAnimSetVelocidade(0.5)">0,5×</button>
+              <button type="button" class="modh-anim-vel-btn modh-anim-vel-btn--ativo" data-vel="1" onclick="modHAnimSetVelocidade(1)">1×</button>
+              <button type="button" class="modh-anim-vel-btn" data-vel="2" onclick="modHAnimSetVelocidade(2)">2×</button>
+            </div>
+
+            <p class="modh-anim-nota">Os orbitais puros (s/p/d) começam sobrepostos no núcleo; ao tocar, eles encolhem enquanto os híbridos crescem já nos ângulos geométricos corretos.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- ══════════ BALANÇO ATÔMICO — oculto em Nomenclatura e
            Construtor: os únicos menus específicos desses 2 módulos
            hoje são Biblioteca (Nomenclatura) e Biblioteca+Informações
@@ -826,6 +873,8 @@
      não específico de um módulo: liga os botões "Selecionar módulo"
      de TODOS os cards e faz a inicialização geral da página.) -->
 <script src="js/render/orbitais-atomicos.js"></script>
+<script src="js/hibridizacao/detector.js"></script>
+<script src="js/hibridizacao/animacao.js"></script>
 <script src="js/hibridizacao/logica.js"></script>
 <script src="js/redox/eventos-finais.js"></script>
 </body>
