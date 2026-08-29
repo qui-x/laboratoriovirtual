@@ -13,11 +13,19 @@
    102 substâncias. Só um módulo fica ativo por vez — a troca para
    outro desativa o anterior automaticamente.
 
+   A sidebar direita (Substância/Controles/Estado & Medidas) começa
+   TRANCADA: sem nenhum módulo ativo, os 3 painéis ficam com o
+   atributo `inert` (bloqueia clique, foco por Tab e leitura de tela)
+   e esmaecidos por CSS; um aviso explica o porquê. Ativar qualquer
+   módulo destrava tudo de uma vez — ver atualizarTrancaSidebarDireita().
+
    Também liga os "chips" de exemplo de cada módulo (ex.: O₂, N₂, CO₂
    no módulo Gases): diferente do SIMA, onde os chips de "bons
    exemplos" são só decorativos, aqui cada chip é um atalho clicável
-   que já carrega aquela substância no cilindro — mais útil num
-   simulador onde a substância é o dado central do experimento.
+   que já carrega aquela substância no cilindro — e, por estar dentro
+   de um cartão de módulo trancado, clicar nele ativa esse módulo
+   automaticamente (senão a sidebar direita continuaria trancada com
+   uma substância já carregada, o que não faria sentido).
 
    Depende de: data/catalogo-substancias.js (SUBSTANCIAS),
                core/estado-simulacao.js (estado.modulo),
@@ -57,6 +65,23 @@ function preencherBadgesModulo() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   TRANCA DA SIDEBAR DIREITA
+   ───────────────────────────────────────────────────────
+   `inert` é o atributo padrão HTML (não uma classe CSS) para "este
+   pedaço da página existe, mas não está disponível agora": o
+   navegador tira os elementos de dentro dele do foco por Tab e da
+   árvore de acessibilidade sozinho — não precisamos desabilitar
+   cada slider/botão/link um por um. O CSS (stylesime.css) só cuida
+   da aparência esmaecida; quem bloqueia de verdade é isto aqui.
+═══════════════════════════════════════════════════════ */
+function atualizarTrancaSidebarDireita() {
+  var travar = !estado.modulo;
+  document.querySelectorAll('#sidebar-right > .panel').forEach(function(painel) {
+    painel.inert = travar;
+  });
+}
+
+/* ═══════════════════════════════════════════════════════
    ATIVAR / DESATIVAR MÓDULO
 ═══════════════════════════════════════════════════════ */
 function alternarModulo(modulo, btn) {
@@ -73,13 +98,14 @@ function alternarModulo(modulo, btn) {
 
   if (jaEstavaAtivo) {
     estado.modulo = null;
-    announce('Módulo ' + nomes[modulo] + ' desativado. A lista de substâncias voltou a mostrar todos os estados físicos.', 'assertive');
+    announce('Módulo ' + nomes[modulo] + ' desativado. A barra de substância, controles e medidas foi trancada novamente.', 'assertive');
   } else {
     estado.modulo = modulo;
     btn.setAttribute('aria-pressed', 'true');
-    announce('Módulo ' + nomes[modulo] + ' ativado. A lista de substâncias foi filtrada.', 'assertive');
+    announce('Módulo ' + nomes[modulo] + ' ativado. A lista de substâncias foi filtrada e a barra da direita foi destrancada.', 'assertive');
   }
   renderizarLista();
+  atualizarTrancaSidebarDireita();
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -107,7 +133,22 @@ function inicializarModulos() {
   document.querySelectorAll('.chip[data-sub-id]').forEach(function(chip) {
     chip.addEventListener('click', function() {
       var sub = buscarSubstanciaPorId(chip.dataset.subId);
-      if (sub) selecionarSubstancia(sub);
+      if (!sub) return;
+      // O chip vive dentro do cartão de um módulo (data-modulo="gasoso"
+      // etc.) — se esse módulo ainda não estiver ativo, ativa primeiro
+      // (destrancando a sidebar direita) e só depois carrega a
+      // substância, para nunca deixar algo selecionado atrás de uma
+      // barra ainda trancada.
+      var cartao = chip.closest('.panel--mode');
+      var modulo = cartao ? cartao.dataset.modulo : null;
+      if (modulo && estado.modulo !== modulo) {
+        var btnAtivar = cartao.querySelector('.mode-activate-btn[data-modulo-ativar]');
+        if (btnAtivar) alternarModulo(modulo, btnAtivar);
+      }
+      selecionarSubstancia(sub);
     });
   });
+
+  // Estado inicial: nenhum módulo ativo → sidebar direita começa trancada.
+  atualizarTrancaSidebarDireita();
 }

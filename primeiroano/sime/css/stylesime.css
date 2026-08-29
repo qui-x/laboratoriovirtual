@@ -982,6 +982,48 @@ body.simple-read .canvas-interactions p{ line-height:1.75; font-size:.74rem; }
   display: none;
 }
 
+/* =====================================================================
+   SIDEBAR DIREITA TRANCADA ATÉ ATIVAR UM MÓDULO
+   ---------------------------------------------------------------------
+   Pedido explícito: substância, controles e medidas só ficam disponíveis
+   depois que o usuário escolhe um módulo de estado físico à esquerda.
+   Duas camadas, cada uma com seu papel:
+     • ESTE CSS cuida da APARÊNCIA (opacidade + pointer-events:none) e
+       reage sozinho, via :has(), ao mesmo aria-pressed que os botões
+       "Ativar módulo" já mantêm — sem precisar de nenhuma classe extra
+       controlada por JS.
+     • o atributo `inert` (ligado/desligado via JS em
+       ui/painel-modulos.js, função atualizarTrancaSidebarDireita) cuida
+       do BLOQUEIO de verdade: enquanto ativo, tira os 3 painéis do foco
+       por Tab e da leitura de tela — pointer-events:none sozinho impede
+       o clique do mouse, mas não o teclado nem o leitor de tela.
+   ===================================================================== */
+.sidebar-lock-hint{
+  display: none;
+  align-items: flex-start; gap: .5rem;
+  padding: .6rem .65rem;
+  border: 1px dashed var(--bdr2); border-radius: var(--r);
+  background: var(--bg2); color: var(--tx2);
+  font-size: .72rem; line-height: 1.55;
+}
+.sidebar-lock-hint .icon{ width: 1.3em; height: 1.3em; flex-shrink: 0; margin-top: .1em; color: var(--cyan); }
+.sidebar-lock-hint strong{ color: var(--tx1); }
+
+body:not(:has(.mode-activate-btn[aria-pressed="true"])) .sidebar-lock-hint{
+  display: flex;
+}
+body:not(:has(.mode-activate-btn[aria-pressed="true"])) #sidebar-right > .panel{
+  opacity: .4;
+  filter: grayscale(.35);
+  pointer-events: none;
+  transition: opacity .25s ease, filter .25s ease;
+}
+body.high-contrast:not(:has(.mode-activate-btn[aria-pressed="true"])) #sidebar-right > .panel{
+  opacity: 1; filter: none; border-style: dashed;
+}
+body.high-contrast .sidebar-lock-hint{ border: 2px solid var(--hc-fg) !important; color: var(--hc-fg) !important; }
+body.simple-read .sidebar-lock-hint{ font-size: .78rem; line-height: 1.75; }
+
 
 /* ---------------------------------------------------------------------
    SKIP-LINK — contraste corrigido
