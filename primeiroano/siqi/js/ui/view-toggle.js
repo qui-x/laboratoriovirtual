@@ -3,7 +3,7 @@
    ARQUIVO: view-toggle.js
    ───────────────────────────────────────────────────────────────
    Alterna entre as views centrais do simulador (nenhum módulo, Lab,
-   Ficha, Redox, Construtor) — expõe window._setView() para os
+   Ficha, Construtor) — expõe window._setView() para os
    botões inline "Voltar ao Laboratório" no HTML.
    Depende de: nada além do HTML.
 ═══════════════════════════════════════════════════════════════ */
@@ -15,23 +15,22 @@
 ════════════════════════════════════════════════════════════════ */
 function initViewToggle(){
   var btnLab=$('view-lab-btn'), btnInfo=$('view-info-btn');
-  var panelNone=$('panel-none'), panelLab=$('panel-lab'), panelInfo=$('panel-info'), panelRedox=$('panel-redox'), panelConstrutor=$('panel-construtor');
+  var panelNone=$('panel-none'), panelLab=$('panel-lab'), panelInfo=$('panel-info'), panelConstrutor=$('panel-construtor');
   if(!btnLab||!btnInfo) return;
 
-  /* setView agora suporta 'none' | 'lab' | 'info' | 'redox' | 'construtor'.
+  /* setView agora suporta 'none' | 'lab' | 'info' | 'construtor'.
      'none' é o estado inicial (réplica do canvas em branco do SIMA
      quando sim.model===null): nenhum módulo ativo, dica central
      convidando a escolher um. trocarModulo()/desativarModulo() cuidam
      de trocar para/desta view automaticamente — ver seção 7.1. */
   function setView(v){
     STATE.modoView=v;
-    var isLab=v==='lab', isInfo=v==='info', isRedox=v==='redox', isNone=v==='none', isConstrutor=v==='construtor';
+    var isLab=v==='lab', isInfo=v==='info', isNone=v==='none', isConstrutor=v==='construtor';
     btnLab.classList.toggle('active',isLab);   btnLab.setAttribute('aria-pressed',String(isLab));
     btnInfo.classList.toggle('active',isInfo); btnInfo.setAttribute('aria-pressed',String(isInfo));
     if(panelNone) panelNone.hidden=!isNone;
     if(panelLab) panelLab.hidden=!isLab;
     if(panelInfo) panelInfo.hidden=!isInfo;
-    if(panelRedox) panelRedox.hidden=!isRedox;
     if(panelConstrutor) panelConstrutor.hidden=!isConstrutor;
   }
   btnLab.addEventListener('click',function(){ setView('lab'); });

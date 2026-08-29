@@ -44,7 +44,7 @@
   <!-- ═══ CABEÇALHO ═══ -->
   <header class="app-header">
     <div class="header-brand">
-      <a class="header-back" href="../indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
+      <a class="header-back" href="indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
         <span>1º Ano</span>
       </a>
@@ -216,58 +216,6 @@
         </div>
       </section>
 
-      <section class="panel panel--mode" data-mode-card="redox" data-open="false" aria-labelledby="hdr-mode-redox">
-        <button type="button" class="panel-header" id="hdr-mode-redox"
-                aria-expanded="false" aria-controls="body-mode-redox">
-          <span class="panel-icon" aria-hidden="true">🧬</span>
-          <span class="panel-label">Hibridização</span>
-          <span class="panel-badge" id="modh-badge-total">15</span>
-          <span class="mode-active-tag">Ativo</span>
-          <span class="chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="panel-body collapsed" id="body-mode-redox" role="region" aria-labelledby="hdr-mode-redox">
-
-          <button type="button" class="action-btn mode-activate-btn" data-module="redox"
-                  title="Selecionar o módulo de Hibridização de Nuvens Eletrônicas" aria-pressed="false" aria-describedby="def-mod-redox">
-            <span class="mode-dot" aria-hidden="true"></span>
-            <span aria-hidden="true">▶</span> Selecionar módulo <span class="model-name">Hibridização</span>
-          </button>
-
-          <p class="mode-define" id="def-mod-redox">
-            <strong>Hibridização de nuvens eletrônicas</strong>: conte os domínios eletrônicos
-            ao redor do átomo central e descubra que orbitais híbridos (sp, sp², sp³...)
-            explicam a geometria observada.
-          </p>
-
-          <div class="fact-grid">
-            <div class="fact-cell"><span class="fact-label">Compostos</span><span class="fact-value">15 cadastrados</span></div>
-            <div class="fact-cell"><span class="fact-label">Tipos</span><span class="fact-value">sp · sp² · sp³ · sp³d · sp³d²</span></div>
-            <div class="fact-cell"><span class="fact-label">Método</span><span class="fact-value">Contagem VSEPR</span></div>
-            <div class="fact-cell"><span class="fact-label">BNCC</span><span class="fact-value">EM13CNT101/207</span></div>
-          </div>
-
-          <div class="canvas-interactions">
-            <p class="canvas-interactions-title">Ao ativar este módulo</p>
-            <p>A barra lateral mostra os compostos por tipo de hibridização. Selecione um
-               para ver a <strong>contagem de domínios</strong>, o <em>tipo de orbital híbrido</em>
-               e a geometria molecular resultante, com a estrutura desenhada de verdade.</p>
-          </div>
-
-          <div class="recommended">
-            <p class="recommended-title">Bons exemplos</p>
-            <div class="chip-row">
-              <span class="chip">CH₄ (sp³)</span><span class="chip">CO₂ (sp)</span><span class="chip">SF₆ (sp³d²)</span>
-            </div>
-          </div>
-
-          <p class="mode-note">
-            <span class="mode-note-icon" aria-hidden="true">🧬</span>
-            <span>A regra é sempre a mesma: conte ligantes σ + pares isolados no átomo
-               central — esse número É o número de orbitais híbridos formados.</span>
-          </p>
-        </div>
-      </section>
-
     </aside>
 
     <!-- ══ CENTRO ══ -->
@@ -283,9 +231,9 @@
            No SIMA, sim.model começa null: canvas em branco + dica
            central "Escolha um modelo atômico ao lado e clique em
            Ativar". Réplica exata aqui: SIQI agora também abre com os
-           3 módulos desativados (nenhum aria-pressed=true, nenhum
+           2 módulos desativados (nenhum aria-pressed=true, nenhum
            card expandido), e esta view é a que aparece por padrão —
-           trocada automaticamente para Lab/Ficha/Redox assim que
+           trocada automaticamente para Lab/Ficha/Construtor assim que
            algum módulo é ativado (ver trocarModulo() em
            js/modulos/alternar.js), e de volta pra cá ao desativar
            (desativarModulo()). -->
@@ -428,43 +376,19 @@
         </div>
       </div>
 
-      <!-- ══ HIBRIDIZAÇÃO — 3ª view central, gerada pelo Módulo 3 ══
-           Substituiu o antigo módulo de Redox — mesmo padrão de 3
-           camadas (card seletor → controles/lista na lateral → área
-           CENTRAL gera a análise completa), agora sobre o tema de
-           hibridização de nuvens eletrônicas: contagem de domínios
-           VSEPR, tipo de orbital híbrido (sp/sp²/sp³/sp³d/sp³d²) e
-           comparação geometria eletrônica × molecular, com a
-           estrutura desenhada de verdade (motor 2D do SILQ,
-           reaproveitado da pista visual da Nomenclatura). Populado
-           por modHRenderDetalhe() em js/hibridizacao/logica.js;
-           trocado para cá automaticamente ao escolher um composto
-           (window._setView('redox') — nome interno da view mantido
-           por compatibilidade com o resto do app). -->
-      <div id="panel-redox" class="sim-panel" hidden>
-        <div class="ficha-scroll">
-          <div id="redox-central-content" class="redox-central">
-            <div class="redox-central-empty">
-              <span aria-hidden="true">🧬</span>
-              <p>Selecione um composto no painel <strong>Compostos por Hibridização</strong>, na barra lateral, para ver a análise completa aqui.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══ CONSTRUTOR — 5ª view central, gerada pelo Módulo 2 ══
-           Mesmo padrão de 3 camadas do Redox: sidebar-left seleciona o
-           módulo, sidebar-right traz Biblioteca/Informações/Validador, e
-           a ÁREA CENTRAL vira a "bancada de montagem" — paleta de
-           blocos clicáveis + slots posicionais + fórmula preliminar
-           desenhada dinamicamente. Populado por mod2* (js/construtor/*);
-           trocado para cá ao escolher um composto na
-           Biblioteca (window._setView('construtor')).
+      <!-- ══ CONSTRUTOR — 3ª view central, gerada pelo Módulo 2 ══
+           Mesmo padrão de 3 camadas dos outros módulos: sidebar-left
+           seleciona o módulo, sidebar-right traz Biblioteca/
+           Informações/Validador, e a ÁREA CENTRAL vira a "bancada de
+           montagem" — paleta de blocos clicáveis + slots posicionais +
+           fórmula preliminar desenhada dinamicamente. Populado por
+           mod2* (js/construtor/*); trocado para cá ao escolher um
+           composto na Biblioteca (window._setView('construtor')).
 
            SEM RODAPÉ "Voltar ao Laboratório" de propósito: o Construtor
            é autocontido — nenhuma menção a outro módulo aparece aqui
            enquanto ele estiver ativo (sair é só desativar o card na
-           barra esquerda, igual aos outros 2 módulos). -->
+           barra esquerda, igual à Nomenclatura). -->
       <div id="panel-construtor" class="sim-panel" hidden>
         <div class="ficha-scroll">
           <div id="construtor-central-content" class="construtor-central">
@@ -606,81 +530,13 @@
         </div>
       </section>
 
-      <!-- ══ MÓDULO 3 — Hibridização de Nuvens Eletrônicas ══
-           Substituiu o antigo painel "Reações Disponíveis" do Redox —
-           IDs mantidos (difficulty-selector, redox-reactions-list,
-           redox-detail-panel) por compatibilidade com o resto do app
-           e pra reaproveitar o CSS já existente; agora consumidos por
-           modHMontarTipos()/modHRenderLista()/modHRenderDetalhe() em
-           js/hibridizacao/logica.js. -->
-      <section class="panel" data-open="true" data-module-content="redox" hidden>
-        <button class="panel-header" id="hdr-redox" type="button" aria-expanded="true" aria-controls="body-redox">
-          <span class="panel-icon" aria-hidden="true">🧬</span>
-          <span class="panel-label">Compostos por Hibridização</span>
-          <span class="chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="panel-body" id="body-redox" role="region" aria-labelledby="hdr-redox">
-          <p class="mode-define">Escolha o tipo de orbital híbrido, depois um composto, pra ver a contagem de domínios e a geometria resultante.</p>
-          <div class="difficulty-selector" id="difficulty-selector"></div>
-          <div class="redox-reactions-list" id="redox-reactions-list"></div>
-          <div class="redox-detail-panel" id="redox-detail-panel" hidden></div>
-        </div>
-      </section>
-
-      <!-- ══ Painel recolhível de controles da animação — pedido
-           explícito do usuário: os GATILHOS da animação ficam na área
-           central (junto com o próprio desenho grande), e este painel
-           lateral traz os controles FINOS (tocar/pausar, avançar por
-           etapa, velocidade, barra de progresso arrastável). Some
-           quando nenhum composto foi selecionado ainda (nada pra
-           controlar) — controlado por js/hibridizacao/logica.js. ══ -->
-      <section class="panel" data-open="true" data-module-content="redox" id="modh-controles-secao" hidden>
-        <button class="panel-header" id="hdr-modh-controles" type="button" aria-expanded="true" aria-controls="body-modh-controles">
-          <span class="panel-icon" aria-hidden="true">🎬</span>
-          <span class="panel-label">Controles da Animação</span>
-          <span class="chevron" aria-hidden="true">▾</span>
-        </button>
-        <div class="panel-body" id="body-modh-controles" role="region" aria-labelledby="hdr-modh-controles">
-          <p class="mode-define" id="modh-controles-vazio">Selecione um composto pra liberar os controles da animação.</p>
-
-          <div id="modh-controles-ativos" hidden>
-            <button type="button" class="action-btn" id="modh-anim-play" onclick="if(_modHAnim.tocando)modHAnimPausar();else modHAnimTocar();">
-              ▶ Iniciar hibridização
-            </button>
-
-            <div class="modh-anim-progresso-row">
-              <div class="modh-anim-progresso-wrap" id="modh-anim-progresso-wrap"
-                   role="slider" aria-label="Progresso da animação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"
-                   tabindex="0" onclick="modHAnimClicarBarra(event)">
-                <div class="modh-anim-progresso-fill" id="modh-anim-progresso"></div>
-              </div>
-            </div>
-
-            <div class="modh-anim-etapas-row">
-              <button type="button" class="modh-anim-etapa-btn" title="Voltar uma etapa" onclick="modHAnimEtapa(-1)">⏮ Etapa</button>
-              <button type="button" class="modh-anim-etapa-btn" title="Avançar uma etapa" onclick="modHAnimEtapa(1)">Etapa ⏭</button>
-              <button type="button" class="modh-anim-etapa-btn" title="Reiniciar do zero" onclick="modHAnimReiniciar()">↺ Zero</button>
-            </div>
-
-            <p class="modh-anim-vel-label">Velocidade</p>
-            <div class="modh-anim-vel-row">
-              <button type="button" class="modh-anim-vel-btn" data-vel="0.5" onclick="modHAnimSetVelocidade(0.5)">0,5×</button>
-              <button type="button" class="modh-anim-vel-btn modh-anim-vel-btn--ativo" data-vel="1" onclick="modHAnimSetVelocidade(1)">1×</button>
-              <button type="button" class="modh-anim-vel-btn" data-vel="2" onclick="modHAnimSetVelocidade(2)">2×</button>
-            </div>
-
-            <p class="modh-anim-nota">Os orbitais puros (s/p/d) começam sobrepostos no núcleo; ao tocar, eles encolhem enquanto os híbridos crescem já nos ângulos geométricos corretos.</p>
-          </div>
-        </div>
-      </section>
-
       <!-- ══════════ BALANÇO ATÔMICO — oculto em Nomenclatura e
            Construtor: os únicos menus específicos desses 2 módulos
            hoje são Biblioteca (Nomenclatura) e Biblioteca+Informações
            do Composto (Construtor). A mecânica de reação livre que
            alimenta este painel continua acessível pelo toggle
            Lab/Ficha no topo do canvas central — só sai da SIDEBAR. ══ -->
-      <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura,redox">
+      <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura">
         <button class="panel-header" id="hdr-balanco" type="button" aria-expanded="true" aria-controls="body-balanco">
           <span class="panel-icon" aria-hidden="true">⚖️</span>
           <span class="panel-label">Balanço Atômico</span>
@@ -697,7 +553,7 @@
            Construtor: Nomenclatura já mostra a mesma coisa na Ficha
            central (Lab/Ficha, no topo do canvas); Construtor tem sua
            própria "Informações do Composto" (sem nome) ══════════ -->
-      <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura,redox">
+      <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura">
         <div class="panel-header-row">
           <button class="panel-header" id="hdr-ficha" type="button" aria-expanded="true" aria-controls="body-ficha">
             <span class="panel-icon" aria-hidden="true">📋</span>
@@ -755,7 +611,7 @@
            dos 2 painéis acima — a Biblioteca é o único menu "próprio"
            da Nomenclatura pedido pelo usuário; Construtor já tem seu
            validador ao vivo, não precisa de um botão "Verificar". -->
-      <div class="lab-actions-panel" data-hide-for-module="construtor,nomenclatura,redox">
+      <div class="lab-actions-panel" data-hide-for-module="construtor,nomenclatura">
         <button type="button" id="btn-verificar-side" class="lab-action-verify">
           Verificar reação ↗
         </button>
@@ -810,7 +666,6 @@
 <script src="js/data/ligantes-metais.js"></script>
 <script src="js/data/desafios-construtor.js"></script>
 <script src="js/data/regras-iupac.js"></script>
-<script src="js/data/hibridizacoes-nuvens.js"></script>
 
 <!-- ═══ ACESSIBILIDADE ═══ -->
 <script src="js/a11y/preferencias.js"></script>
@@ -867,15 +722,13 @@
 <script src="js/construtor/estado-biblioteca.js"></script>
 <script src="js/construtor/bancada.js"></script>
 
-<!-- ═══ MÓDULO 3: HIBRIDIZAÇÃO DE NUVENS ELETRÔNICAS ═══
-     (substituiu o antigo módulo de Redox — js/redox/eventos-finais.js
-     continua no lugar porque é o composition-root do app inteiro,
-     não específico de um módulo: liga os botões "Selecionar módulo"
-     de TODOS os cards e faz a inicialização geral da página.) -->
-<script src="js/render/orbitais-atomicos.js"></script>
-<script src="js/hibridizacao/detector.js"></script>
-<script src="js/hibridizacao/animacao.js"></script>
-<script src="js/hibridizacao/logica.js"></script>
+<!-- ═══ PONTO DE ENTRADA ═══
+     js/redox/eventos-finais.js é o composition-root do app inteiro
+     (nome do arquivo é histórico — era o disparo final do antigo
+     módulo de Redox — mas não é específico de módulo nenhum: liga os
+     botões "Selecionar módulo" de TODOS os cards e faz a
+     inicialização geral da página). Continua no lugar mesmo depois
+     da remoção do 3º módulo. -->
 <script src="js/redox/eventos-finais.js"></script>
 </body>
 </html>
