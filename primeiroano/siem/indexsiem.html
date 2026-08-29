@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- MEMORIA DE ACESSIBILIDADE: precisa ser o PRIMEIRO script da pagina -->
+<script src="../a11y.js"></script>
+  <title>SIEM — Simulador Interativo de Estrutura da Matéria</title>
+  <link rel="stylesheet" href="css/stylesiem.css" />
+</head>
+<body class="a11y-content">
+
+  <!-- Filtros de daltonismo — mesmas matrizes usadas na Central.
+       Aplicados via #colorblindOverlay (backdrop-filter), nunca direto
+       no <body> (ver o receptor de acessibilidade no início
+       de scriptsiem.js + stylesiem.css). -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="f-protanopia">
+        <feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-deuteranopia">
+        <feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-tritanopia">
+        <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-acromatopsia">
+        <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Overlay fixo de daltonismo (backdrop-filter, pointer-events:none) —
+       evita quebrar elementos position:fixed/absolute (painéis, modais). -->
+  <div id="colorblindOverlay" aria-hidden="true"></div>
+
+  <!-- ══════════════ SKIP LINKS (WCAG 2.4.1 Bypass Blocks) ══════════════
+       Quatro atalhos, um para cada bloco repetido da pagina, agrupados
+       num unico landmark <nav>. Sem eles, quem navega por teclado tinha
+       de percorrer os ~40 controles da coluna esquerda antes de alcancar
+       o simulador. ══════════════ -->
+  <nav class="skip-nav" aria-label="Atalhos de navegação">
+    <a href="#main-content"   class="skip-link">Pular para o conteúdo principal</a>
+    <a href="#sidebar-left"   class="skip-link">Pular para a substância e o diagrama</a>
+    <a href="#sim-area"       class="skip-link">Pular para a simulação</a>
+    <a href="#sidebar-right"  class="skip-link">Pular para os controles e medidas</a>
+  </nav>
+
+  <!-- Os recursos de acessibilidade (tema claro/escuro, alto contraste,
+       daltonismo, leitura simples, escala de fonte e redução de animações)
+       NÃO têm controles aqui: são definidos na Central de Simuladores e
+       chegam via parâmetros de URL e postMessage, aplicados pelo
+       receptor de acessibilidade no início de scriptsiem.js — igual ao SIMA e ao SITP. -->
+
+
+  <header class="app-header">
+    <div class="header-brand">
+      <a class="header-back" href="indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="16" height="16"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span>1º Ano</span>
+      </a>
+      <span class="header-logo" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg"><line x1="22" y1="22" x2="29" y2="29" stroke-width="2.5" stroke-linecap="round"/><circle cx="13" cy="13" r="10.5" stroke-width="1.6"/><circle cx="9" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="13" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="9" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="13" r="1.4" fill="currentColor" stroke="none"/><circle cx="13" cy="13" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="13" r="1.4" fill="currentColor" stroke="none"/><circle cx="9" cy="17" r="1.4" fill="currentColor" stroke="none"/><circle cx="13" cy="17" r="1.4" fill="currentColor" stroke="none"/><circle cx="17" cy="17" r="1.4" fill="currentColor" stroke="none"/><line x1="9" y1="9" x2="17" y2="9" stroke-width="0.8" opacity="0.7"/><line x1="9" y1="13" x2="17" y2="13" stroke-width="0.8" opacity="0.7"/><line x1="9" y1="17" x2="17" y2="17" stroke-width="0.8" opacity="0.7"/><line x1="9" y1="9" x2="9" y2="17" stroke-width="0.8" opacity="0.7"/><line x1="13" y1="9" x2="13" y2="17" stroke-width="0.8" opacity="0.7"/><line x1="17" y1="9" x2="17" y2="17" stroke-width="0.8" opacity="0.7"/></svg></span>
+      <div>
+        <h1>SIEM</h1>
+        <p class="header-sub">Simulador Interativo de Estrutura da Matéria</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <!-- Badge de estado. O rotulo em .sr-only da contexto a quem usa
+           leitor de tela: sem ele, o aria-live anunciava so "travessao" ou
+           so "Liquido", sem dizer do que se tratava. O texto visivel fica
+           no span interno, que e o unico que o JS reescreve. -->
+      <span class="state-pill state-pill--vazio" id="state-pill" role="status" aria-live="polite">
+        <span class="sr-only">Estado físico da substância: </span><span id="state-pill-text">sem substância</span>
+      </span>
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir painel de substância e dados"
+              aria-expanded="false" aria-controls="sidebar-left">☰</button>
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right" aria-label="Abrir painel de temperatura, pressão, medidas e diagrama de fases"
+              aria-expanded="false" aria-controls="sidebar-right">⚙</button>
+    </div>
+  </header>
+
+  <div class="app-body" id="main-content">
+
+    <!-- ══════════ PAINEL ESQUERDO — substância + dados ══════════ -->
+    <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Substância e dados">
+
+      <section class="panel" data-open="true">
+        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia"><span class="panel-icon" aria-hidden="true">🧪</span><span class="panel-label">Substância</span><span class="panel-badge">95</span><span class="chevron" aria-hidden="true">▾</span></button>
+        <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
+          <p class="mode-define">95 substâncias com dados experimentais reais de fusão, ebulição, ponto triplo e ponto crítico. A escolha aqui <strong>calibra todos os outros painéis</strong>.</p>
+          <div class="search-wrap">
+            <label for="sub-search" class="sr-only">Buscar substância por nome ou fórmula</label>
+            <input type="search" id="sub-search" class="search-input" placeholder="Nome ou fórmula…" autocomplete="off" spellcheck="false" />
+            <span class="search-icon" aria-hidden="true">⌕</span>
+          </div>
+          <div class="mol-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar substâncias por categoria"></div>
+          <ul id="sub-list" class="sub-list" role="listbox" aria-label="Lista de substâncias"></ul>
+        </div>
+      </section>
+
+      <!-- ══ MOVIDO DA DIREITA: DIAGRAMA DE FASES ══
+           O diagrama e o unico grafico do simulador e o painel mais alto
+           da pagina; na coluna da direita ele empurrava os controles para
+           fora da tela. Aqui, embaixo da lista de substancias, fica na
+           mesma coluna do objeto que ele descreve — trocar de substancia
+           redesenha o diagrama logo acima do dedo/cursor.
+           Nada mudou de id: #phase-diagram continua sendo achado por
+           getElementById e o botao ⤢ continua usando closest('.panel'). -->
+      <section class="panel" data-open="true">
+        <div class="panel-header-row">
+          <button class="panel-header" id="hdr-diagrama" type="button" aria-expanded="true" aria-controls="body-diagrama">
+            <span class="panel-icon" aria-hidden="true">📈</span>
+            <span class="panel-label">Diagrama de fases</span>
+            <span class="chevron" aria-hidden="true">▾</span>
+          </button>
+          <button type="button" class="expand-btn" data-expand="diagrama" aria-label="Expandir diagrama de fases para leitura ampliada" title="Expandir para leitura">⤢</button>
+        </div>
+        <div class="panel-body chart-bd" id="body-diagrama" role="region" aria-labelledby="hdr-diagrama">
+          <p class="mode-define">Diagrama de fases P × T da substância, com o ponto atual marcado. Sólido, líquido, vapor, ponto triplo e ponto crítico.</p>
+          <canvas id="phase-diagram" class="mini-chart phase-diagram-canvas" role="img" aria-label="Diagrama de pressão e temperatura mostrando as curvas de fusão, ebulição e sublimação da substância selecionada, com a posição atual definida pelos controles de temperatura e pressão"></canvas>
+        </div>
+      </section>
+
+    </aside>
+
+    <!-- ══════════ CENTRO — simulação ══════════ -->
+    <main class="sim-area" id="sim-area">
+      <canvas id="sim-canvas" role="img" aria-label="Simulação visual de moléculas no estado físico atual"></canvas>
+      <canvas id="sim-canvas-3d" role="img" aria-label="Simulação visual 3D de moléculas no estado físico atual, arraste para rotacionar a câmera" hidden></canvas>
+      <!-- O alternador 2D/3D era o QUARTO controle solto do simulador:
+           flutuava sobre o canvas, longe dos outros tres. Foi para dentro
+           do painel CONTROLES, no bloco "Visualizacao". Os ids
+           #view-2d-btn e #view-3d-btn nao mudaram — view3dsiem.js os
+           acha por getElementById. -->
+
+      <div class="warning-box" id="warning-box" role="alert" style="display:none"></div>
+    </main>
+
+    <!-- ══════════════════════════════════════════════════════════════
+         DIREITA — remodelada em DOIS paineis
+
+         Antes eram SEIS paineis empilhados:
+           Dados Gerais · Temperatura · Pressao · Particulas · Medidas ·
+           Diagrama de fases
+         mais o alternador 2D/3D flutuando sobre o canvas — ou seja,
+         QUATRO controles em quatro lugares diferentes.
+
+         Agora:
+           1) CONTROLES        — os quatro controles num painel unico,
+                                 cada um no seu bloco identificado.
+           2) DADOS & MEDIDAS  — a ficha da substancia e as leituras ao
+                                 vivo integradas: as duas respondem
+                                 "como esta a substancia agora", uma com
+                                 constantes de tabela e a outra com o
+                                 valor recalculado na pressao em uso.
+         O Diagrama de fases foi para a coluna da ESQUERDA.
+    ══════════════════════════════════════════════════════════════ -->
+    <aside class="sidebar sidebar--right" id="sidebar-right" aria-label="Controles, dados e medidas">
+
+      <!-- ══════════ PAINEL 1 — CONTROLES UNIFICADOS ══════════ -->
+      <section class="panel" data-open="true">
+        <button class="panel-header" id="hdr-controles" type="button" aria-expanded="true" aria-controls="body-controles">
+          <span class="panel-icon" aria-hidden="true">🎛️</span>
+          <span class="panel-label">Controles</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-controles" role="region" aria-labelledby="hdr-controles">
+
+          <!-- UM texto explicativo para os quatro controles, em vez de um
+               por painel (eram quatro paragrafos dizendo variacoes da
+               mesma coisa). -->
+          <p class="mode-define">
+            <strong>Temperatura</strong> e <strong>pressão</strong> definem em que ponto do
+            diagrama de fases a amostra está — as duas juntas decidem a fase.
+            <strong>Partículas</strong> e <strong>visualização</strong> mudam só o que você vê
+            no canvas, não as propriedades da substância.
+          </p>
+
+          <!-- ── Bloco 1: TEMPERATURA ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-temp-lbl">
+            <p class="ctrl-block-hd" id="cb-temp-lbl">
+              <span aria-hidden="true">🌡️</span>
+              <span class="ctrl-block-name">Temperatura</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="temp-slider" class="ctrl-label">Temperatura</label>
+                <output class="ctrl-val" id="temp-val" for="temp-slider">25 °C</output>
+              </div>
+              <input type="range" id="temp-slider" min="-200" max="500" value="25" step="1" aria-describedby="temp-val" />
+              <div class="ctrl-sublabels" aria-hidden="true"><span id="temp-min-lbl">-200 °C</span><span id="temp-max-lbl">500 °C</span></div>
+            </div>
+            <div class="btn-row">
+              <button class="action-btn" id="btn-cool" type="button">❄ Resfriar</button>
+              <button class="action-btn" id="btn-heat" type="button">🔥 Aquecer</button>
+            </div>
+            <p class="ctrl-note" id="temp-note">Selecione uma substância para calibrar a faixa de temperatura pelos seus pontos reais de fusão e ebulição.</p>
+          </div>
+
+          <!-- ── Bloco 2: PRESSAO ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-press-lbl">
+            <p class="ctrl-block-hd" id="cb-press-lbl">
+              <span aria-hidden="true">💨</span>
+              <span class="ctrl-block-name">Pressão</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="press-slider" class="ctrl-label">Pressão</label>
+                <output class="ctrl-val" id="press-val" for="press-slider">1.00 atm</output>
+              </div>
+              <input type="range" id="press-slider" min="-2" max="2.5" value="0" step="0.02" aria-describedby="press-val" />
+              <div class="ctrl-sublabels" aria-hidden="true"><span>0.01 atm</span><span>300 atm</span></div>
+            </div>
+            <p class="ctrl-note" id="press-note">1 atm = pressão atmosférica ao nível do mar</p>
+          </div>
+
+          <!-- ── Bloco 3: PARTICULAS ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-n-lbl">
+            <p class="ctrl-block-hd" id="cb-n-lbl">
+              <span aria-hidden="true">⚫</span>
+              <span class="ctrl-block-name">Partículas</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="n-slider" class="ctrl-label">Quantidade</label>
+                <output class="ctrl-val" id="n-val" for="n-slider">40</output>
+              </div>
+              <input type="range" id="n-slider" min="15" max="80" value="40" step="5" aria-describedby="n-val" />
+            </div>
+          </div>
+
+          <!-- ── Bloco 4: VISUALIZACAO (veio de cima do canvas) ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-view-lbl">
+            <p class="ctrl-block-hd" id="cb-view-lbl">
+              <span aria-hidden="true">🧊</span>
+              <span class="ctrl-block-name">Visualização</span>
+            </p>
+            <div class="view-toggle view-toggle--inline" role="group" aria-label="Modo de visualização">
+              <button type="button" class="view-toggle-btn active" id="view-2d-btn" aria-pressed="true">2D</button>
+              <button type="button" class="view-toggle-btn" id="view-3d-btn" aria-pressed="false">3D</button>
+            </div>
+            <p class="ctrl-note">No modo 3D arraste sobre o canvas para girar a câmera.</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════ PAINEL 2 — DADOS & MEDIDAS INTEGRADOS ══════════
+           Eram dois paineis: "Dados Gerais" (constantes de tabela, a 1 atm)
+           e "Medidas" (leituras ao vivo, na pressao em uso). Ler um sem o
+           outro nao serve para nada: o sentido esta justamente em comparar
+           "fusao a 1 atm" com "T. fusao na P atual". Agora sao tres
+           sub-blocos do mesmo painel, e um unico botao ⤢ expande a ficha
+           completa.  data-expand mudou de "gerais" para "dados" — o titulo
+           correspondente foi atualizado em scriptsiem.js (_initExpand). -->
+      <section class="panel" data-open="true">
+        <div class="panel-header-row">
+          <button class="panel-header" id="hdr-dados" type="button" aria-expanded="true" aria-controls="body-dados">
+            <span class="panel-icon" aria-hidden="true">📋</span>
+            <span class="panel-label">Dados &amp; Medidas</span>
+            <span class="chevron" aria-hidden="true">▾</span>
+          </button>
+          <button type="button" class="expand-btn" data-expand="dados" aria-label="Expandir dados e medidas para leitura ampliada" title="Expandir para leitura">⤢</button>
+        </div>
+        <div class="panel-body" id="body-dados" role="region" aria-labelledby="hdr-dados">
+          <p class="mode-define">Ficha da substância e leitura do instante. As constantes são <strong>experimentais, a 1 atm</strong>; as medidas ao vivo já vêm recalculadas para a pressão em uso.</p>
+
+          <!-- ── Leituras ao vivo primeiro: e o que muda a cada ajuste ── -->
+          <p class="data-subhead">Estado atual (ao vivo)</p>
+          <dl class="data-grid live" aria-live="polite">
+            <div class="dr"><dt>Estado atual</dt>      <dd id="m-state">—</dd></div>
+            <div class="dr"><dt>T. fusão (P atual)</dt><dd id="m-fusionNow">—</dd></div>
+            <div class="dr"><dt>T. ebulição (P atual)</dt><dd id="m-boilingNow">—</dd></div>
+            <div class="dr"><dt>Agitação relativa</dt> <dd id="m-agitation">—</dd></div>
+          </dl>
+
+          <p class="data-subhead">Geometria molecular (VSEPR)</p>
+          <dl class="data-grid">
+            <div class="dr"><dt>Fórmula</dt>        <dd id="d-formula">—</dd></div>
+            <div class="dr"><dt>Geometria</dt>      <dd id="d-geometry">—</dd></div>
+            <div class="dr"><dt>Ângulo de ligação</dt><dd id="d-angle">—</dd></div>
+            <div class="dr"><dt>Pares isolados</dt> <dd id="d-lonepairs">—</dd></div>
+            <div class="dr"><dt>Polaridade</dt>     <dd id="d-polarity">—</dd></div>
+          </dl>
+          <div id="atom-legend" class="atom-legend" role="group" aria-label="Legenda de cores dos átomos"></div>
+
+          <p class="data-subhead">Dados físicos reais (1 atm)</p>
+          <dl class="data-grid">
+            <div class="dr"><dt>Fusão (1 atm)</dt>   <dd id="d-fusion">—</dd></div>
+            <div class="dr"><dt>Ebulição (1 atm)</dt><dd id="d-boiling">—</dd></div>
+            <div class="dr"><dt>Pt. triplo</dt>      <dd id="d-triple">—</dd></div>
+            <div class="dr"><dt>Pt. crítico</dt>     <dd id="d-critical">—</dd></div>
+            <div class="dr"><dt>Densidade sólido</dt><dd id="d-densSolid">—</dd></div>
+            <div class="dr"><dt>Densidade líquido</dt><dd id="d-densLiquid">—</dd></div>
+            <div class="dr"><dt>Anomalia</dt>        <dd id="d-anomaly">—</dd></div>
+            <div class="dr"><dt>Descrição</dt>       <dd id="d-descricao">—</dd></div>
+          </dl>
+        </div>
+      </section>
+
+    </aside>
+
+  </div>
+
+
+  <!-- ══════════════ BACKDROP MOBILE (fecha o menu ao tocar fora) ══════════════ -->
+  <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
+
+  <!-- ══════════════ MODAL DE EXPANSÃO (leitura ampliada) ══════════════
+       O overlay é filho direto do <body>, que já tem .a11y-content;
+       a classe é repetida aqui para que o aumento de
+       fonte e leitura simples continuem valendo dentro do modal. ══════════════ -->
+  <div class="expand-overlay a11y-content" id="expand-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="expand-title">
+    <div class="expand-modal">
+      <div class="expand-modal-hd">
+        <h2 id="expand-title">Detalhes</h2>
+        <button type="button" class="expand-close" id="expand-close" aria-label="Fechar painel expandido">✕</button>
+      </div>
+      <div class="expand-modal-bd" id="expand-body"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════ VLIBRAS — tradução para Língua Brasileira de Sinais ══════════════ -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var script = document.createElement('script');
+      script.src = 'https://vlibras.gov.br/app/vlibras-plugin.js';
+      script.onload = function() {
+        try { new window.VLibras.Widget('https://vlibras.gov.br/app'); } catch (e) { /* VLibras indisponível sem conexão */ }
+      };
+      document.body.appendChild(script);
+    })();
+  </script>
+  <!-- ═══ CAMADA DE DADOS ═══ -->
+  <script src="js/data/paleta-cpk.js"></script>
+  <script src="js/data/catalogo-substancias.js"></script>
+
+  <!-- ═══ CAMADA DE NÚCLEO (física pura + utilitários) ═══ -->
+  <script src="js/core/termodinamica.js"></script>
+  <script src="js/core/cor.js"></script>
+
+  <!-- ═══ ACESSIBILIDADE + TEMA DO CANVAS ═══ -->
+  <script src="js/a11y/acessibilidade.js"></script>
+
+  <!-- ═══ SIMULAÇÃO (classe Simulation) ═══ -->
+  <script src="js/simulation/simulation-core.js"></script>
+  <script src="js/simulation/simulation-fisica.js"></script>
+  <script src="js/simulation/simulation-render.js"></script>
+
+  <!-- ═══ DIAGRAMA DE FASES (classe PhaseDiagram) ═══ -->
+  <script src="js/phase-diagram/phase-diagram-core.js"></script>
+  <script src="js/phase-diagram/phase-diagram-render.js"></script>
+
+  <!-- ═══ APLICAÇÃO (classe App) ═══ -->
+  <script src="js/app/app-core.js"></script>
+  <script src="js/app/app-substancias.js"></script>
+  <script src="js/app/app-controles.js"></script>
+  <script src="js/app/app-dados-medidas.js"></script>
+  <script src="js/app/app-paineis.js"></script>
+  <script src="js/app/app-eventos.js"></script>
+  <script src="js/app/app-mobile.js"></script>
+  <script src="js/app/app-loop.js"></script>
+
+  <!--
+    ⚠ ORDEM CRÍTICA a partir daqui: os três blocos abaixo registram
+    listeners de DOMContentLoaded, e a ORDEM DE REGISTRO determina a
+    ordem em que disparam. O arquivo original carregava
+    dadossiem.js → view3dsiem.js → scriptsiem.js (que registrava
+    "new App()" e só depois o redimensionador de sidebars), então a
+    ordem de disparo original era: view3d → App → redimensionador.
+    Mantemos exatamente essa ordem aqui.
+  -->
+
+  <!-- ═══ VISÃO 3D (módulo autocontido, não alterado) ═══ -->
+  <script src="js/view3d/view3d.js"></script>
+
+  <!-- ═══ PONTO DE ENTRADA ═══ -->
+  <script src="js/main.js"></script>
+
+  <!-- ═══ INTERFACE — sidebars redimensionáveis ═══ -->
+  <script src="js/ui/sidebar-resizer.js"></script>
+</body>
+</html>

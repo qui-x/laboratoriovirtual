@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- MEMORIA DE ACESSIBILIDADE: precisa ser o PRIMEIRO script da pagina -->
+<script src="../a11y.js"></script>
+  <meta name="description" content="Compare reações de adição e substituição molécula a molécula e balanceie a combustão de alcanos automaticamente."/>
+  <title>SIREA — Simulador Interativo de Reações Orgânicas</title>
+  <link rel="stylesheet" href="stylereacoes.css"/>
+</head>
+<body>
+
+  <!-- Camada de simulação de daltonismo (backdrop-filter, nunca no body) -->
+  <div id="colorblindOverlay" aria-hidden="true"></div>
+  <!-- ══ FILTROS DE DALTONISMO ══════════════════════════════════════
+       O a11y.js aplica `backdrop-filter: url(#f-<tipo>)` no
+       #colorblindOverlay. Sem estes <filter> declarados NESTE
+       documento, a URL aponta para um id inexistente e o navegador
+       ignora em silencio — sem erro no console. Era o caso aqui: o
+       overlay existia, o CSS existia, mas os filtros nao. A simulacao
+       de daltonismo simplesmente nao acontecia.
+
+       Matrizes: Brettel para as tres dicromacias e Rec.601
+       (0.299/0.587/0.114) para acromatopsia. Identicas as das outras
+       paginas — ha uma fonte unica de verdade no projeto.
+       ══════════════════════════════════════════════════════════════ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="f-protanopia">
+        <feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-deuteranopia">
+        <feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-tritanopia">
+        <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/>
+      </filter>
+      <filter id="f-acromatopsia">
+        <feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <nav class="skip-nav" aria-label="Atalhos de navegação">
+    <a href="#sidebar-left"  class="skip-link">Pular para menus e informações</a>
+    <a href="#sim-canvas"    class="skip-link">Pular para a simulação</a>
+    <a href="#sidebar-right" class="skip-link">Pular para os controles</a>
+  </nav>
+
+  <div id="sr-live"           class="sr-only" aria-live="polite"    aria-atomic="true"></div>
+  <div id="sr-live-assertive" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+
+  <header class="app-header" role="banner">
+    <div class="header-brand">
+      <a class="header-back" href="indexterceiroano.html" aria-label="Voltar aos simuladores do 3º Ano">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" width="16" height="16"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span>3º Ano</span>
+      </a>
+      <button class="header-logo" id="btn-app-logo" aria-label="Logo do SIREA — toque para uma curiosidade química">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" width="22" height="22">
+          <path d="M4 9h13M14 6l3 3-3 3M20 15H7M10 12l-3 3 3 3"/>
+        </svg>
+      </button>
+      <div>
+        <h1>SIREA</h1>
+        <p class="header-sub">Simulador Interativo de Reações Orgânicas</p>
+      </div>
+    </div>
+
+    <button type="button" class="mobile-menu-btn" id="mobile-info-btn"
+      aria-label="Abrir menus e informações" aria-expanded="false" aria-controls="sidebar-left">☰</button>
+    <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
+      aria-label="Abrir controles da simulação" aria-expanded="false" aria-controls="sidebar-right">🎛</button>
+  </header>
+
+  <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
+
+  <div class="keyboard-hints" role="note" aria-label="Atalhos de teclado disponíveis">
+    <kbd>Alt+1–3</kbd> Modos &nbsp;
+    <kbd>Enter/Espaço</kbd> Ação no canvas
+  </div>
+
+  <main class="app-main" id="main-content" role="main">
+
+    <aside class="sidebar sidebar--left" id="sidebar-left"
+           aria-label="Menus, listagens e informações do simulador">
+      <!-- ════════ MODOS (um painel-acordeão por modo, gerado de SIM_DATA.MODES) ════════ -->
+      <div id="model-list" aria-label="Modos disponíveis, cada um com painel próprio"></div>
+    </aside>
+
+    <div class="canvas-wrap">
+      <canvas id="sim-canvas" tabindex="0" role="img"
+              aria-label="Desenho do modo selecionado"
+              aria-describedby="canvas-desc"></canvas>
+      <p id="canvas-desc" class="sr-only">
+        Área de desenho com a molécula antes e depois da reação, a seta com o reagente e a equação balanceada da combustão.
+      </p>
+      <!-- INDICADOR DE MODO ATIVO (padrão SILQ) — a pílula fica ESCONDIDA
+           enquanto nenhum modo está ativo: o canvas começa puro. Ao ativar
+           um modo, a classe .mode-on aparece e mostra ícone + nome + ✕. -->
+      <div class="canvas-overlay" id="mode-indicator">
+        <span class="overlay-label" id="overlay-label">
+          <span class="overlay-icon" id="overlay-icon" aria-hidden="true"></span>
+          <span class="overlay-text" id="overlay-text">SIREA</span>
+          <button type="button" class="overlay-clear" id="overlay-clear"
+                  aria-label="Desativar o modo ativo" title="Desativar o modo ativo">✕</button>
+        </span>
+      </div>
+      <div class="canvas-hint" aria-hidden="true" id="canvas-hint">Escolha um modo ao lado e clique em "Ativar" para iniciar a simulação.</div>
+      <div class="fps-counter" aria-hidden="true" id="fps-counter">-- fps</div>
+    </div>
+
+    <aside class="sidebar sidebar--right" id="sidebar-right"
+           aria-label="Controles da simulação">
+
+      <!-- ════════ MODO 1 — ADIÇÃO ════════ -->
+      <section class="panel" id="panel-adicao" data-owner hidden aria-labelledby="hdr-ad">
+        <button type="button" class="panel-header" id="hdr-ad" aria-expanded="true" aria-controls="body-ad">
+          <span class="panel-icon" aria-hidden="true">➕</span>
+          <span class="panel-label">Reagente que Ataca</span>
+          <span class="panel-badge">4</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-ad" role="region" aria-labelledby="hdr-ad">
+          <div class="opt-grid cols-1" id="ad-grid" data-group="adr" role="listbox"
+               aria-label="Reagente que se adiciona ao propeno"></div>
+          <div class="action-row">
+            <button type="button" class="action-btn" data-action="ad-next"><span aria-hidden="true">↻</span> Próximo reagente</button>
+          </div>
+          <p class="hint-text">Substrato fixo: <strong>propeno</strong> (CH₂=CH–CH₃). O que muda é quem ataca a dupla.</p>
+        </div>
+      </section>
+
+      <!-- ════════ MODO 2 — SUBSTITUIÇÃO ════════ -->
+      <section class="panel" id="panel-substituicao" data-owner hidden aria-labelledby="hdr-sub">
+        <button type="button" class="panel-header" id="hdr-sub" aria-expanded="true" aria-controls="body-sub">
+          <span class="panel-icon" aria-hidden="true">🔁</span>
+          <span class="panel-label">Reação de Substituição</span>
+          <span class="panel-badge">4</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-sub" role="region" aria-labelledby="hdr-sub">
+          <div class="opt-grid cols-1" id="sub-grid" data-group="subr" role="listbox"
+               aria-label="Reação de substituição a comparar"></div>
+          <div class="action-row">
+            <button type="button" class="action-btn" data-action="sub-next"><span aria-hidden="true">↻</span> Próxima reação</button>
+          </div>
+          <p class="hint-text">Repare que o tamanho da cadeia <strong>não muda</strong>: só troca um átomo por outro.</p>
+        </div>
+      </section>
+
+      <!-- ════════ MODO 3 — COMBUSTÃO ════════ -->
+      <section class="panel" id="panel-combustao" data-owner hidden aria-labelledby="hdr-comb">
+        <button type="button" class="panel-header" id="hdr-comb" aria-expanded="true" aria-controls="body-comb">
+          <span class="panel-icon" aria-hidden="true">🔥</span>
+          <span class="panel-label">Combustível e Oxigênio</span>
+          <span class="panel-badge">3</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-comb" role="region" aria-labelledby="hdr-comb">
+          <div class="slider-row">
+            <label for="comb-n">Carbonos</label>
+            <input type="range" id="comb-n" data-bind="combn" min="1" max="10" step="1" value="3"/>
+            <output id="out-comb-n" for="comb-n">3</output>
+          </div>
+
+          <div class="seg" data-group="combtipo" role="group" aria-label="Tipo de combustão conforme a oferta de oxigênio">
+            <button type="button" class="seg-btn" data-value="completa" aria-pressed="true">Completa</button>
+            <button type="button" class="seg-btn" data-value="monoxido" aria-pressed="false">CO</button>
+            <button type="button" class="seg-btn" data-value="fuligem" aria-pressed="false">Fuligem</button>
+          </div>
+
+          <div class="action-row">
+            <button type="button" class="action-btn" data-action="comb-next"><span aria-hidden="true">↻</span> Alternar tipo</button>
+          </div>
+          <p class="hint-text">Os coeficientes são <strong>calculados</strong> a partir de CₙH₂ₙ₊₂ e simplificados — nunca ficam desbalanceados.</p>
+        </div>
+      </section>
+
+      <!-- ════════ RESULTADOS (sempre visível, independe do modo) ════════ -->
+      <section class="panel" aria-labelledby="hdr-result">
+        <button type="button" class="panel-header" id="hdr-result" aria-expanded="true" aria-controls="body-result">
+          <span class="panel-icon" aria-hidden="true">📊</span>
+          <span class="panel-label">Resultados</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-result" role="region" aria-labelledby="hdr-result">
+          <dl class="data-grid" id="result-grid" aria-live="polite" aria-atomic="true"></dl>
+          <canvas id="result-chart" class="result-chart" hidden aria-label="Gráfico auxiliar do modo atual"></canvas>
+        </div>
+      </section>
+
+    </aside>
+
+  </main>
+
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="dadosreacoes.js"></script>
+  <script src="scriptreacoes.js"></script>
+</body>
+</html>

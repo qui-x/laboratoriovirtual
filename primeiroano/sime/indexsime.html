@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<!-- MEMORIA DE ACESSIBILIDADE: precisa ser o PRIMEIRO script da pagina -->
+<script src="../a11y.js"></script>
+  <title>SIME — Simulador Interativo de Matéria e Estados</title>
+  <link rel="stylesheet" href="css/stylesime.css" />
+</head>
+<body>
+<div id="colorblindOverlay" aria-hidden="true"></div>
+ 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="f-protanopia">  <feColorMatrix type="matrix" values="0.567 0.433 0 0 0  0.558 0.442 0 0 0  0 0.242 0.758 0 0  0 0 0 1 0"/></filter>
+    <filter id="f-deuteranopia"><feColorMatrix type="matrix" values="0.625 0.375 0 0 0  0.7 0.3 0 0 0  0 0.3 0.7 0 0  0 0 0 1 0"/></filter>
+    <filter id="f-tritanopia">  <feColorMatrix type="matrix" values="0.95 0.05 0 0 0  0 0.433 0.567 0 0  0 0.475 0.525 0 0  0 0 0 1 0"/></filter>
+    <filter id="f-acromatopsia"><feColorMatrix type="matrix" values="0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0.299 0.587 0.114 0 0  0 0 0 1 0"/></filter>
+  </defs>
+</svg>
+ 
+<!-- Skip links múltiplos (WCAG 2.1 AA) -->
+<nav class="skip-nav" aria-label="Atalhos de navegação">
+  <a href="#main-content"  class="skip-link">Pular para o conteúdo principal</a>
+  <a href="#sidebar-left"  class="skip-link">Pular para substâncias</a>
+  <a href="#sim-area"      class="skip-link">Pular para o simulador</a>
+  <a href="#sidebar-right" class="skip-link">Pular para controles e medidas</a>
+</nav>
+ 
+<!-- Regiões aria-live para anúncios ao leitor de tela -->
+<div id="sr-live"           class="sr-only" aria-live="polite"   aria-atomic="true"></div>
+<div id="sr-live-assertive" class="sr-only" aria-live="assertive" aria-atomic="true"></div>
+ 
+  <!-- ═══ CABEÇALHO ═══ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a class="header-back" href="indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+        <span>1º Ano</span>
+      </a>
+      <span class="header-logo" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg"><rect x="1.5" y="8" width="8" height="16" rx="1.5" stroke-width="1.2"/><circle cx="4" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="7" cy="13" r="1.2" fill="currentColor" stroke="none"/><circle cx="4" cy="17" r="1.2" fill="currentColor" stroke="none"/><circle cx="7" cy="17" r="1.2" fill="currentColor" stroke="none"/><rect x="12" y="8" width="8" height="16" rx="1.5" stroke-width="1.2"/><circle cx="14.5" cy="21" r="1.2" fill="currentColor" stroke="none"/><circle cx="17.5" cy="20" r="1.2" fill="currentColor" stroke="none"/><circle cx="16" cy="18" r="1.2" fill="currentColor" stroke="none"/><rect x="22.5" y="8" width="8" height="16" rx="1.5" stroke-width="1.2"/><circle cx="25" cy="11.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="28" cy="15" r="1.1" fill="currentColor" stroke="none"/><circle cx="25" cy="19" r="1.1" fill="currentColor" stroke="none"/><line x1="25" y1="11.5" x2="27" y2="13" stroke-width="0.8" opacity="0.6"/><line x1="28" y1="15" x2="26" y2="16.5" stroke-width="0.8" opacity="0.6"/></svg>
+      </span>
+      <div>
+        <h1>SIME</h1>
+        <p class="header-sub">Simulador Interativo de Matéria e Estados</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <!-- O rotulo em .sr-only diz ao leitor de tela do que o badge trata.
+           Sem ele o aria-live anunciava so "Solido" ou, no estado vazio,
+           so um travessao. -->
+      <span class="state-pill state-pill--vazio" id="state-pill" role="status" aria-live="polite">
+        <span class="sr-only">Estado físico da substância: </span>
+        <span id="state-pill-icon" aria-hidden="true"></span>
+        <span id="state-pill-text">sem substância</span>
+      </span>
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
+        aria-label="Abrir painel de substância e estado físico"
+        aria-expanded="false" aria-controls="sidebar-left">☰</button>
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
+        aria-label="Abrir controles e medidas"
+        aria-expanded="false" aria-controls="sidebar-right">⚙</button>
+    </div>
+  </header>
+ 
+  <!-- Dicas de teclado (visíveis apenas ao focar skip-link) -->
+  <div class="keyboard-hints" role="note" aria-label="Atalhos de teclado disponíveis">
+    <kbd>Tab</kbd> Navegar &nbsp;
+    <kbd>Enter/Espaço</kbd> Selecionar
+  </div>
+ 
+  <!-- ═══ CORPO ═══ -->
+  <div class="app-body" id="main-content">
+ 
+    <!-- ══════════════════════════════════════════
+         ESQUERDA — Substância · Estado · Medidas
+    ══════════════════════════════════════════ -->
+    <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Substância e estado físico">
+ 
+      <!-- Substância -->
+      <section class="panel" data-open="true">
+        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia">
+          <span class="panel-icon" aria-hidden="true">🧪</span>
+          <span class="panel-label">Substância</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
+          <p class="mode-define">Escolha a substância a estudar. Fusão, ebulição e comportamento sob pressão são os valores <strong>experimentais reais</strong> dela — todo o resto do simulador se recalibra a partir daqui.</p>
+          <div class="sub-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar por categoria"></div>
+          <ul id="sub-lista" class="sub-lista" role="listbox" aria-label="Substâncias disponíveis"></ul>
+ 
+        </div>
+      </section>
+ 
+    </aside><!-- /sidebar-left -->
+ 
+    <!-- ══════════════════════════════════════
+         CENTRO — Cilindro SVG
+    ══════════════════════════════════════ -->
+    <main class="sim-area" id="sim-area" aria-label="Área de experimento">
+ 
+      <!-- Dica do estado vazio: some sozinha por CSS (:has) quando a lista
+           da esquerda passa a ter um .sub-item.ativa. Sem JS. -->
+      <p class="sim-hint" id="sim-hint">
+        Escolha uma substância no painel da esquerda para montar o experimento.
+      </p>
+ 
+      <svg id="seringa-svg" class="seringa-svg"
+        viewBox="0 0 220 460" xmlns="http://www.w3.org/2000/svg"
+        role="img" aria-label="Cilindro experimental com êmbolo móvel">
+        <defs>
+          <linearGradient id="grad-vidro" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#1a3a6a" stop-opacity="0.5"/>
+            <stop offset="15%"  stop-color="#0a1a3a" stop-opacity="0.15"/>
+            <stop offset="85%"  stop-color="#0a1a3a" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#1a3a6a" stop-opacity="0.5"/>
+          </linearGradient>
+          <linearGradient id="grad-pistao" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#475569"/>
+            <stop offset="50%"  stop-color="#1E293B"/>
+            <stop offset="100%" stop-color="#334155"/>
+          </linearGradient>
+          <linearGradient id="grad-haste" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#334155"/>
+            <stop offset="50%"  stop-color="#64748B"/>
+            <stop offset="100%" stop-color="#334155"/>
+          </linearGradient>
+          <linearGradient id="grad-base" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#1E293B"/>
+            <stop offset="100%" stop-color="#0F172A"/>
+          </linearGradient>
+          <linearGradient id="grad-gelo" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#BFE0FF"/>
+            <stop offset="30%"  stop-color="#7EC8FF"/>
+            <stop offset="70%"  stop-color="#5BAAEE"/>
+            <stop offset="100%" stop-color="#3A88CC"/>
+          </linearGradient>
+          <linearGradient id="grad-liquido" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="rgba(74,158,255,0.8)"/>
+            <stop offset="60%"  stop-color="rgba(30,100,200,0.9)"/>
+            <stop offset="100%" stop-color="rgba(10,40,130,0.95)"/>
+          </linearGradient>
+          <clipPath id="clip-cilindro-fixo">
+            <rect x="44" y="104" width="132" height="320"/>
+          </clipPath>
+        </defs>
+        <!-- Paredes -->
+        <rect x="30"  y="104" width="14"  height="320" fill="url(#grad-vidro)" stroke="rgba(100,160,220,0.5)" stroke-width="1.5"/>
+        <rect x="176" y="104" width="14"  height="320" fill="url(#grad-vidro)" stroke="rgba(100,160,220,0.5)" stroke-width="1.5"/>
+        <rect x="34"  y="104" width="5"   height="320" fill="rgba(255,255,255,0.04)"/>
+        <!-- Conteúdo -->
+        <g clip-path="url(#clip-cilindro-fixo)">
+          <g id="sv-solido" opacity="1">
+            <rect id="sv-sol-rect" x="57" y="340" width="106" height="84" rx="8" fill="url(#grad-gelo)"/>
+            <rect x="64" y="348" width="26" height="8" rx="3" fill="rgba(255,255,255,0.45)" transform="rotate(-12,77,352)"/>
+            <rect x="74" y="361" width="14" height="4" rx="2" fill="rgba(255,255,255,0.35)"/>
+          </g>
+          <g id="sv-liquido" opacity="0">
+            <rect id="sv-liq-corpo" x="44" y="220" width="132" height="204" fill="url(#grad-liquido)"/>
+            <ellipse id="sv-onda1" cx="110" cy="220" rx="66" ry="7"   fill="rgba(74,158,255,0.6)"  class="onda-svg o-svg-1"/>
+            <ellipse id="sv-onda2" cx="110" cy="220" rx="52" ry="4.5" fill="rgba(140,200,255,0.35)" class="onda-svg o-svg-2"/>
+          </g>
+          <g id="sv-gasoso" opacity="0">
+            <rect    id="sv-gas-rect" x="44" y="104" width="132" height="320" fill="rgba(139,92,246,0.07)"/>
+            <ellipse id="sv-blob-1"   cx="90"  cy="170" rx="36" ry="26" fill="rgba(139,92,246,0.18)" class="gas-blob gb-1"/>
+            <ellipse id="sv-blob-2"   cx="142" cy="230" rx="42" ry="30" fill="rgba(167,130,255,0.15)" class="gas-blob gb-2"/>
+            <ellipse id="sv-blob-3"   cx="86"  cy="300" rx="32" ry="22" fill="rgba(139,92,246,0.14)" class="gas-blob gb-3"/>
+            <ellipse id="sv-blob-4"   cx="146" cy="345" rx="38" ry="26" fill="rgba(200,170,255,0.12)" class="gas-blob gb-4"/>
+          </g>
+        </g>
+        <!-- Êmbolo -->
+        <g id="sv-embolo">
+          <rect x="102" y="10"  width="16"  height="72" fill="url(#grad-haste)" rx="3"/>
+          <rect x="32"  y="82"  width="156" height="22" fill="url(#grad-pistao)" rx="4"/>
+          <line x1="60" y1="90" x2="160" y2="90" stroke="rgba(0,212,255,0.3)" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="48"  cy="93" r="3" fill="#475569"/>
+          <circle cx="172" cy="93" r="3" fill="#475569"/>
+          <rect x="44" y="0" width="132" height="82" fill="#070C18"/>
+        </g>
+        <!-- Borda -->
+        <rect x="30" y="104" width="160" height="320" fill="none" stroke="rgba(100,160,220,0.45)" stroke-width="2.5"/>
+        <path d="M 30 400 Q 30 424 54 424 L 166 424 Q 190 424 190 400" fill="none" stroke="rgba(100,160,220,0.45)" stroke-width="2.5"/>
+        <!-- Base e chapa -->
+        <rect x="24" y="424" width="172" height="14" fill="url(#grad-base)" rx="4" stroke="#334155" stroke-width="1.5"/>
+        <rect id="sv-chapa" x="14" y="438" width="192" height="20" fill="#1A0E05" rx="5" stroke="#3D2010" stroke-width="1.5"/>
+        <line id="sv-res-1" x1="34"  y1="448" x2="64"  y2="448" stroke="#3D2010" stroke-width="3.5" stroke-linecap="round"/>
+        <line id="sv-res-2" x1="80"  y1="448" x2="110" y2="448" stroke="#3D2010" stroke-width="3.5" stroke-linecap="round"/>
+        <line id="sv-res-3" x1="126" y1="448" x2="156" y2="448" stroke="#3D2010" stroke-width="3.5" stroke-linecap="round"/>
+        <line id="sv-res-4" x1="170" y1="448" x2="192" y2="448" stroke="#3D2010" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- Escala -->
+        <g stroke="rgba(100,160,220,0.3)" stroke-width="1">
+          <line x1="19" y1="144" x2="26" y2="144"/><line x1="19" y1="184" x2="26" y2="184"/>
+          <line x1="19" y1="224" x2="26" y2="224"/><line x1="19" y1="264" x2="26" y2="264"/>
+          <line x1="19" y1="304" x2="26" y2="304"/><line x1="19" y1="344" x2="26" y2="344"/>
+          <line x1="19" y1="384" x2="26" y2="384"/>
+        </g>
+ 
+      </svg>
+ 
+      <!-- compat JS -->
+      <div id="materia-solida"  hidden aria-hidden="true"></div>
+      <div id="materia-liquida" hidden aria-hidden="true"></div>
+      <div id="materia-gasosa"  hidden aria-hidden="true"></div>
+ 
+    </main><!-- /sim-area -->
+ 
+    <!-- ══════════════════════════════════════════════════════════════
+         DIREITA — DOIS PAINEIS APENAS
+         Antes eram CINCO paineis (Temperatura & Estado · Medidas ·
+         Temperatura · Pressao · Volume), cada um com seu proprio texto
+         explicativo, mais o termometro SVG e o manometro SVG. Somados,
+         passavam de 1200px de altura: a coluna so era navegavel com
+         barra de rolagem.
+ 
+         Agora:
+           1) CONTROLES  — os tres controles num unico painel, cada um
+                           identificado por seu bloco (.ctrl-block).
+           2) ESTADO & MEDIDAS — a leitura do estado fisico + todas as
+                           medidas numericas no mesmo painel.
+ 
+         DESENHOS REMOVIDOS (eram redundantes com a leitura numerica):
+           · termometro SVG  — a barra de progresso termico ja mostra as
+             faixas solido/liquido/gasoso E a posicao atual, com os
+             valores de fusao/ebulicao efetivos; o mercurio repetia isso.
+           · manometro SVG   — repetia o mesmo numero de #display-pressao
+             e #m-pressao, ocupando ~180px de altura.
+         O JS nao quebra: todo acesso a esses elementos e protegido por
+         "if (el)" em scriptsime.js (atualizarTermometro, atualizarManometro,
+         atualizarArcoPressao e atualizarLinhasTermometro).
+    ══════════════════════════════════════════════════════════════ -->
+    <aside class="sidebar sidebar--right" id="sidebar-right" aria-label="Controles e medidas">
+ 
+      <!-- ══════════ PAINEL 1 — CONTROLES UNIFICADOS ══════════ -->
+      <section class="panel" data-open="true">
+        <button class="panel-header" id="hdr-controles" type="button" aria-expanded="true" aria-controls="body-controles">
+          <span class="panel-icon" aria-hidden="true">🎛️</span>
+          <span class="panel-label">Controles</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-controles" role="region" aria-labelledby="hdr-controles">
+ 
+          <!-- UNICO texto explicativo do painel: cobre as tres variaveis -->
+          <p class="mode-define">
+            <strong>Temperatura</strong> move a amostra pelas transições de fase.
+            <strong>Pressão</strong> desloca os pontos de fusão e ebulição.
+            <strong>Volume</strong> comprime o êmbolo e altera a pressão efetiva.
+            As leituras resultantes estão no painel abaixo.
+          </p>
+ 
+          <!-- ── Bloco 1: TEMPERATURA ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-temp-lbl">
+            <p class="ctrl-block-hd" id="cb-temp-lbl">
+              <span aria-hidden="true">🌡️</span>
+              <span class="ctrl-block-name">Temperatura</span>
+              <span class="panel-valor" id="pv-temperatura">25 °C</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="slider-temperatura" class="ctrl-label">Chapa aquecedora</label>
+                <span class="ctrl-val" id="display-temp">25 °C</span>
+              </div>
+              <input type="range" id="slider-temperatura" min="-50" max="300" value="25" step="1"
+                aria-label="Temperatura em graus Celsius"/>
+              <div class="ctrl-sublabels" aria-hidden="true">
+                <span id="slider-temp-min">-50 °C</span>
+                <span id="slider-temp-max">300 °C</span>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button class="action-btn" id="btn-cool" type="button">❄ Resfriar</button>
+              <button class="action-btn" id="btn-heat" type="button">🔥 Aquecer</button>
+            </div>
+            <div class="indicador-faixa">
+              <span class="faixa-ponto" id="ponto-faixa-temp"></span>
+              <span class="ctrl-note"   id="texto-faixa-temp">Ambiente</span>
+            </div>
+          </div>
+ 
+          <!-- ── Bloco 2: PRESSAO ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-press-lbl">
+            <p class="ctrl-block-hd" id="cb-press-lbl">
+              <span aria-hidden="true">💨</span>
+              <span class="ctrl-block-name">Pressão</span>
+              <span class="panel-valor" id="pv-pressao">1.00 atm</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="slider-pressao" class="ctrl-label">Pressão manual</label>
+                <span class="ctrl-val" id="display-pressao-ctrl">1.00 atm</span>
+              </div>
+              <input type="range" id="slider-pressao" min="0.1" max="25" value="1.0" step="0.1"
+                aria-label="Pressão em atmosferas"/>
+              <div class="ctrl-sublabels" aria-hidden="true">
+                <span>0.1 atm</span>
+                <span>25 atm</span>
+              </div>
+            </div>
+            <div class="btn-row">
+              <button class="action-btn" id="btn-press-down" type="button">▼ Reduzir</button>
+              <button class="action-btn" id="btn-press-up"   type="button">▲ Aumentar</button>
+            </div>
+            <div class="indicador-faixa">
+              <span class="faixa-ponto" id="ponto-faixa-pressao"></span>
+              <span class="ctrl-note"   id="texto-faixa-pressao">Normal</span>
+              <span class="ctrl-val"    id="display-pressao" style="margin-left:auto">1.00 atm</span>
+            </div>
+          </div>
+ 
+          <!-- ── Bloco 3: VOLUME ── -->
+          <div class="ctrl-block" role="group" aria-labelledby="cb-vol-lbl">
+            <p class="ctrl-block-hd" id="cb-vol-lbl">
+              <span aria-hidden="true">⚗️</span>
+              <span class="ctrl-block-name">Volume</span>
+              <span class="panel-valor" id="pv-volume">60 %</span>
+            </p>
+            <div class="ctrl-group">
+              <div class="ctrl-label-row">
+                <label for="slider-volume" class="ctrl-label">Posição do êmbolo</label>
+                <span class="ctrl-val" id="display-volume">60 %</span>
+              </div>
+              <input type="range" id="slider-volume" min="20" max="100" value="60" step="1"
+                aria-label="Volume: 20% comprimido a 100% expandido"/>
+              <div class="ctrl-sublabels" aria-hidden="true">
+                <span>20% Comprimido</span>
+                <span>100% Expandido</span>
+              </div>
+            </div>
+          </div>
+ 
+        </div>
+      </section>
+ 
+      <!-- ══════════ PAINEL 2 — ESTADO & MEDIDAS ══════════ -->
+      <section class="panel" data-open="true">
+        <button class="panel-header" id="hdr-medidas" type="button" aria-expanded="true" aria-controls="body-medidas">
+          <span class="panel-icon" aria-hidden="true">📏</span>
+          <span class="panel-label">Estado &amp; Medidas</span>
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="panel-body" id="body-medidas" role="region" aria-labelledby="hdr-medidas">
+ 
+          <!-- Barra de progresso termico: substitui o termometro SVG.
+               Mostra as tres faixas dimensionadas pelos pontos de fusao e
+               ebulicao EFETIVOS e o cursor na temperatura atual. -->
+          <div class="termometro-progresso" aria-hidden="true">
+            <div class="tp-trilha">
+              <div class="tp-zona tp-zona-solido"  id="tp-zona-solido">❄️</div>
+              <div class="tp-divisor" id="tp-div-fusao">
+                <span class="tp-label-divisor" id="tp-lbl-fusao">0°C</span>
+              </div>
+              <div class="tp-zona tp-zona-liquido" id="tp-zona-liquido">💧</div>
+              <div class="tp-divisor" id="tp-div-ebulicao">
+                <span class="tp-label-divisor" id="tp-lbl-ebulicao">100°C</span>
+              </div>
+              <div class="tp-zona tp-zona-gasoso" id="tp-zona-gasoso">💨</div>
+            </div>
+            <div class="tp-cursor" id="tp-cursor" aria-hidden="true"></div>
+          </div>
+ 
+          <!-- Descricao do estado fisico atual -->
+          <div class="descricao-estado" id="descricao-estado">
+            <p id="texto-descricao-estado">Forma e volume definidos. Não precisa de recipiente.</p>
+          </div>
+ 
+          <!-- Medidas em DUAS COLUNAS: mesma informacao, metade da altura -->
+          <dl class="data-grid data-grid--2col" aria-live="polite">
+            <div class="dr"><dt>Substância</dt>     <dd id="m-substancia">—</dd></div>
+            <div class="dr"><dt>Estado</dt>          <dd id="m-state">—</dd></div>
+            <div class="dr"><dt>Temperatura</dt>     <dd id="m-temp">25 °C</dd></div>
+            <div class="dr"><dt>Pt. fusão ef.</dt>   <dd id="m-fusao">0.0 °C</dd></div>
+            <div class="dr"><dt>Pt. ebulição ef.</dt><dd id="m-ebulicao">100.0 °C</dd></div>
+            <div class="dr"><dt>Pressão</dt>         <dd id="m-pressao">1.00 atm</dd></div>
+            <div class="dr"><dt>P. efetiva</dt>      <dd id="m-pressao-ef">1.00 atm</dd></div>
+            <div class="dr"><dt>Faixa pressão</dt>   <dd id="m-faixa-pressao">Normal</dd></div>
+            <div class="dr"><dt>Volume</dt>          <dd id="m-volume">60 %</dd></div>
+            <div class="dr"><dt>Fator vol.</dt>      <dd id="m-fator-vol">1.00×</dd></div>
+          </dl>
+ 
+        </div>
+      </section>
+ 
+    </aside><!-- /sidebar-right -->
+ 
+  </div><!-- /.app-body -->
+ 
+<div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
+ 
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+</div>
+<script>
+  (function(){
+    var s=document.createElement('script');
+    s.src='https://vlibras.gov.br/app/vlibras-plugin.js';
+    s.onload=function(){try{new window.VLibras.Widget('https://vlibras.gov.br/app');}catch(e){}};
+    document.body.appendChild(s);
+  })();
+</script>
+ 
+<!-- ═══ CAMADA DE DADOS (catálogos fixos — não mudam em runtime) ═══ -->
+<script src="js/data/limites.js"></script>
+<script src="js/data/paleta-cores.js"></script>
+<script src="js/data/catalogo-substancias.js"></script>
+<script src="js/data/estados-e-fenomenos.js"></script>
+<script src="js/data/escalas-visuais.js"></script>
+
+<!-- ═══ CAMADA DE NÚCLEO (estado da simulação + física) ═══ -->
+<script src="js/core/estado-simulacao.js"></script>
+<script src="js/core/fisica.js"></script>
+
+<!-- ═══ ACESSIBILIDADE ═══ -->
+<script src="js/a11y/acessibilidade.js"></script>
+
+<!-- ═══ CAMADA DE INTERFACE (DOM e renderização) ═══ -->
+<script src="js/ui/dom-cache.js"></script>
+<script src="js/ui/render-temperatura.js"></script>
+<script src="js/ui/render-pressao.js"></script>
+<script src="js/ui/render-cilindro.js"></script>
+<script src="js/ui/render-medidas.js"></script>
+
+<!-- ═══ ORQUESTRAÇÃO ═══ -->
+<script src="js/orquestrador.js"></script>
+
+<!-- ═══ INTERFACE — interação do usuário ═══ -->
+<script src="js/ui/painel-substancias.js"></script>
+<script src="js/ui/paineis-recolhiveis.js"></script>
+<script src="js/ui/menu-mobile.js"></script>
+<script src="js/ui/eventos.js"></script>
+<script src="js/ui/sidebar-resizer.js"></script>
+
+<!-- ═══ PONTO DE ENTRADA (deve ser o último) ═══ -->
+<script src="js/main.js"></script>
+</body>
+</html>
