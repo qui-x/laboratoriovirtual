@@ -89,7 +89,7 @@ function atualizarMateriaVisual() {
   var info   = ESTADOS[novo.toUpperCase()];
  
   if (info) {
-    if (D.badgeIcone) D.badgeIcone.textContent = info.icone;
+    if (D.badgeIcone) D.badgeIcone.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-' + info.icone + '"/></svg>';
     if (D.badgeTexto) D.badgeTexto.textContent = info.nome;
     if (D.badge)      D.badge.className        = 'state-pill ' + novo;
     if (D.descricao)  D.descricao.textContent  = info.descricao;

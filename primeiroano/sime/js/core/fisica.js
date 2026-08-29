@@ -112,6 +112,23 @@ function calcularTransicoesEfetivas() {
 }
 
 /* ═══════════════════════════════════════════════════════
+   FÍSICA — ESTADO DE REFERÊNCIA (25 °C, 1 atm — condição padrão IUPAC)
+   ───────────────────────────────────────────────────────
+   Classifica uma substância do catálogo pelo estado físico que ela
+   assume na condição de referência, usando os próprios Tf/Tb do
+   catálogo (nenhum dado novo — mesma regra que já existia, solta,
+   dentro de ui/painel-substancias.js; centralizada aqui para ser
+   reaproveitada também pelos módulos Gases/Líquidos/Sólidos da
+   sidebar esquerda, em ui/painel-modulos.js).
+═══════════════════════════════════════════════════════ */
+function estadoPadrao(sub) {
+  if (!sub) return null;
+  if (sub.Tf > 25) return 'solido';
+  if (sub.Tb <= 25) return 'gasoso';
+  return 'liquido';
+}
+
+/* ═══════════════════════════════════════════════════════
    FÍSICA — ESTADO (usa TRANSICOES já calculados por T+P+V)
 ═══════════════════════════════════════════════════════ */
 function determinarEstado(tempC) {

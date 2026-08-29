@@ -26,6 +26,10 @@ var estado = {
   estadoFisico:     '',
   fenomeno:         null,
   substancia:       null,
+  /* Módulo físico ativo na sidebar esquerda ('gasoso'|'liquido'|'solido'
+     ou null se nenhum estiver ativado). Filtra a lista de substâncias
+     do painel direito — ver ui/painel-modulos.js. */
+  modulo:           null,
   _tempAnterior:    25,
   _pressaoAnterior: 1.0,
   _volumeAnterior:  60,

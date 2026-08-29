@@ -17,7 +17,7 @@
    DOM — MEDIDAS
 ═══════════════════════════════════════════════════════ */
 function atualizarMedidas() {
-  var labels = { solido:'❄️ Sólido', liquido:'💧 Líquido', gasoso:'💨 Gasoso' };
+  var labels = { solido:'Sólido', liquido:'Líquido', gasoso:'Gasoso' };
  
   // Campos básicos
   if (D.mSubstancia) D.mSubstancia.textContent = estado.substancia ? estado.substancia.nome : '—';
@@ -56,12 +56,12 @@ function atualizarInfoPressaoEfetiva() {
   var dP   = Pef - 1.0;
   var TfEf = TRANSICOES.fusao;
   var TbEf = TRANSICOES.ebulicao;
-  if (D.lblFusao)    D.lblFusao.textContent    = TfEf.toFixed(0) + '°C ❄️';
-  if (D.lblEbulicao) D.lblEbulicao.textContent = TbEf.toFixed(0) + '°C ♨️';
+  if (D.lblFusao)    D.lblFusao.textContent    = TfEf.toFixed(0) + '°C';
+  if (D.lblEbulicao) D.lblEbulicao.textContent = TbEf.toFixed(0) + '°C';
   if (estado.substancia) atualizarLinhasTermometro(estado.substancia);
   if (D.elEfeitoEstado) {
     var estadoAtual = determinarEstado(estado.temperatura);
-    var nomes = { solido: '❄️ Sólido', liquido: '💧 Líquido', gasoso: '💨 Gasoso' };
+    var nomes = { solido: 'Sólido', liquido: 'Líquido', gasoso: 'Gasoso' };
     D.elEfeitoEstado.textContent = nomes[estadoAtual] || '—';
   }
 }

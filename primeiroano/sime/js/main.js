@@ -3,11 +3,11 @@
    ARQUIVO: main.js
    ───────────────────────────────────────────────────────────────
    Último arquivo carregado. Define inicializar() — a função que liga
-   tudo: cacheia o DOM, conecta eventos, monta os painéis recolhíveis
-   e o menu mobile, constrói a lista de substâncias e faz a primeira
-   renderização (com o cilindro vazio, sem substância escolhida, até
-   o usuário selecionar uma). Registrada para rodar em
-   DOMContentLoaded.
+   tudo: cacheia o DOM, conecta eventos, monta os painéis recolhíveis,
+   o menu mobile e os módulos de estado físico (Gases/Líquidos/Sólidos),
+   constrói a lista de substâncias e faz a primeira renderização (com
+   o cilindro vazio, sem substância escolhida, até o usuário selecionar
+   uma). Registrada para rodar em DOMContentLoaded.
    Depende de: todos os demais módulos (é o topo da árvore de
                dependências).
 ═══════════════════════════════════════════════════════════════ */
@@ -23,6 +23,7 @@ function inicializar() {
   initPanels();
   initMobileMenu();
   construirPainelSubstancia();
+  inicializarModulos();
   /* ── ESTADO VAZIO NO CARREGAMENTO ──
      Antes o SIME abria com agua ja selecionada. Isso tinha dois efeitos
      ruins: (1) o aluno via um cilindro cheio sem ter escolhido nada, e

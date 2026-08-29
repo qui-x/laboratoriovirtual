@@ -59,9 +59,17 @@
 
   AtomicApp.prototype._updateOverlay = function() {
     const MNAMES={dalton:'Dalton',thomson:'Thomson',rutherford:'Rutherford',bohr:'Bohr',quantum:'Quântico'};
-    // mesmos emojis do .panel-icon de cada painel de modelo, para a pilula
-    // do canvas casar visualmente com o menu de modulos (padrao SILQ)
-    const MICONS={dalton:'🎱',thomson:'🍮',rutherford:'⚛️',bohr:'🪐',quantum:'☁️'};
+    // mesmos icones SVG do .panel-icon de cada painel de modelo (ver <defs>
+    // de <symbol> no topo do indexsima.html), para a pilula do canvas casar
+    // visualmente com o menu de modulos (padrao SILQ). Substituiu os
+    // emojis que existiam aqui antes — ver ic.innerHTML abaixo.
+    const MICONS={
+      dalton:'<svg class="icon" aria-hidden="true"><use href="#ic-dalton"/></svg>',
+      thomson:'<svg class="icon" aria-hidden="true"><use href="#ic-thomson"/></svg>',
+      rutherford:'<svg class="icon" aria-hidden="true"><use href="#ic-rutherford"/></svg>',
+      bohr:'<svg class="icon" aria-hidden="true"><use href="#ic-bohr"/></svg>',
+      quantum:'<svg class="icon" aria-hidden="true"><use href="#ic-quantum"/></svg>',
+    };
     const[Z,,name]=this.sim.elData;
     const txt=document.getElementById('overlay-text');
     const ico=document.getElementById('overlay-icon');
@@ -76,7 +84,7 @@
       sp.textContent=` · ${name} (Z=${Z})`;
       txt.appendChild(sp);
     }
-    if (ico) ico.textContent=MICONS[this.sim.model]||'';
+    if (ico) ico.innerHTML=MICONS[this.sim.model]||'';
     // data-mode pinta a pilula com a cor do modelo, as mesmas 5 cores do menu
     if (ind) ind.dataset.mode=this.sim.model||'';
   };

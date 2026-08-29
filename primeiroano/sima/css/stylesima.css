@@ -646,6 +646,21 @@ body.simple-read .canvas-wrap canvas{ filter:contrast(1.15) brightness(1.05); }
    covalente/iônica/metálica têm cores distintas.
    ===================================================================== */
 
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsima.html. stroke/fill:currentColor herda a cor do texto ao
+   redor; width/height:1em acompanha o tamanho da fonte do elemento-pai,
+   então o mesmo ícone fica pequeno num badge e maior num botão sem
+   precisar de regra própria para cada contexto.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.mode-note-icon .icon,
+.overlay-icon .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 /* acento local: violeta do SIMA no papel do --accent do SILQ */
 .panel--mode{
   --mod: var(--accent-main);
@@ -794,9 +809,10 @@ body.light-mode #mode-indicator[data-mode="quantum"]    { --mod:#6a3af7; --mod-r
   color:var(--mod);
   box-shadow:0 0 0 3px rgba(var(--mod-rgb),.2);
 }
-/* sufixo "✓ ativo" — exatamente como no SILQ */
+/* sufixo "· ativo" — mesma ideia do SILQ, sem símbolo de checkmark:
+   pontuação tipográfica simples no lugar do dingbat "✓". */
 .mode-activate-btn[aria-pressed="true"]::after{
-  content:' ✓ ativo';
+  content:' · ativo';
   font-size:.65rem; font-weight:600; opacity:.8; margin-left:auto;
 }
 .mode-activate-btn:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
@@ -918,9 +934,9 @@ body.simple-read .fact-value{ font-size:.75rem; }
    desativa. Antes ele era um seletor exclusivo, sempre com um modelo
    renderizado.
 
-   Por isso o hover sobre o modelo ativo agora avisa "✕ desativar".
+   Por isso o hover sobre o modelo ativo agora avisa "desativar".
    --------------------------------------------------------------------- */
-.mode-activate-btn[aria-pressed="true"]:hover::after{ content:' ✕ desativar'; opacity:1; }
+.mode-activate-btn[aria-pressed="true"]:hover::after{ content:' · desativar'; opacity:1; }
 
 /* =====================================================================
    INDICADOR DE MODELO ATIVO NO CANVAS — PADRÃO SILQ

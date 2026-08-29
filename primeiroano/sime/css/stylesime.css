@@ -97,6 +97,23 @@ body.high-contrast.light-mode     { --hc-fg:#ff0;     --hc-bg:#000;     }
 
 /* ── Reset ──────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsime.html. stroke/fill:currentColor herda a cor do texto ao
+   redor (por isso os ícones de estado físico ficam azul/verde/âmbar
+   automaticamente ao herdar de .solido/.liquido/.gasoso, sem precisar
+   de uma regra de cor própria por ícone); width/height:1em acompanha
+   o tamanho de fonte do elemento-pai.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.mode-note-icon .icon,
+.ctrl-block-hd .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 html, body {
   height: 100%; overflow: hidden;
   background: var(--bg0); color: var(--tx1);
@@ -362,12 +379,17 @@ input[type="range"]::-moz-range-thumb {
 .sub-item.ativa  { background: rgba(154,247,254,.07); border-color: var(--bdr-a); }
 .sub-formula-tag { font-family: var(--mono); font-size: .75rem; color: var(--cyan); font-weight: 600; min-width: 46px; }
 .sub-estado-pill {
+  display: inline-flex; align-items: center; gap: 3px;
   font-size: .58rem; font-weight: 700; padding: 1px 5px; border-radius: 8px;
   flex-shrink: 0; border: 1px solid transparent;
 }
 .sub-estado-pill.solido  { color: var(--solid-col);  background: rgba(96,165,250,.12);  border-color: var(--solid-col); }
 .sub-estado-pill.liquido { color: var(--liquid-col); background: rgba(0,230,150,.12);   border-color: var(--liquid-col); }
 .sub-estado-pill.gasoso  { color: var(--gas-col);    background: rgba(255,176,32,.12);  border-color: var(--gas-col); }
+.sub-lista-vazia{
+  list-style:none; padding:.5rem .3rem; text-align:center;
+  font-size:.68rem; color:var(--tx3); line-height:1.5;
+}
 
 /* ── Termômetro SVG ─────────────────────────────────── */
 .termometro-wrap {
@@ -835,6 +857,131 @@ body.high-contrast .mode-define{ border-left-color:var(--hc-fg) !important; }
    (sem o "ing"). Estavam inertes. */
 body.simple-read .mode-define,
 body.simple-read .mode-note{ line-height:1.75; font-size:.74rem; }
+
+/* =====================================================================
+   MÓDULOS DE ESTADO FÍSICO — Gases / Líquidos / Sólidos
+   ---------------------------------------------------------------------
+   Réplica do padrão .panel--mode do SIMA (cartão de módulo ativável na
+   coluna esquerda), adaptado às primitivas que o SIME já usa:
+     • o SIME abre/fecha painéis via atributo [data-open] no .panel
+       (paineis-recolhiveis.js), não via [aria-expanded] no header como
+       o SIMA — por isso os seletores abaixo usam .panel--mode[data-open]
+       em vez de .panel-header[aria-expanded]; o COMPORTAMENTO visual
+       (cabeçalho tingido da cor do módulo quando aberto, chevron que
+       gira, badge que reforça a cor) é o mesmo.
+     • cada módulo (Gasoso/Líquido/Sólido) ganha sua cor a partir das
+       variáveis --gas-col/--liquid-col/--solid-col que este arquivo já
+       definia no :root, em vez de cores novas — a identidade visual dos
+       3 estados físicos já usada no pill do cabeçalho e nas zonas da
+       barra térmica passa a valer também para o menu de módulos.
+   ===================================================================== */
+.panel--mode{ --mod:var(--cyan); --mod-rgb:154,247,254; }
+.panel--mode[data-modulo="gasoso"] { --mod:var(--gas-col);    --mod-rgb:255,176,32; }
+.panel--mode[data-modulo="liquido"]{ --mod:var(--liquid-col); --mod-rgb:0,230,150;  }
+.panel--mode[data-modulo="solido"] { --mod:var(--solid-col);  --mod-rgb:96,165,250; }
+
+.panel--mode[data-open="true"]{
+  border-color:rgba(var(--mod-rgb),.4);
+  box-shadow:0 0 0 1px rgba(var(--mod-rgb),.12);
+}
+.panel--mode .panel-header:hover{ background:rgba(var(--mod-rgb),.08); color:var(--mod); }
+.panel--mode[data-open="true"] .panel-header{
+  background:linear-gradient(135deg, rgba(var(--mod-rgb),.14), rgba(var(--mod-rgb),.05));
+  color:var(--mod);
+  border-bottom-color:rgba(var(--mod-rgb),.2);
+}
+.panel--mode[data-open="true"] .chevron{ color:var(--mod); }
+.panel--mode .panel-badge{
+  font-size:.6rem; font-weight:700;
+  background:rgba(var(--mod-rgb),.2); color:var(--mod);
+  border-radius:10px; padding:1px 6px; min-width:18px;
+  text-align:center; flex-shrink:0;
+}
+.panel--mode[data-open="true"] .panel-badge{ background:rgba(var(--mod-rgb),.35); }
+.panel--mode .mode-define{ border-left-color:var(--mod); }
+.panel--mode .mode-note{ background:rgba(var(--mod-rgb),.06); border-color:rgba(var(--mod-rgb),.18); }
+
+/* selo "Ativo" no cabeçalho — só aparece quando o módulo está ativado */
+.mode-active-tag{
+  display:none;
+  font-size:.55rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+  padding:1px 5px; border-radius:10px;
+  background:rgba(var(--mod-rgb),.25); color:var(--mod); flex-shrink:0;
+}
+.panel--mode:has(.mode-activate-btn[aria-pressed="true"]) .mode-active-tag{ display:inline-block; }
+
+/* botão Ativar/Desativar módulo */
+.mode-activate-btn{
+  display:flex; align-items:center; gap:8px; width:100%;
+  padding:.4rem .6rem; margin:0 0 .3rem;
+  border-radius:var(--rs);
+  border:1.5px solid var(--bdr);
+  background:var(--bg3);
+  color:var(--tx1);
+  font-size:.75rem; font-weight:700; font-family:var(--font);
+  cursor:pointer; transition:all .18s; text-align:left;
+}
+.mode-activate-btn:hover{ border-color:var(--mod); background:rgba(var(--mod-rgb),.08); color:var(--mod); }
+.mode-activate-btn[aria-pressed="true"]{
+  background:rgba(var(--mod-rgb),.15); border-color:var(--mod); color:var(--mod);
+  box-shadow:0 0 0 3px rgba(var(--mod-rgb),.2);
+}
+/* sufixo "· ativo" / "· desativar" — texto simples, sem símbolo de check */
+.mode-activate-btn[aria-pressed="true"]::after{
+  content:' · ativo'; font-size:.65rem; font-weight:600; opacity:.8; margin-left:auto;
+}
+.mode-activate-btn[aria-pressed="true"]:hover::after{ content:' · desativar'; opacity:1; }
+.mode-activate-btn:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
+
+.mode-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; background:var(--mod); box-shadow:0 0 6px var(--mod); }
+
+/* interações do cilindro (= .canvas-interactions do SIMA) */
+.canvas-interactions{ margin:.5rem 0 .3rem; border:1px solid var(--bdr); border-radius:var(--rs); overflow:hidden; }
+.canvas-interactions-title{
+  margin:0; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+  color:var(--tx3); padding:.3rem .5rem; background:var(--bg3); border-bottom:1px solid var(--bdr);
+}
+.canvas-interactions p:not(.canvas-interactions-title){ margin:0; padding:.4rem .5rem; font-size:.68rem; line-height:1.5; color:var(--tx2); }
+.canvas-interactions strong{ color:var(--tx1); }
+
+/* exemplos recomendados — chips CLICÁVEIS (diferente do SIMA: aqui cada
+   chip seleciona a substância diretamente, funcionando como atalho) */
+.recommended{ margin-top:.3rem; }
+.recommended-title{ margin:0 0 .2rem; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--tx3); }
+.chip-row{ display:flex; flex-wrap:wrap; gap:.3rem; }
+.chip{
+  font-size:.68rem; font-weight:700; padding:3px 8px; border-radius:12px;
+  background:rgba(var(--mod-rgb),.12); color:var(--mod);
+  border:1px solid rgba(var(--mod-rgb),.3); cursor:pointer; font-family:var(--font);
+  transition:background .15s, transform .1s;
+}
+.chip:hover{ background:rgba(var(--mod-rgb),.25); }
+.chip:active{ transform:scale(.95); }
+.chip:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
+
+body.high-contrast .panel--mode{ border:2px solid var(--hc-fg) !important; }
+body.high-contrast .canvas-interactions,
+body.high-contrast .chip{ border:2px solid var(--hc-fg) !important; background:var(--hc-bg) !important; color:#fff !important; }
+body.high-contrast .canvas-interactions-title,
+body.high-contrast .recommended-title{ color:var(--hc-fg) !important; }
+body.high-contrast .mode-activate-btn{ border:2px solid var(--hc-fg) !important; color:var(--hc-fg) !important; }
+body.high-contrast .mode-activate-btn[aria-pressed="true"]{ background:var(--hc-fg) !important; color:var(--hc-bg) !important; }
+body.high-contrast .mode-active-tag{ background:var(--hc-fg) !important; color:var(--hc-bg) !important; }
+body.high-contrast .mode-dot{ background:var(--hc-fg) !important; }
+
+body.simple-read .canvas-interactions p{ line-height:1.75; font-size:.74rem; }
+
+/* ---------------------------------------------------------------------
+   FOCO NO MÓDULO ATIVO — mesma regra :has() do SIMA: ao ativar um
+   módulo, os outros dois cartões somem da coluna esquerda (display:none,
+   não visibility/opacity, para tirá-los também do foco por teclado e da
+   leitura de tela). Sem módulo ativo, os três voltam a aparecer.
+   --------------------------------------------------------------------- */
+#sidebar-left:has(.mode-activate-btn[aria-pressed="true"])
+  .panel--mode:not(:has(.mode-activate-btn[aria-pressed="true"])) {
+  display: none;
+}
+
 
 /* ---------------------------------------------------------------------
    SKIP-LINK — contraste corrigido
