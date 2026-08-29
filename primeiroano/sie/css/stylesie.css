@@ -190,6 +190,20 @@ html[data-reading="on"] .sb-subtitle { font-size: 13px; }
 
 * { box-sizing: border-box; }
 
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsie.html. stroke/fill:currentColor herda a cor do texto ao
+   redor; width/height:1em acompanha o tamanho de fonte do elemento-pai.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.mode-note-icon .icon,
+.overlay-icon .icon,
+.btn-icon .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 .sr-only {
   position: absolute;
   width: 1px; height: 1px;
@@ -1223,7 +1237,7 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
   box-shadow: 0 0 0 3px rgba(92, 160, 255, .2);
 }
 .bond-mode-btn[aria-pressed="true"]::after {
-  content: ' ✓ ativo';
+  content: ' · ativo';
   font-size: .65rem;
   font-weight: 600;
   opacity: .8;
@@ -1232,7 +1246,7 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
 /* Passar o cursor sobre o modo já ativo avisa que o clique DESATIVA —
    mesmo aviso usado nos 19 outros simuladores. */
 .bond-mode-btn[aria-pressed="true"]:hover::after {
-  content: ' ✕ desativar';
+  content: ' · desativar';
   opacity: 1;
 }
 .bond-mode-btn:focus-visible { outline: 2px solid var(--accent-main); outline-offset: 2px; }
@@ -1382,10 +1396,10 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
   box-shadow: 0 0 0 3px rgba(var(--mod-rgb), .2);
 }
 .mode-activate-btn[aria-pressed="true"]::after {
-  content: ' ✓ ativo';
+  content: ' · ativo';
   font-size: .65rem; font-weight: 600; opacity: .8; margin-left: auto;
 }
-.mode-activate-btn[aria-pressed="true"]:hover::after { content: ' ✕ desativar'; opacity: 1; }
+.mode-activate-btn[aria-pressed="true"]:hover::after { content: ' · desativar'; opacity: 1; }
 .mode-activate-btn:focus-visible { outline: 2px solid var(--mod); outline-offset: 2px; }
 
 .mode-dot {

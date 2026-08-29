@@ -35,6 +35,37 @@
        evita quebrar elementos position:fixed/absolute (painéis, modais). -->
   <div id="colorblindOverlay" aria-hidden="true"></div>
 
+  <!-- ═══════════════════════════════════════════════════════════════
+       BIBLIOTECA DE ÍCONES SVG — substitui todos os emojis do SIEM
+       ───────────────────────────────────────────────────────────────
+       Mesmo mecanismo do SIMA/SIME/SIFI: um bloco de <symbol>, usado
+       no resto da página como <svg class="icon"><use href="#ic-NOME"/>
+       </svg>. stroke/fill:currentColor herda a cor do texto ao redor;
+       width/height:1em (ver .icon em stylesiem.css) acompanha o
+       tamanho de fonte do elemento-pai.
+       ═══════════════════════════════════════════════════════════════ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="ic-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+      <symbol id="ic-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.5v2.4M12 18.1v2.4M20.5 12h-2.4M5.9 12H3.5M17.8 6.2l-1.7 1.7M7.9 16.1l-1.7 1.7M17.8 17.8l-1.7-1.7M7.9 7.9 6.2 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="ic-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+      <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 2h6M10 2v6.2L4.8 18a2 2 0 0 0 1.75 3h10.9a2 2 0 0 0 1.75-3L14 8.2V2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 15h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="ic-chart" viewBox="0 0 24 24"><path d="M3 20h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 16l5-6 4 3 7-9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-sliders" viewBox="0 0 24 24"><path d="M4 21V14M4 10V3M12 21V12M12 8V3M20 21V16M20 12V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="4" cy="12" r="2" fill="currentColor" stroke="none"/><circle cx="12" cy="10" r="2" fill="currentColor" stroke="none"/><circle cx="20" cy="14" r="2" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="ic-thermometer" viewBox="0 0 24 24"><path d="M12 14.5V5a2 2 0 1 0-4 0v9.5a4 4 0 1 0 4 0z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="10" cy="16.2" r="1.7" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="ic-gauge" viewBox="0 0 24 24"><path d="M4 15.5a8 8 0 1 1 16 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M12 15.5 16 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1.3" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="ic-flame" viewBox="0 0 24 24"><path d="M12 21.5c-3.6 0-6.4-2.5-6.4-6 0-2.7 1.7-4.3 2.5-6.4.5 1.4 1.4 2 2.1 1.4-.4-2.6.4-5 3-8 .8 3 3.6 4.7 5 7.4.9 1.7 1.2 3.3 1.2 4.6 0 3.9-3.4 7-7.4 7z" fill="currentColor" opacity=".92" stroke="none"/></symbol>
+      <symbol id="ic-snow" viewBox="0 0 24 24"><path d="M12 2v20M4.2 6.5l15.6 11M4.2 17.5l15.6-11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 2 9.8 4.4M12 2l2.2 2.4M12 22l-2.2-2.4M12 22l2.2-2.4M4.2 6.5l.4 3.2M4.2 6.5l3.1-.9M19.8 6.5l-.4 3.2M19.8 6.5l-3.1-.9M4.2 17.5l.4-3.2M4.2 17.5l3.1.9M19.8 17.5l-.4-3.2M19.8 17.5l-3.1.9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+      <symbol id="ic-particles" viewBox="0 0 24 24"><circle cx="6" cy="7" r="2" fill="currentColor" stroke="none"/><circle cx="15" cy="6" r="1.6" fill="currentColor" stroke="none"/><circle cx="18" cy="13" r="2" fill="currentColor" stroke="none"/><circle cx="9" cy="14" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="19.5" r="1.5" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="ic-cube" viewBox="0 0 24 24"><path d="M12 3 20 7.5v9L12 21 4 16.5v-9L12 3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M4 7.5 12 12l8-4.5M12 12v9" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-databox" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7.5 9h9M7.5 12.5h9M7.5 16h5.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+      <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+      <symbol id="ic-expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 21h6v-6M21 3l-8 8M3 21l8-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-gas" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.1" fill="currentColor" opacity=".85" stroke="none"/><circle cx="15.5" cy="6.5" r="1.5" fill="currentColor" opacity=".65" stroke="none"/><circle cx="17" cy="13" r="2.4" fill="currentColor" opacity=".8" stroke="none"/><circle cx="8.5" cy="16" r="1.7" fill="currentColor" opacity=".7" stroke="none"/><circle cx="12.5" cy="11" r="1.3" fill="currentColor" opacity=".55" stroke="none"/></symbol>
+    </defs>
+  </svg>
+
   <!-- ══════════════ SKIP LINKS (WCAG 2.4.1 Bypass Blocks) ══════════════
        Quatro atalhos, um para cada bloco repetido da pagina, agrupados
        num unico landmark <nav>. Sem eles, quem navega por teclado tinha
@@ -75,9 +106,9 @@
         <span class="sr-only">Estado físico da substância: </span><span id="state-pill-text">sem substância</span>
       </span>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir painel de substância e dados"
-              aria-expanded="false" aria-controls="sidebar-left">☰</button>
+              aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right" aria-label="Abrir painel de temperatura, pressão, medidas e diagrama de fases"
-              aria-expanded="false" aria-controls="sidebar-right">⚙</button>
+              aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-gear"/></svg></button>
     </div>
   </header>
 
@@ -87,13 +118,13 @@
     <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Substância e dados">
 
       <section class="panel" data-open="true">
-        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia"><span class="panel-icon" aria-hidden="true">🧪</span><span class="panel-label">Substância</span><span class="panel-badge">95</span><span class="chevron" aria-hidden="true">▾</span></button>
+        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia"><span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span><span class="panel-label">Substância</span><span class="panel-badge">95</span><span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span></button>
         <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
           <p class="mode-define">95 substâncias com dados experimentais reais de fusão, ebulição, ponto triplo e ponto crítico. A escolha aqui <strong>calibra todos os outros painéis</strong>.</p>
           <div class="search-wrap">
             <label for="sub-search" class="sr-only">Buscar substância por nome ou fórmula</label>
             <input type="search" id="sub-search" class="search-input" placeholder="Nome ou fórmula…" autocomplete="off" spellcheck="false" />
-            <span class="search-icon" aria-hidden="true">⌕</span>
+            <span class="search-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-search"/></svg></span>
           </div>
           <div class="mol-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar substâncias por categoria"></div>
           <ul id="sub-list" class="sub-list" role="listbox" aria-label="Lista de substâncias"></ul>
@@ -111,11 +142,11 @@
       <section class="panel" data-open="true">
         <div class="panel-header-row">
           <button class="panel-header" id="hdr-diagrama" type="button" aria-expanded="true" aria-controls="body-diagrama">
-            <span class="panel-icon" aria-hidden="true">📈</span>
+            <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chart"/></svg></span>
             <span class="panel-label">Diagrama de fases</span>
-            <span class="chevron" aria-hidden="true">▾</span>
+            <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
           </button>
-          <button type="button" class="expand-btn" data-expand="diagrama" aria-label="Expandir diagrama de fases para leitura ampliada" title="Expandir para leitura">⤢</button>
+          <button type="button" class="expand-btn" data-expand="diagrama" aria-label="Expandir diagrama de fases para leitura ampliada" title="Expandir para leitura"><svg class="icon" aria-hidden="true"><use href="#ic-expand"/></svg></button>
         </div>
         <div class="panel-body chart-bd" id="body-diagrama" role="region" aria-labelledby="hdr-diagrama">
           <p class="mode-define">Diagrama de fases P × T da substância, com o ponto atual marcado. Sólido, líquido, vapor, ponto triplo e ponto crítico.</p>
@@ -162,9 +193,9 @@
       <!-- ══════════ PAINEL 1 — CONTROLES UNIFICADOS ══════════ -->
       <section class="panel" data-open="true">
         <button class="panel-header" id="hdr-controles" type="button" aria-expanded="true" aria-controls="body-controles">
-          <span class="panel-icon" aria-hidden="true">🎛️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-sliders"/></svg></span>
           <span class="panel-label">Controles</span>
-          <span class="chevron" aria-hidden="true">▾</span>
+          <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
         </button>
         <div class="panel-body" id="body-controles" role="region" aria-labelledby="hdr-controles">
 
@@ -181,7 +212,7 @@
           <!-- ── Bloco 1: TEMPERATURA ── -->
           <div class="ctrl-block" role="group" aria-labelledby="cb-temp-lbl">
             <p class="ctrl-block-hd" id="cb-temp-lbl">
-              <span aria-hidden="true">🌡️</span>
+              <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-thermometer"/></svg></span>
               <span class="ctrl-block-name">Temperatura</span>
             </p>
             <div class="ctrl-group">
@@ -193,8 +224,8 @@
               <div class="ctrl-sublabels" aria-hidden="true"><span id="temp-min-lbl">-200 °C</span><span id="temp-max-lbl">500 °C</span></div>
             </div>
             <div class="btn-row">
-              <button class="action-btn" id="btn-cool" type="button">❄ Resfriar</button>
-              <button class="action-btn" id="btn-heat" type="button">🔥 Aquecer</button>
+              <button class="action-btn" id="btn-cool" type="button"><svg class="icon" aria-hidden="true"><use href="#ic-snow"/></svg> Resfriar</button>
+              <button class="action-btn" id="btn-heat" type="button"><svg class="icon" aria-hidden="true"><use href="#ic-flame"/></svg> Aquecer</button>
             </div>
             <p class="ctrl-note" id="temp-note">Selecione uma substância para calibrar a faixa de temperatura pelos seus pontos reais de fusão e ebulição.</p>
           </div>
@@ -202,7 +233,7 @@
           <!-- ── Bloco 2: PRESSAO ── -->
           <div class="ctrl-block" role="group" aria-labelledby="cb-press-lbl">
             <p class="ctrl-block-hd" id="cb-press-lbl">
-              <span aria-hidden="true">💨</span>
+              <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-gauge"/></svg></span>
               <span class="ctrl-block-name">Pressão</span>
             </p>
             <div class="ctrl-group">
@@ -219,7 +250,7 @@
           <!-- ── Bloco 3: PARTICULAS ── -->
           <div class="ctrl-block" role="group" aria-labelledby="cb-n-lbl">
             <p class="ctrl-block-hd" id="cb-n-lbl">
-              <span aria-hidden="true">⚫</span>
+              <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-particles"/></svg></span>
               <span class="ctrl-block-name">Partículas</span>
             </p>
             <div class="ctrl-group">
@@ -234,7 +265,7 @@
           <!-- ── Bloco 4: VISUALIZACAO (veio de cima do canvas) ── -->
           <div class="ctrl-block" role="group" aria-labelledby="cb-view-lbl">
             <p class="ctrl-block-hd" id="cb-view-lbl">
-              <span aria-hidden="true">🧊</span>
+              <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-cube"/></svg></span>
               <span class="ctrl-block-name">Visualização</span>
             </p>
             <div class="view-toggle view-toggle--inline" role="group" aria-label="Modo de visualização">
@@ -258,11 +289,11 @@
       <section class="panel" data-open="true">
         <div class="panel-header-row">
           <button class="panel-header" id="hdr-dados" type="button" aria-expanded="true" aria-controls="body-dados">
-            <span class="panel-icon" aria-hidden="true">📋</span>
+            <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-databox"/></svg></span>
             <span class="panel-label">Dados &amp; Medidas</span>
-            <span class="chevron" aria-hidden="true">▾</span>
+            <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
           </button>
-          <button type="button" class="expand-btn" data-expand="dados" aria-label="Expandir dados e medidas para leitura ampliada" title="Expandir para leitura">⤢</button>
+          <button type="button" class="expand-btn" data-expand="dados" aria-label="Expandir dados e medidas para leitura ampliada" title="Expandir para leitura"><svg class="icon" aria-hidden="true"><use href="#ic-expand"/></svg></button>
         </div>
         <div class="panel-body" id="body-dados" role="region" aria-labelledby="hdr-dados">
           <p class="mode-define">Ficha da substância e leitura do instante. As constantes são <strong>experimentais, a 1 atm</strong>; as medidas ao vivo já vêm recalculadas para a pressão em uso.</p>
@@ -316,7 +347,7 @@
     <div class="expand-modal">
       <div class="expand-modal-hd">
         <h2 id="expand-title">Detalhes</h2>
-        <button type="button" class="expand-close" id="expand-close" aria-label="Fechar painel expandido">✕</button>
+        <button type="button" class="expand-close" id="expand-close" aria-label="Fechar painel expandido"><svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg></button>
       </div>
       <div class="expand-modal-bd" id="expand-body"></div>
     </div>

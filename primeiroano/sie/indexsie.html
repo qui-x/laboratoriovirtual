@@ -29,6 +29,32 @@
      evita aplicar o filtro direto no body, o que quebraria elementos
      position:fixed/absolute (painéis, tooltips, peças arrastáveis). -->
 <div id="colorblindOverlay" aria-hidden="true"></div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BIBLIOTECA DE ÍCONES SVG — substitui todos os emojis do SIE
+     ───────────────────────────────────────────────────────────────
+     Mesmo mecanismo do SIMA/SIME/SIEM/SIFI: um bloco de <symbol>,
+     usado no resto da página como <svg class="icon"><use
+     href="#ic-NOME"/></svg>. stroke/fill:currentColor herda a cor do
+     texto ao redor; width/height:1em (ver .icon em stylesie.css)
+     acompanha o tamanho de fonte do elemento-pai.
+     ═══════════════════════════════════════════════════════════════ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7V5z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 2.34 5.66" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 17v-5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M12 2v7.5L6.2 19a1.8 1.8 0 0 0 1.55 2.7h8.5A1.8 1.8 0 0 0 17.8 19L12 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 2h6M8.3 16h7.4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 6 4 8m8-2 8 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 8l-2.2 5.2a2.6 2.6 0 0 0 4.9 1L4 8zM20 8l2.2 5.2a2.6 2.6 0 0 1-4.9 1L20 8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-microscope" viewBox="0 0 24 24"><path d="M8 21h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 21v-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M6.5 17.5h8a2.3 2.3 0 0 0 0-4.6h-3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 12.9 7.4 9.3a2.1 2.1 0 1 1 3-3l4.6 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="14" y1="4.5" x2="16.5" y2="7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+    <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-barchart" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M4 20h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-2.2-1.5L14 21l-2-1.5L10 21l-1.8-1.5L6 21V3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 8h6M9 12h6M9 16h3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="ic-atom" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1.9" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.3"/><ellipse cx="12" cy="12" rx="9" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.2" fill="none" stroke="currentColor" stroke-width="1.3" transform="rotate(120 12 12)"/></symbol>
+  </defs>
+</svg>
 <header class="app-header" role="banner">
     <div class="header-brand">
       <a class="header-back" href="../indexprimeiroano.html" aria-label="Voltar aos simuladores do 1º Ano">
@@ -107,7 +133,7 @@
         <span class="overlay-icon" id="overlay-icon" aria-hidden="true"></span>
         <span class="overlay-text" id="overlay-text"></span>
         <button type="button" class="overlay-clear" id="overlay-clear"
-                aria-label="Desativar o módulo ativo" title="Desativar o módulo ativo">✕</button>
+                aria-label="Desativar o módulo ativo" title="Desativar o módulo ativo"><svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg></button>
       </span>
     </div>
   </main>
@@ -135,7 +161,7 @@
             <div class="modal-meta-mols" id="modalMetaMols"></div>
             <div class="modal-badges-mols" id="modalBadgesMols"></div>
           </div>
-          <button class="modal-close-btn-mols" id="btnCloseMols" aria-label="Fechar detalhes do elemento"><span aria-hidden="true">✕</span></button>
+          <button class="modal-close-btn-mols" id="btnCloseMols" aria-label="Fechar detalhes do elemento"><span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg></span></button>
         </div>
       </div>
       <div class="modal-body-mols">
@@ -201,7 +227,7 @@
       <section class="panel panel--mode" aria-labelledby="hdr-mod-estequiometria" data-open="false" data-modulo="estequiometria">
         <button class="panel-header" id="hdr-mod-estequiometria" type="button"
                 aria-expanded="false" aria-controls="body-mod-estequiometria">
-          <span class="panel-icon" aria-hidden="true">⚗️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
           <span class="panel-label">Estequiometria</span>
           <span class="mode-active-tag">Ativo</span>
           <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -214,7 +240,7 @@
                   aria-pressed="false" aria-describedby="def-mod-estequiometria"
                   title="Ativar o módulo Estequiometria">
             <span class="mode-dot mode-dot--estequiometria" aria-hidden="true"></span>
-            <span aria-hidden="true">▶</span> Ativar módulo <span class="model-name">Estequiometria</span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg></span> Ativar módulo <span class="model-name">Estequiometria</span>
           </button>
 
           <p class="mode-define" id="def-mod-estequiometria">
@@ -248,7 +274,7 @@
           </div>
 
           <p class="mode-note">
-            <span class="mode-note-icon" aria-hidden="true">⚖️</span>
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-scale"/></svg></span>
             <span>A Lei de Lavoisier vale pra toda reação química: nenhum átomo nasce nem desaparece, só troca de parceiro.</span>
           </p>
 
@@ -263,7 +289,7 @@
       <section class="panel panel--mode" aria-labelledby="hdr-mod-mols" data-open="false" data-modulo="mols">
         <button class="panel-header" id="hdr-mod-mols" type="button"
                 aria-expanded="false" aria-controls="body-mod-mols">
-          <span class="panel-icon" aria-hidden="true">⚖️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-scale"/></svg></span>
           <span class="panel-label">Mols</span>
           <span class="mode-active-tag">Ativo</span>
           <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -281,7 +307,7 @@
                   aria-pressed="false" aria-describedby="def-mod-mols"
                   title="Ativar o módulo Mols">
             <span class="mode-dot mode-dot--mols" aria-hidden="true"></span>
-            <span aria-hidden="true">▶</span> Ativar módulo <span class="model-name">Mols</span>
+            <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg></span> Ativar módulo <span class="model-name">Mols</span>
           </button>
 
           <p class="mode-define" id="def-mod-mols">
@@ -314,7 +340,7 @@
           </div>
 
           <p class="mode-note">
-            <span class="mode-note-icon" aria-hidden="true">🔬</span>
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-microscope"/></svg></span>
             <span>Massa molar é propriedade de cada <strong>substância</strong>, não do elemento isolado — H em H₂ e H em HCl contam separado.</span>
           </p>
 
@@ -358,7 +384,7 @@
       <!-- REAÇÕES PRONTAS (vinda da sidebar esquerda) -->
       <section class="panel" aria-labelledby="hdr-reactions" id="panel-reactions" data-open="true">
         <button class="panel-header" id="hdr-reactions" type="button" aria-expanded="true" aria-controls="body-reactions">
-          <span class="panel-icon" aria-hidden="true">⚗️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
           <span class="panel-label">Reações Prontas</span>
           <span class="panel-badge" id="reactionsBadge">0</span>
           <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -367,7 +393,7 @@
         </button>
         <div class="panel-body" id="body-reactions" role="region" aria-labelledby="hdr-reactions">
           <p class="mode-define">Reações prontas com estequiometria real. Ativar uma delas <strong>monta os reagentes no canvas</strong> nas proporções corretas — depois é só disparar e observar.</p>
-          <input type="search" id="reactionSearch" class="pt-search-input" placeholder="🔍 Buscar reação (nome, fórmula, tipo)…" autocomplete="off" />
+          <input type="search" id="reactionSearch" class="pt-search-input" placeholder="Buscar reação (nome, fórmula, tipo)…" autocomplete="off" />
           <div class="rc-filter-row">
             <button type="button" class="rc-filter-chip is-active" data-tipo="todas">Todas</button>
             <button type="button" class="rc-filter-chip" data-tipo="covalente">Covalente</button>
@@ -382,7 +408,7 @@
       <section class="panel" aria-labelledby="hdr-analysis" id="panel-analysis" data-open="false">
         <button class="panel-header" id="hdr-analysis" type="button"
                 aria-expanded="false" aria-controls="body-analysis">
-          <span class="panel-icon" aria-hidden="true">📊</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-barchart"/></svg></span>
           <span class="panel-label">Análise Estequiométrica</span>
           <!-- Antes mostrava o reagente limitante ("O₂") — pouco útil
                como identificador do painel, já que só faz sentido depois
@@ -412,7 +438,7 @@
           <p class="eq-balance" id="eqBalance" role="status" aria-live="polite"></p>
           <!-- Sem equacao estatica na tela nao existe copia de referencia:
                este botao devolve os coeficientes do catalogo. -->
-          <button type="button" class="eq-restore" id="restoreCoeffBtn">↺ Restaurar coeficientes</button>
+          <button type="button" class="eq-restore" id="restoreCoeffBtn"><svg class="icon" aria-hidden="true"><use href="#ic-reset"/></svg> Restaurar coeficientes</button>
 
           <div class="ctrl-block">
             <p class="mode-define">Nenhuma reação começa sozinha: é preciso vencer a barreira de energia.</p>
@@ -422,7 +448,7 @@
                     aria-label="Onda da energia fornecida. Os valores numéricos estão anunciados por voz."></canvas>
             <div class="ctrl-row">
               <button id="energyBtn" class="btn btn-energy" disabled>
-                <span class="btn-icon" aria-hidden="true">⚡</span><span class="btn-label"> Fornecer Energia</span>
+                <span class="btn-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-bolt"/></svg></span><span class="btn-label"> Fornecer Energia</span>
               </button>
               <button id="validateBtn" class="btn btn-validate" disabled>Validar</button>
               <button id="resetBtn" class="btn btn-ghost">Reiniciar</button>
@@ -445,7 +471,7 @@
       <section class="panel" aria-labelledby="hdr-reaction-data" id="panel-reaction-data" data-open="false">
         <button class="panel-header" id="hdr-reaction-data" type="button"
                 aria-expanded="false" aria-controls="body-reaction-data">
-          <span class="panel-icon" aria-hidden="true">🧾</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-receipt"/></svg></span>
           <span class="panel-label">Dados da Reação</span>
           <span class="panel-badge panel-badge--reacao" id="reactionDataBadge">—</span>
           <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
@@ -466,7 +492,7 @@
       <section class="panel" aria-labelledby="hdr-mols-investigar" id="panel-mols-investigar" data-open="true" hidden>
         <button class="panel-header" id="hdr-mols-investigar" type="button"
                 aria-expanded="true" aria-controls="body-mols-investigar">
-          <span class="panel-icon" aria-hidden="true">🔎</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-search"/></svg></span>
           <span class="panel-label">Investigar Reação</span>
           <svg class="chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true">
             <polyline points="5,8 10,13 15,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -493,7 +519,7 @@
           <div class="mols-picker">
             <span class="mols-picker-label" id="molsReactionLabel">Reação</span>
             <input type="search" id="molsReactionSearch" class="pt-search-input" disabled
-                   placeholder="🔍 Buscar reação (nome, fórmula, tipo)…" autocomplete="off"
+                   placeholder="Buscar reação (nome, fórmula, tipo)…" autocomplete="off"
                    aria-labelledby="molsReactionLabel">
             <div class="reaction-menu mols-reaction-menu" id="molsReactionMenu" role="listbox" aria-labelledby="molsReactionLabel"></div>
             <!-- Legenda só de leitura — mostra o que é reagente e o que é

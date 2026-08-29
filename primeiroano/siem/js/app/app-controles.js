@@ -72,9 +72,8 @@
 
     // Estado físico real a 25°C/1atm — calculado para a nota didática
     const roomState = ROOM_T < entry.Tf ? 'sólida' : (ROOM_T < entry.Tb ? 'líquida' : 'gasosa');
-    const roomLabel = { 'sólida':'❄ sólida', 'líquida':'💧 líquida', 'gasosa':'💨 gasosa' }[roomState];
     document.getElementById('temp-note').textContent =
-      `${entry.name} é ${roomLabel} a 25°C/1 atm (fusão: ${entry.Tf.toFixed(1)}°C, ebulição: ${entry.Tb.toFixed(1)}°C).`;
+      `${entry.name} é ${roomState} a 25°C/1 atm (fusão: ${entry.Tf.toFixed(1)}°C, ebulição: ${entry.Tb.toFixed(1)}°C).`;
 
     // SEMPRE inicia em 25°C — nunca foge para o meio do intervalo
     // líquido, mesmo quando a substância é sólida ou gasosa nessa
@@ -102,8 +101,8 @@
     const fusionPct = ((entry.Tf - min) / range) * 100;
     const boilingPct = ((entry.Tb - min) / range) * 100;
     track.innerHTML = `
-      <span class="temp-mark fusion" style="left:${fusionPct.toFixed(2)}%" title="Fusão: ${entry.Tf.toFixed(1)}°C">❄→💧</span>
-      <span class="temp-mark boiling" style="left:${boilingPct.toFixed(2)}%" title="Ebulição: ${entry.Tb.toFixed(1)}°C">💧→💨</span>
+      <span class="temp-mark fusion" style="left:${fusionPct.toFixed(2)}%" title="Fusão: ${entry.Tf.toFixed(1)}°C"><svg class="icon" aria-hidden="true"><use href="#ic-snow"/></svg></span>
+      <span class="temp-mark boiling" style="left:${boilingPct.toFixed(2)}%" title="Ebulição: ${entry.Tb.toFixed(1)}°C"><svg class="icon" aria-hidden="true"><use href="#ic-gas"/></svg></span>
     `;
   };
 

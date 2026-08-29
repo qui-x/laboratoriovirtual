@@ -74,11 +74,11 @@ function aplicarVibracao(intensidade) {
 function atualizarRotuloBotaoEnergia() {
   const icone = energyBtn.querySelector(".btn-icon");
   const rotulo = energyBtn.querySelector(".btn-label");
-  let texto, emoji;
-  if (state === "VALIDATED") { texto = "Produtos Formados"; emoji = "✅"; }
-  else if (state === "ACTIVATED") { texto = "Complexo Ativado"; emoji = "⚛️"; }
-  else { texto = "Fornecer Energia de Ativação"; emoji = "⚡"; }
-  if (icone) icone.textContent = emoji;
+  let texto, iconeSvg;
+  if (state === "VALIDATED") { texto = "Produtos Formados"; iconeSvg = "check"; }
+  else if (state === "ACTIVATED") { texto = "Complexo Ativado"; iconeSvg = "atom"; }
+  else { texto = "Fornecer Energia de Ativação"; iconeSvg = "bolt"; }
+  if (icone) icone.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#ic-${iconeSvg}"/></svg>`;
   if (rotulo) rotulo.textContent = " " + texto;
 }
 

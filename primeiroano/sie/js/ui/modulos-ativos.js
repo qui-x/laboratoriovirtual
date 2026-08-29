@@ -80,7 +80,7 @@ function atualizarModeIndicator() {
 
   if (moduloAtivo === "estequiometria") {
     canvasArea.dataset.mode = "estequiometria"; // dono de --mod/--mod-rgb agora — ver stylesie.css
-    overlayIcon.textContent = "⚗️";
+    overlayIcon.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg>';
     if (reacaoEscolhida) {
       montarTexto("Investigando", REACTIONS[currentReactionKey].label);
     } else {
@@ -89,7 +89,7 @@ function atualizarModeIndicator() {
     overlay.classList.add("mode-on");
   } else if (moduloAtivo === "mols") {
     canvasArea.dataset.mode = "mols";
-    overlayIcon.textContent = "🔎";
+    overlayIcon.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-search"/></svg>';
     if (typeof molsReacaoAtual !== "undefined" && molsReacaoAtual) {
       const formulas = Object.keys(molsSubstancias);
       const completos = formulas.filter((f) => substanciaCompletaMols(f)).length;

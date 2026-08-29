@@ -60,7 +60,9 @@ function verificarBalanceamentoUI() {
 
   const ok = equacaoEstaBalanceada(r, r.coeffs);
   el.dataset.ok = String(ok);
-  el.textContent = ok ? "✓ Equação Balanceada" : "✗ Equação Não Balanceada";
+  el.innerHTML = ok
+    ? '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Equação Balanceada'
+    : '<svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg> Equação Não Balanceada';
 
   document.querySelectorAll(".qty-coef-input").forEach((i) => {
     if (ok) i.removeAttribute("data-desbalanceado");

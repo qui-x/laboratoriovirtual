@@ -90,6 +90,23 @@ html[data-theme="light"]{
   --header-accent: #015274;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsiem.html. stroke/fill:currentColor herda a cor do texto ao
+   redor (por isso os marcadores de fusão/ebulição do slider de
+   temperatura, por exemplo, ficam azul/âmbar automaticamente ao herdar
+   de .temp-mark.fusion/.boiling, sem precisar de uma regra de cor
+   própria por ícone); width/height:1em acompanha o tamanho de fonte
+   do elemento-pai.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.ctrl-block-hd .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 html,body{height:100%;overflow:hidden;background:var(--bg0);color:var(--tx1);font-family:var(--font);font-size:13px;line-height:1.5;}
 body{display:flex;flex-direction:column;}
 

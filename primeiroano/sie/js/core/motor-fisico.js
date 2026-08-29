@@ -30,7 +30,7 @@ if (typeof Matter === 'undefined') {
                 background:#090c11;color:#e8edf2;font-family:'Segoe UI',system-ui,sans-serif;
                 text-align:center;padding:2rem;">
       <div style="max-width:420px;">
-        <div style="font-size:2.5rem;margin-bottom:1rem;">⚠️</div>
+        <div style="margin-bottom:1rem;"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="#e8edf2" stroke-width="1.6" style="display:inline-block" aria-hidden="true"><path d="M12 3l10 18H2L12 3z" stroke-linejoin="round"/><path d="M12 10v4" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.1" fill="#e8edf2" stroke="none"/></svg></div>
         <h1 style="font-family:'Segoe UI',system-ui,sans-serif;font-size:1.3rem;margin:0 0 .75rem;">
           Não foi possível carregar o simulador
         </h1>

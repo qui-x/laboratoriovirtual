@@ -61,7 +61,7 @@ function renderizarTallyMols() {
       tr.innerHTML = `
         <td>${simbolo}</td>
         <td>${registro.massa === null ? "?" : registro.massa.toFixed(3).replace(".", ",")}</td>
-        <td>${registro.contadosIdx.size}/${registro.total}${completo ? " ✓" : ""}</td>`;
+        <td>${registro.contadosIdx.size}/${registro.total}${completo ? ' <svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg>' : ""}</td>`;
       molsTallyBody.appendChild(tr);
     });
 
@@ -120,7 +120,7 @@ function mostrarResumoFinalMols() {
     .join(" · ");
 
   const linhaLavoisier = `<p class="mols-lavoisier ${conserva ? "is-ok" : "is-erro"}">
-    ${conserva ? "✓" : "✗"} Massa dos reagentes (${fmt(massaReagentes)} g) ${conserva ? "=" : "≠"} massa dos produtos (${fmt(massaProdutos)} g) — Lei de Lavoisier.
+    ${conserva ? '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg>' : '<svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg>'} Massa dos reagentes (${fmt(massaReagentes)} g) ${conserva ? "=" : "≠"} massa dos produtos (${fmt(massaProdutos)} g) — Lei de Lavoisier.
   </p>`;
 
   molsResultadoEl.hidden = false;

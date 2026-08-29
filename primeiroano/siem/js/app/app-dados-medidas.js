@@ -50,7 +50,7 @@ App.prototype._populateDataPanel = function(entry) {
   App.prototype._updateMeasures = function() {
     const sim=this.sim; if (!sim.entry) return;
     const set=(id,v)=>{ const el=document.getElementById(id); if(el) el.textContent=v; };
-    const labels={solid:'❄ Sólido',liquid:'💧 Líquido',gas:'💨 Gás'};
+    const labels={solid:'Sólido',liquid:'Líquido',gas:'Gás'};
     set('m-state', labels[sim.state]||'—');
     set('m-fusionNow', `${sim.stateInfo.Tf_eff.toFixed(1)} °C`);
     set('m-boilingNow', sim.stateInfo.canHaveLiquid ? `${sim.stateInfo.Tb_eff.toFixed(1)} °C` : 'não existe (sublima)');
