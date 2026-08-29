@@ -73,16 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const geo = db.geometry || '';
     const stereo = db.stereo || 'none';
 
+    const ICO = (n) => `<svg class="icon" aria-hidden="true"><use href="#ic-${n}"/></svg>`;
     const STEREO_NOTES = {
       'none':          null,
-      'linear':        `🔵 Hibridização <strong>sp</strong> — geometria linear (180°). Nenhum isômero estereoquímico possível.`,
-      'tetrahedral':   `🔷 Hibridização <strong>sp³</strong> — geometria tetraédrica (109,5°). Se os 4 substituintes forem <em>diferentes</em>, o carbono é um <strong>centro quiral</strong> e a molécula pode existir como enantiômeros <strong>R</strong> ou <strong>S</strong> (CIP). Representação: cunha sólida (▶ para frente) e tracejada (╌╌ para trás).`,
-      'EZ':            `🔶 Hibridização <strong>sp²</strong> — ligação dupla C=C planar (120°). Rotação impedida: gera <strong>isomeria E/Z</strong> (cis/trans). Z = substituintes de maior prioridade CIP no mesmo lado; E = lados opostos.`,
-      'pyramidal':     `🔺 Hibridização <strong>sp³</strong> — geometria piramidal. O par solitário ocupa um vértice do tetraedro, comprimindo o ângulo. Em N: inversão rápida (racemização). Em P, As: inversão lenta → centros quirais estáveis possíveis.`,
-      'squareplanar':  `🟦 Geometria <strong>quadrado planar</strong> (dsp²). Isomeria <strong>cis/trans</strong> possível: substituintes iguais em posições adjacentes (cis, 90°) ou opostas (trans, 180°). Clássico em complexos de Pt²⁺.`,
-      'seesaw':        `⚖️ Geometria <strong>gangorra (seesaw)</strong> — par solitário em posição equatorial da bipiramidal trigonal. Ângulos axial–equatorial (~173°) e equatorial–equatorial (~101,6°) diferentes.`,
-      'tshaped':       `🔤 Geometria <strong>T-shaped</strong> — dois pares solitários em posições axiais da bipiramidal trigonal. Ângulos F–X–F: axial ~175°, equatorial ~87,5°.`,
-      'ionic':         db.ionicCrystal ? `⚡ Composto iônico — estrutura de rede ${db.ionicCrystal === 'NaCl-rock-salt' ? 'Rock Salt (NaCl): cada íon coordenado por 6 do tipo oposto (CN=6:6), octaédrico' : db.ionicCrystal === 'fluorite' ? 'Fluorita (CaF₂): Ca²⁺ em CN=8 cúbico; F⁻ em CN=4 tetraédrico' : db.ionicCrystal}. Sem quiralidade molecular — simetria da rede.` : null,
+      'linear':        `${ICO('angle')} Hibridização <strong>sp</strong> — geometria linear (180°). Nenhum isômero estereoquímico possível.`,
+      'tetrahedral':   `${ICO('angle')} Hibridização <strong>sp³</strong> — geometria tetraédrica (109,5°). Se os 4 substituintes forem <em>diferentes</em>, o carbono é um <strong>centro quiral</strong> e a molécula pode existir como enantiômeros <strong>R</strong> ou <strong>S</strong> (CIP). Representação: cunha sólida (▶ para frente) e tracejada (╌╌ para trás).`,
+      'EZ':            `${ICO('angle')} Hibridização <strong>sp²</strong> — ligação dupla C=C planar (120°). Rotação impedida: gera <strong>isomeria E/Z</strong> (cis/trans). Z = substituintes de maior prioridade CIP no mesmo lado; E = lados opostos.`,
+      'pyramidal':     `${ICO('angle')} Hibridização <strong>sp³</strong> — geometria piramidal. O par solitário ocupa um vértice do tetraedro, comprimindo o ângulo. Em N: inversão rápida (racemização). Em P, As: inversão lenta → centros quirais estáveis possíveis.`,
+      'squareplanar':  `${ICO('angle')} Geometria <strong>quadrado planar</strong> (dsp²). Isomeria <strong>cis/trans</strong> possível: substituintes iguais em posições adjacentes (cis, 90°) ou opostas (trans, 180°). Clássico em complexos de Pt²⁺.`,
+      'seesaw':        `${ICO('scale')} Geometria <strong>gangorra (seesaw)</strong> — par solitário em posição equatorial da bipiramidal trigonal. Ângulos axial–equatorial (~173°) e equatorial–equatorial (~101,6°) diferentes.`,
+      'tshaped':       `Geometria <strong>T-shaped</strong> — dois pares solitários em posições axiais da bipiramidal trigonal. Ângulos F–X–F: axial ~175°, equatorial ~87,5°.`,
+      'ionic':         db.ionicCrystal ? `${ICO('bolt')} Composto iônico — estrutura de rede ${db.ionicCrystal === 'NaCl-rock-salt' ? 'Rock Salt (NaCl): cada íon coordenado por 6 do tipo oposto (CN=6:6), octaédrico' : db.ionicCrystal === 'fluorite' ? 'Fluorita (CaF₂): Ca²⁺ em CN=8 cúbico; F⁻ em CN=4 tetraédrico' : db.ionicCrystal}. Sem quiralidade molecular — simetria da rede.` : null,
     };
     return STEREO_NOTES[stereo] || null;
   };

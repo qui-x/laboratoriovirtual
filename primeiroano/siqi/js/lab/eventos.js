@@ -16,6 +16,6 @@ window.reiniciar = reiniciar;
 
 window.siqi_sim = {
   reiniciar: reiniciar,
-  explorar: function(){ addMsg('sistema','🔬 Use a busca ou as abas na **barra lateral esquerda** para explorar compostos!'); }
+  explorar: function(){ addMsg('sistema','Use a busca ou as abas na **barra lateral esquerda** para explorar compostos!'); }
 };
 

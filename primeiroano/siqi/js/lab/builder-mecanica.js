@@ -379,7 +379,7 @@ function atualizarStoich(exp){
       '</div>' +
       '<div class="bal-status-row">' +
         '<span class="'+(totalOk?'bal-status-ok':'bal-status-err')+'">' +
-          (totalOk ? '✓ Perfeitamente balanceado' : '✗ '+okCount+'/'+todosEls.length+' elementos OK') +
+          (totalOk ? '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Perfeitamente balanceado' : '<svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg> '+okCount+'/'+todosEls.length+' elementos OK') +
         '</span>' +
         '<span class="bal-pct">'+(totalOk?'100':pct)+'%</span>' +
       '</div>';
@@ -397,7 +397,7 @@ function atualizarStoich(exp){
       var diff = dir - esq;
       var rowCls = ok ? 'bal-row bal-row-ok' : (dir>esq ? 'bal-row bal-row-over' : 'bal-row bal-row-under');
       var badge = ok
-        ? '<span class="bal-badge bal-badge-ok">✓</span>'
+        ? '<span class="bal-badge bal-badge-ok"><svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg></span>'
         : (diff>0
             ? '<span class="bal-badge bal-badge-over">+'+diff+'</span>'
             : '<span class="bal-badge bal-badge-under">'+diff+'</span>');

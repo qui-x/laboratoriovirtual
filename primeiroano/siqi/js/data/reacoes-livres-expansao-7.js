@@ -19,7 +19,7 @@
 
   /* ── BaO ── */
   'BaO': [
-    { id:'bao_h2o', icon:'⚗️', familia:'Reação com Água',
+    { id:'bao_h2o', icon:'flask', familia:'Reação com Água',
       titulo:'BaO + H₂O → Ba(OH)₂',
       reagentes:['BaO','H₂O'], condicao:'exotérmico', coefR:{'BaO':1,'H₂O':1}, coefP:[1],
       produtos_visuais:['Ba(OH)₂'],
@@ -28,7 +28,7 @@
         equacaoBalanceada:'BaO(s) + H₂O(l) → Ba(OH)₂(aq)   ΔH = −126 kJ/mol'},
       hints:['Óxido básico + água → base. BaO + H₂O → Ba(OH)₂ (hidróxido de bário)','Reação exotérmica (−126 kJ/mol). Ba(OH)₂ é a base mais solúvel dentre os alcalino-terrosos'],
       explicacao:'BaO+H₂O→Ba(OH)₂ · Óxido básico + água → base forte. Ba(OH)₂ é muito solúvel (5,6 g/100 mL a 20°C) e forte. Usado para preparar soluções básicas e como padrão analítico' },
-    { id:'bao_co2', icon:'🔬', familia:'Síntese',
+    { id:'bao_co2', icon:'precipitate', familia:'Síntese',
       titulo:'BaO + CO₂ → BaCO₃',
       reagentes:['BaO','CO₂'], condicao:'', coefR:{'BaO':1,'CO₂':1}, coefP:[1],
       produtos_visuais:['BaCO₃'],
@@ -37,7 +37,7 @@
         equacaoBalanceada:'BaO(s) + CO₂(g) → BaCO₃(s)'},
       hints:['Óxido básico + óxido ácido → sal. BaO + CO₂ → BaCO₃ (witherita)','Mesma lógica: CaO+CO₂→CaCO₃. BaCO₃ = witherita, mineral raro'],
       explicacao:'BaO+CO₂→BaCO₃ · Óxido básico + anidrido carbônico → carbonato. BaCO₃ (witherita) é mineral natural raro. Reação análoga à recarbonação do Ca(OH)₂ na cura do cimento' },
-    { id:'bao_h2so4', icon:'⚗️', familia:'Neutralização',
+    { id:'bao_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'BaO + H₂SO₄ → BaSO₄↓ + H₂O',
       reagentes:['BaO','H₂SO₄'], condicao:'', coefR:{'BaO':1,'H₂SO₄':1}, coefP:[1,1],
       produtos_visuais:['BaSO₄','H₂O'],
@@ -50,7 +50,7 @@
 
   /* ── CaSO₃ ── */
   'CaSO3': [
-    { id:'caso3_hcl', icon:'🔬', familia:'Dupla Troca',
+    { id:'caso3_hcl', icon:'precipitate', familia:'Dupla Troca',
       titulo:'CaSO₃ + 2 HCl → CaCl₂ + H₂O + SO₂',
       reagentes:['CaSO₃','HCl'], condicao:'', coefR:{'CaSO₃':1,'HCl':2}, coefP:[1,1,1],
       produtos_visuais:['CaCl₂','H₂O','SO₂'],
@@ -59,7 +59,7 @@
         equacaoBalanceada:'CaSO₃(s) + 2 HCl(aq) → CaCl₂(aq) + H₂O(l) + SO₂(g)'},
       hints:['Sal de ácido fraco (H₂SO₃) + ácido forte → libera SO₂ gasoso','CaSO₃ + 2HCl → CaCl₂ + H₂O + SO₂. Efervescência de SO₂ (odor pungente)'],
       explicacao:'CaSO₃+2HCl→CaCl₂+H₂O+SO₂ · Ácido forte desloca ácido fraco instável (H₂SO₃→SO₂). Analogia: CaCO₃+2HCl→CaCl₂+H₂O+CO₂. Produz SO₂ — identificado pelo odor e tornassol vermelho' },
-    { id:'caso3_fgd', icon:'🏭', familia:'Dessulfurização Industrial',
+    { id:'caso3_fgd', icon:'factory', familia:'Dessulfurização Industrial',
       titulo:'CaO + SO₂ → CaSO₃',
       reagentes:['CaO','SO₂'], condicao:'FGD em termelétrica', coefR:{'CaO':1,'SO₂':1}, coefP:[1],
       produtos_visuais:['CaSO₃'],
@@ -72,7 +72,7 @@
 
   /* ── Cr₂O₃ ── */
   'Cr2O3': [
-    { id:'cr2o3_hcl', icon:'⚗️', familia:'Reação com Ácido',
+    { id:'cr2o3_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'Cr₂O₃ + 6 HCl → 2 CrCl₃ + 3 H₂O',
       reagentes:['Cr₂O₃','HCl'], condicao:'', coefR:{'Cr₂O₃':1,'HCl':6}, coefP:[2,3],
       produtos_visuais:['CrCl₃','H₂O'],
@@ -81,7 +81,7 @@
         equacaoBalanceada:'Cr₂O₃(s) + 6 HCl(aq) → 2 CrCl₃(aq) + 3 H₂O(l)'},
       hints:['Óxido anfótero + ácido → sal + água. Cr₂O₃ comporta-se como base aqui','2 Cr³⁺ precisa de 6 Cl⁻ → 6 HCl. Solução verde de CrCl₃'],
       explicacao:'Cr₂O₃+6HCl→2CrCl₃+3H₂O · Comportamento básico do Cr₂O₃ anfótero. CrCl₃ em solução é verde-escuro. Cr(III) é não-tóxico; bem diferente do Cr(VI) cancerígeno' },
-    { id:'cr2o3_al_termita', icon:'⚡', familia:'Reação Aluminotérmica',
+    { id:'cr2o3_al_termita', icon:'bolt', familia:'Reação Aluminotérmica',
       titulo:'Cr₂O₃ + 2 Al → Al₂O₃ + 2 Cr',
       reagentes:['Cr₂O₃','Al'], condicao:'ignição', coefR:{'Cr₂O₃':1,'Al':2}, coefP:[1,2],
       produtos_visuais:['Al₂O₃','Cr'],
@@ -94,7 +94,7 @@
 
   /* ── Fe₃O₄ ── */
   'Fe3O4': [
-    { id:'fe3o4_hcl', icon:'⚗️', familia:'Reação com Ácido',
+    { id:'fe3o4_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'Fe₃O₄ + 8 HCl → FeCl₂ + 2 FeCl₃ + 4 H₂O',
       reagentes:['Fe₃O₄','HCl'], condicao:'', coefR:{'Fe₃O₄':1,'HCl':8}, coefP:[1,2,4],
       produtos_visuais:['FeCl₂','FeCl₃','H₂O'],
@@ -103,7 +103,7 @@
         equacaoBalanceada:'Fe₃O₄(s) + 8 HCl(aq) → FeCl₂(aq) + 2 FeCl₃(aq) + 4 H₂O(l)'},
       hints:['Fe₃O₄ = FeO·Fe₂O₃: contém Fe²⁺ e Fe³⁺. 1 FeCl₂ + 2 FeCl₃','8 HCl: 2 para Fe²⁺ + 6 para 2 Fe³⁺ = 8 total'],
       explicacao:'Fe₃O₄+8HCl→FeCl₂+2FeCl₃+4H₂O · Dissolução da magnetita em HCl. O óxido misto libera Fe²⁺ e Fe³⁺ na proporção 1:2 (FeO:Fe₂O₃). Método de análise do teor de Fe em minerais magnéticos' },
-    { id:'fe3o4_h2', icon:'🏭', familia:'Redução com H₂',
+    { id:'fe3o4_h2', icon:'factory', familia:'Redução com H₂',
       titulo:'Fe₃O₄ + 4 H₂ → 3 Fe + 4 H₂O',
       reagentes:['Fe₃O₄','H₂'], condicao:'Δ 800°C', coefR:{'Fe₃O₄':1,'H₂':4}, coefP:[3,4],
       produtos_visuais:['Fe','H₂O'],
@@ -116,7 +116,7 @@
 
   /* ── FeS ── */
   'FeS': [
-    { id:'fes_hcl_h2s', icon:'🔬', familia:'Geração de H₂S (Kipp)',
+    { id:'fes_hcl_h2s', icon:'precipitate', familia:'Geração de H₂S (Kipp)',
       titulo:'FeS + 2 HCl → FeCl₂ + H₂S↑',
       reagentes:['FeS','HCl'], condicao:'', coefR:{'FeS':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['FeCl₂','H₂S'],
@@ -125,7 +125,7 @@
         equacaoBalanceada:'FeS(s) + 2 HCl(aq) → FeCl₂(aq) + H₂S(g)'},
       hints:['Ácido forte + sulfeto → libera H₂S gasoso (cheiro de ovo podre)','Método de Kipp: FeS+HCl→H₂S. H₂S é mais tóxico que HCN! Usar em boa ventilação'],
       explicacao:'FeS+2HCl→FeCl₂+H₂S · Método clássico de produção de H₂S em laboratório (aparelho de Kipp). H₂S tem cheiro inconfundível de ovo podre. Precipita metais pesados: H₂S+Pb²⁺→PbS↓ negro' },
-    { id:'fes_fe_s_sint', icon:'🔥', familia:'Síntese Direta',
+    { id:'fes_fe_s_sint', icon:'flame', familia:'Síntese Direta',
       titulo:'Fe + S → FeS',
       reagentes:['Fe','S'], condicao:'Δ', coefR:{'Fe':1,'S':1}, coefP:[1],
       produtos_visuais:['FeS'],
@@ -138,7 +138,7 @@
 
   /* ── H₂CrO₄ ── */
   'H2CrO4': [
-    { id:'h2cro4_naoh_cromato', icon:'⚗️', familia:'Neutralização',
+    { id:'h2cro4_naoh_cromato', icon:'flask', familia:'Neutralização',
       titulo:'H₂CrO₄ + 2 NaOH → Na₂CrO₄ + 2 H₂O',
       reagentes:['H₂CrO₄','NaOH'], condicao:'', coefR:{'H₂CrO₄':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Na₂CrO₄','H₂O'],
@@ -147,7 +147,7 @@
         equacaoBalanceada:'H₂CrO₄(aq) + 2 NaOH(aq) → Na₂CrO₄(aq) + 2 H₂O(l)'},
       hints:['Ácido diprótido + 2 base → sal + água. CrO₄²⁻ (amarelo) formado','Em pH básico: cromato CrO₄²⁻ (amarelo). Em pH ácido: dicromato Cr₂O₇²⁻ (laranja)'],
       explicacao:'H₂CrO₄+2NaOH→Na₂CrO₄+2H₂O · Neutralização formando cromato amarelo. Em meio ácido converte ao dicromato (Cr₂O₇²⁻). Equilíbrio 2CrO₄²⁻+2H⁺⇌Cr₂O₇²⁻+H₂O controla a cor: amarelo↔laranja' },
-    { id:'h2cro4_hcl_dicrom', icon:'🔬', familia:'Conversão a Dicromato',
+    { id:'h2cro4_hcl_dicrom', icon:'precipitate', familia:'Conversão a Dicromato',
       titulo:'2 H₂CrO₄ + H₂SO₄ → Cr₂O₇²⁻ + ... ',
       reagentes:['H₂CrO₄','H₂SO₄'], condicao:'acidificação', coefR:{'H₂CrO₄':2,'H₂SO₄':1}, coefP:[1,3],
       produtos_visuais:['Na₂Cr₂O₇','H₂O'],
@@ -160,7 +160,7 @@
 
   /* ── H₃PO₃ ── */
   'H3PO3': [
-    { id:'h3po3_naoh', icon:'⚗️', familia:'Neutralização (diácido)',
+    { id:'h3po3_naoh', icon:'flask', familia:'Neutralização (diácido)',
       titulo:'H₃PO₃ + 2 NaOH → Na₂HPO₃ + 2 H₂O',
       reagentes:['H₃PO₃','NaOH'], condicao:'', coefR:{'H₃PO₃':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Na₂HPO₃','H₂O'],
@@ -169,7 +169,7 @@
         equacaoBalanceada:'H₃PO₃(aq) + 2 NaOH(aq) → Na₂HPO₃(aq) + 2 H₂O(l)'},
       hints:['H₃PO₃ é DIÁCIDO (não triácido): apenas 2 H ionizáveis. Precisa 2 NaOH','O 3º H está ligado diretamente ao P (P-H) e NÃO se ioniza. Na₂HPO₃ contém 1 H restante'],
       explicacao:'H₃PO₃+2NaOH→Na₂HPO₃+2H₂O · H₃PO₃ é diácido! O P tem um H não-ionizável (P-H direto). Requer 2 NaOH para neutralização completa. Na₂HPO₃ = fosfito de sódio, redutor e antioxidante industrial' },
-    { id:'h3po3_agno3', icon:'🔬', familia:'Oxidação-Redução',
+    { id:'h3po3_agno3', icon:'precipitate', familia:'Oxidação-Redução',
       titulo:'H₃PO₃ + 2 AgNO₃ + H₂O → H₃PO₄ + 2 Ag + 2 HNO₃',
       reagentes:['H₃PO₃','AgNO₃','H₂O'], condicao:'', coefR:{'H₃PO₃':1,'AgNO₃':2,'H₂O':1}, coefP:[1,2,2],
       produtos_visuais:['H₃PO₄','Ag','HNO₃'],
@@ -182,7 +182,7 @@
 
   /* ── HClO₃ ── */
   'HClO3': [
-    { id:'hclo3_naoh', icon:'⚗️', familia:'Neutralização',
+    { id:'hclo3_naoh', icon:'flask', familia:'Neutralização',
       titulo:'HClO₃ + NaOH → NaClO₃ + H₂O',
       reagentes:['HClO₃','NaOH'], condicao:'', coefR:{'HClO₃':1,'NaOH':1}, coefP:[1,1],
       produtos_visuais:['NaClO₃','H₂O'],
@@ -191,7 +191,7 @@
         equacaoBalanceada:'HClO₃(aq) + NaOH(aq) → NaClO₃(aq) + H₂O(l)'},
       hints:['Ácido forte + base forte → sal neutro + água. NaClO₃ = clorato de sódio','Cl está em NOX +5. NaClO₃ é oxidante e usado em herbicidas (proibido em muitos países)'],
       explicacao:'HClO₃+NaOH→NaClO₃+H₂O · Neutralização do ácido clórico. NaClO₃ usado como herbicida total (mata qualquer planta). Cl em NOX +5. Reação análoga: HClO₄+NaOH→NaClO₄+H₂O' },
-    { id:'hclo3_koh', icon:'⚗️', familia:'Neutralização',
+    { id:'hclo3_koh', icon:'flask', familia:'Neutralização',
       titulo:'HClO₃ + KOH → KClO₃ + H₂O',
       reagentes:['HClO₃','KOH'], condicao:'', coefR:{'HClO₃':1,'KOH':1}, coefP:[1,1],
       produtos_visuais:['KClO₃','H₂O'],
@@ -204,7 +204,7 @@
 
   /* ── HClO₄ ── */
   'HClO4': [
-    { id:'hclo4_naoh', icon:'⚗️', familia:'Neutralização',
+    { id:'hclo4_naoh', icon:'flask', familia:'Neutralização',
       titulo:'HClO₄ + NaOH → NaClO₄ + H₂O',
       reagentes:['HClO₄','NaOH'], condicao:'', coefR:{'HClO₄':1,'NaOH':1}, coefP:[1,1],
       produtos_visuais:['NaClO₄','H₂O'],
@@ -213,7 +213,7 @@
         equacaoBalanceada:'HClO₄(aq) + NaOH(aq) → NaClO₄(aq) + H₂O(l)'},
       hints:['Superácido + base forte → sal neutro. NaClO₄ = perclorato de sódio','Cl em +7 (máximo). HClO₄ é o ácido mais forte; NaClO₄ é o sal resultante'],
       explicacao:'HClO₄+NaOH→NaClO₄+H₂O · Neutralização do ácido mais forte. NaClO₄ é oxidante forte — usado em propelentes. Cl em NOX +7. Série: HOCl<HClO₂<HClO₃<HClO₄ (força crescente com mais O)' },
-    { id:'hclo4_kcl_precip', icon:'🔬', familia:'Precipitação',
+    { id:'hclo4_kcl_precip', icon:'precipitate', familia:'Precipitação',
       titulo:'HClO₄ + KCl → KClO₄↓ + HCl',
       reagentes:['HClO₄','KCl'], condicao:'', coefR:{'HClO₄':1,'KCl':1}, coefP:[1,1],
       produtos_visuais:['KClO₄','HCl'],
@@ -226,7 +226,7 @@
 
   /* ── K₂O ── */
   'K2O': [
-    { id:'k2o_h2o', icon:'⚗️', familia:'Reação com Água',
+    { id:'k2o_h2o', icon:'flask', familia:'Reação com Água',
       titulo:'K₂O + H₂O → 2 KOH',
       reagentes:['K₂O','H₂O'], condicao:'violento', coefR:{'K₂O':1,'H₂O':1}, coefP:[2],
       produtos_visuais:['KOH'],
@@ -235,7 +235,7 @@
         equacaoBalanceada:'K₂O(s) + H₂O(l) → 2 KOH(aq)'},
       hints:['Óxido básico + água → base forte. K₂O + H₂O → 2 KOH (potassa cáustica)','Análogo: Na₂O+H₂O→2NaOH. KOH é potassa cáustica, mais solúvel que NaOH'],
       explicacao:'K₂O+H₂O→2KOH · Potassa cáustica formada. KOH é mais solúvel que NaOH (121 g/100 mL a 20°C vs 111 g/100 mL). Usado em eletrólise alcalina de H₂ (produção de H₂ verde) e fabricação de sabão mole' },
-    { id:'k2o_co2', icon:'🔬', familia:'Síntese',
+    { id:'k2o_co2', icon:'precipitate', familia:'Síntese',
       titulo:'K₂O + CO₂ → K₂CO₃',
       reagentes:['K₂O','CO₂'], condicao:'', coefR:{'K₂O':1,'CO₂':1}, coefP:[1],
       produtos_visuais:['K₂CO₃'],
@@ -248,7 +248,7 @@
 
   /* ── KClO₄ ── */
   'KClO4': [
-    { id:'kclo4_decomp', icon:'🌡️', familia:'Decomposição Térmica',
+    { id:'kclo4_decomp', icon:'thermometer', familia:'Decomposição Térmica',
       titulo:'KClO₄ → KCl + 2 O₂',
       reagentes:['KClO₄'], condicao:'Δ ~610°C', coefR:{'KClO₄':1}, coefP:[1,2],
       produtos_visuais:['KCl','O₂'],
@@ -257,7 +257,7 @@
         equacaoBalanceada:'KClO₄(s) →(Δ ~610°C)→ KCl(s) + 2 O₂(g)'},
       hints:['Cl +7 → Cl -1 (ganho 8e⁻). Mais estável que KClO₃: precisa de temperatura maior','KClO₄ não explode ao bater (diferente de KClO₃). Mais seguro para manuseio'],
       explicacao:'KClO₄→KCl+2O₂ · Decomposição do perclorato. Mais segura que do KClO₃. Cl: +7→−1. Propelentes de foguete usam KClO₄+Al: 4Al+3KClO₄→2Al₂O₃+3KCl. Alta energia por mol de O₂ liberado' },
-    { id:'kclo4_al_foguete', icon:'🚀', familia:'Combustão em Propelente',
+    { id:'kclo4_al_foguete', icon:'rocket', familia:'Combustão em Propelente',
       titulo:'4 Al + 3 KClO₄ → 2 Al₂O₃ + 3 KCl',
       reagentes:['Al','KClO₄'], condicao:'ignição', coefR:{'Al':4,'KClO₄':3}, coefP:[2,3],
       produtos_visuais:['Al₂O₃','KCl'],
@@ -270,7 +270,7 @@
 
   /* ── NH₄OH ── */
   'NH4OH': [
-    { id:'nh4oh_hcl', icon:'💨', familia:'Neutralização / Fumaça Branca',
+    { id:'nh4oh_hcl', icon:'cloud', familia:'Neutralização / Fumaça Branca',
       titulo:'NH₄OH + HCl → NH₄Cl + H₂O',
       reagentes:['NH₄OH','HCl'], condicao:'', coefR:{'NH₄OH':1,'HCl':1}, coefP:[1,1],
       produtos_visuais:['NH₄Cl','H₂O'],
@@ -279,7 +279,7 @@
         equacaoBalanceada:'NH₃(g) + HCl(g) → NH₄Cl(s)   [fumaça branca densa]'},
       hints:['NH₃ + HCl → NH₄Cl (fumaça branca). Gases se encontram no ar','Experimento clássico: abrir frascos de NH₃ e HCl próximos → fumaça branca densa'],
       explicacao:'NH₄OH+HCl→NH₄Cl+H₂O · NH₃ volátil reage com HCl gasoso → NH₄Cl sólido em suspensão (fumaça branca). Experimento dos "anéis de Newton": o anel de NH₄Cl forma mais perto do HCl (menor difusividade)' },
-    { id:'nh4oh_fecl3', icon:'🔬', familia:'Precipitação Seletiva',
+    { id:'nh4oh_fecl3', icon:'precipitate', familia:'Precipitação Seletiva',
       titulo:'3 NH₄OH + FeCl₃ → Fe(OH)₃↓ + 3 NH₄Cl',
       reagentes:['NH₄OH','FeCl₃'], condicao:'', coefR:{'NH₄OH':3,'FeCl₃':1}, coefP:[1,3],
       produtos_visuais:['Fe(OH)₃','NH₄Cl'],
@@ -288,7 +288,7 @@
         equacaoBalanceada:'3 NH₃(aq) + FeCl₃(aq) + 3 H₂O → Fe(OH)₃(s)↓ + 3 NH₄Cl(aq)'},
       hints:['NH₄OH (base fraca) precipita Fe(OH)₃ castanho sem dissolvê-lo','Vantagem: NH₃ não dissolve Al(OH)₃ (anfótero) — precipitação seletiva vs NaOH'],
       explicacao:'3NH₄OH+FeCl₃→Fe(OH)₃↓+3NH₄Cl · Base fraca precipita Fe(OH)₃ sem redissolver. Com NaOH forte, Al(OH)₃ anfótero dissolve-se. NH₄OH é seletivo — mantém Al(OH)₃ precipitado. Análise gravimétrica de Fe³⁺' },
-    { id:'nh4oh_h2so4', icon:'⚗️', familia:'Neutralização',
+    { id:'nh4oh_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'2 NH₄OH + H₂SO₄ → (NH₄)₂SO₄ + 2 H₂O',
       reagentes:['NH₄OH','H₂SO₄'], condicao:'', coefR:{'NH₄OH':2,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['(NH₄)₂SO₄','H₂O'],
@@ -301,7 +301,7 @@
 
   /* ── NO ── */
   'NO': [
-    { id:'no_o2_no2', icon:'🌡️', familia:'Oxidação',
+    { id:'no_o2_no2', icon:'thermometer', familia:'Oxidação',
       titulo:'2 NO + O₂ → 2 NO₂',
       reagentes:['NO','O₂'], condicao:'', coefR:{'NO':2,'O₂':1}, coefP:[2],
       produtos_visuais:['NO₂'],
@@ -310,7 +310,7 @@
         equacaoBalanceada:'2 NO(g) + O₂(g) → 2 NO₂(g)'},
       hints:['NO (incolor) + O₂ → NO₂ (marrom). Reação visível ao misturar NO com ar','Processo Ostwald: NO oxidado a NO₂, depois absorvido em água → HNO₃'],
       explicacao:'2NO+O₂→2NO₂ · NO incolor oxida rapidamente ao ar → NO₂ marrom-alaranjado. Esta é a "névoa fotoquímica": NO de carros + O₂ → NO₂ → absorção UV → radicais → ozônio troposférico' },
-    { id:'no_h2o_hno3', icon:'🏭', familia:'Processo Ostwald',
+    { id:'no_h2o_hno3', icon:'factory', familia:'Processo Ostwald',
       titulo:'3 NO₂ + H₂O → 2 HNO₃ + NO',
       reagentes:['NO','O₂','H₂O'], condicao:'→ via NO₂', coefR:{'NO':4,'O₂':3,'H₂O':2}, coefP:[4,1],
       produtos_visuais:['HNO₃','NO'],
@@ -319,7 +319,7 @@
         equacaoBalanceada:'4 NO(g) + 3 O₂(g) + 2 H₂O(l) → 4 HNO₃(aq)'},
       hints:['Processo Ostwald completo: NO+O₂→NO₂, depois NO₂+H₂O→HNO₃+NO','NH₃→NO (Pt,830°C)→NO₂ (ar)→HNO₃ (água). Toda a indústria de fertilizantes e explosivos'],
       explicacao:'Processo Ostwald: NH₃→NO→NO₂→HNO₃. O NO do passo 1 é reciclado. Etapa global: 4NO+3O₂+2H₂O→4HNO₃. Base da produção de fertilizantes nitrogenados e ácido nítrico industrial' },
-    { id:'no_no2_agua_hn', icon:'⚗️', familia:'Reação com Água (via NO₂)',
+    { id:'no_no2_agua_hn', icon:'flask', familia:'Reação com Água (via NO₂)',
       titulo:'4 NO + 3 O₂ + 2 H₂O → 4 HNO₃',
       reagentes:['NO','O₂','H₂O'], condicao:'', coefR:{'NO':4,'O₂':3,'H₂O':2}, coefP:[4],
       produtos_visuais:['HNO₃'],
@@ -332,7 +332,7 @@
 
   /* ── Na₂CrO₄ ── */
   'Na2CrO4': [
-    { id:'na2cro4_agno3_mohr', icon:'🔬', familia:'Indicador / Método Mohr',
+    { id:'na2cro4_agno3_mohr', icon:'precipitate', familia:'Indicador / Método Mohr',
       titulo:'2 AgNO₃ + Na₂CrO₄ → Ag₂CrO₄↓ + 2 NaNO₃',
       reagentes:['Na₂CrO₄','AgNO₃'], condicao:'', coefR:{'Na₂CrO₄':1,'AgNO₃':2}, coefP:[1,2],
       produtos_visuais:['Ag₂CrO₄','NaNO₃'],
@@ -341,7 +341,7 @@
         equacaoBalanceada:'2 AgNO₃(aq) + Na₂CrO₄(aq) → Ag₂CrO₄(s)↓ + 2 NaNO₃(aq)'},
       hints:['Ag₂CrO₄ precipita vermelho-tijolo. Usado no método Mohr para detectar ponto final','Mohr: adiciona AgNO₃ a solução de Cl⁻ com indicador Na₂CrO₄. Quando todo Cl⁻ precipita como AgCl, o próximo Ag⁺ forma Ag₂CrO₄ vermelho'],
       explicacao:'2AgNO₃+Na₂CrO₄→Ag₂CrO₄↓+2NaNO₃ · Ag₂CrO₄ vermelho-tijolo. Método Mohr de titulação: AgNO₃ + Cl⁻ → AgCl↓ branco; quando todo Cl⁻ é consumido → Ag⁺ livre + CrO₄²⁻ → Ag₂CrO₄ vermelho = ponto final' },
-    { id:'na2cro4_h2so4_dicrom', icon:'🔬', familia:'Equilíbrio Cromato/Dicromato',
+    { id:'na2cro4_h2so4_dicrom', icon:'precipitate', familia:'Equilíbrio Cromato/Dicromato',
       titulo:'2 Na₂CrO₄ + H₂SO₄ → Na₂Cr₂O₇ + Na₂SO₄ + H₂O',
       reagentes:['Na₂CrO₄','H₂SO₄'], condicao:'acidificação', coefR:{'Na₂CrO₄':2,'H₂SO₄':1}, coefP:[1,1,1],
       produtos_visuais:['Na₂Cr₂O₇','Na₂SO₄','H₂O'],
@@ -354,7 +354,7 @@
 
   /* ── Na₂O ── */
   'Na2O': [
-    { id:'na2o_h2o', icon:'⚗️', familia:'Reação com Água',
+    { id:'na2o_h2o', icon:'flask', familia:'Reação com Água',
       titulo:'Na₂O + H₂O → 2 NaOH',
       reagentes:['Na₂O','H₂O'], condicao:'violento', coefR:{'Na₂O':1,'H₂O':1}, coefP:[2],
       produtos_visuais:['NaOH'],
@@ -363,7 +363,7 @@
         equacaoBalanceada:'Na₂O(s) + H₂O(l) → 2 NaOH(aq)'},
       hints:['Óxido básico + água → base forte. Na₂O + H₂O → 2 NaOH (soda cáustica)','Reação violenta e exotérmica. NaOH é a base industrial mais importante'],
       explicacao:'Na₂O+H₂O→2NaOH · Anidrido sódico reage violentamente com H₂O → NaOH (soda cáustica). Mesma lógica de todos óxidos básicos com água. NaOH: base industrial #1 (produção de papel, alumínio, sabão, plásticos)' },
-    { id:'na2o_co2', icon:'🔬', familia:'Síntese',
+    { id:'na2o_co2', icon:'precipitate', familia:'Síntese',
       titulo:'Na₂O + CO₂ → Na₂CO₃',
       reagentes:['Na₂O','CO₂'], condicao:'', coefR:{'Na₂O':1,'CO₂':1}, coefP:[1],
       produtos_visuais:['Na₂CO₃'],
@@ -372,7 +372,7 @@
         equacaoBalanceada:'Na₂O(s) + CO₂(g) → Na₂CO₃(s)'},
       hints:['Óxido básico + óxido ácido → sal. Na₂O + CO₂ → Na₂CO₃ (barrilha)','Na₂CO₃ = barrilha: fabricação de vidro, sabão, papel e refinação de metais'],
       explicacao:'Na₂O+CO₂→Na₂CO₃ · Óxido básico + anidrido carbônico → carbonato. Na₂CO₃ (barrilha) é matéria-prima do vidro: Na₂CO₃+SiO₂+CaO → vidro. Produção mundial via processo Solvay: ~50 Mt/ano' },
-    { id:'na2o_hcl', icon:'⚗️', familia:'Reação com Ácido',
+    { id:'na2o_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'Na₂O + 2 HCl → 2 NaCl + H₂O',
       reagentes:['Na₂O','HCl'], condicao:'', coefR:{'Na₂O':1,'HCl':2}, coefP:[2,1],
       produtos_visuais:['NaCl','H₂O'],
@@ -385,7 +385,7 @@
 
   /* ── Na₂O₂ ── */
   'Na2O2': [
-    { id:'na2o2_h2o_o2', icon:'🚀', familia:'Reação com Água / Gerador O₂',
+    { id:'na2o2_h2o_o2', icon:'rocket', familia:'Reação com Água / Gerador O₂',
       titulo:'2 Na₂O₂ + 2 H₂O → 4 NaOH + O₂',
       reagentes:['Na₂O₂','H₂O'], condicao:'', coefR:{'Na₂O₂':2,'H₂O':2}, coefP:[4,1],
       produtos_visuais:['NaOH','O₂'],
@@ -394,7 +394,7 @@
         equacaoBalanceada:'2 Na₂O₂(s) + 2 H₂O(l) → 4 NaOH(aq) + O₂(g)'},
       hints:['Peróxido + água → base forte + O₂. O₂²⁻: 1 O oxidado (→O₂) + 1 reduzido (→OH⁻)','Submarinos usam Na₂O₂: absorve H₂O e CO₂ expirados, libera O₂'],
       explicacao:'2Na₂O₂+2H₂O→4NaOH+O₂ · Geração de O₂ em submarinos. O₂²⁻ (peroxídico) se desproporcionam: parte→O₂ (oxidação), parte→OH⁻ (redução). Um cartucho de Na₂O₂ sustenta um homem por horas' },
-    { id:'na2o2_co2_subm', icon:'🚀', familia:'Absorção de CO₂ (Submarino)',
+    { id:'na2o2_co2_subm', icon:'rocket', familia:'Absorção de CO₂ (Submarino)',
       titulo:'2 Na₂O₂ + 2 CO₂ → 2 Na₂CO₃ + O₂',
       reagentes:['Na₂O₂','CO₂'], condicao:'', coefR:{'Na₂O₂':2,'CO₂':2}, coefP:[2,1],
       produtos_visuais:['Na₂CO₃','O₂'],
@@ -407,7 +407,7 @@
 
   /* ── Na₂S ── */
   'Na2S': [
-    { id:'na2s_hcl_h2s', icon:'🔬', familia:'Geração de H₂S',
+    { id:'na2s_hcl_h2s', icon:'precipitate', familia:'Geração de H₂S',
       titulo:'Na₂S + 2 HCl → 2 NaCl + H₂S↑',
       reagentes:['Na₂S','HCl'], condicao:'', coefR:{'Na₂S':1,'HCl':2}, coefP:[2,1],
       produtos_visuais:['NaCl','H₂S'],
@@ -416,7 +416,7 @@
         equacaoBalanceada:'Na₂S(aq) + 2 HCl(aq) → 2 NaCl(aq) + H₂S(g)'},
       hints:['S²⁻ + 2H⁺ → H₂S↑ (cheiro ovo podre). Ácido forte desloca ácido fraco (H₂S)','H₂S mais tóxico que HCN! Efervescência gasosa com odor característico'],
       explicacao:'Na₂S+2HCl→2NaCl+H₂S · HCl (forte) desloca H₂S (fraco). H₂S produzido é tóxico (≡HCN em toxicidade). Usado em análise qualitativa: H₂S precipita metais pesados como sulfetos (PbS negro, CuS negro, ZnS branco)' },
-    { id:'na2s_pb_precip', icon:'🔬', familia:'Precipitação de Metal Pesado',
+    { id:'na2s_pb_precip', icon:'precipitate', familia:'Precipitação de Metal Pesado',
       titulo:'Na₂S + Pb(NO₃)₂ → PbS↓ + 2 NaNO₃',
       reagentes:['Na₂S','Pb(NO₃)₂'], condicao:'', coefR:{'Na₂S':1,'Pb(NO₃)₂':1}, coefP:[1,2],
       produtos_visuais:['PbS','NaNO₃'],
@@ -425,7 +425,7 @@
         equacaoBalanceada:'Na₂S(aq) + Pb(NO₃)₂(aq) → PbS(s)↓ + 2 NaNO₃(aq)'},
       hints:['S²⁻ + Pb²⁺ → PbS↓ negro (Kps=8×10⁻²⁸, extremamente insolúvel)','PbS negro: teste de Pb²⁺. Origem da "galena" (PbS), minério histórico de Pb'],
       explicacao:'Na₂S+Pb(NO₃)₂→PbS↓+2NaNO₃ · PbS (galena) precipita negro intenso. Kps=8×10⁻²⁸: um dos sais menos solúveis. Na₂S precipita metais pesados (Pb, Cu, Hg, Cd) — tratamento de efluentes industriais. Base do minerio de Pb (galena)' },
-    { id:'na2s_cl2_oxidacao', icon:'⚡', familia:'Oxirredução',
+    { id:'na2s_cl2_oxidacao', icon:'bolt', familia:'Oxirredução',
       titulo:'Na₂S + Cl₂ → 2 NaCl + S',
       reagentes:['Na₂S','Cl₂'], condicao:'', coefR:{'Na₂S':1,'Cl₂':1}, coefP:[2,1],
       produtos_visuais:['NaCl','S'],
@@ -438,7 +438,7 @@
 
   /* ── Na₃PO₄ ── */
   'Na3PO4': [
-    { id:'na3po4_hcl', icon:'⚗️', familia:'Neutralização',
+    { id:'na3po4_hcl', icon:'flask', familia:'Neutralização',
       titulo:'Na₃PO₄ + 3 HCl → 3 NaCl + H₃PO₄',
       reagentes:['Na₃PO₄','HCl'], condicao:'', coefR:{'Na₃PO₄':1,'HCl':3}, coefP:[3,1],
       produtos_visuais:['NaCl','H₃PO₄'],
@@ -447,7 +447,7 @@
         equacaoBalanceada:'Na₃PO₄(aq) + 3 HCl(aq) → 3 NaCl(aq) + H₃PO₄(aq)'},
       hints:['Sal de triácido + ácido forte → ácido fraco liberado. 3 HCl para 3 Na⁺','PO₄³⁻ + 3H⁺ → H₃PO₄. Ácido fosfórico liberado é fraco e fica em solução'],
       explicacao:'Na₃PO₄+3HCl→3NaCl+H₃PO₄ · HCl (forte) desloca H₃PO₄ (fraco) do fosfato. 3 HCl para 3 Na⁺. PO₄³⁻+3H⁺→H₃PO₄. Hidrólise básica do Na₃PO₄: PO₄³⁻+H₂O⇌HPO₄²⁻+OH⁻ (pH 12)' },
-    { id:'na3po4_cacl2', icon:'🔬', familia:'Precipitação',
+    { id:'na3po4_cacl2', icon:'precipitate', familia:'Precipitação',
       titulo:'2 Na₃PO₄ + 3 CaCl₂ → Ca₃(PO₄)₂↓ + 6 NaCl',
       reagentes:['Na₃PO₄','CaCl₂'], condicao:'', coefR:{'Na₃PO₄':2,'CaCl₂':3}, coefP:[1,6],
       produtos_visuais:['Ca₃(PO₄)₂','NaCl'],
@@ -456,7 +456,7 @@
         equacaoBalanceada:'2 Na₃PO₄(aq) + 3 CaCl₂(aq) → Ca₃(PO₄)₂(s)↓ + 6 NaCl(aq)'},
       hints:['3 Ca²⁺ + 2 PO₄³⁻ → Ca₃(PO₄)₂↓ (Kps=1,2×10⁻²⁹, muito insolúvel)','Ca₃(PO₄)₂ = fosfato de cálcio: componente dos ossos e hidroxiapatita dentária'],
       explicacao:'2Na₃PO₄+3CaCl₂→Ca₃(PO₄)₂↓+6NaCl · Precipitação de fosfato de cálcio. Ca₃(PO₄)₂ é o mineral dos ossos e dentes (hidroxiapatita). Eutrofização: excesso de PO₄³⁻ + Ca²⁺ → Ca₃(PO₄)₂ no sedimento de rios' },
-    { id:'na3po4_h2so4_acid', icon:'⚗️', familia:'Neutralização Parcial',
+    { id:'na3po4_h2so4_acid', icon:'flask', familia:'Neutralização Parcial',
       titulo:'Na₃PO₄ + H₂SO₄ → NaH₂PO₄ + Na₂SO₄',
       reagentes:['Na₃PO₄','H₂SO₄'], condicao:'', coefR:{'Na₃PO₄':1,'H₂SO₄':1}, coefP:[1,1],
       produtos_visuais:['NaH₂PO₄','Na₂SO₄'],
@@ -469,7 +469,7 @@
 
   /* ── Pb(OH)₂ ── */
   'Pb(OH)2': [
-    { id:'pboh2_hno3', icon:'⚗️', familia:'Dissolução em Ácido',
+    { id:'pboh2_hno3', icon:'flask', familia:'Dissolução em Ácido',
       titulo:'Pb(OH)₂ + 2 HNO₃ → Pb(NO₃)₂ + 2 H₂O',
       reagentes:['Pb(OH)₂','HNO₃'], condicao:'', coefR:{'Pb(OH)₂':1,'HNO₃':2}, coefP:[1,2],
       produtos_visuais:['Pb(NO₃)₂','H₂O'],
@@ -478,7 +478,7 @@
         equacaoBalanceada:'Pb(OH)₂(s) + 2 HNO₃(aq) → Pb(NO₃)₂(aq) + 2 H₂O(l)'},
       hints:['Base insolúvel + ácido → sal + água. Pb(OH)₂ dissolve em HNO₃','Pb(NO₃)₂ é um dos poucos sais de chumbo solúveis — fonte de Pb²⁺ em soluções'],
       explicacao:'Pb(OH)₂+2HNO₃→Pb(NO₃)₂+2H₂O · Dissolução de base anfótera em ácido. Pb(NO₃)₂ solúvel → fonte de Pb²⁺ para precipitações (PbI₂ chuva dourada, PbSO₄ branco, PbCrO₄ amarelo)' },
-    { id:'pboh2_naoh_plumbato', icon:'🔬', familia:'Reação Anfótera com Base',
+    { id:'pboh2_naoh_plumbato', icon:'precipitate', familia:'Reação Anfótera com Base',
       titulo:'Pb(OH)₂ + 2 NaOH → Na₂PbO₂ + 2 H₂O',
       reagentes:['Pb(OH)₂','NaOH'], condicao:'concentrado', coefR:{'Pb(OH)₂':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Na₂PbO₂','H₂O'],
@@ -491,7 +491,7 @@
 
   /* ── PbBr₂ ── */
   'PbBr2': [
-    { id:'pbbr2_form', icon:'🔬', familia:'Precipitação',
+    { id:'pbbr2_form', icon:'precipitate', familia:'Precipitação',
       titulo:'Pb(NO₃)₂ + 2 KBr → PbBr₂↓ + 2 KNO₃',
       reagentes:['Pb(NO₃)₂','KBr'], condicao:'', coefR:{'Pb(NO₃)₂':1,'KBr':2}, coefP:[1,2],
       produtos_visuais:['PbBr₂','KNO₃'],
@@ -500,7 +500,7 @@
         equacaoBalanceada:'Pb(NO₃)₂(aq) + 2 KBr(aq) → PbBr₂(s)↓ + 2 KNO₃(aq)'},
       hints:['Pb²⁺+2Br⁻→PbBr₂↓ branco-amarelado. Menos vistoso que PbI₂ amarelo','Série: AgCl (branco) < AgBr (amarelo pálido) < AgI (amarelo) em insolubilidade'],
       explicacao:'Pb(NO₃)₂+2KBr→PbBr₂↓+2KNO₃ · Precipitação de brometo. PbBr₂ menos amarelo que PbI₂. Teste de Br⁻: AgNO₃+Br⁻→AgBr↓ (amarelo pálido). Perovskita MAPbBr₃ = LED verde de próxima geração' },
-    { id:'pbbr2_agno3', icon:'🔬', familia:'Teste de Br⁻',
+    { id:'pbbr2_agno3', icon:'precipitate', familia:'Teste de Br⁻',
       titulo:'PbBr₂ + 2 AgNO₃ → 2 AgBr↓ + Pb(NO₃)₂',
       reagentes:['PbBr₂','AgNO₃'], condicao:'dissolução prévia', coefR:{'PbBr₂':1,'AgNO₃':2}, coefP:[2,1],
       produtos_visuais:['AgBr','Pb(NO₃)₂'],
@@ -513,7 +513,7 @@
 
   /* ── RbOH ── */
   'RbOH': [
-    { id:'rboh_hcl', icon:'⚗️', familia:'Neutralização',
+    { id:'rboh_hcl', icon:'flask', familia:'Neutralização',
       titulo:'RbOH + HCl → RbCl + H₂O',
       reagentes:['RbOH','HCl'], condicao:'', coefR:{'RbOH':1,'HCl':1}, coefP:[1,1],
       produtos_visuais:['RbCl','H₂O'],
@@ -522,7 +522,7 @@
         equacaoBalanceada:'RbOH(aq) + HCl(aq) → RbCl(aq) + H₂O(l)'},
       hints:['Base forte + ácido forte → sal neutro + água. RbOH + HCl → RbCl + H₂O','RbCl usado em espectroscopia atômica (linha vermelha intensa a 780 nm)'],
       explicacao:'RbOH+HCl→RbCl+H₂O · Neutralização simples. Rb foi descoberto por Bunsen e Kirchhoff em 1861 pelo espectroscópio (linhas vermelhas características). RbCl emite vermelho intenso na chama' },
-    { id:'rboh_co2', icon:'🔬', familia:'Absorção de CO₂',
+    { id:'rboh_co2', icon:'precipitate', familia:'Absorção de CO₂',
       titulo:'2 RbOH + CO₂ → Rb₂CO₃ + H₂O',
       reagentes:['RbOH','CO₂'], condicao:'', coefR:{'RbOH':2,'CO₂':1}, coefP:[1,1],
       produtos_visuais:['Rb₂CO₃','H₂O'],
@@ -535,7 +535,7 @@
 
   /* ── Sn(OH)₄ ── */
   'Sn(OH)4': [
-    { id:'snoh4_hcl', icon:'⚗️', familia:'Dissolução em Ácido',
+    { id:'snoh4_hcl', icon:'flask', familia:'Dissolução em Ácido',
       titulo:'Sn(OH)₄ + 4 HCl → SnCl₄ + 4 H₂O',
       reagentes:['Sn(OH)₄','HCl'], condicao:'', coefR:{'Sn(OH)₄':1,'HCl':4}, coefP:[1,4],
       produtos_visuais:['SnCl₄','H₂O'],
@@ -544,7 +544,7 @@
         equacaoBalanceada:'Sn(OH)₄(s) + 4 HCl(aq) → SnCl₄(aq) + 4 H₂O(l)'},
       hints:['Base insolúvel + ácido → sal + água. 4 HCl para 4 OH⁻. Sn em +4','SnCl₄ é o precursor do SnO₂ (vidro condutor ITO — telas de toque)'],
       explicacao:'Sn(OH)₄+4HCl→SnCl₄+4H₂O · Comportamento básico do Sn(OH)₄ anfótero. SnCl₄ é precursor do ITO (Indium Tin Oxide = SnO₂+In₂O₃) — material de telas touchscreen e painéis solares' },
-    { id:'snoh4_naoh_estanato', icon:'🔬', familia:'Reação Anfótera com Base',
+    { id:'snoh4_naoh_estanato', icon:'precipitate', familia:'Reação Anfótera com Base',
       titulo:'Sn(OH)₄ + 2 NaOH → Na₂[Sn(OH)₆]',
       reagentes:['Sn(OH)₄','NaOH'], condicao:'concentrado', coefR:{'Sn(OH)₄':1,'NaOH':2}, coefP:[1],
       produtos_visuais:['Na₂SnO₃','H₂O'],
@@ -553,7 +553,7 @@
         equacaoBalanceada:'Sn(OH)₄(s) + 2 NaOH(conc.) → Na₂[Sn(OH)₆](aq)'},
       hints:['Sn(OH)₄ anfótero dissolve em NaOH → complexo hexahidroxoestanato','Análogo: Al(OH)₃+NaOH→NaAlO₂. Zn(OH)₂+2NaOH→Na₂ZnO₂. Sn(OH)₄+2NaOH→Na₂SnO₃'],
       explicacao:'Sn(OH)₄+2NaOH→Na₂SnO₃ · Comportamento ácido do Sn(OH)₄ anfótero. Dissolve em NaOH forte → estanato. Série anfótera: Be(OH)₂, Al(OH)₃, Zn(OH)₂, Sn(OH)₄, Pb(OH)₂ — todos dissolvem em NaOH concentrado' },
-    { id:'snoh4_decomp', icon:'🌡️', familia:'Decomposição Térmica',
+    { id:'snoh4_decomp', icon:'thermometer', familia:'Decomposição Térmica',
       titulo:'Sn(OH)₄ → SnO₂ + 2 H₂O',
       reagentes:['Sn(OH)₄'], condicao:'Δ', coefR:{'Sn(OH)₄':1}, coefP:[1,2],
       produtos_visuais:['SnO₂','H₂O'],
@@ -566,7 +566,7 @@
 
   /* ── TiO₂ ── */
   'TiO2': [
-    { id:'tio2_h2so4', icon:'🔬', familia:'Dissolução em Ácido Concentrado',
+    { id:'tio2_h2so4', icon:'precipitate', familia:'Dissolução em Ácido Concentrado',
       titulo:'TiO₂ + H₂SO₄(conc.) → TiOSO₄ + H₂O',
       reagentes:['TiO₂','H₂SO₄'], condicao:'conc., Δ', coefR:{'TiO₂':1,'H₂SO₄':1}, coefP:[1,1],
       produtos_visuais:['TiOSO₄','H₂O'],
@@ -575,7 +575,7 @@
         equacaoBalanceada:'TiO₂(s) + H₂SO₄(conc.) →(Δ)→ TiOSO₄(aq) + H₂O(l)'},
       hints:['TiO₂ dissolve em H₂SO₄ concentrado e quente. TiOSO₄ = sulfato de titanil','Processo de produção de TiO₂ puro: minério+H₂SO₄→TiOSO₄→hidrólise→TiO₂ puro'],
       explicacao:'TiO₂+H₂SO₄→TiOSO₄+H₂O · Produção industrial de TiO₂ pigmento (processo de sulfato). Minério de titânio + H₂SO₄ conc. → TiOSO₄ → hidrólise → TiO₂ precipitado → calcinação → pigmento branco puro' },
-    { id:'tio2_fotocatalise', icon:'☀️', familia:'Fotocatálise',
+    { id:'tio2_fotocatalise', icon:'sun', familia:'Fotocatálise',
       titulo:'TiO₂ + luz UV → 2 •OH (radical hidroxil)',
       reagentes:['TiO₂','H₂O'], condicao:'luz UV (λ < 380 nm)', coefR:{'TiO₂':1,'H₂O':2}, coefP:[1,1],
       produtos_visuais:['H₂O₂','O₂'],
@@ -584,7 +584,7 @@
         equacaoBalanceada:'TiO₂ →(UV)→ e⁻(CB) + h⁺(VB); h⁺ + H₂O → •OH + H⁺; •OH destrói poluentes'},
       hints:['Luz UV excita TiO₂: e⁻ para banda de condução + h⁺ na banda de valência','h⁺ + H₂O → •OH radical. •OH é o oxidante mais forte — destrói qualquer orgânico'],
       explicacao:'TiO₂+hν→e⁻+h⁺; h⁺+H₂O→•OH · Fotocatálise: luz UV excita TiO₂ (bandgap 3,2 eV). •OH gerado decompõe poluentes orgânicos (NOx, VOC, bactérias). Vidros autolimpantes, purificadores de ar, hospitais: revestimento de TiO₂' },
-    { id:'tio2_hf', icon:'⚠️', familia:'Dissolução em HF',
+    { id:'tio2_hf', icon:'warning', familia:'Dissolução em HF',
       titulo:'TiO₂ + 4 HF → TiF₄ + 2 H₂O',
       reagentes:['TiO₂','HF'], condicao:'', coefR:{'TiO₂':1,'HF':4}, coefP:[1,2],
       produtos_visuais:['TiF₄','H₂O'],
@@ -597,7 +597,7 @@
 
   /* ── ZnCl₂ ── */
   'ZnCl2': [
-    { id:'zncl2_naoh', icon:'🔬', familia:'Precipitação / Anfótero',
+    { id:'zncl2_naoh', icon:'precipitate', familia:'Precipitação / Anfótero',
       titulo:'ZnCl₂ + 2 NaOH → Zn(OH)₂↓ + 2 NaCl',
       reagentes:['ZnCl₂','NaOH'], condicao:'', coefR:{'ZnCl₂':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Zn(OH)₂','NaCl'],
@@ -606,7 +606,7 @@
         equacaoBalanceada:'ZnCl₂(aq) + 2 NaOH(aq) → Zn(OH)₂(s)↓ + 2 NaCl(aq)'},
       hints:['Zn²⁺+2OH⁻→Zn(OH)₂↓ branco gelatinoso. Com excesso NaOH dissolve (anfótero)','Zn(OH)₂+2NaOH→Na₂ZnO₂+2H₂O (excesso). Anfótero como Al(OH)₃'],
       explicacao:'ZnCl₂+2NaOH→Zn(OH)₂↓+2NaCl · Precipitado branco gelatinoso. Com excesso de NaOH o Zn(OH)₂ dissolve-se formando zincato: Na₂ZnO₂. Anfoteria do Zn: dissolve em ácido E em base forte' },
-    { id:'zncl2_h2o_hidrolise', icon:'🔬', familia:'Hidrólise',
+    { id:'zncl2_h2o_hidrolise', icon:'precipitate', familia:'Hidrólise',
       titulo:'ZnCl₂ + 2 H₂O ⇌ Zn(OH)₂ + 2 HCl',
       reagentes:['ZnCl₂','H₂O'], condicao:'(parcial)', coefR:{'ZnCl₂':1,'H₂O':2}, coefP:[1,2],
       produtos_visuais:['Zn(OH)₂','HCl'],
@@ -615,7 +615,7 @@
         equacaoBalanceada:'ZnCl₂(aq) + 2 H₂O(l) ⇌ Zn(OH)Cl(s) + HCl(aq)   [hidrólise parcial]'},
       hints:['Zn²⁺ hidrolisa: Zn²⁺+H₂O⇌ZnOH⁺+H⁺. Por isso solução de ZnCl₂ tem pH 4-6','ZnCl₂ concentrado pode dissolver celulose! Ácido de Lewis muito forte'],
       explicacao:'ZnCl₂+H₂O→Zn(OH)Cl+HCl · Hidrólise parcial do ZnCl₂ — Zn²⁺ é ácido de Lewis forte que polariza a água, liberando H⁺. Por isso soluções de ZnCl₂ são ácidas (pH 4-6). Concentrado dissolve celulose (base dos solventes de celulose históricos)' },
-    { id:'zncl2_zn', icon:'⚗️', familia:'Síntese Direta',
+    { id:'zncl2_zn', icon:'flask', familia:'Síntese Direta',
       titulo:'Zn + 2 HCl → ZnCl₂ + H₂',
       reagentes:['Zn','HCl'], condicao:'', coefR:{'Zn':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['ZnCl₂','H₂'],
@@ -628,7 +628,7 @@
 
   /* ── ZnS ── */
   'ZnS': [
-    { id:'zns_hcl', icon:'🔬', familia:'Dissolução em Ácido',
+    { id:'zns_hcl', icon:'precipitate', familia:'Dissolução em Ácido',
       titulo:'ZnS + 2 HCl → ZnCl₂ + H₂S↑',
       reagentes:['ZnS','HCl'], condicao:'', coefR:{'ZnS':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['ZnCl₂','H₂S'],
@@ -637,7 +637,7 @@
         equacaoBalanceada:'ZnS(s) + 2 HCl(aq) → ZnCl₂(aq) + H₂S(g)'},
       hints:['S²⁻ + 2H⁺ → H₂S↑. ZnS dissolve em ácido forte (diferente de PbS e CuS)','ZnS dissolve em HCl (pH neutro) mas não PbS ou CuS — diferencia sulfetos em análise'],
       explicacao:'ZnS+2HCl→ZnCl₂+H₂S · ZnS dissolve em HCl diluído (Kps=1,6×10⁻²⁴ mas dissolve em ácido). Diferente de PbS (Kps=8×10⁻²⁸) que não dissolve facilmente — separação analítica de Zn²⁺ de Pb²⁺ pelo comportamento do sulfeto' },
-    { id:'zns_sint', icon:'🔥', familia:'Síntese Direta',
+    { id:'zns_sint', icon:'flame', familia:'Síntese Direta',
       titulo:'Zn + S → ZnS',
       reagentes:['Zn','S'], condicao:'Δ', coefR:{'Zn':1,'S':1}, coefP:[1],
       produtos_visuais:['ZnS'],
@@ -646,7 +646,7 @@
         equacaoBalanceada:'Zn(s) + S(s) →(Δ)→ ZnS(s)'},
       hints:['Síntese direta de sulfeto: Zn + S → ZnS. Flash brilhante ao reagir','ZnS:Cu emite verde; ZnS:Ag emite azul. Era o material das telas de CRT (TV/monitor)'],
       explicacao:'Zn+S→ZnS · Síntese direta com flash luminoso. ZnS dopado com Cu (verde) ou Ag (azul) emite luz sob excitação por elétrons — foi o material de todas as telas de TV e monitor CRT por décadas. Ainda usado em detectores de radiação' },
-    { id:'zns_h2s_precip', icon:'🔬', familia:'Precipitação Analítica',
+    { id:'zns_h2s_precip', icon:'precipitate', familia:'Precipitação Analítica',
       titulo:'ZnSO₄ + H₂S → ZnS↓ + H₂SO₄',
       reagentes:['ZnSO₄','H₂S'], condicao:'pH neutro', coefR:{'ZnSO₄':1,'H₂S':1}, coefP:[1,1],
       produtos_visuais:['ZnS','H₂SO₄'],
@@ -659,7 +659,7 @@
 
   /* ── K₂SO₄ ── */
   'K2SO4': [
-    { id:'k2so4_bacl2', icon:'🔬', familia:'Precipitação',
+    { id:'k2so4_bacl2', icon:'precipitate', familia:'Precipitação',
       titulo:'K₂SO₄ + BaCl₂ → BaSO₄↓ + 2 KCl',
       reagentes:['K₂SO₄','BaCl₂'], condicao:'', coefR:{'K₂SO₄':1,'BaCl₂':1}, coefP:[1,2],
       produtos_visuais:['BaSO₄','KCl'],
@@ -668,7 +668,7 @@
         equacaoBalanceada:'K₂SO₄(aq) + BaCl₂(aq) → BaSO₄(s)↓ + 2 KCl(aq)'},
       hints:['SO₄²⁻+Ba²⁺→BaSO₄↓ branco (Kps=1,1×10⁻¹⁰). Teste confirmatório de SO₄²⁻','BaSO₄ não dissolve em HCl — distingue de CaSO₃, BaCO₃'],
       explicacao:'K₂SO₄+BaCl₂→BaSO₄↓+2KCl · Precipitação de BaSO₄ — teste confirmatório de sulfato. BaSO₄ insolúvel em ácidos (diferente de carbonatos e sulfitos). Base da papa baritada em radiologia: BaSO₄ opaco ao raio-X' },
-    { id:'k2so4_form', icon:'⚗️', familia:'Neutralização',
+    { id:'k2so4_form', icon:'flask', familia:'Neutralização',
       titulo:'2 KOH + H₂SO₄ → K₂SO₄ + 2 H₂O',
       reagentes:['KOH','H₂SO₄'], condicao:'', coefR:{'KOH':2,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['K₂SO₄','H₂O'],
@@ -677,7 +677,7 @@
         equacaoBalanceada:'2 KOH(aq) + H₂SO₄(aq) → K₂SO₄(aq) + 2 H₂O(l)'},
       hints:['Base dibásica? Não — KOH é monobásico! H₂SO₄ é dibásico: precisa 2 KOH','Com 1 KOH → KHSO₄ (sal ácido). Com 2 KOH → K₂SO₄ (sal neutro)'],
       explicacao:'2KOH+H₂SO₄→K₂SO₄+2H₂O · H₂SO₄ dibásico neutralizado por 2 mol de KOH. K₂SO₄ = fertilizante agrícola sem cloro, preferido para tabaco e frutas. Com 1 KOH: KHSO₄ (sal ácido). Proporção molar decide o produto!' },
-    { id:'k2so4_alum', icon:'🔬', familia:'Formação de Alume',
+    { id:'k2so4_alum', icon:'precipitate', familia:'Formação de Alume',
       titulo:'K₂SO₄ + Al₂(SO₄)₃ + 24 H₂O → 2 KAl(SO₄)₂·12H₂O',
       reagentes:['K₂SO₄','Al₂(SO₄)₃','H₂O'], condicao:'cristalização', coefR:{'K₂SO₄':1,'Al₂(SO₄)₃':1,'H₂O':24}, coefP:[2],
       produtos_visuais:['KAl(SO₄)₂'],

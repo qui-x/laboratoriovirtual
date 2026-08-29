@@ -9,11 +9,12 @@
             "✓ ativo", canvas com borda colorida), clicar de novo
             desativa, e trocar de módulo limpa a área de trabalho.
    ───────────────────────────────────────────────────────────────
-   Só o Módulo 3 continua com o botão DESABILITADO por enquanto — os
-   Módulos 1 e 2 têm o `disabled` removido do HTML e um MODULE_CONFIG
-   completo. Quando o Módulo 3 for construído, a mudança é a mesma
-   receita: remover o `disabled` no HTML e garantir que os arquivos
-   dele liguem/desliguem no lugar certo aqui.
+   Os 3 módulos estão completos e habilitados: MODULE_CONFIG cobre
+   1, 2 e 3, e o `disabled` já foi removido dos três botões no HTML.
+   (Nota histórica: comentários antigos deste arquivo diziam que o
+   Módulo 3 — Laboratório de Solubilidade — ainda estava desabilitado;
+   isso ficou desatualizado assim que fisica-solubilidade.js e
+   tubo-ensaio.js foram concluídos, sem que o comentário fosse revisado.)
    Depende de: js/core/estado.js, js/core/dom-refs.js,
               js/ui/sandbox.js (limparSandbox, updateSandboxHint),
               js/ui/beaker.js (limparBequer — Módulo 2),

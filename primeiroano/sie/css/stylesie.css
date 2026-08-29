@@ -822,6 +822,22 @@ body.high-contrast .header-back { color: var(--hc-fg); border-color: var(--hc-fg
   border-left:2px solid var(--accent-main);
   font-size:.7rem; line-height:1.5; color:var(--text-secondary);
 }
+
+.panel--mode .panel-body{ gap:0; }
+.panel--mode .mode-define{
+  margin:0 0 10px; padding:6px 8px;
+  background:var(--bg-panel);
+  border-left:3px solid var(--mod);
+  border-radius:0 6px 6px 0;
+}
+.panel--mode .fact-grid{ margin:0 0 10px; gap:5px; }
+.panel--mode .fact-cell{ border-radius:7px; padding:6px 8px; }
+.panel--mode .fact-label{ font-size:.58rem; }
+.panel--mode .fact-value{ font-size:.72rem; font-weight:700; }
+.panel--mode .recommended{ margin-top:8px; }
+.panel--mode .mode-note{
+  gap:6px; margin:8px 0 0; padding:6px 8px; border-radius:6px;
+}
 .mode-define strong{ color:var(--text-primary); }
 
 .fact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.3rem; margin:.5rem 0; }
@@ -1375,7 +1391,7 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
 
 .mode-activate-btn {
   display: flex; align-items: center; gap: 8px; width: 100%;
-  padding: 8px 12px; margin: 0 0 .5rem;
+  padding: 8px 12px; margin: 8px 0 10px;
   border-radius: 8px;
   border: 1.5px solid var(--border);
   background: var(--bg-panel);
@@ -1409,9 +1425,9 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
 
 /* ---------- Observações sobre o canvas (módulo Estequiometria) ---------- */
 .canvas-interactions {
-  margin: 0 0 .7rem;
+  margin: 10px 0 6px;
   padding: .5rem .6rem;
-  background: var(--bg-void);
+  background: var(--bg-panel);
   border: 1px solid var(--border);
   border-radius: 8px;
 }

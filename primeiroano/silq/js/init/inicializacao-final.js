@@ -132,9 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const indicatorClear = document.getElementById('bond-mode-indicator-clear');
 
     const MODE_CONFIG = {
-      covalent:  { icon: '🔗', label: 'Modo Covalente ativo', cls: 'mode--covalent',  canvasCls: 'mode-covalent',  nome: 'covalente' },
-      ionic:     { icon: '⚡', label: 'Modo Iônico ativo',    cls: 'mode--ionic',     canvasCls: 'mode-ionic',     nome: 'iônico'    },
-      metallic:  { icon: '🧲', label: 'Modo Metálico ativo',  cls: 'mode--metallic',  canvasCls: 'mode-metallic',  nome: 'metálico'  },
+      covalent:  { icon: 'link',   label: 'Modo Covalente ativo', cls: 'mode--covalent',  canvasCls: 'mode-covalent',  nome: 'covalente' },
+      ionic:     { icon: 'bolt',   label: 'Modo Iônico ativo',    cls: 'mode--ionic',     canvasCls: 'mode-ionic',     nome: 'iônico'    },
+      metallic:  { icon: 'magnet', label: 'Modo Metálico ativo',  cls: 'mode--metallic',  canvasCls: 'mode-metallic',  nome: 'metálico'  },
     };
 
     function setMode(type) {
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (type && MODE_CONFIG[type]) {
         const cfg = MODE_CONFIG[type];
         indicator.className = `bond-mode-indicator ${cfg.cls}`;
-        indicatorIcon.textContent = cfg.icon;
+        indicatorIcon.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#ic-${cfg.icon}"/></svg>`;
         indicatorText.textContent = cfg.label;
         // Remove todas as classes de modo do canvas e aplica a atual
         SILQ.canvas.classList.remove('mode-covalent', 'mode-ionic', 'mode-metallic');

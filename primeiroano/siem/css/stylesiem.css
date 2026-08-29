@@ -70,7 +70,7 @@ body.high-contrast.light-mode     { --hc-fg:#0000cc;  --hc-bg:#fff;     }
   --tx1:#ffffff; --tx2:#6899b8; --tx3:#2d4f6a;
   --solid-col:#60a5fa; --liquid-col:#00e696; --gas-col:#ffb020;
   --font:'Segoe UI',system-ui,sans-serif; --mono:'Consolas','Monaco',monospace;
-  --hh:54px; --sr:250px; --r:7px; --rs:4px;
+  --hh:54px; --sr:250px; --r:10px; --rs:5px;
   --a11y-font-scale: 1;
   --overlay-bg: rgba(7,14,24,.85);
   --header-accent: #47C8FF;
@@ -150,7 +150,7 @@ body{flex:1;overflow:hidden;}
 }
 
 .header-sub{font-size:9.92px;color:var(--tx2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
-.header-right{display:flex;align-items:center;gap:.6rem;}
+.header-actions{display:flex;align-items:center;gap:.6rem;}
 .state-pill{font-size:.64rem;font-weight:700;letter-spacing:.06em;padding:.12rem .55rem;border-radius:20px;border:1px solid var(--bdr);color:var(--tx3);transition:all .3s;}
 .state-pill.solid{background:rgba(96,165,250,.12);color:var(--solid-col);border-color:var(--solid-col);}
 .state-pill.liquid{background:rgba(0,230,150,.12);color:var(--liquid-col);border-color:var(--liquid-col);}
@@ -265,8 +265,8 @@ input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:13px;hei
 input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.3);}
 
 .btn-row{display:flex;gap:.28rem;}
-.action-btn{flex:1;padding:.3rem .4rem;border:1px solid var(--bdr);background:transparent;color:var(--tx2);border-radius:var(--rs);cursor:pointer;font-size:.63rem;font-family:var(--font);transition:all .13s;}
-.action-btn:hover{background:var(--bg3);color:var(--tx1);border-color:var(--bdr2);}
+.action-btn{flex:1;padding:.3rem .4rem;border:1px solid var(--cyan);background:rgba(71,200,255,.12);color:var(--cyan);border-radius:var(--rs);cursor:pointer;font-size:.63rem;font-family:var(--font);transition:all .13s;}
+.action-btn:hover{background:rgba(71,200,255,.26);box-shadow:0 0 10px rgba(71,200,255,.3);}
 .action-btn:active{transform:scale(.96);}
 
 .data-grid{display:flex;flex-direction:column;}
@@ -543,6 +543,167 @@ html[data-spacing="true"] * {
 body.high-contrast .fact-cell,
 body.high-contrast .mode-note{ border:2px solid var(--hc-fg) !important; background:var(--hc-bg) !important; }
 body.high-contrast .fact-label{ color:var(--hc-fg) !important; }
+
+/* =====================================================================
+   MÓDULOS DE ESTADO FÍSICO — Gases / Líquidos / Sólidos
+   ---------------------------------------------------------------------
+   Réplica do padrão .panel--mode do SIMA (mesmo componente já usado no
+   SIME/SIE), com as cores dos 3 estados físicos que o SIEM já definia
+   no :root (--gas-col/--liquid-col/--solid-col — usadas na pílula de
+   estado e nas marcas do slider de temperatura).
+   ===================================================================== */
+.panel--mode{ --mod:var(--cyan); --mod-rgb:71,200,255; }
+.panel--mode[data-modulo="gasoso"] { --mod:var(--gas-col);    --mod-rgb:255,176,32; }
+.panel--mode[data-modulo="liquido"]{ --mod:var(--liquid-col); --mod-rgb:0,230,150;  }
+.panel--mode[data-modulo="solido"] { --mod:var(--solid-col);  --mod-rgb:96,165,250; }
+
+.panel--mode[data-open="true"]{
+  border-color:rgba(var(--mod-rgb),.4);
+  box-shadow:0 0 0 1px rgba(var(--mod-rgb),.12);
+}
+.panel--mode .panel-header:hover{ background:rgba(var(--mod-rgb),.08); color:var(--mod); }
+.panel--mode[data-open="true"] .panel-header{
+  background:linear-gradient(135deg, rgba(var(--mod-rgb),.14), rgba(var(--mod-rgb),.05));
+  color:var(--mod);
+  border-bottom-color:rgba(var(--mod-rgb),.2);
+}
+.panel--mode[data-open="true"] .chevron{ color:var(--mod); }
+.panel--mode .panel-badge{
+  font-size:.6rem; font-weight:700;
+  background:rgba(var(--mod-rgb),.2); color:var(--mod);
+  border-radius:10px; padding:1px 6px; min-width:18px;
+  text-align:center; flex-shrink:0;
+}
+.panel--mode[data-open="true"] .panel-badge{ background:rgba(var(--mod-rgb),.35); }
+
+/* BUG evitado desde o início (achado no SIME/SIE): o .panel-body
+   genérico usa display:flex + gap — pensado pros painéis "normais",
+   cujo conteúdo não tem margem própria. Dentro de um cartão de módulo,
+   cada filho (botão Ativar, definição, fatos...) já traz sua própria
+   margem, copiada do SIMA de propósito. Manter os dois juntos somaria
+   espaço extra por cima das margens. */
+.panel--mode .panel-body{ gap:0; }
+
+.panel--mode .mode-define{
+  margin:0 0 10px; padding:6px 8px;
+  background:var(--bg1);
+  border-left:3px solid var(--mod);
+  border-radius:0 6px 6px 0;
+}
+.panel--mode .fact-grid{ margin:0 0 10px; gap:5px; }
+.panel--mode .fact-cell{ border-radius:7px; padding:6px 8px; }
+.panel--mode .fact-label{ font-size:.58rem; }
+.panel--mode .fact-value{ font-size:.72rem; font-weight:700; }
+.panel--mode .mode-note{
+  gap:6px; margin:8px 0 0; padding:6px 8px; border-radius:6px;
+  background:rgba(var(--mod-rgb),.06); border-color:rgba(var(--mod-rgb),.18);
+}
+
+/* selo "Ativo" no cabeçalho — só aparece quando o módulo está ativado */
+.mode-active-tag{
+  display:none;
+  font-size:.55rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+  padding:1px 5px; border-radius:10px;
+  background:rgba(var(--mod-rgb),.25); color:var(--mod); flex-shrink:0;
+}
+.panel--mode:has(.mode-activate-btn[aria-pressed="true"]) .mode-active-tag{ display:inline-block; }
+
+/* botão Ativar/Desativar módulo */
+.mode-activate-btn{
+  display:flex; align-items:center; gap:8px; width:100%;
+  padding:8px 12px; margin:8px 0 10px;
+  border-radius:var(--rs);
+  border:1.5px solid var(--bdr);
+  background:var(--bg1);
+  color:var(--tx1);
+  font-size:.75rem; font-weight:700; font-family:var(--font);
+  cursor:pointer; transition:all .18s; text-align:left;
+}
+.mode-activate-btn:hover{ border-color:var(--mod); background:rgba(var(--mod-rgb),.08); color:var(--mod); }
+.mode-activate-btn[aria-pressed="true"]{
+  background:rgba(var(--mod-rgb),.15); border-color:var(--mod); color:var(--mod);
+  box-shadow:0 0 0 3px rgba(var(--mod-rgb),.2);
+}
+.mode-activate-btn[aria-pressed="true"]::after{
+  content:' · ativo'; font-size:.65rem; font-weight:600; opacity:.8; margin-left:auto;
+}
+.mode-activate-btn[aria-pressed="true"]:hover::after{ content:' · desativar'; opacity:1; }
+.mode-activate-btn:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
+
+.mode-dot{ width:10px; height:10px; border-radius:50%; flex-shrink:0; background:var(--mod); box-shadow:0 0 6px var(--mod); }
+
+/* interações do diagrama de fases (= .canvas-interactions do SIMA) */
+.canvas-interactions{ margin:10px 0 6px; border:1px solid var(--bdr); border-radius:var(--rs); overflow:hidden; }
+.canvas-interactions-title{
+  margin:0; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
+  color:var(--tx3); padding:.3rem .5rem; background:var(--bg1); border-bottom:1px solid var(--bdr);
+}
+.canvas-interactions p:not(.canvas-interactions-title){ margin:0; padding:.4rem .5rem; font-size:.68rem; line-height:1.5; color:var(--tx2); }
+.canvas-interactions strong{ color:var(--tx1); }
+
+/* exemplos recomendados — chips clicáveis (mesma técnica do SIME: cada
+   chip já carrega a substância direto, funcionando como atalho) */
+.recommended{ margin-top:8px; }
+.recommended-title{ margin:0 0 .2rem; font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.5px; color:var(--tx3); }
+.chip-row{ display:flex; flex-wrap:wrap; gap:.3rem; }
+.chip{
+  font-size:.68rem; font-weight:700; padding:3px 8px; border-radius:12px;
+  background:rgba(var(--mod-rgb),.12); color:var(--mod);
+  border:1px solid rgba(var(--mod-rgb),.3); cursor:pointer; font-family:var(--font);
+  transition:background .15s, transform .1s;
+}
+.chip:hover{ background:rgba(var(--mod-rgb),.25); }
+.chip:active{ transform:scale(.95); }
+.chip:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
+
+body.high-contrast .panel--mode{ border:2px solid var(--hc-fg) !important; }
+body.high-contrast .canvas-interactions,
+body.high-contrast .chip{ border:2px solid var(--hc-fg) !important; background:var(--hc-bg) !important; color:#fff !important; }
+body.high-contrast .canvas-interactions-title,
+body.high-contrast .recommended-title{ color:var(--hc-fg) !important; }
+body.high-contrast .mode-activate-btn{ border:2px solid var(--hc-fg) !important; color:var(--hc-fg) !important; }
+body.high-contrast .mode-activate-btn[aria-pressed="true"]{ background:var(--hc-fg) !important; color:var(--hc-bg) !important; }
+body.high-contrast .mode-active-tag{ background:var(--hc-fg) !important; color:var(--hc-bg) !important; }
+body.high-contrast .mode-dot{ background:var(--hc-fg) !important; }
+
+/* ---------------------------------------------------------------------
+   FOCO NO MÓDULO ATIVO — mesma regra :has() do SIMA/SIME: ao ativar um
+   módulo, os outros dois cartões somem da coluna esquerda.
+   --------------------------------------------------------------------- */
+#sidebar-left:has(.mode-activate-btn[aria-pressed="true"])
+  .panel--mode:not(:has(.mode-activate-btn[aria-pressed="true"])) {
+  display: none;
+}
+
+/* =====================================================================
+   SIDEBAR DIREITA TRANCADA ATÉ ATIVAR UM MÓDULO — mesmo mecanismo do
+   SIME: CSS cuida da aparência (opacidade), o atributo `inert` (ligado
+   via JS em ui/app-modulos.js) cuida do bloqueio de verdade.
+   ===================================================================== */
+.sidebar-lock-hint{
+  display: none;
+  align-items: flex-start; gap: .5rem;
+  padding: .6rem .65rem; margin-bottom: .4rem;
+  border: 1px dashed var(--bdr2); border-radius: var(--r);
+  background: var(--bg1); color: var(--tx2);
+  font-size: .72rem; line-height: 1.55;
+}
+.sidebar-lock-hint .icon{ width: 1.3em; height: 1.3em; flex-shrink: 0; margin-top: .1em; color: var(--cyan); }
+.sidebar-lock-hint strong{ color: var(--tx1); }
+
+body:not(:has(.mode-activate-btn[aria-pressed="true"])) .sidebar-lock-hint{
+  display: flex;
+}
+body:not(:has(.mode-activate-btn[aria-pressed="true"])) #sidebar-right > .panel{
+  opacity: .4;
+  filter: grayscale(.35);
+  pointer-events: none;
+  transition: opacity .25s ease, filter .25s ease;
+}
+body.high-contrast:not(:has(.mode-activate-btn[aria-pressed="true"])) #sidebar-right > .panel{
+  opacity: 1; filter: none; border-style: dashed;
+}
+body.high-contrast .sidebar-lock-hint{ border: 2px solid var(--hc-fg) !important; color: var(--hc-fg) !important; }
 body.high-contrast .mode-define{ border-left-color:var(--hc-fg) !important; }
 
 /* CORRECAO: estas regras foram escritas com "body.simple-read",

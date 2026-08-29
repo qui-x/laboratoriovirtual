@@ -41,13 +41,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('btn-delete-mode');
     if (!btn) return;
     if (SILQ.deleteMode) {
-      btn.textContent = '\u2705 Clique no \u00e1tomo para remover';
+      btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Clique no \u00e1tomo para remover';
       btn.classList.replace('btn-outline-danger','btn-danger');
       SILQ.canvas.classList.add('delete-mode');
       SILQ.setToggleState(btn, true);
       SILQ.announce('Modo de remo\u00e7\u00e3o ativado. Clique em um \u00e1tomo para remov\u00ea-lo.', 'assertive');
     } else {
-      btn.textContent = '\uD83D\uDDD1\uFE0F Remover \u00c1tomo';
+      btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-trash"/></svg> Remover \u00c1tomo';
       btn.classList.replace('btn-danger','btn-outline-danger');
       SILQ.canvas.classList.remove('delete-mode');
       SILQ.setToggleState(btn, false);

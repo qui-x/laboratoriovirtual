@@ -179,6 +179,19 @@ html[data-motion="true"] *, html[data-motion="true"] *::before, html[data-motion
 
 /* ── Reset ───────────────────────────────────────────────────── */
 *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsiqi.html. stroke/fill:currentColor herda a cor do texto ao
+   redor; width/height:1em acompanha o tamanho de fonte do elemento-pai.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.mode-note-icon .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 html { color-scheme: dark; }
 html, body { height:100%; overflow:hidden; background:var(--bg0); color:var(--tx1);
   font-family:var(--font); font-size:13px; line-height:1.5; }
@@ -2113,7 +2126,7 @@ body.reduce-motion *::after{ animation:none!important; transition-duration:.01ms
 /* Botão "Selecionar módulo" (= .mode-activate-btn do SIMA) */
 .mode-activate-btn{
   display:flex; align-items:center; gap:.5rem; width:100%;
-  padding:.5rem .65rem; margin:.5rem 0 .6rem;
+  padding:.5rem .65rem; margin:8px 0 10px;
   border-radius:var(--rs); border:1.5px solid var(--bdr);
   background:var(--bg1); color:var(--tx1); font-family:var(--font);
   font-size:.75rem; font-weight:700; cursor:pointer; text-align:left;
@@ -2125,7 +2138,7 @@ body.reduce-motion *::after{ animation:none!important; transition-duration:.01ms
   box-shadow:0 0 0 3px rgba(var(--mod-rgb),.18);
 }
 .mode-activate-btn[aria-pressed="true"]::after{
-  content:' ✓ ativo'; font-size:.65rem; font-weight:600; opacity:.85; margin-left:auto;
+  content:' · ativo'; font-size:.65rem; font-weight:600; opacity:.85; margin-left:auto;
 }
 .mode-activate-btn:focus-visible{ outline:2px solid var(--mod); outline-offset:2px; }
 .mode-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; background:var(--mod); box-shadow:0 0 6px var(--mod); }
@@ -2177,7 +2190,10 @@ body.reduce-motion *::after{ animation:none!important; transition-duration:.01ms
    deste mesmo Plano de Ação). Como aqui vira o texto PRINCIPAL de cada
    card, a correção é ESCOPADA só a .panel--mode — não mexe no uso da
    classe em nenhum outro painel do SIQI (fora do escopo desta tarefa). */
-.panel--mode .mode-define{ color:var(--tx1); border-left-color:var(--mod); }
+.panel--mode .mode-define{
+  color:var(--tx1); border-left-color:var(--mod);
+  background:var(--bg1); border-radius:0 6px 6px 0; padding:6px 8px; margin:0 0 10px;
+}
 
 @media(max-width:520px){ .fact-grid{ grid-template-columns:1fr; } }
 

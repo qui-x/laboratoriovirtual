@@ -43,10 +43,10 @@ var FUNCAO_META = {
 
 /* ── Categorias para filtro de busca ────────────────────────── */
 var CATEGORIAS_SIQI = [
-  { id:'todos',  label:'Todos'       },
-  { id:'acido',  label:'⚗️ Ácidos'   },
-  { id:'base',   label:'🧪 Bases'    },
-  { id:'sal',    label:'🧂 Sais'     },
-  { id:'oxido',  label:'🔥 Óxidos'   },
+  { id:'todos',  label:'Todos'  },
+  { id:'acido',  label:'Ácidos' },
+  { id:'base',   label:'Bases'  },
+  { id:'sal',    label:'Sais'   },
+  { id:'oxido',  label:'Óxidos' },
 ];
 

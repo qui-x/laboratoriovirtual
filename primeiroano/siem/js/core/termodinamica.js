@@ -60,3 +60,23 @@ function determineState(entry, T_C, P_atm) {
   return { state, canHaveLiquid, Tf_eff, Tb_eff };
 }
 
+/* ====================================================================
+   ESTADO DE REFERÊNCIA (25 °C, 1 atm — condição padrão IUPAC)
+   ---------------------------------------------------------------------
+   Classifica uma substância do catálogo pelo estado físico que ela
+   assume na condição de referência, usando os próprios Tf/Tb do
+   catálogo — mesma regra e mesma condição de referência já usadas em
+   determineState() acima (que resolve o estado em QUALQUER T/P), só
+   que fixando T=25°C e P=1atm para dar sempre a mesma resposta,
+   independente dos controles de temperatura/pressão no momento.
+   Usada pelos módulos Gases/Líquidos/Sólidos da sidebar esquerda (ver
+   ui/painel-modulos.js) para filtrar a lista de substâncias por
+   estado físico, sem precisar simular nada.
+==================================================================== */
+function estadoPadrao(entry) {
+  if (!entry) return null;
+  if (entry.Tf > 25) return 'solid';
+  if (entry.Tb <= 25) return 'gas';
+  return 'liquid';
+}
+

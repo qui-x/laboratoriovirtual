@@ -47,18 +47,26 @@ App.prototype._buildSubCatTabs = function() {
   App.prototype._buildList = function(filter='') {
     const list=document.getElementById('sub-list');
     const q=filter.toLowerCase().trim();
+    const mapaEstado = { solid:'solido', liquid:'liquido', gas:'gasoso' };
     const cats={};
     for (const e of CATALOG) {
       if (this._activeSubCat && this._activeSubCat!=='all' && e.cat!==this._activeSubCat) continue;
+      // Filtro de MÓDULO (Gases/Líquidos/Sólidos, sidebar esquerda) — além
+      // do filtro de categoria química (abas acima da lista). Com um
+      // módulo ativo, só aparecem substâncias daquele estado físico de
+      // referência (25°C, 1atm — ver estadoPadrao() em termodinamica.js).
+      if (this._activeModulo && mapaEstado[estadoPadrao(e)] !== this._activeModulo) continue;
       if (q && !e.name.toLowerCase().includes(q) && !e.formula.toLowerCase().includes(q)) continue;
       if (!cats[e.cat]) cats[e.cat]=[];
       cats[e.cat].push(e);
     }
     list.innerHTML='';
+    let visiveis = 0;
     for (const [cat,items] of Object.entries(cats)) {
       const hdr=document.createElement('li'); hdr.className='sub-group-hdr'; hdr.setAttribute('role','presentation'); hdr.textContent=cat;
       list.appendChild(hdr);
       for (const e of items) {
+        visiveis++;
         const li=document.createElement('li');
         li.className='sub-item'; li.setAttribute('role','option'); li.setAttribute('tabindex','0');
         li.innerHTML=`<span class="si-dot" style="background:${e.color};color:${e.color}"></span>
@@ -68,6 +76,13 @@ App.prototype._buildSubCatTabs = function() {
         li.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' ')this._selectEntry(e,li);});
         list.appendChild(li);
       }
+    }
+    if (visiveis === 0) {
+      const vazio = document.createElement('li');
+      vazio.className = 'sub-lista-vazia';
+      vazio.setAttribute('role', 'note');
+      vazio.textContent = 'Nenhuma substância nesta combinação de filtros.';
+      list.appendChild(vazio);
     }
   };
 

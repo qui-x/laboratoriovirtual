@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
         window.SILQ_VIEW3D.showAngles = SILQ.showAngles;
       }
 
-      SILQ.btn3D.textContent = '\uD83D\uDD2C Voltar ao Editor 2D';
+      SILQ.btn3D.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-microscope"/></svg> Voltar ao Editor 2D';
       SILQ.btn3D.classList.replace('btn-outline-info', 'btn-info');
       SILQ.setToggleState(SILQ.btn3D, true);
       SILQ.viewer3dEl.setAttribute('tabindex', '0');
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (window.SILQ_VIEW3D) window.SILQ_VIEW3D.setActive(false);
       SILQ.viewer3dEl.style.display = 'none';
       SILQ.canvasWrapper.style.display = 'block';
-      SILQ.btn3D.textContent = '\uD83E\uDDEC Visualizar em 3D';
+      SILQ.btn3D.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-cube"/></svg> Visualizar em 3D';
       SILQ.btn3D.classList.replace('btn-info', 'btn-outline-info');
       SILQ.setToggleState(SILQ.btn3D, false);
       SILQ.viewer3dEl.setAttribute('tabindex', '-1');
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFrz) {
       btnFrz.classList.remove('active-a11y');
       btnFrz.setAttribute('aria-pressed','false');
-      btnFrz.textContent = '\uD83D\uDD13 F\u00edsica Livre';
+      btnFrz.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-unlock"/></svg> F\u00edsica Livre';
     }
     SILQ.canvasAtoms.forEach(a=>{gsap.killTweensOf(a.orbitDom);a.dom.remove();a.orbitDom.remove();if(a.dipoleDom)a.dipoleDom.remove();});
     SILQ.seaElectrons.forEach(e=>{gsap.killTweensOf(e);e.remove();});

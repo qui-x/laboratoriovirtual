@@ -22,7 +22,7 @@ var EXPERIMENTOS_SIQI = [
   ──────────────────────────────────────────────────────────── */
   {
     id: 1,
-    icon: '🔥',
+    icon: 'flame',
     familia: 'Síntese / Adição',
     titulo: 'CaO + H₂O',
     descricao: 'Cal viva + água',
@@ -68,7 +68,7 @@ var EXPERIMENTOS_SIQI = [
   ──────────────────────────────────────────────────────────── */
   {
     id: 2,
-    icon: '🌡️',
+    icon: 'thermometer',
     familia: 'Decomposição / Análise',
     titulo: 'CaCO₃ →(Δ)→ ?',
     descricao: 'Calcinação do calcário',
@@ -113,7 +113,7 @@ var EXPERIMENTOS_SIQI = [
   ──────────────────────────────────────────────────────────── */
   {
     id: 3,
-    icon: '⚡',
+    icon: 'bolt',
     familia: 'Simples Troca / Deslocamento',
     titulo: 'Zn + HCl',
     descricao: 'Metal em ácido — cuidado com o gás!',
@@ -159,7 +159,7 @@ var EXPERIMENTOS_SIQI = [
   ──────────────────────────────────────────────────────────── */
   {
     id: 4,
-    icon: '🧫',
+    icon: 'flask',
     familia: 'Dupla Troca / Neutralização',
     titulo: 'HCl + NaOH',
     descricao: 'Titulação ácido-base com fenolftaleína',

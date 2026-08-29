@@ -61,16 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     SILQ.molStats.innerHTML = [
-      `<span>⚛️ Átomos: <b>${SILQ.canvasAtoms.length}</b></span>`,
-      bCov  ? `<span>🔗 Cov: <b>${bCov}</b></span>` : '',
-      bIon  ? `<span>⚡ Iôn: <b>${bIon}</b></span>` : '',
-      bMet  ? `<span>🧲 Met: <b>${bMet}</b></span>` : '',
+      `<span><svg class="icon" aria-hidden="true"><use href="#ic-atom"/></svg> Átomos: <b>${SILQ.canvasAtoms.length}</b></span>`,
+      bCov  ? `<span><svg class="icon" aria-hidden="true"><use href="#ic-link"/></svg> Cov: <b>${bCov}</b></span>` : '',
+      bIon  ? `<span><svg class="icon" aria-hidden="true"><use href="#ic-bolt"/></svg> Iôn: <b>${bIon}</b></span>` : '',
+      bMet  ? `<span><svg class="icon" aria-hidden="true"><use href="#ic-magnet"/></svg> Met: <b>${bMet}</b></span>` : '',
       `<span>EN médio: <b>${avgEN}</b></span>`,
       SILQ.canvasAtoms.length>1 ? `<span>Dipolo: ${polar}</span>` : '',
     ].filter(Boolean).join('');
 
     if (geoLines.length) {
-      SILQ.molStats.innerHTML += `<div style="width:100%;margin-top:4px;padding-top:4px;border-top:1px solid #2a3142;font-size:.65rem;color:#94a3b8;">📐 Geometrias: ${geoLines.join(' &nbsp;|&nbsp; ')}</div>`;
+      SILQ.molStats.innerHTML += `<div style="width:100%;margin-top:4px;padding-top:4px;border-top:1px solid #2a3142;font-size:.65rem;color:#94a3b8;"><svg class="icon" aria-hidden="true"><use href="#ic-angle"/></svg> Geometrias: ${geoLines.join(' &nbsp;|&nbsp; ')}</div>`;
     }
 
     // Nota de estereoquímica (se disponível no banco)
@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
           border-top:1px solid #2a3142;border-left:3px solid #a78bfa;
           border-radius:0 6px 6px 0;background:rgba(167,139,250,.07);
           font-size:.65rem;color:#c4b5fd;line-height:1.55;">
-          🔬 <strong>Estereoquímica:</strong> ${stereoNote}
+          <svg class="icon" aria-hidden="true"><use href="#ic-microscope"/></svg> <strong>Estereoquímica:</strong> ${stereoNote}
         </div>`;
     }
   };
@@ -101,18 +101,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const dEN=Math.abs(enA-enB).toFixed(2);
     const sub = bond.subtype || bond.type;
     const bd  = BOND_DATA[sub] || BOND_DATA[bond.type] || {};
-    const iupacNote = `<span class="iupac-note">📖 <strong>IUPAC</strong>: ligação química existe quando forças entre átomos formam agregado estável o suficiente para ser uma espécie independente. A fronteira iônica/covalente é um contínuo — não uma divisão absoluta.</span>`;
+    const iupacNote = `<span class="iupac-note"><svg class="icon" aria-hidden="true"><use href="#ic-book"/></svg> <strong>IUPAC</strong>: ligação química existe quando forças entre átomos formam agregado estável o suficiente para ser uma espécie independente. A fronteira iônica/covalente é um contínuo — não uma divisão absoluta.</span>`;
 
     // Cabeçalho rico para qualquer tipo
     function richHeader(bd, extra='') {
       return `<div class="bond-card">
-        <div class="bond-card-title">${bd.icon||'🔬'} ${bd.label||sub}</div>
+        <div class="bond-card-title"><svg class="icon" aria-hidden="true"><use href="#ic-${bd.icon||'microscope'}"/></svg> ${bd.label||sub}</div>
         <div class="bond-card-pair">${a.element} '—' ${b.element} &nbsp;|&nbsp; ΔEN = ${dEN}</div>
         <div class="bond-card-grid">
-          <span>⚡ Energia: <b>${bd.energy||'—'}</b></span>
-          <span>📏 Comprimento: <b>${bd.length||'—'}</b></span>
-          <span>🔀 Natureza: <b>${bd.nature||'—'}</b></span>
-          <span>🧪 Ex: <b>${bd.examples||'—'}</b></span>
+          <span><svg class="icon" aria-hidden="true"><use href="#ic-bolt"/></svg> Energia: <b>${bd.energy||'—'}</b></span>
+          <span><svg class="icon" aria-hidden="true"><use href="#ic-ruler"/></svg> Comprimento: <b>${bd.length||'—'}</b></span>
+          <span><svg class="icon" aria-hidden="true"><use href="#ic-shuffle"/></svg> Natureza: <b>${bd.nature||'—'}</b></span>
+          <span><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg> Ex: <b>${bd.examples||'—'}</b></span>
         </div>
         <div class="bond-card-desc">${bd.desc||''}</div>
         ${extra}
@@ -133,8 +133,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const xtraIon = d && ac
         ? `<div class="bond-transfer">${ELEMENTS[d.element].name} → ${bond.transferred||1}e⁻ → ${ELEMENTS[ac.element].name}: <b>${d.element}${SILQ.formatCharge(d.charge)}</b> + <b>${ac.element}${SILQ.formatCharge(ac.charge)}</b></div>
            <div class="bond-ionic-capacity">
-             <span>⚗️ ${d.element}: ${usedDonor}/${capDonor} ligações usadas${remDonor===0?' <b style="color:#ef4444">— saturado</b>':''}</span>
-             <span>⚗️ ${ac.element}: ${usedAcceptor}/${capAcceptor} ligações usadas${remAcceptor===0?' <b style="color:#ef4444">— saturado</b>':''}</span>
+             <span><svg class="icon" aria-hidden="true"><use href="#ic-retort"/></svg> ${d.element}: ${usedDonor}/${capDonor} ligações usadas${remDonor===0?' <b style="color:#ef4444">— saturado</b>':''}</span>
+             <span><svg class="icon" aria-hidden="true"><use href="#ic-retort"/></svg> ${ac.element}: ${usedAcceptor}/${capAcceptor} ligações usadas${remAcceptor===0?' <b style="color:#ef4444">— saturado</b>':''}</span>
            </div>` : '';
       return richHeader(BOND_DATA.ionic, xtraIon) + iupacNote;
     }
@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const vsepr = SILQ.getVSEPR(central);
       if (vsepr) {
         const { nBonds, nLone, name } = vsepr;
-        SILQ.infoText.innerHTML += `<span class="iupac-note">📐 <strong>Geometria VSEPR (${central.element})</strong>: ${nBonds} ligante(s) + ${nLone} par(es) solitário(s) → <strong>${name}</strong>. Motor aplica forças angulares para convergir ao ângulo de equilíbrio.</span>`;
+        SILQ.infoText.innerHTML += `<span class="iupac-note"><svg class="icon" aria-hidden="true"><use href="#ic-angle"/></svg> <strong>Geometria VSEPR (${central.element})</strong>: ${nBonds} ligante(s) + ${nLone} par(es) solitário(s) → <strong>${name}</strong>. Motor aplica forças angulares para convergir ao ângulo de equilíbrio.</span>`;
       }
     }
   };

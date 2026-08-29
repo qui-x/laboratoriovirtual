@@ -57,12 +57,12 @@ function verificarBuilder(exp){
     var root=document.getElementById('rxb-root-'+exp.id);
     if(root) root.classList.add('rxb-acertou');
     var btn=document.getElementById('rxb-btn-check-'+exp.id);
-    if(btn){ btn.disabled=true; btn.textContent='✓ Correto!'; }
+    if(btn){ btn.disabled=true; btn.innerHTML='<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Correto!'; }
     setTimeout(acertou,500);
 
   } else if(corretos && !balanceado){
     shake('rxb-root-'+exp.id);
-    showToast('hint','Produtos ✓ — ajuste os coeficientes até o painel ficar todo verde.');
+    showToast('hint','Produtos corretos — ajuste os coeficientes até o painel ficar todo verde.');
 
   } else {
     shake('rxb-root-'+exp.id);
@@ -99,7 +99,7 @@ function revelarProdutos(expId){
   screen.className='rxb-acerto-screen';
   screen.id='rxb-acerto-'+expId;
   screen.innerHTML=
-    '<div class="rxb-acerto-icon">✓</div>'+
+    '<div class="rxb-acerto-icon"><svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg></div>'+
     '<div class="rxb-acerto-eq-wrap">'+
       '<div class="rxb-acerto-label">Equação Balanceada</div>'+
       '<div class="rxb-acerto-eq">'+eqHtml+'</div>'+
@@ -169,7 +169,7 @@ function acertou(){
 
   revelarProdutos(exp.id);
   /* Toast 1 linha com o mecanismo */
-  showToast('ok', exp.explicacao || '✓ Correto!');
+  showToast('ok', exp.explicacao || 'Correto!');
   srAnnounce('Correto!', 'assertive');
 
   /* Após acerto: sempre voltar ao seletor do composto */

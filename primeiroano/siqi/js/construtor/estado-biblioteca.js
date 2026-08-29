@@ -136,7 +136,7 @@ function mod2RenderBiblioteca(){
     li.innerHTML =
       '<span class="construtor-lib-formula">' + d.formula + '</span>' +
       '<span class="construtor-lib-badge' + (resolvido ? ' construtor-lib-badge--ok' : '') + '">' +
-        (resolvido ? '✓ resolvido' : MOD2_TIPO_ABA_LABEL[d.tipo]) +
+        (resolvido ? '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> resolvido' : MOD2_TIPO_ABA_LABEL[d.tipo]) +
       '</span>';
     function selecionar(){
       lista.querySelectorAll('.construtor-lib-item').forEach(function(el){ el.setAttribute('aria-selected', 'false'); });

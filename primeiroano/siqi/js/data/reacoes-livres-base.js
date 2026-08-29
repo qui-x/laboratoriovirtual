@@ -24,7 +24,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'H2SO4': [
     {
-      id:'h2so4_naoh', icon:'⚗️', familia:'Neutralização',
+      id:'h2so4_naoh', icon:'flask', familia:'Neutralização',
       titulo:'H₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O',
       reagentes:['H₂SO₄','NaOH'], condicao:'', coefR:{'H₂SO₄':1,'NaOH':2},
       produtos_visuais:['Na₂SO₄','H₂O'], coefP:[1,2],
@@ -35,7 +35,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂SO₄+2NaOH→Na₂SO₄+2H₂O  ·  Neutralização total — ácido dibásico',
     },
     {
-      id:'h2so4_zn', icon:'⚡', familia:'Simples Troca',
+      id:'h2so4_zn', icon:'bolt', familia:'Simples Troca',
       titulo:'Zn + H₂SO₄ → ZnSO₄ + H₂',
       reagentes:['Zn','H₂SO₄'], condicao:'diluído', coefR:{'Zn':1,'H₂SO₄':1},
       produtos_visuais:['ZnSO₄','H₂'], coefP:[1,1],
@@ -46,7 +46,7 @@ var REACOES_LIVRES = {
       explicacao:'Zn+H₂SO₄→ZnSO₄+H₂  ·  Deslocamento em ácido diluído',
     },
     {
-      id:'h2so4_caoh2', icon:'💧', familia:'Neutralização / Precipitação',
+      id:'h2so4_caoh2', icon:'droplet', familia:'Neutralização / Precipitação',
       titulo:'H₂SO₄ + Ca(OH)₂ → CaSO₄↓ + 2 H₂O',
       reagentes:['H₂SO₄','Ca(OH)₂'], condicao:'', coefR:{'H₂SO₄':1,'Ca(OH)₂':1},
       produtos_visuais:['CaSO₄','H₂O'], coefP:[1,2],
@@ -57,7 +57,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂SO₄+Ca(OH)₂→CaSO₄↓+2H₂O  ·  Precipitação de gesso (Kps=4,93×10⁻⁵)',
     },
     {
-      id:'h2so4_na2co3', icon:'🔄', familia:'Dupla Troca',
+      id:'h2so4_na2co3', icon:'refresh', familia:'Dupla Troca',
       titulo:'H₂SO₄ + Na₂CO₃ → Na₂SO₄ + H₂O + CO₂',
       reagentes:['H₂SO₄','Na₂CO₃'], condicao:'', coefR:{'H₂SO₄':1,'Na₂CO₃':1},
       produtos_visuais:['Na₂SO₄','H₂O','CO₂'], coefP:[1,1,1],
@@ -68,7 +68,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂SO₄+Na₂CO₃→Na₂SO₄+H₂O+CO₂↑  ·  Ácido forte desloca ácido fraco',
     },
     {
-      id:'h2so4_cu', icon:'⚡', familia:'Oxirredução',
+      id:'h2so4_cu', icon:'bolt', familia:'Oxirredução',
       titulo:'Cu + 2 H₂SO₄ → CuSO₄ + SO₂ + 2 H₂O',
       reagentes:['Cu','H₂SO₄'], condicao:'conc. Δ', coefR:{'Cu':1,'H₂SO₄':2},
       produtos_visuais:['CuSO₄','SO₂','H₂O'], coefP:[1,1,2],
@@ -80,7 +80,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'h2so4_fe', icon:'⚡', familia:'Simples Troca',
+      id:'h2so4_fe', icon:'bolt', familia:'Simples Troca',
       titulo:'Fe + H₂SO₄ → FeSO₄ + H₂',
       reagentes:['Fe','H₂SO₄'], condicao:'diluído',
       coefR:{'Fe':1,'H₂SO₄':1}, coefP:[1,1],
@@ -92,7 +92,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe+H₂SO₄→FeSO₄+H₂  ·  Dissolução de ferro em ácido diluído — decapagem industrial',
     },
     {
-      id:'h2so4_al', icon:'⚡', familia:'Simples Troca',
+      id:'h2so4_al', icon:'bolt', familia:'Simples Troca',
       titulo:'2 Al + 3 H₂SO₄ → Al₂(SO₄)₃ + 3 H₂',
       reagentes:['Al','H₂SO₄'], condicao:'diluído',
       coefR:{'Al':2,'H₂SO₄':3}, coefP:[1,3],
@@ -104,7 +104,7 @@ var REACOES_LIVRES = {
       explicacao:'2Al+3H₂SO₄→Al₂(SO₄)₃+3H₂  ·  Importante: Al conc. não reage (passivação)! Só com H₂SO₄ diluído',
     },
     {
-      id:'h2so4_mg', icon:'⚡', familia:'Simples Troca',
+      id:'h2so4_mg', icon:'bolt', familia:'Simples Troca',
       titulo:'Mg + H₂SO₄ → MgSO₄ + H₂',
       reagentes:['Mg','H₂SO₄'], condicao:'',
       coefR:{'Mg':1,'H₂SO₄':1}, coefP:[1,1],
@@ -122,7 +122,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'HCl': [
     {
-      id:'hcl_naoh', icon:'⚗️', familia:'Neutralização',
+      id:'hcl_naoh', icon:'flask', familia:'Neutralização',
       titulo:'HCl + NaOH → NaCl + H₂O',
       reagentes:['HCl','NaOH'], condicao:'', coefR:{'HCl':1,'NaOH':1},
       produtos_visuais:['NaCl','H₂O'], coefP:[1,1],
@@ -133,7 +133,7 @@ var REACOES_LIVRES = {
       explicacao:'HCl+NaOH→NaCl+H₂O  ·  Neutralização clássica — ácido e base fortes',
     },
     {
-      id:'hcl_fe', icon:'⚡', familia:'Simples Troca',
+      id:'hcl_fe', icon:'bolt', familia:'Simples Troca',
       titulo:'Fe + 2 HCl → FeCl₂ + H₂',
       reagentes:['Fe','HCl'], condicao:'', coefR:{'Fe':1,'HCl':2},
       produtos_visuais:['FeCl₂','H₂'], coefP:[1,1],
@@ -144,7 +144,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe+2HCl→FeCl₂+H₂  ·  Deslocamento — Fe desloca H do ácido forte',
     },
     {
-      id:'hcl_mgoh2', icon:'⚗️', familia:'Neutralização',
+      id:'hcl_mgoh2', icon:'flask', familia:'Neutralização',
       titulo:'2 HCl + Mg(OH)₂ → MgCl₂ + 2 H₂O',
       reagentes:['HCl','Mg(OH)₂'], condicao:'', coefR:{'HCl':2,'Mg(OH)₂':1},
       produtos_visuais:['MgCl₂','H₂O'], coefP:[1,2],
@@ -155,7 +155,7 @@ var REACOES_LIVRES = {
       explicacao:'2HCl+Mg(OH)₂→MgCl₂+2H₂O  ·  Leite de magnésia (antiácido) neutralizando HCl gástrico',
     },
     {
-      id:'hcl_caco3', icon:'🔄', familia:'Dupla Troca',
+      id:'hcl_caco3', icon:'refresh', familia:'Dupla Troca',
       titulo:'2 HCl + CaCO₃ → CaCl₂ + H₂O + CO₂',
       reagentes:['HCl','CaCO₃'], condicao:'', coefR:{'HCl':2,'CaCO₃':1},
       produtos_visuais:['CaCl₂','H₂O','CO₂'], coefP:[1,1,1],
@@ -166,7 +166,7 @@ var REACOES_LIVRES = {
       explicacao:'2HCl+CaCO₃→CaCl₂+H₂O+CO₂  ·  Base de como estalactites se formam — ácido dissolve calcário',
     },
     {
-      id:'hcl_mno2', icon:'🔥', familia:'Oxirredução',
+      id:'hcl_mno2', icon:'flame', familia:'Oxirredução',
       titulo:'4 HCl + MnO₂ → MnCl₂ + Cl₂ + 2 H₂O',
       reagentes:['HCl','MnO₂'], condicao:'Δ', coefR:{'HCl':4,'MnO₂':1},
       produtos_visuais:['MnCl₂','Cl₂','H₂O'], coefP:[1,1,2],
@@ -178,7 +178,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'hcl_zn', icon:'⚡', familia:'Simples Troca',
+      id:'hcl_zn', icon:'bolt', familia:'Simples Troca',
       titulo:'Zn + 2 HCl → ZnCl₂ + H₂',
       reagentes:['Zn','HCl'], condicao:'',
       coefR:{'Zn':1,'HCl':2}, coefP:[1,1],
@@ -190,7 +190,7 @@ var REACOES_LIVRES = {
       explicacao:'Zn+2HCl→ZnCl₂+H₂  ·  Pilha de Volta — Zn em HCl gera corrente elétrica e H₂',
     },
     {
-      id:'hcl_caoh2', icon:'⚗️', familia:'Neutralização',
+      id:'hcl_caoh2', icon:'flask', familia:'Neutralização',
       titulo:'2 HCl + Ca(OH)₂ → CaCl₂ + 2 H₂O',
       reagentes:['HCl','Ca(OH)₂'], condicao:'',
       coefR:{'HCl':2,'Ca(OH)₂':1}, coefP:[1,2],
@@ -202,7 +202,7 @@ var REACOES_LIVRES = {
       explicacao:'2HCl+Ca(OH)₂→CaCl₂+2H₂O  ·  CaCl₂ é anti-gelo de estradas e dessecante industrial',
     },
     {
-      id:'hcl_na2s', icon:'🔬', familia:'Dupla Troca',
+      id:'hcl_na2s', icon:'precipitate', familia:'Dupla Troca',
       titulo:'2 HCl + Na₂S → 2 NaCl + H₂S',
       reagentes:['HCl','Na₂S'], condicao:'',
       coefR:{'HCl':2,'Na₂S':1}, coefP:[2,1],
@@ -214,7 +214,7 @@ var REACOES_LIVRES = {
       explicacao:'2HCl+Na₂S→2NaCl+H₂S  ·  H₂S cheiro de ovo podre — ácido forte desloca ácido fraco volátil',
     },
     {
-      id:'hcl_al', icon:'⚡', familia:'Simples Troca',
+      id:'hcl_al', icon:'bolt', familia:'Simples Troca',
       titulo:'2 Al + 6 HCl → 2 AlCl₃ + 3 H₂',
       reagentes:['Al','HCl'], condicao:'',
       coefR:{'Al':2,'HCl':6}, coefP:[2,3],
@@ -232,7 +232,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'HNO3': [
     {
-      id:'hno3_koh', icon:'⚗️', familia:'Neutralização',
+      id:'hno3_koh', icon:'flask', familia:'Neutralização',
       titulo:'HNO₃ + KOH → KNO₃ + H₂O',
       reagentes:['HNO₃','KOH'], condicao:'', coefR:{'HNO₃':1,'KOH':1},
       produtos_visuais:['KNO₃','H₂O'], coefP:[1,1],
@@ -243,7 +243,7 @@ var REACOES_LIVRES = {
       explicacao:'HNO₃+KOH→KNO₃+H₂O  ·  KNO₃ (salitre) — componente da pólvora negra',
     },
     {
-      id:'hno3_cu', icon:'⚡', familia:'Oxirredução',
+      id:'hno3_cu', icon:'bolt', familia:'Oxirredução',
       titulo:'3 Cu + 8 HNO₃ → 3 Cu(NO₃)₂ + 2 NO + 4 H₂O',
       reagentes:['Cu','HNO₃'], condicao:'diluído', coefR:{'Cu':3,'HNO₃':8},
       produtos_visuais:['Cu(NO₃)₂','NO','H₂O'], coefP:[3,2,4],
@@ -254,7 +254,7 @@ var REACOES_LIVRES = {
       explicacao:'3Cu+8HNO₃dil→3Cu(NO₃)₂+2NO↑+4H₂O  ·  HNO₃ diluído produz NO (incolor → vira NO₂ marrom no ar)',
     },
     {
-      id:'hno3_cu_conc', icon:'🔥', familia:'Oxirredução',
+      id:'hno3_cu_conc', icon:'flame', familia:'Oxirredução',
       titulo:'Cu + 4 HNO₃ → Cu(NO₃)₂ + 2 NO₂ + 2 H₂O',
       reagentes:['Cu','HNO₃'], condicao:'conc.', coefR:{'Cu':1,'HNO₃':4},
       produtos_visuais:['Cu(NO₃)₂','NO₂','H₂O'], coefP:[1,2,2],
@@ -265,7 +265,7 @@ var REACOES_LIVRES = {
       explicacao:'Cu+4HNO₃conc→Cu(NO₃)₂+2NO₂+2H₂O  ·  Gás marrom-avermelhado tóxico — HNO₃ conc. é oxidante mais forte',
     },
     {
-      id:'hno3_na2co3', icon:'🔄', familia:'Dupla Troca',
+      id:'hno3_na2co3', icon:'refresh', familia:'Dupla Troca',
       titulo:'2 HNO₃ + Na₂CO₃ → 2 NaNO₃ + H₂O + CO₂',
       reagentes:['HNO₃','Na₂CO₃'], condicao:'', coefR:{'HNO₃':2,'Na₂CO₃':1},
       produtos_visuais:['NaNO₃','H₂O','CO₂'], coefP:[2,1,1],
@@ -277,7 +277,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'hno3_fe', icon:'⚡', familia:'Oxirredução',
+      id:'hno3_fe', icon:'bolt', familia:'Oxirredução',
       titulo:'Fe + 4 HNO₃ → Fe(NO₃)₃ + NO + 2 H₂O',
       reagentes:['Fe','HNO₃'], condicao:'diluído exc.',
       coefR:{'Fe':1,'HNO₃':4}, coefP:[1,1,2],
@@ -289,7 +289,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe+4HNO₃→Fe(NO₃)₃+NO+2H₂O  ·  Fe³⁺ (não Fe²⁺) porque HNO₃ é oxidante forte',
     },
     {
-      id:'hno3_ca', icon:'⚡', familia:'Simples Troca',
+      id:'hno3_ca', icon:'bolt', familia:'Simples Troca',
       titulo:'Ca + 2 HNO₃ → Ca(NO₃)₂ + H₂',
       reagentes:['Ca','HNO₃'], condicao:'muito diluído',
       coefR:{'Ca':1,'HNO₃':2}, coefP:[1,1],
@@ -301,7 +301,7 @@ var REACOES_LIVRES = {
       explicacao:'Ca+2HNO₃→Ca(NO₃)₂+H₂  ·  Ca(NO₃)₂ = fertilizante nitrocalcário — fonte dupla Ca+N',
     },
     {
-      id:'hno3_caco3', icon:'🔄', familia:'Dupla Troca',
+      id:'hno3_caco3', icon:'refresh', familia:'Dupla Troca',
       titulo:'2 HNO₃ + CaCO₃ → Ca(NO₃)₂ + H₂O + CO₂',
       reagentes:['HNO₃','CaCO₃'], condicao:'',
       coefR:{'HNO₃':2,'CaCO₃':1}, coefP:[1,1,1],
@@ -319,7 +319,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'H2CO3': [
     {
-      id:'h2co3_naoh', icon:'⚗️', familia:'Neutralização',
+      id:'h2co3_naoh', icon:'flask', familia:'Neutralização',
       titulo:'H₂CO₃ + 2 NaOH → Na₂CO₃ + 2 H₂O',
       reagentes:['H₂CO₃','NaOH'], condicao:'', coefR:{'H₂CO₃':1,'NaOH':2},
       produtos_visuais:['Na₂CO₃','H₂O'], coefP:[1,2],
@@ -330,7 +330,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂CO₃+2NaOH→Na₂CO₃+2H₂O  ·  Na₂CO₃ = barrilha — usada em sabão e vidro',
     },
     {
-      id:'h2co3_naoh_parcial', icon:'⚗️', familia:'Neutralização Parcial',
+      id:'h2co3_naoh_parcial', icon:'flask', familia:'Neutralização Parcial',
       titulo:'H₂CO₃ + NaOH → NaHCO₃ + H₂O',
       reagentes:['H₂CO₃','NaOH'], condicao:'1:1', coefR:{'H₂CO₃':1,'NaOH':1},
       produtos_visuais:['NaHCO₃','H₂O'], coefP:[1,1],
@@ -341,7 +341,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂CO₃+NaOH→NaHCO₃+H₂O  ·  NaHCO₃ = bicarbonato de sódio (fermento em pó)',
     },
     {
-      id:'h2co3_caoh2', icon:'🔬', familia:'Precipitação',
+      id:'h2co3_caoh2', icon:'precipitate', familia:'Precipitação',
       titulo:'H₂CO₃ + Ca(OH)₂ → CaCO₃↓ + 2 H₂O',
       reagentes:['H₂CO₃','Ca(OH)₂'], condicao:'', coefR:{'H₂CO₃':1,'Ca(OH)₂':1},
       produtos_visuais:['CaCO₃','H₂O'], coefP:[1,2],
@@ -353,7 +353,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'h2co3_caco3', icon:'🌊', familia:'Dissolução Cárstica',
+      id:'h2co3_caco3', icon:'droplet', familia:'Dissolução Cárstica',
       titulo:'H₂CO₃ + CaCO₃ → Ca(HCO₃)₂',
       reagentes:['H₂CO₃','CaCO₃'], condicao:'H₂O exc.',
       coefR:{'H₂CO₃':1,'CaCO₃':1}, coefP:[1],
@@ -365,7 +365,7 @@ var REACOES_LIVRES = {
       explicacao:'H₂CO₃+CaCO₃→Ca(HCO₃)₂  ·  Formação de cavernas cársticas — calcário se dissolve em chuva ácida natural',
     },
     {
-      id:'h2co3_decomp', icon:'🌡️', familia:'Decomposição',
+      id:'h2co3_decomp', icon:'thermometer', familia:'Decomposição',
       titulo:'H₂CO₃ → H₂O + CO₂',
       reagentes:['H₂CO₃'], condicao:'instável',
       coefR:{'H₂CO₃':1}, coefP:[1,1],
@@ -383,7 +383,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'NaOH': [
     {
-      id:'naoh_hcl', icon:'⚗️', familia:'Neutralização',
+      id:'naoh_hcl', icon:'flask', familia:'Neutralização',
       titulo:'NaOH + HCl → NaCl + H₂O',
       reagentes:['NaOH','HCl'], condicao:'', coefR:{'NaOH':1,'HCl':1},
       produtos_visuais:['NaCl','H₂O'], coefP:[1,1],
@@ -394,7 +394,7 @@ var REACOES_LIVRES = {
       explicacao:'NaOH+HCl→NaCl+H₂O  ·  Neutralização total — ΔH = −57,3 kJ/mol',
     },
     {
-      id:'naoh_cuso4', icon:'🧪', familia:'Precipitação',
+      id:'naoh_cuso4', icon:'flask', familia:'Precipitação',
       titulo:'CuSO₄ + 2 NaOH → Cu(OH)₂↓ + Na₂SO₄',
       reagentes:['CuSO₄','NaOH'], condicao:'', coefR:{'CuSO₄':1,'NaOH':2},
       produtos_visuais:['Cu(OH)₂','Na₂SO₄'], coefP:[1,1],
@@ -405,7 +405,7 @@ var REACOES_LIVRES = {
       explicacao:'CuSO₄+2NaOH→Cu(OH)₂↓+Na₂SO₄  ·  Precipitado azul — teste de identificação de Cu²⁺',
     },
     {
-      id:'naoh_al', icon:'⚡', familia:'Deslocamento',
+      id:'naoh_al', icon:'bolt', familia:'Deslocamento',
       titulo:'2 Al + 2 NaOH + 2 H₂O → 2 NaAlO₂ + 3 H₂',
       reagentes:['Al','NaOH','H₂O'], condicao:'', coefR:{'Al':2,'NaOH':2,'H₂O':2},
       produtos_visuais:['NaAlO₂','H₂'], coefP:[2,3],
@@ -416,7 +416,7 @@ var REACOES_LIVRES = {
       explicacao:'2Al+2NaOH+2H₂O→2NaAlO₂+3H₂  ·  Al é anfótero — reage com ácidos E bases! H₂ gerado desentope ralos',
     },
     {
-      id:'naoh_fecl3', icon:'🔄', familia:'Precipitação',
+      id:'naoh_fecl3', icon:'refresh', familia:'Precipitação',
       titulo:'FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl',
       reagentes:['FeCl₃','NaOH'], condicao:'', coefR:{'FeCl₃':1,'NaOH':3},
       produtos_visuais:['Fe(OH)₃','NaCl'], coefP:[1,3],
@@ -427,7 +427,7 @@ var REACOES_LIVRES = {
       explicacao:'FeCl₃+3NaOH→Fe(OH)₃↓+3NaCl  ·  Precipitado marrom de Fe(OH)₃ — teste de Fe³⁺',
     },
     {
-      id:'naoh_co2', icon:'🌫️', familia:'Síntese',
+      id:'naoh_co2', icon:'cloud', familia:'Síntese',
       titulo:'CO₂ + 2 NaOH → Na₂CO₃ + H₂O',
       reagentes:['CO₂','NaOH'], condicao:'', coefR:{'CO₂':1,'NaOH':2},
       produtos_visuais:['Na₂CO₃','H₂O'], coefP:[1,1],
@@ -439,7 +439,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'naoh_h2so4', icon:'⚗️', familia:'Neutralização',
+      id:'naoh_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'2 NaOH + H₂SO₄ → Na₂SO₄ + 2 H₂O',
       reagentes:['NaOH','H₂SO₄'], condicao:'',
       coefR:{'NaOH':2,'H₂SO₄':1}, coefP:[1,2],
@@ -451,7 +451,7 @@ var REACOES_LIVRES = {
       explicacao:'2NaOH+H₂SO₄→Na₂SO₄+2H₂O  ·  Na₂SO₄ (sal de Glauber) — usado em detergentes e papel',
     },
     {
-      id:'naoh_zn', icon:'⚡', familia:'Deslocamento (Anfótero)',
+      id:'naoh_zn', icon:'bolt', familia:'Deslocamento (Anfótero)',
       titulo:'Zn + 2 NaOH → Na₂ZnO₂ + H₂',
       reagentes:['Zn','NaOH'], condicao:'conc.',
       coefR:{'Zn':1,'NaOH':2}, coefP:[1,1],
@@ -463,7 +463,7 @@ var REACOES_LIVRES = {
       explicacao:'Zn+2NaOH→Na₂ZnO₂+H₂  ·  Zn anfótero (como Al) — reage com HCl E com NaOH',
     },
     {
-      id:'naoh_hno3', icon:'⚗️', familia:'Neutralização',
+      id:'naoh_hno3', icon:'flask', familia:'Neutralização',
       titulo:'NaOH + HNO₃ → NaNO₃ + H₂O',
       reagentes:['NaOH','HNO₃'], condicao:'',
       coefR:{'NaOH':1,'HNO₃':1}, coefP:[1,1],
@@ -475,7 +475,7 @@ var REACOES_LIVRES = {
       explicacao:'NaOH+HNO₃→NaNO₃+H₂O  ·  NaNO₃ = salitre — fertilizante e componente de explosivos',
     },
     {
-      id:'naoh_sioh4', icon:'🪨', familia:'Síntese',
+      id:'naoh_sioh4', icon:'precipitate', familia:'Síntese',
       titulo:'SiO₂ + 2 NaOH → Na₂SiO₃ + H₂O',
       reagentes:['SiO₂','NaOH'], condicao:'Δ',
       coefR:{'SiO₂':1,'NaOH':2}, coefP:[1,1],
@@ -493,7 +493,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'Ca(OH)2': [
     {
-      id:'caoh2_hcl', icon:'⚗️', familia:'Neutralização',
+      id:'caoh2_hcl', icon:'flask', familia:'Neutralização',
       titulo:'Ca(OH)₂ + 2 HCl → CaCl₂ + 2 H₂O',
       reagentes:['Ca(OH)₂','HCl'], condicao:'', coefR:{'Ca(OH)₂':1,'HCl':2},
       produtos_visuais:['CaCl₂','H₂O'], coefP:[1,2],
@@ -504,7 +504,7 @@ var REACOES_LIVRES = {
       explicacao:'Ca(OH)₂+2HCl→CaCl₂+2H₂O  ·  CaCl₂ é usado para derreter gelo em estradas',
     },
     {
-      id:'caoh2_co2', icon:'🔬', familia:'Síntese / Precipitação',
+      id:'caoh2_co2', icon:'precipitate', familia:'Síntese / Precipitação',
       titulo:'Ca(OH)₂ + CO₂ → CaCO₃↓ + H₂O',
       reagentes:['Ca(OH)₂','CO₂'], condicao:'', coefR:{'Ca(OH)₂':1,'CO₂':1},
       produtos_visuais:['CaCO₃','H₂O'], coefP:[1,1],
@@ -515,7 +515,7 @@ var REACOES_LIVRES = {
       explicacao:'Ca(OH)₂+CO₂→CaCO₃↓+H₂O  ·  Água de cal ficando turva = teste clássico de CO₂',
     },
     {
-      id:'caoh2_h2so4', icon:'💧', familia:'Precipitação',
+      id:'caoh2_h2so4', icon:'droplet', familia:'Precipitação',
       titulo:'Ca(OH)₂ + H₂SO₄ → CaSO₄↓ + 2 H₂O',
       reagentes:['Ca(OH)₂','H₂SO₄'], condicao:'', coefR:{'Ca(OH)₂':1,'H₂SO₄':1},
       produtos_visuais:['CaSO₄','H₂O'], coefP:[1,2],
@@ -526,7 +526,7 @@ var REACOES_LIVRES = {
       explicacao:'Ca(OH)₂+H₂SO₄→CaSO₄↓+2H₂O  ·  Gesso (CaSO₄·½H₂O) é a base de moldes e construção',
     },
     {
-      id:'caoh2_na2co3', icon:'🔄', familia:'Dupla Troca',
+      id:'caoh2_na2co3', icon:'refresh', familia:'Dupla Troca',
       titulo:'Ca(OH)₂ + Na₂CO₃ → CaCO₃↓ + 2 NaOH',
       reagentes:['Ca(OH)₂','Na₂CO₃'], condicao:'', coefR:{'Ca(OH)₂':1,'Na₂CO₃':1},
       produtos_visuais:['CaCO₃','NaOH'], coefP:[1,2],
@@ -538,7 +538,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'caoh2_cl2', icon:'🔬', familia:'Síntese',
+      id:'caoh2_cl2', icon:'precipitate', familia:'Síntese',
       titulo:'2 Ca(OH)₂ + 2 Cl₂ → Ca(ClO)₂ + CaCl₂ + 2 H₂O',
       reagentes:['Ca(OH)₂','Cl₂'], condicao:'frio',
       coefR:{'Ca(OH)₂':2,'Cl₂':2}, coefP:[1,1,2],
@@ -550,7 +550,7 @@ var REACOES_LIVRES = {
       explicacao:'2Ca(OH)₂+2Cl₂→Ca(ClO)₂+CaCl₂+2H₂O  ·  Cal clorada (cloro para piscina) — hipoclorito de cálcio',
     },
     {
-      id:'caoh2_hno3', icon:'⚗️', familia:'Neutralização',
+      id:'caoh2_hno3', icon:'flask', familia:'Neutralização',
       titulo:'Ca(OH)₂ + 2 HNO₃ → Ca(NO₃)₂ + 2 H₂O',
       reagentes:['Ca(OH)₂','HNO₃'], condicao:'',
       coefR:{'Ca(OH)₂':1,'HNO₃':2}, coefP:[1,2],
@@ -568,7 +568,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'NH3': [
     {
-      id:'nh3_hcl', icon:'🌫️', familia:'Síntese de Sal',
+      id:'nh3_hcl', icon:'cloud', familia:'Síntese de Sal',
       titulo:'NH₃ + HCl → NH₄Cl',
       reagentes:['NH₃','HCl'], condicao:'', coefR:{'NH₃':1,'HCl':1},
       produtos_visuais:['NH₄Cl'], coefP:[1],
@@ -579,7 +579,7 @@ var REACOES_LIVRES = {
       explicacao:'NH₃+HCl→NH₄Cl  ·  Névoa branca visível — formação direta de sal na fase gasosa',
     },
     {
-      id:'nh3_h2so4', icon:'⚗️', familia:'Neutralização',
+      id:'nh3_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'2 NH₃ + H₂SO₄ → (NH₄)₂SO₄',
       reagentes:['NH₃','H₂SO₄'], condicao:'', coefR:{'NH₃':2,'H₂SO₄':1},
       produtos_visuais:['(NH₄)₂SO₄'], coefP:[1],
@@ -590,7 +590,7 @@ var REACOES_LIVRES = {
       explicacao:'2NH₃+H₂SO₄→(NH₄)₂SO₄  ·  Sulfato de amônio — fertilizante de maior produção global',
     },
     {
-      id:'nh3_hno3', icon:'⚗️', familia:'Neutralização',
+      id:'nh3_hno3', icon:'flask', familia:'Neutralização',
       titulo:'NH₃ + HNO₃ → NH₄NO₃',
       reagentes:['NH₃','HNO₃'], condicao:'', coefR:{'NH₃':1,'HNO₃':1},
       produtos_visuais:['NH₄NO₃'], coefP:[1],
@@ -601,7 +601,7 @@ var REACOES_LIVRES = {
       explicacao:'NH₃+HNO₃→NH₄NO₃  ·  Fertilizante e explosivo (ANFO). Usado em detonações controladas',
     },
     {
-      id:'nh3_o2', icon:'🔥', familia:'Combustão / Oxidação Catalítica',
+      id:'nh3_o2', icon:'flame', familia:'Combustão / Oxidação Catalítica',
       titulo:'4 NH₃ + 5 O₂ → 4 NO + 6 H₂O',
       reagentes:['NH₃','O₂'], condicao:'Pt 900°C', coefR:{'NH₃':4,'O₂':5},
       produtos_visuais:['NO','H₂O'], coefP:[4,6],
@@ -613,7 +613,7 @@ var REACOES_LIVRES = {
     },
 
     {
-      id:'nh3_h2o', icon:'💧', familia:'Ionização / Base Fraca',
+      id:'nh3_h2o', icon:'droplet', familia:'Ionização / Base Fraca',
       titulo:'NH₃ + HCl → NH₄Cl (base fraca)',
       reagentes:['NH₃','HCl'], condicao:'',
       coefR:{'NH₃':1,'HCl':1}, coefP:[1],
@@ -625,7 +625,7 @@ var REACOES_LIVRES = {
       explicacao:'NH₃+HCl→NH₄Cl  ·  NH₃ é base fraca (Kb=1,8×10⁻⁵) mas reage prontamente com ácido forte — névoa branca',
     },
     {
-      id:'nh3_cu', icon:'🔵', familia:'Complexação',
+      id:'nh3_cu', icon:'dot', familia:'Complexação',
       titulo:'CuSO₄ + 4 NH₃ → [Cu(NH₃)₄]SO₄',
       reagentes:['CuSO₄','NH₃'], condicao:'exc. NH₃',
       coefR:{'CuSO₄':1,'NH₃':4}, coefP:[1],
@@ -637,7 +637,7 @@ var REACOES_LIVRES = {
       explicacao:'CuSO₄+4NH₃→[Cu(NH₃)₄]SO₄  ·  Azul de Schweizer — dissolve celulose! Base de fibras artificiais rayon',
     },
     {
-      id:'nh3_haber', icon:'🏭', familia:'Síntese Industrial',
+      id:'nh3_haber', icon:'factory', familia:'Síntese Industrial',
       titulo:'N₂ + 3 H₂ ⇌ 2 NH₃',
       reagentes:['N₂','H₂'], condicao:'Fe, 450°C, 200atm',
       coefR:{'N₂':1,'H₂':3}, coefP:[2],
@@ -655,7 +655,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'NaCl': [
     {
-      id:'nacl_agno3', icon:'🔬', familia:'Precipitação',
+      id:'nacl_agno3', icon:'precipitate', familia:'Precipitação',
       titulo:'NaCl + AgNO₃ → AgCl↓ + NaNO₃',
       reagentes:['NaCl','AgNO₃'], condicao:'', coefR:{'NaCl':1,'AgNO₃':1},
       produtos_visuais:['AgCl','NaNO₃'], coefP:[1,1],
@@ -666,7 +666,7 @@ var REACOES_LIVRES = {
       explicacao:'NaCl+AgNO₃→AgCl↓+NaNO₃  ·  Teste qualitativo de Cl⁻ — precipitado branco insolúvel',
     },
     {
-      id:'nacl_eletr', icon:'⚡', familia:'Eletrólise',
+      id:'nacl_eletr', icon:'bolt', familia:'Eletrólise',
       titulo:'2 NaCl + 2 H₂O →(eletr.)→ Cl₂ + H₂ + 2 NaOH',
       reagentes:['NaCl','H₂O'], condicao:'eletrólise', coefR:{'NaCl':2,'H₂O':2},
       produtos_visuais:['Cl₂','H₂','NaOH'], coefP:[1,1,2],
@@ -677,7 +677,7 @@ var REACOES_LIVRES = {
       explicacao:'2NaCl+2H₂O→Cl₂+H₂+2NaOH  ·  Processo cloroálcali — base da indústria de PVC e plásticos',
     },
     {
-      id:'nacl_h2so4', icon:'🔄', familia:'Dupla Troca',
+      id:'nacl_h2so4', icon:'refresh', familia:'Dupla Troca',
       titulo:'NaCl + H₂SO₄ → NaHSO₄ + HCl',
       reagentes:['NaCl','H₂SO₄'], condicao:'Δ 150°C', coefR:{'NaCl':1,'H₂SO₄':1},
       produtos_visuais:['NaHSO₄','HCl'], coefP:[1,1],
@@ -688,7 +688,7 @@ var REACOES_LIVRES = {
       explicacao:'NaCl+H₂SO₄→NaHSO₄+HCl↑  ·  Produção laboratorial de HCl gasoso — ácido forte × sal volátil',
     },
     {
-      id:'nacl_pb', icon:'🔬', familia:'Precipitação',
+      id:'nacl_pb', icon:'precipitate', familia:'Precipitação',
       titulo:'2 NaCl + Pb(NO₃)₂ → PbCl₂↓ + 2 NaNO₃',
       reagentes:['NaCl','Pb(NO₃)₂'], condicao:'', coefR:{'NaCl':2,'Pb(NO₃)₂':1},
       produtos_visuais:['PbCl₂','NaNO₃'], coefP:[1,2],
@@ -700,7 +700,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'nacl_naoh_cl2', icon:'⚗️', familia:'Desproporcionamento',
+      id:'nacl_naoh_cl2', icon:'flask', familia:'Desproporcionamento',
       titulo:'Cl₂ + 2 NaOH → NaCl + NaClO + H₂O',
       reagentes:['Cl₂','NaOH'], condicao:'frio',
       coefR:{'Cl₂':1,'NaOH':2}, coefP:[1,1,1],
@@ -712,7 +712,7 @@ var REACOES_LIVRES = {
       explicacao:'Cl₂+2NaOH→NaCl+NaClO+H₂O  ·  Produção de água sanitária — Cl₂ se autoxirreduz em base',
     },
     {
-      id:'nacl_nano3', icon:'🔄', familia:'Dupla Troca',
+      id:'nacl_nano3', icon:'refresh', familia:'Dupla Troca',
       titulo:'NaCl + AgNO₃ → AgCl↓ + NaNO₃',
       reagentes:['NaCl','AgNO₃'], condicao:'',
       coefR:{'NaCl':1,'AgNO₃':1}, coefP:[1,1],
@@ -724,7 +724,7 @@ var REACOES_LIVRES = {
       explicacao:'NaCl+AgNO₃→AgCl↓+NaNO₃  ·  Identificação de Cl⁻ por precipitação com AgNO₃',
     },
     {
-      id:'nacl_forno', icon:'🔥', familia:'Eletrólise Ígnea',
+      id:'nacl_forno', icon:'flame', familia:'Eletrólise Ígnea',
       titulo:'2 NaCl →(eletr. ígnea)→ 2 Na + Cl₂',
       reagentes:['NaCl'], condicao:'eletr. ígnea 800°C',
       coefR:{'NaCl':2}, coefP:[2,1],
@@ -742,7 +742,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'CuSO4': [
     {
-      id:'cuso4_naoh', icon:'🧪', familia:'Precipitação',
+      id:'cuso4_naoh', icon:'flask', familia:'Precipitação',
       titulo:'CuSO₄ + 2 NaOH → Cu(OH)₂↓ + Na₂SO₄',
       reagentes:['CuSO₄','NaOH'], condicao:'', coefR:{'CuSO₄':1,'NaOH':2},
       produtos_visuais:['Cu(OH)₂','Na₂SO₄'], coefP:[1,1],
@@ -753,7 +753,7 @@ var REACOES_LIVRES = {
       explicacao:'CuSO₄+2NaOH→Cu(OH)₂↓+Na₂SO₄  ·  Reagente de Fehling — detecta açúcares redutores',
     },
     {
-      id:'cuso4_fe', icon:'⚡', familia:'Simples Troca',
+      id:'cuso4_fe', icon:'bolt', familia:'Simples Troca',
       titulo:'Fe + CuSO₄ → FeSO₄ + Cu',
       reagentes:['Fe','CuSO₄'], condicao:'', coefR:{'Fe':1,'CuSO₄':1},
       produtos_visuais:['FeSO₄','Cu'], coefP:[1,1],
@@ -764,7 +764,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe+CuSO₄→FeSO₄+Cu  ·  Cementação — cobre metálico vermelho precipita sobre o ferro',
     },
     {
-      id:'cuso4_nh3_exc', icon:'🔵', familia:'Complexação',
+      id:'cuso4_nh3_exc', icon:'dot', familia:'Complexação',
       titulo:'CuSO₄ + 4 NH₃ → [Cu(NH₃)₄]SO₄',
       reagentes:['CuSO₄','NH₃'], condicao:'excesso', coefR:{'CuSO₄':1,'NH₃':4},
       produtos_visuais:['[Cu(NH₃)₄]SO₄'], coefP:[1],
@@ -775,7 +775,7 @@ var REACOES_LIVRES = {
       explicacao:'CuSO₄+4NH₃→[Cu(NH₃)₄]SO₄  ·  Azul de Schweizer — dissolve celulose! Base de fibras rayon',
     },
     {
-      id:'cuso4_calor', icon:'🌡️', familia:'Decomposição',
+      id:'cuso4_calor', icon:'thermometer', familia:'Decomposição',
       titulo:'CuSO₄ · 5H₂O →(Δ)→ CuSO₄ + 5 H₂O',
       /* Reagente modelado como CuSO₄ + 5H₂O para o parser funcionar */
       reagentes:['CuSO₄','H₂O'], condicao:'Δ 200°C', coefR:{'CuSO₄':1,'H₂O':5},
@@ -788,7 +788,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'cuso4_zn', icon:'⚡', familia:'Simples Troca',
+      id:'cuso4_zn', icon:'bolt', familia:'Simples Troca',
       titulo:'Zn + CuSO₄ → ZnSO₄ + Cu',
       reagentes:['Zn','CuSO₄'], condicao:'',
       coefR:{'Zn':1,'CuSO₄':1}, coefP:[1,1],
@@ -800,7 +800,7 @@ var REACOES_LIVRES = {
       explicacao:'Zn+CuSO₄→ZnSO₄+Cu  ·  Galvanoplastia — cobre vermelho deposita sobre zinco',
     },
     {
-      id:'cuso4_al', icon:'⚡', familia:'Simples Troca',
+      id:'cuso4_al', icon:'bolt', familia:'Simples Troca',
       titulo:'2 Al + 3 CuSO₄ → Al₂(SO₄)₃ + 3 Cu',
       reagentes:['Al','CuSO₄'], condicao:'',
       coefR:{'Al':2,'CuSO₄':3}, coefP:[1,3],
@@ -812,7 +812,7 @@ var REACOES_LIVRES = {
       explicacao:'2Al+3CuSO₄→Al₂(SO₄)₃+3Cu  ·  Al desloca Cu — aluminotermia em solução aquosa',
     },
     {
-      id:'cuso4_baoh2', icon:'🔬', familia:'Precipitação',
+      id:'cuso4_baoh2', icon:'precipitate', familia:'Precipitação',
       titulo:'CuSO₄ + Ba(OH)₂ → Cu(OH)₂↓ + BaSO₄↓',
       reagentes:['CuSO₄','Ba(OH)₂'], condicao:'',
       coefR:{'CuSO₄':1,'Ba(OH)₂':1}, coefP:[1,1],
@@ -830,7 +830,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'AgNO3': [
     {
-      id:'agno3_nacl', icon:'🔬', familia:'Precipitação',
+      id:'agno3_nacl', icon:'precipitate', familia:'Precipitação',
       titulo:'AgNO₃ + NaCl → AgCl↓ + NaNO₃',
       reagentes:['AgNO₃','NaCl'], condicao:'', coefR:{'AgNO₃':1,'NaCl':1},
       produtos_visuais:['AgCl','NaNO₃'], coefP:[1,1],
@@ -841,7 +841,7 @@ var REACOES_LIVRES = {
       explicacao:'AgNO₃+NaCl→AgCl↓+NaNO₃  ·  Análise qualitativa — confirma Cl⁻ por precipitado branco',
     },
     {
-      id:'agno3_nabr', icon:'🟡', familia:'Precipitação',
+      id:'agno3_nabr', icon:'dot', familia:'Precipitação',
       titulo:'AgNO₃ + NaBr → AgBr↓ + NaNO₃',
       reagentes:['AgNO₃','NaBr'], condicao:'', coefR:{'AgNO₃':1,'NaBr':1},
       produtos_visuais:['AgBr','NaNO₃'], coefP:[1,1],
@@ -852,7 +852,7 @@ var REACOES_LIVRES = {
       explicacao:'AgNO₃+NaBr→AgBr↓+NaNO₃  ·  AgBr era a base da fotografia analógica — sensível à luz',
     },
     {
-      id:'agno3_cu', icon:'⚡', familia:'Simples Troca',
+      id:'agno3_cu', icon:'bolt', familia:'Simples Troca',
       titulo:'2 AgNO₃ + Cu → Cu(NO₃)₂ + 2 Ag',
       reagentes:['AgNO₃','Cu'], condicao:'', coefR:{'AgNO₃':2,'Cu':1},
       produtos_visuais:['Cu(NO₃)₂','Ag'], coefP:[1,2],
@@ -864,7 +864,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'agno3_fotolise', icon:'☀️', familia:'Fotólise',
+      id:'agno3_fotolise', icon:'sun', familia:'Fotólise',
       titulo:'2 AgNO₃ →(hν)→ 2 Ag + 2 NO₂ + O₂',
       reagentes:['AgNO₃'], condicao:'luz UV (hν)',
       coefR:{'AgNO₃':2}, coefP:[2,2,1],
@@ -876,7 +876,7 @@ var REACOES_LIVRES = {
       explicacao:'2AgNO₃→2Ag+2NO₂+O₂  ·  Por isso AgNO₃ deve ser guardado em frasco escuro — mancha pele de preto (argentismo)',
     },
     {
-      id:'agno3_naoh', icon:'🔬', familia:'Precipitação',
+      id:'agno3_naoh', icon:'precipitate', familia:'Precipitação',
       titulo:'AgNO₃ + NaOH → AgOH↓ + NaNO₃',
       reagentes:['AgNO₃','NaOH'], condicao:'',
       coefR:{'AgNO₃':1,'NaOH':1}, coefP:[1,1],
@@ -894,7 +894,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'CaO': [
     {
-      id:'cao_h2o', icon:'🔥', familia:'Síntese / Adição',
+      id:'cao_h2o', icon:'flame', familia:'Síntese / Adição',
       titulo:'CaO + H₂O → Ca(OH)₂',
       reagentes:['CaO','H₂O'], condicao:'', coefR:{'CaO':1,'H₂O':1},
       produtos_visuais:['Ca(OH)₂'], coefP:[1],
@@ -905,7 +905,7 @@ var REACOES_LIVRES = {
       explicacao:'CaO+H₂O→Ca(OH)₂  ·  ΔH=−63,7kJ/mol — reação tão exotérmica que ferve a solução',
     },
     {
-      id:'cao_h2so4', icon:'⚗️', familia:'Reação com Ácido',
+      id:'cao_h2so4', icon:'flask', familia:'Reação com Ácido',
       titulo:'CaO + H₂SO₄ → CaSO₄ + H₂O',
       reagentes:['CaO','H₂SO₄'], condicao:'', coefR:{'CaO':1,'H₂SO₄':1},
       produtos_visuais:['CaSO₄','H₂O'], coefP:[1,1],
@@ -916,7 +916,7 @@ var REACOES_LIVRES = {
       explicacao:'CaO+H₂SO₄→CaSO₄+H₂O  ·  Óxido básico neutraliza ácido — CaSO₄ (gesso) incrusta tubulações',
     },
     {
-      id:'cao_co2', icon:'🌫️', familia:'Síntese',
+      id:'cao_co2', icon:'cloud', familia:'Síntese',
       titulo:'CaO + CO₂ → CaCO₃',
       reagentes:['CaO','CO₂'], condicao:'', coefR:{'CaO':1,'CO₂':1},
       produtos_visuais:['CaCO₃'], coefP:[1],
@@ -927,7 +927,7 @@ var REACOES_LIVRES = {
       explicacao:'CaO+CO₂→CaCO₃  ·  Reação inversa da calcinação — morteiro de cal endurece absorvendo CO₂ do ar',
     },
     {
-      id:'cao_c', icon:'🔥', familia:'Síntese (Alta Temperatura)',
+      id:'cao_c', icon:'flame', familia:'Síntese (Alta Temperatura)',
       titulo:'CaO + 3 C → CaC₂ + CO',
       reagentes:['CaO','C'], condicao:'Δ 2000°C', coefR:{'CaO':1,'C':3},
       produtos_visuais:['CaC₂','CO'], coefP:[1,1],
@@ -939,7 +939,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'cao_n2o5', icon:'🔥', familia:'Síntese',
+      id:'cao_n2o5', icon:'flame', familia:'Síntese',
       titulo:'CaO + N₂O₅ → Ca(NO₃)₂',
       reagentes:['CaO','N₂O₅'], condicao:'',
       coefR:{'CaO':1,'N₂O₅':1}, coefP:[1],
@@ -951,7 +951,7 @@ var REACOES_LIVRES = {
       explicacao:'CaO+N₂O₅→Ca(NO₃)₂  ·  Reação óxido-óxido — Ca(NO₃)₂ é fertilizante nitrocalcário',
     },
     {
-      id:'cao_so2', icon:'🏭', familia:'Síntese (Ambiental)',
+      id:'cao_so2', icon:'factory', familia:'Síntese (Ambiental)',
       titulo:'CaO + SO₂ → CaSO₃',
       reagentes:['CaO','SO₂'], condicao:'',
       coefR:{'CaO':1,'SO₂':1}, coefP:[1],
@@ -963,7 +963,7 @@ var REACOES_LIVRES = {
       explicacao:'CaO+SO₂→CaSO₃  ·  Dessulfurização de gases de usinas — CaO captura SO₂ antes de sair pela chaminé',
     },
     {
-      id:'cao_hcl', icon:'⚗️', familia:'Reação com Ácido',
+      id:'cao_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'CaO + 2 HCl → CaCl₂ + H₂O',
       reagentes:['CaO','HCl'], condicao:'',
       coefR:{'CaO':1,'HCl':2}, coefP:[1,1],
@@ -981,7 +981,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'CO2': [
     {
-      id:'co2_naoh_total', icon:'⚗️', familia:'Síntese',
+      id:'co2_naoh_total', icon:'flask', familia:'Síntese',
       titulo:'CO₂ + 2 NaOH → Na₂CO₃ + H₂O',
       reagentes:['CO₂','NaOH'], condicao:'excesso base', coefR:{'CO₂':1,'NaOH':2},
       produtos_visuais:['Na₂CO₃','H₂O'], coefP:[1,1],
@@ -992,7 +992,7 @@ var REACOES_LIVRES = {
       explicacao:'CO₂+2NaOH→Na₂CO₃+H₂O  ·  Carbonatação total — base do processo Solvay de Na₂CO₃',
     },
     {
-      id:'co2_naoh_parcial', icon:'⚗️', familia:'Síntese Parcial',
+      id:'co2_naoh_parcial', icon:'flask', familia:'Síntese Parcial',
       titulo:'CO₂ + NaOH → NaHCO₃',
       reagentes:['CO₂','NaOH'], condicao:'1:1', coefR:{'CO₂':1,'NaOH':1},
       produtos_visuais:['NaHCO₃'], coefP:[1],
@@ -1003,7 +1003,7 @@ var REACOES_LIVRES = {
       explicacao:'CO₂+NaOH→NaHCO₃  ·  Bicarbonato de sódio (fermento em pó) — formado com NaOH limitado',
     },
     {
-      id:'co2_caoh2', icon:'🔬', familia:'Teste Analítico',
+      id:'co2_caoh2', icon:'precipitate', familia:'Teste Analítico',
       titulo:'CO₂ + Ca(OH)₂ → CaCO₃↓ + H₂O',
       reagentes:['CO₂','Ca(OH)₂'], condicao:'', coefR:{'CO₂':1,'Ca(OH)₂':1},
       produtos_visuais:['CaCO₃','H₂O'], coefP:[1,1],
@@ -1014,7 +1014,7 @@ var REACOES_LIVRES = {
       explicacao:'CO₂+Ca(OH)₂→CaCO₃↓+H₂O  ·  Água de cal turva — teste clássico de CO₂ em laboratório',
     },
     {
-      id:'co2_h2o', icon:'🌧️', familia:'Síntese',
+      id:'co2_h2o', icon:'cloud', familia:'Síntese',
       titulo:'CO₂ + H₂O → H₂CO₃',
       reagentes:['CO₂','H₂O'], condicao:'', coefR:{'CO₂':1,'H₂O':1},
       produtos_visuais:['H₂CO₃'], coefP:[1],
@@ -1026,7 +1026,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'co2_c', icon:'🔥', familia:'Oxirredução',
+      id:'co2_c', icon:'flame', familia:'Oxirredução',
       titulo:'CO₂ + C → 2 CO',
       reagentes:['CO₂','C'], condicao:'Δ 700°C',
       coefR:{'CO₂':1,'C':1}, coefP:[2],
@@ -1038,7 +1038,7 @@ var REACOES_LIVRES = {
       explicacao:'CO₂+C→2CO  ·  Reação de Boudouard — gás de alto-forno; CO é o agente redutor principal',
     },
     {
-      id:'co2_mg', icon:'🔥', familia:'Oxirredução',
+      id:'co2_mg', icon:'flame', familia:'Oxirredução',
       titulo:'2 Mg + CO₂ → 2 MgO + C',
       reagentes:['Mg','CO₂'], condicao:'Δ',
       coefR:{'Mg':2,'CO₂':1}, coefP:[2,1],
@@ -1050,7 +1050,7 @@ var REACOES_LIVRES = {
       explicacao:'2Mg+CO₂→2MgO+C  ·  Mg é tão reativo que queima em CO₂! Jamais use extintor de CO₂ em fogo de Mg',
     },
     {
-      id:'co2_k2o', icon:'🔥', familia:'Síntese',
+      id:'co2_k2o', icon:'flame', familia:'Síntese',
       titulo:'CO₂ + K₂O → K₂CO₃',
       reagentes:['CO₂','K₂O'], condicao:'',
       coefR:{'CO₂':1,'K₂O':1}, coefP:[1],
@@ -1068,7 +1068,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'Fe2O3': [
     {
-      id:'fe2o3_h2so4', icon:'⚗️', familia:'Reação com Ácido',
+      id:'fe2o3_h2so4', icon:'flask', familia:'Reação com Ácido',
       titulo:'Fe₂O₃ + 3 H₂SO₄ → Fe₂(SO₄)₃ + 3 H₂O',
       reagentes:['Fe₂O₃','H₂SO₄'], condicao:'', coefR:{'Fe₂O₃':1,'H₂SO₄':3},
       produtos_visuais:['Fe₂(SO₄)₃','H₂O'], coefP:[1,3],
@@ -1079,7 +1079,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe₂O₃+3H₂SO₄→Fe₂(SO₄)₃+3H₂O  ·  Dissolução de ferrugem em ácido sulfúrico — decapagem de aço',
     },
     {
-      id:'fe2o3_al', icon:'🔥', familia:'Oxirredução (Termoita)',
+      id:'fe2o3_al', icon:'flame', familia:'Oxirredução (Termoita)',
       titulo:'Fe₂O₃ + 2 Al → Al₂O₃ + 2 Fe',
       reagentes:['Fe₂O₃','Al'], condicao:'Δ ignição', coefR:{'Fe₂O₃':1,'Al':2},
       produtos_visuais:['Al₂O₃','Fe'], coefP:[1,2],
@@ -1090,7 +1090,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe₂O₃+2Al→Al₂O₃+2Fe  ·  Reação termoita — 2500°C, usada para soldar trilhos in loco',
     },
     {
-      id:'fe2o3_co', icon:'🏭', familia:'Oxirredução (Alto-Forno)',
+      id:'fe2o3_co', icon:'factory', familia:'Oxirredução (Alto-Forno)',
       titulo:'Fe₂O₃ + 3 CO → 2 Fe + 3 CO₂',
       reagentes:['Fe₂O₃','CO'], condicao:'Δ alto-forno', coefR:{'Fe₂O₃':1,'CO':3},
       produtos_visuais:['Fe','CO₂'], coefP:[2,3],
@@ -1101,7 +1101,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe₂O₃+3CO→2Fe+3CO₂  ·  Alto-forno — principal processo de produção de aço no mundo',
     },
     {
-      id:'fe2o3_h2', icon:'⚡', familia:'Oxirredução',
+      id:'fe2o3_h2', icon:'bolt', familia:'Oxirredução',
       titulo:'Fe₂O₃ + 3 H₂ → 2 Fe + 3 H₂O',
       reagentes:['Fe₂O₃','H₂'], condicao:'Δ 500°C', coefR:{'Fe₂O₃':1,'H₂':3},
       produtos_visuais:['Fe','H₂O'], coefP:[2,3],
@@ -1113,7 +1113,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'fe2o3_hcl', icon:'⚗️', familia:'Reação com Ácido',
+      id:'fe2o3_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'Fe₂O₃ + 6 HCl → 2 FeCl₃ + 3 H₂O',
       reagentes:['Fe₂O₃','HCl'], condicao:'',
       coefR:{'Fe₂O₃':1,'HCl':6}, coefP:[2,3],
@@ -1125,7 +1125,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe₂O₃+6HCl→2FeCl₃+3H₂O  ·  FeCl₃ é coagulante de água e gravura em cobre (PCBs)',
     },
     {
-      id:'fe2o3_hno3', icon:'⚗️', familia:'Reação com Ácido',
+      id:'fe2o3_hno3', icon:'flask', familia:'Reação com Ácido',
       titulo:'Fe₂O₃ + 6 HNO₃ → 2 Fe(NO₃)₃ + 3 H₂O',
       reagentes:['Fe₂O₃','HNO₃'], condicao:'',
       coefR:{'Fe₂O₃':1,'HNO₃':6}, coefP:[2,3],
@@ -1137,7 +1137,7 @@ var REACOES_LIVRES = {
       explicacao:'Fe₂O₃+6HNO₃→2Fe(NO₃)₃+3H₂O  ·  Síntese de Fe(NO₃)₃ — catalisador e oxidante em laboratório',
     },
     {
-      id:'fe2o3_c', icon:'🏭', familia:'Oxirredução',
+      id:'fe2o3_c', icon:'factory', familia:'Oxirredução',
       titulo:'2 Fe₂O₃ + 3 C → 4 Fe + 3 CO₂',
       reagentes:['Fe₂O₃','C'], condicao:'Δ 1500°C',
       coefR:{'Fe₂O₃':2,'C':3}, coefP:[4,3],
@@ -1155,7 +1155,7 @@ var REACOES_LIVRES = {
   ════════════════════════════════════════════════════════════════ */
   'SO3': [
     {
-      id:'so3_h2o', icon:'🌧️', familia:'Síntese',
+      id:'so3_h2o', icon:'cloud', familia:'Síntese',
       titulo:'SO₃ + H₂O → H₂SO₄',
       reagentes:['SO₃','H₂O'], condicao:'', coefR:{'SO₃':1,'H₂O':1},
       produtos_visuais:['H₂SO₄'], coefP:[1],
@@ -1166,7 +1166,7 @@ var REACOES_LIVRES = {
       explicacao:'SO₃+H₂O→H₂SO₄  ·  Etapa final do processo de contato — produção industrial de H₂SO₄',
     },
     {
-      id:'so3_naoh', icon:'⚗️', familia:'Neutralização',
+      id:'so3_naoh', icon:'flask', familia:'Neutralização',
       titulo:'SO₃ + 2 NaOH → Na₂SO₄ + H₂O',
       reagentes:['SO₃','NaOH'], condicao:'', coefR:{'SO₃':1,'NaOH':2},
       produtos_visuais:['Na₂SO₄','H₂O'], coefP:[1,1],
@@ -1177,7 +1177,7 @@ var REACOES_LIVRES = {
       explicacao:'SO₃+2NaOH→Na₂SO₄+H₂O  ·  Na₂SO₄ (sulfato de sódio) — usado em detergentes e vidro',
     },
     {
-      id:'so3_cao', icon:'🔥', familia:'Síntese',
+      id:'so3_cao', icon:'flame', familia:'Síntese',
       titulo:'SO₃ + CaO → CaSO₄',
       reagentes:['SO₃','CaO'], condicao:'', coefR:{'SO₃':1,'CaO':1},
       produtos_visuais:['CaSO₄'], coefP:[1],
@@ -1189,7 +1189,7 @@ var REACOES_LIVRES = {
     },
 
 {
-      id:'so3_so2_o2', icon:'🏭', familia:'Síntese Industrial',
+      id:'so3_so2_o2', icon:'factory', familia:'Síntese Industrial',
       titulo:'2 SO₂ + O₂ ⇌ 2 SO₃',
       reagentes:['SO₂','O₂'], condicao:'V₂O₅, 450°C',
       coefR:{'SO₂':2,'O₂':1}, coefP:[2],
@@ -1201,7 +1201,7 @@ var REACOES_LIVRES = {
       explicacao:'2SO₂+O₂⇌2SO₃  ·  Etapa central do processo de contato — ΔH=−197kJ/mol',
     },
     {
-      id:'so3_h2so4_oleum', icon:'⚡', familia:'Síntese',
+      id:'so3_h2so4_oleum', icon:'bolt', familia:'Síntese',
       titulo:'SO₃ + H₂SO₄ → H₂S₂O₇',
       reagentes:['SO₃','H₂SO₄'], condicao:'',
       coefR:{'SO₃':1,'H₂SO₄':1}, coefP:[1],
@@ -1213,7 +1213,7 @@ var REACOES_LIVRES = {
       explicacao:'SO₃+H₂SO₄→H₂S₂O₇  ·  Oleum (ácido fumegante) — industrialmente mais eficiente que absorver SO₃ em água direta',
     },
     {
-      id:'so3_mgo', icon:'🔥', familia:'Síntese',
+      id:'so3_mgo', icon:'flame', familia:'Síntese',
       titulo:'SO₃ + MgO → MgSO₄',
       reagentes:['SO₃','MgO'], condicao:'',
       coefR:{'SO₃':1,'MgO':1}, coefP:[1],

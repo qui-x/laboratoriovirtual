@@ -1043,14 +1043,14 @@ class SilqView3D {
       if (db) {
         const geoLabel = `${db.geometry}${db.hybridization ? '  ·  ' + db.hybridization : ''}`;
         const stereoIcon = {
-          'tetrahedral':  '🔷 sp³ quiral',
-          'EZ':           '🔶 E/Z',
-          'pyramidal':    '🔺 piramidal',
-          'squareplanar': '🟦 quad. planar',
-          'seesaw':       '⚖️ gangorra',
-          'tshaped':      '🔤 T-shaped',
-          'linear':       '🔵 linear',
-          'ionic':        '⚡ iônico',
+          'tetrahedral':  'sp³ quiral',
+          'EZ':           'E/Z',
+          'pyramidal':    'piramidal',
+          'squareplanar': 'quad. planar',
+          'seesaw':       'gangorra',
+          'tshaped':      'T-shaped',
+          'linear':       'linear',
+          'ionic':        'iônico',
         }[db.stereo] || '';
         const hudLine = stereoIcon ? `${geoLabel}  ·  ${stereoIcon}` : geoLabel;
         ctx.font      = '11px Consolas,monospace';

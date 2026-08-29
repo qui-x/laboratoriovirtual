@@ -55,7 +55,7 @@ function gerarConteudoModal(target){
     return { titulo:'Composto bloqueado', html:
       '<p style="font-size:.9em;color:var(--tx2);line-height:1.7;text-align:center;'+
         'background:var(--bg2);border-radius:8px;padding:1rem;border:1px solid var(--bdr);">'+
-        '🔒 <strong>'+sub2(STATE.compostoAtual)+'</strong> ainda está bloqueado.<br>'+
+        '<svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg> <strong>'+sub2(STATE.compostoAtual)+'</strong> ainda está bloqueado.<br>'+
         'Acerte a nomenclatura na aba ◈ Ficha para liberar os dados e a estrutura.'+
       '</p>' };
   }

@@ -78,11 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const hint = document.getElementById('bond-edit-hint');
     if (hint) {
       if (bond) {
-        hint.innerHTML = `✅ Ligação selecionada: <strong>${BOND_DATA[bond.subtype]?.label || 'covalente'}</strong>. Escolha a ordem acima.`;
+        hint.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Ligação selecionada: <strong>${BOND_DATA[bond.subtype]?.label || 'covalente'}</strong>. Escolha a ordem acima.`;
         hint.style.borderColor = 'rgba(41,182,246,.25)';
         hint.style.color = '#94a3b8';
       } else {
-        hint.innerHTML = '👆 Clique sobre uma ligação no canvas para selecioná-la, depois escolha a ordem acima.';
+        hint.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-point"/></svg> Clique sobre uma ligação no canvas para selecioná-la, depois escolha a ordem acima.';
         hint.style.borderColor = 'rgba(41,182,246,.25)';
         hint.style.color = '#94a3b8';
       }
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('bond-edit-overlay');
     if (!btn) return;
     if (SILQ.bondEditMode) {
-      btn.textContent = '\u2705 Clique na liga\u00e7\u00e3o para editar';
+      btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Clique na liga\u00e7\u00e3o para editar';
       btn.classList.replace('btn-outline-info', 'btn-info');
       SILQ.canvas.classList.add('bond-edit-mode');
       if (hint)    hint.style.display    = 'block';
@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       SILQ.setToggleState(btn, true);
       SILQ.announce('Modo de edi\u00e7\u00e3o de liga\u00e7\u00e3o ativado. Clique sobre uma liga\u00e7\u00e3o no canvas para selecion\u00e1-la.', 'assertive');
     } else {
-      btn.textContent = '\u270f\ufe0f Editar Liga\u00e7\u00e3o';
+      btn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-pencil"/></svg> Editar Liga\u00e7\u00e3o';
       btn.classList.replace('btn-info', 'btn-outline-info');
       SILQ.canvas.classList.remove('bond-edit-mode');
       if (hint)    hint.style.display    = 'none';
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const warn = document.getElementById('bond-order-warning');
     if (!warn) return;
     const names = {1:'simples',2:'dupla',3:'tripla'};
-    warn.textContent = `⚠️ ${symA}–${symB}: ligação ${names[requested]} excede o octeto. Máximo: ${names[allowed]||allowed}.`;
+    warn.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> ${symA}–${symB}: ligação ${names[requested]} excede o octeto. Máximo: ${names[allowed]||allowed}.`;
     warn.style.display = 'block';
     clearTimeout(warn._t);
     warn._t = setTimeout(() => { warn.style.display='none'; }, 3500);
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const el   = ELEMENTS[sym];
     if (!warn || !el) return;
     const chargeStr = SILQ.isMetal(el.category) ? `+${cap}` : `−${cap}`;
-    warn.textContent = `⚠️ ${sym} já atingiu sua capacidade iônica máxima (${chargeStr}). Não é possível formar mais ligações iônicas com este átomo.`;
+    warn.innerHTML = `<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> ${sym} já atingiu sua capacidade iônica máxima (${chargeStr}). Não é possível formar mais ligações iônicas com este átomo.`;
     warn.style.display = 'block';
     clearTimeout(warn._t);
     warn._t = setTimeout(() => { warn.style.display='none'; }, 4000);

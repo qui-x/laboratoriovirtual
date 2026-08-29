@@ -49,7 +49,7 @@ function mostrarBoasVindas(){
     rxnWrap.hidden = false;
     rxnWrap.innerHTML =
       '<div class="rxl-welcome">' +
-        '<div class="rxl-welcome-icon">⚗️</div>' +
+        '<div class="rxl-welcome-icon"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></div>' +
         '<div class="rxl-welcome-titulo">Laboratório de Química Inorgânica</div>' +
         '<div class="rxl-welcome-sub">' +
           'Selecione um composto na biblioteca ao lado para explorar suas reações' +

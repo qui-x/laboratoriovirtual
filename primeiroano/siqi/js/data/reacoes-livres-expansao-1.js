@@ -18,7 +18,7 @@
   /* ── H₃PO₄ — 5 reações ──────────────────────────────────── */
   'H3PO4': [
     {
-      id:'h3po4_naoh3', icon:'⚗️', familia:'Neutralização Total',
+      id:'h3po4_naoh3', icon:'flask', familia:'Neutralização Total',
       titulo:'H₃PO₄ + 3 NaOH → Na₃PO₄ + 3 H₂O',
       reagentes:['H₃PO₄','NaOH'], condicao:'', coefR:{'H₃PO₄':1,'NaOH':3}, coefP:[1,3],
       produtos_visuais:['Na₃PO₄','H₂O'],
@@ -29,7 +29,7 @@
       explicacao:'H₃PO₄+3NaOH→Na₃PO₄+3H₂O  ·  Na₃PO₄ (fosfato trisódico) — detergente industrial e sequestrante',
     },
     {
-      id:'h3po4_naoh1', icon:'⚗️', familia:'Neutralização Parcial (1ª etapa)',
+      id:'h3po4_naoh1', icon:'flask', familia:'Neutralização Parcial (1ª etapa)',
       titulo:'H₃PO₄ + NaOH → NaH₂PO₄ + H₂O',
       reagentes:['H₃PO₄','NaOH'], condicao:'1:1', coefR:{'H₃PO₄':1,'NaOH':1}, coefP:[1,1],
       produtos_visuais:['NaH₂PO₄','H₂O'],
@@ -40,7 +40,7 @@
       explicacao:'H₃PO₄+NaOH→NaH₂PO₄+H₂O  ·  NaH₂PO₄ (fosfato monossódico) — tampão fisiológico e aditivo alimentar E339',
     },
     {
-      id:'h3po4_naoh2', icon:'⚗️', familia:'Neutralização Parcial (2ª etapa)',
+      id:'h3po4_naoh2', icon:'flask', familia:'Neutralização Parcial (2ª etapa)',
       titulo:'H₃PO₄ + 2 NaOH → Na₂HPO₄ + 2 H₂O',
       reagentes:['H₃PO₄','NaOH'], condicao:'1:2', coefR:{'H₃PO₄':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Na₂HPO₄','H₂O'],
@@ -51,7 +51,7 @@
       explicacao:'H₃PO₄+2NaOH→Na₂HPO₄+2H₂O  ·  Na₂HPO₄ — tampão urinário e aditivo em alimentos processados E339(ii)',
     },
     {
-      id:'h3po4_caoh2', icon:'🔬', familia:'Precipitação',
+      id:'h3po4_caoh2', icon:'precipitate', familia:'Precipitação',
       titulo:'2 H₃PO₄ + 3 Ca(OH)₂ → Ca₃(PO₄)₂↓ + 6 H₂O',
       reagentes:['H₃PO₄','Ca(OH)₂'], condicao:'', coefR:{'H₃PO₄':2,'Ca(OH)₂':3}, coefP:[1,6],
       produtos_visuais:['Ca₃(PO₄)₂','H₂O'],
@@ -62,7 +62,7 @@
       explicacao:'2H₃PO₄+3Ca(OH)₂→Ca₃(PO₄)₂↓+6H₂O  ·  Ca₃(PO₄)₂ é o mineral dos ossos e dentes (hidroxiapatita)',
     },
     {
-      id:'h3po4_zn', icon:'⚡', familia:'Simples Troca',
+      id:'h3po4_zn', icon:'bolt', familia:'Simples Troca',
       titulo:'2 H₃PO₄ + 3 Zn → Zn₃(PO₄)₂ + 3 H₂',
       reagentes:['H₃PO₄','Zn'], condicao:'', coefR:{'H₃PO₄':2,'Zn':3}, coefP:[1,3],
       produtos_visuais:['Zn₃(PO₄)₂','H₂'],
@@ -77,7 +77,7 @@
   /* ── KOH — 5 reações ─────────────────────────────────────── */
   'KOH': [
     {
-      id:'koh_hcl', icon:'⚗️', familia:'Neutralização',
+      id:'koh_hcl', icon:'flask', familia:'Neutralização',
       titulo:'KOH + HCl → KCl + H₂O',
       reagentes:['KOH','HCl'], condicao:'', coefR:{'KOH':1,'HCl':1}, coefP:[1,1],
       produtos_visuais:['KCl','H₂O'],
@@ -88,7 +88,7 @@
       explicacao:'KOH+HCl→KCl+H₂O  ·  KCl é substituto do sal de cozinha para hipertensos e eletrólito esportivo',
     },
     {
-      id:'koh_co2', icon:'🌫️', familia:'Síntese',
+      id:'koh_co2', icon:'cloud', familia:'Síntese',
       titulo:'2 KOH + CO₂ → K₂CO₃ + H₂O',
       reagentes:['KOH','CO₂'], condicao:'', coefR:{'KOH':2,'CO₂':1}, coefP:[1,1],
       produtos_visuais:['K₂CO₃','H₂O'],
@@ -99,7 +99,7 @@
       explicacao:'2KOH+CO₂→K₂CO₃+H₂O  ·  K₂CO₃ (potassa) — base de sabões líquidos e fertilizantes de potássio',
     },
     {
-      id:'koh_h2so4', icon:'⚗️', familia:'Neutralização',
+      id:'koh_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'2 KOH + H₂SO₄ → K₂SO₄ + 2 H₂O',
       reagentes:['KOH','H₂SO₄'], condicao:'', coefR:{'KOH':2,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['K₂SO₄','H₂O'],
@@ -110,7 +110,7 @@
       explicacao:'2KOH+H₂SO₄→K₂SO₄+2H₂O  ·  K₂SO₄ é fertilizante premium para culturas sensíveis ao Cl⁻ (tabaco, uva)',
     },
     {
-      id:'koh_al', icon:'⚡', familia:'Deslocamento (Anfótero)',
+      id:'koh_al', icon:'bolt', familia:'Deslocamento (Anfótero)',
       titulo:'2 Al + 2 KOH + 2 H₂O → 2 KAlO₂ + 3 H₂',
       reagentes:['Al','KOH','H₂O'], condicao:'', coefR:{'Al':2,'KOH':2,'H₂O':2}, coefP:[2,3],
       produtos_visuais:['KAlO₂','H₂'],
@@ -121,7 +121,7 @@
       explicacao:'2Al+2KOH+2H₂O→2KAlO₂+3H₂  ·  Al anfótero reage com KOH — desentupidor de pia (Al+NaOH/KOH)',
     },
     {
-      id:'koh_fecl3', icon:'🔬', familia:'Precipitação',
+      id:'koh_fecl3', icon:'precipitate', familia:'Precipitação',
       titulo:'FeCl₃ + 3 KOH → Fe(OH)₃↓ + 3 KCl',
       reagentes:['FeCl₃','KOH'], condicao:'', coefR:{'FeCl₃':1,'KOH':3}, coefP:[1,3],
       produtos_visuais:['Fe(OH)₃','KCl'],
@@ -136,7 +136,7 @@
   /* ── Mg(OH)₂ — 4 reações ─────────────────────────────────── */
   'Mg(OH)2': [
     {
-      id:'mgoh2_hcl', icon:'⚗️', familia:'Neutralização (Antiácido)',
+      id:'mgoh2_hcl', icon:'flask', familia:'Neutralização (Antiácido)',
       titulo:'Mg(OH)₂ + 2 HCl → MgCl₂ + 2 H₂O',
       reagentes:['Mg(OH)₂','HCl'], condicao:'', coefR:{'Mg(OH)₂':1,'HCl':2}, coefP:[1,2],
       produtos_visuais:['MgCl₂','H₂O'],
@@ -147,7 +147,7 @@
       explicacao:'Mg(OH)₂+2HCl→MgCl₂+2H₂O  ·  Leite de magnésia neutraliza HCl gástrico (antiácido suave)',
     },
     {
-      id:'mgoh2_h2so4', icon:'⚗️', familia:'Neutralização',
+      id:'mgoh2_h2so4', icon:'flask', familia:'Neutralização',
       titulo:'Mg(OH)₂ + H₂SO₄ → MgSO₄ + 2 H₂O',
       reagentes:['Mg(OH)₂','H₂SO₄'], condicao:'', coefR:{'Mg(OH)₂':1,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['MgSO₄','H₂O'],
@@ -158,7 +158,7 @@
       explicacao:'Mg(OH)₂+H₂SO₄→MgSO₄+2H₂O  ·  MgSO₄·7H₂O = sal de Epsom (banho relaxante e laxante)',
     },
     {
-      id:'mgoh2_calor', icon:'🌡️', familia:'Decomposição',
+      id:'mgoh2_calor', icon:'thermometer', familia:'Decomposição',
       titulo:'Mg(OH)₂ →(Δ)→ MgO + H₂O',
       reagentes:['Mg(OH)₂'], condicao:'Δ 350°C', coefR:{'Mg(OH)₂':1}, coefP:[1,1],
       produtos_visuais:['MgO','H₂O'],
@@ -169,7 +169,7 @@
       explicacao:'Mg(OH)₂→MgO+H₂O  ·  Retardante de chama: absorve calor e libera H₂O (vapor resfria e dilui O₂)',
     },
     {
-      id:'mgoh2_co2', icon:'🌫️', familia:'Síntese',
+      id:'mgoh2_co2', icon:'cloud', familia:'Síntese',
       titulo:'Mg(OH)₂ + CO₂ → MgCO₃ + H₂O',
       reagentes:['Mg(OH)₂','CO₂'], condicao:'', coefR:{'Mg(OH)₂':1,'CO₂':1}, coefP:[1,1],
       produtos_visuais:['MgCO₃','H₂O'],
@@ -184,7 +184,7 @@
   /* ── ZnO — 4 reações ─────────────────────────────────────── */
   'ZnO': [
     {
-      id:'zno_hcl', icon:'⚗️', familia:'Reação com Ácido',
+      id:'zno_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'ZnO + 2 HCl → ZnCl₂ + H₂O',
       reagentes:['ZnO','HCl'], condicao:'', coefR:{'ZnO':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['ZnCl₂','H₂O'],
@@ -195,7 +195,7 @@
       explicacao:'ZnO+2HCl→ZnCl₂+H₂O  ·  Comportamento básico do ZnO anfótero — dissolve em ácido',
     },
     {
-      id:'zno_naoh', icon:'⚡', familia:'Reação com Base (Anfótero)',
+      id:'zno_naoh', icon:'bolt', familia:'Reação com Base (Anfótero)',
       titulo:'ZnO + 2 NaOH → Na₂ZnO₂ + H₂O',
       reagentes:['ZnO','NaOH'], condicao:'', coefR:{'ZnO':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Na₂ZnO₂','H₂O'],
@@ -206,7 +206,7 @@
       explicacao:'ZnO+2NaOH→Na₂ZnO₂+H₂O  ·  Comportamento ácido do ZnO anfótero — dissolve em base',
     },
     {
-      id:'zno_h2', icon:'🔥', familia:'Oxirredução',
+      id:'zno_h2', icon:'flame', familia:'Oxirredução',
       titulo:'ZnO + H₂ → Zn + H₂O',
       reagentes:['ZnO','H₂'], condicao:'Δ 500°C', coefR:{'ZnO':1,'H₂':1}, coefP:[1,1],
       produtos_visuais:['Zn','H₂O'],
@@ -217,7 +217,7 @@
       explicacao:'ZnO+H₂→Zn+H₂O  ·  Redução de óxido metálico por hidrogênio — metalurgia limpa do zinco',
     },
     {
-      id:'zno_c', icon:'🏭', familia:'Oxirredução (Pirometalurgia)',
+      id:'zno_c', icon:'factory', familia:'Oxirredução (Pirometalurgia)',
       titulo:'2 ZnO + C → 2 Zn + CO₂',
       reagentes:['ZnO','C'], condicao:'Δ 1000°C', coefR:{'ZnO':2,'C':1}, coefP:[2,1],
       produtos_visuais:['Zn','CO₂'],
@@ -232,7 +232,7 @@
   /* ── MgO — 4 reações ─────────────────────────────────────── */
   'MgO': [
     {
-      id:'mgo_h2o', icon:'💧', familia:'Síntese',
+      id:'mgo_h2o', icon:'droplet', familia:'Síntese',
       titulo:'MgO + H₂O → Mg(OH)₂',
       reagentes:['MgO','H₂O'], condicao:'', coefR:{'MgO':1,'H₂O':1}, coefP:[1],
       produtos_visuais:['Mg(OH)₂'],
@@ -243,7 +243,7 @@
       explicacao:'MgO+H₂O→Mg(OH)₂  ·  Reação lenta (diferente de CaO) — usada para produzir leite de magnésia',
     },
     {
-      id:'mgo_hcl', icon:'⚗️', familia:'Reação com Ácido',
+      id:'mgo_hcl', icon:'flask', familia:'Reação com Ácido',
       titulo:'MgO + 2 HCl → MgCl₂ + H₂O',
       reagentes:['MgO','HCl'], condicao:'', coefR:{'MgO':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['MgCl₂','H₂O'],
@@ -254,7 +254,7 @@
       explicacao:'MgO+2HCl→MgCl₂+H₂O  ·  MgCl₂ é usado em flocos anti-gelo e cimento sorel (cimento de magnésia)',
     },
     {
-      id:'mgo_co2', icon:'🌫️', familia:'Síntese',
+      id:'mgo_co2', icon:'cloud', familia:'Síntese',
       titulo:'MgO + CO₂ → MgCO₃',
       reagentes:['MgO','CO₂'], condicao:'', coefR:{'MgO':1,'CO₂':1}, coefP:[1],
       produtos_visuais:['MgCO₃'],
@@ -265,7 +265,7 @@
       explicacao:'MgO+CO₂→MgCO₃  ·  Magnesita (MgCO₃) — fonte de Mg e refratário industrial',
     },
     {
-      id:'mgo_so3', icon:'🔥', familia:'Síntese',
+      id:'mgo_so3', icon:'flame', familia:'Síntese',
       titulo:'MgO + SO₃ → MgSO₄',
       reagentes:['MgO','SO₃'], condicao:'', coefR:{'MgO':1,'SO₃':1}, coefP:[1],
       produtos_visuais:['MgSO₄'],
@@ -280,7 +280,7 @@
   /* ── Na₂CO₃ — 5 reações ─────────────────────────────────── */
   'Na2CO3': [
     {
-      id:'na2co3_hcl', icon:'🔄', familia:'Dupla Troca',
+      id:'na2co3_hcl', icon:'refresh', familia:'Dupla Troca',
       titulo:'Na₂CO₃ + 2 HCl → 2 NaCl + H₂O + CO₂',
       reagentes:['Na₂CO₃','HCl'], condicao:'', coefR:{'Na₂CO₃':1,'HCl':2}, coefP:[2,1,1],
       produtos_visuais:['NaCl','H₂O','CO₂'],
@@ -291,7 +291,7 @@
       explicacao:'Na₂CO₃+2HCl→2NaCl+H₂O+CO₂  ·  Barrilha reage com HCl liberando CO₂ — base de antiácidos efervescentes',
     },
     {
-      id:'na2co3_h2so4', icon:'🔄', familia:'Dupla Troca',
+      id:'na2co3_h2so4', icon:'refresh', familia:'Dupla Troca',
       titulo:'Na₂CO₃ + H₂SO₄ → Na₂SO₄ + H₂O + CO₂',
       reagentes:['Na₂CO₃','H₂SO₄'], condicao:'', coefR:{'Na₂CO₃':1,'H₂SO₄':1}, coefP:[1,1,1],
       produtos_visuais:['Na₂SO₄','H₂O','CO₂'],
@@ -302,7 +302,7 @@
       explicacao:'Na₂CO₃+H₂SO₄→Na₂SO₄+H₂O+CO₂  ·  Ácido forte desloca ácido fraco volátil — princípio fundamental',
     },
     {
-      id:'na2co3_caoh2', icon:'🔬', familia:'Precipitação',
+      id:'na2co3_caoh2', icon:'precipitate', familia:'Precipitação',
       titulo:'Na₂CO₃ + Ca(OH)₂ → CaCO₃↓ + 2 NaOH',
       reagentes:['Na₂CO₃','Ca(OH)₂'], condicao:'', coefR:{'Na₂CO₃':1,'Ca(OH)₂':1}, coefP:[1,2],
       produtos_visuais:['CaCO₃','NaOH'],
@@ -313,7 +313,7 @@
       explicacao:'Na₂CO₃+Ca(OH)₂→CaCO₃↓+2NaOH  ·  Causticação — produção industrial de NaOH a partir de Na₂CO₃',
     },
     {
-      id:'na2co3_cacl2', icon:'🔬', familia:'Precipitação',
+      id:'na2co3_cacl2', icon:'precipitate', familia:'Precipitação',
       titulo:'Na₂CO₃ + CaCl₂ → CaCO₃↓ + 2 NaCl',
       reagentes:['Na₂CO₃','CaCl₂'], condicao:'', coefR:{'Na₂CO₃':1,'CaCl₂':1}, coefP:[1,2],
       produtos_visuais:['CaCO₃','NaCl'],
@@ -324,7 +324,7 @@
       explicacao:'Na₂CO₃+CaCl₂→CaCO₃↓+2NaCl  ·  Teste de Ca²⁺ — precipitado branco com carbonato',
     },
     {
-      id:'na2co3_sio2', icon:'🔥', familia:'Síntese (Fusão)',
+      id:'na2co3_sio2', icon:'flame', familia:'Síntese (Fusão)',
       titulo:'Na₂CO₃ + SiO₂ → Na₂SiO₃ + CO₂',
       reagentes:['Na₂CO₃','SiO₂'], condicao:'Δ fusão', coefR:{'Na₂CO₃':1,'SiO₂':1}, coefP:[1,1],
       produtos_visuais:['Na₂SiO₃','CO₂'],
@@ -339,7 +339,7 @@
   /* ── FeCl₃ — 4 reações ───────────────────────────────────── */
   'FeCl3': [
     {
-      id:'fecl3_naoh', icon:'🔬', familia:'Precipitação',
+      id:'fecl3_naoh', icon:'precipitate', familia:'Precipitação',
       titulo:'FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl',
       reagentes:['FeCl₃','NaOH'], condicao:'', coefR:{'FeCl₃':1,'NaOH':3}, coefP:[1,3],
       produtos_visuais:['Fe(OH)₃','NaCl'],
@@ -350,7 +350,7 @@
       explicacao:'FeCl₃+3NaOH→Fe(OH)₃↓+3NaCl  ·  Precipitado marrom-laranja característico de Fe³⁺',
     },
     {
-      id:'fecl3_cu', icon:'⚡', familia:'Oxirredução',
+      id:'fecl3_cu', icon:'bolt', familia:'Oxirredução',
       titulo:'2 FeCl₃ + Cu → 2 FeCl₂ + CuCl₂',
       reagentes:['FeCl₃','Cu'], condicao:'', coefR:{'FeCl₃':2,'Cu':1}, coefP:[2,1],
       produtos_visuais:['FeCl₂','CuCl₂'],
@@ -361,7 +361,7 @@
       explicacao:'2FeCl₃+Cu→2FeCl₂+CuCl₂  ·  Gravura de PCBs — FeCl₃ dissolve cobre dos circuitos impressos',
     },
     {
-      id:'fecl3_fe', icon:'⚡', familia:'Oxirredução',
+      id:'fecl3_fe', icon:'bolt', familia:'Oxirredução',
       titulo:'2 FeCl₃ + Fe → 3 FeCl₂',
       reagentes:['FeCl₃','Fe'], condicao:'', coefR:{'FeCl₃':2,'Fe':1}, coefP:[3],
       produtos_visuais:['FeCl₂'],
@@ -372,7 +372,7 @@
       explicacao:'2FeCl₃+Fe→3FeCl₂  ·  Fe metálico reduz Fe³⁺ a Fe²⁺ — comproportionação',
     },
     {
-      id:'fecl3_agno3', icon:'🔬', familia:'Precipitação',
+      id:'fecl3_agno3', icon:'precipitate', familia:'Precipitação',
       titulo:'FeCl₃ + 3 AgNO₃ → Fe(NO₃)₃ + 3 AgCl↓',
       reagentes:['FeCl₃','AgNO₃'], condicao:'', coefR:{'FeCl₃':1,'AgNO₃':3}, coefP:[1,3],
       produtos_visuais:['Fe(NO₃)₃','AgCl'],
@@ -387,7 +387,7 @@
   /* ── Zn — 4 reações ──────────────────────────────────────── */
   'Zn': [
     {
-      id:'zn_hcl', icon:'⚡', familia:'Simples Troca',
+      id:'zn_hcl', icon:'bolt', familia:'Simples Troca',
       titulo:'Zn + 2 HCl → ZnCl₂ + H₂',
       reagentes:['Zn','HCl'], condicao:'', coefR:{'Zn':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['ZnCl₂','H₂'],
@@ -398,7 +398,7 @@
       explicacao:'Zn+2HCl→ZnCl₂+H₂  ·  Base da pilha voltaica original — Zn em ácido libera H₂ e gera corrente',
     },
     {
-      id:'zn_naoh', icon:'⚡', familia:'Deslocamento (Anfótero)',
+      id:'zn_naoh', icon:'bolt', familia:'Deslocamento (Anfótero)',
       titulo:'Zn + 2 NaOH → Na₂ZnO₂ + H₂',
       reagentes:['Zn','NaOH'], condicao:'conc.', coefR:{'Zn':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Na₂ZnO₂','H₂'],
@@ -409,7 +409,7 @@
       explicacao:'Zn+2NaOH→Na₂ZnO₂+H₂  ·  Zn anfótero — reage com HCl E com NaOH, liberando H₂ nos dois casos',
     },
     {
-      id:'zn_o2', icon:'🔥', familia:'Combustão / Síntese',
+      id:'zn_o2', icon:'flame', familia:'Combustão / Síntese',
       titulo:'2 Zn + O₂ → 2 ZnO',
       reagentes:['Zn','O₂'], condicao:'Δ', coefR:{'Zn':2,'O₂':1}, coefP:[2],
       produtos_visuais:['ZnO'],
@@ -420,7 +420,7 @@
       explicacao:'2Zn+O₂→2ZnO  ·  Combustão de zinco produz fumaça branca densa de ZnO — precursor de pigmentos',
     },
     {
-      id:'zn_cuso4', icon:'⚡', familia:'Cementação',
+      id:'zn_cuso4', icon:'bolt', familia:'Cementação',
       titulo:'Zn + CuSO₄ → ZnSO₄ + Cu',
       reagentes:['Zn','CuSO₄'], condicao:'', coefR:{'Zn':1,'CuSO₄':1}, coefP:[1,1],
       produtos_visuais:['ZnSO₄','Cu'],
@@ -435,7 +435,7 @@
   /* ── Al — 4 reações ──────────────────────────────────────── */
   'Al': [
     {
-      id:'al_hcl', icon:'⚡', familia:'Simples Troca',
+      id:'al_hcl', icon:'bolt', familia:'Simples Troca',
       titulo:'2 Al + 6 HCl → 2 AlCl₃ + 3 H₂',
       reagentes:['Al','HCl'], condicao:'', coefR:{'Al':2,'HCl':6}, coefP:[2,3],
       produtos_visuais:['AlCl₃','H₂'],
@@ -446,7 +446,7 @@
       explicacao:'2Al+6HCl→2AlCl₃+3H₂  ·  Al reage com ácidos diluídos (HCl, H₂SO₄), mas não com HNO₃ conc. (passivação)',
     },
     {
-      id:'al_naoh', icon:'⚡', familia:'Deslocamento (Anfótero)',
+      id:'al_naoh', icon:'bolt', familia:'Deslocamento (Anfótero)',
       titulo:'2 Al + 2 NaOH + 2 H₂O → 2 NaAlO₂ + 3 H₂',
       reagentes:['Al','NaOH','H₂O'], condicao:'', coefR:{'Al':2,'NaOH':2,'H₂O':2}, coefP:[2,3],
       produtos_visuais:['NaAlO₂','H₂'],
@@ -457,7 +457,7 @@
       explicacao:'2Al+2NaOH+2H₂O→2NaAlO₂+3H₂  ·  Desentupidor de ralo: Al+NaOH gera H₂ e calor que dissolve gordura',
     },
     {
-      id:'al_fe2o3', icon:'🔥', familia:'Termoita',
+      id:'al_fe2o3', icon:'flame', familia:'Termoita',
       titulo:'2 Al + Fe₂O₃ → Al₂O₃ + 2 Fe',
       reagentes:['Al','Fe₂O₃'], condicao:'ignição', coefR:{'Al':2,'Fe₂O₃':1}, coefP:[1,2],
       produtos_visuais:['Al₂O₃','Fe'],
@@ -468,7 +468,7 @@
       explicacao:'2Al+Fe₂O₃→Al₂O₃+2Fe  ·  Reação Termoita — temperatura ~2500°C, ferro fundido escorre, usada para soldar trilhos',
     },
     {
-      id:'al_o2', icon:'🔥', familia:'Combustão',
+      id:'al_o2', icon:'flame', familia:'Combustão',
       titulo:'4 Al + 3 O₂ → 2 Al₂O₃',
       reagentes:['Al','O₂'], condicao:'Δ', coefR:{'Al':4,'O₂':3}, coefP:[2],
       produtos_visuais:['Al₂O₃'],
@@ -483,7 +483,7 @@
   /* ── Cu — 4 reações ──────────────────────────────────────── */
   'Cu': [
     {
-      id:'cu_hno3dil', icon:'⚡', familia:'Oxirredução',
+      id:'cu_hno3dil', icon:'bolt', familia:'Oxirredução',
       titulo:'3 Cu + 8 HNO₃ → 3 Cu(NO₃)₂ + 2 NO + 4 H₂O',
       reagentes:['Cu','HNO₃'], condicao:'diluído', coefR:{'Cu':3,'HNO₃':8}, coefP:[3,2,4],
       produtos_visuais:['Cu(NO₃)₂','NO','H₂O'],
@@ -494,7 +494,7 @@
       explicacao:'3Cu+8HNO₃dil→3Cu(NO₃)₂+2NO+4H₂O  ·  Cu é nobre — só dissolve em ácidos oxidantes como HNO₃',
     },
     {
-      id:'cu_h2so4conc', icon:'🔥', familia:'Oxirredução',
+      id:'cu_h2so4conc', icon:'flame', familia:'Oxirredução',
       titulo:'Cu + 2 H₂SO₄ → CuSO₄ + SO₂ + 2 H₂O',
       reagentes:['Cu','H₂SO₄'], condicao:'conc. Δ', coefR:{'Cu':1,'H₂SO₄':2}, coefP:[1,1,2],
       produtos_visuais:['CuSO₄','SO₂','H₂O'],
@@ -505,7 +505,7 @@
       explicacao:'Cu+2H₂SO₄conc→CuSO₄+SO₂+2H₂O  ·  H₂SO₄ conc. quente dissolve Cu — diferente do diluído que não reage',
     },
     {
-      id:'cu_o2', icon:'🔥', familia:'Combustão / Oxidação',
+      id:'cu_o2', icon:'flame', familia:'Combustão / Oxidação',
       titulo:'2 Cu + O₂ → 2 CuO',
       reagentes:['Cu','O₂'], condicao:'Δ', coefR:{'Cu':2,'O₂':1}, coefP:[2],
       produtos_visuais:['CuO'],
@@ -516,7 +516,7 @@
       explicacao:'2Cu+O₂→2CuO  ·  Cobre aquecido fica preto por oxidação (CuO). Base da cerâmica de cobre preta',
     },
     {
-      id:'cu_agno3', icon:'⚡', familia:'Cementação',
+      id:'cu_agno3', icon:'bolt', familia:'Cementação',
       titulo:'Cu + 2 AgNO₃ → Cu(NO₃)₂ + 2 Ag',
       reagentes:['Cu','AgNO₃'], condicao:'', coefR:{'Cu':1,'AgNO₃':2}, coefP:[1,2],
       produtos_visuais:['Cu(NO₃)₂','Ag'],

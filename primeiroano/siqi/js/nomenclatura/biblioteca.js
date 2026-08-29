@@ -92,7 +92,7 @@ function renderSubList(query){
           '<span class="si-formula">'+sub2(formula)+'</span>'+
           '<span class="si-name">'+c.nome+'</span>';
       } else {
-        li.innerHTML='<span class="si-dot si-dot-lock" aria-hidden="true">🔒</span>'+
+        li.innerHTML='<span class="si-dot si-dot-lock" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg></span>'+
           '<span class="si-formula">'+sub2(formula)+'</span>'+
           '<span class="si-name si-name-lock">???</span>';
       }

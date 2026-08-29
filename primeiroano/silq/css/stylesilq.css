@@ -185,7 +185,7 @@ body.high-contrast .axis-label  { fill: var(--hc-fg); }
   flex-shrink:0;
 }
 .header-brand{ display:flex; align-items:center; gap:.6rem; min-width:0; }
-.header-right{ display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
+.header-actions{ display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
 .header-back{
   display:inline-flex; align-items:center; gap:.3rem;
   background:transparent; border:1px solid var(--border-color); color: var(--text-muted);
@@ -244,6 +244,19 @@ body.high-contrast .header-brand h1{ color:var(--header-accent); text-shadow:non
 
 /* ============================================================  RESET  */
 *{box-sizing:border-box;}
+
+/* =====================================================================
+   ÍCONES SVG (substituem os emojis) — ver <defs> de <symbol> no topo
+   do indexsilq.html. stroke/fill:currentColor herda a cor do texto ao
+   redor; width/height:1em acompanha o tamanho de fonte do elemento-pai.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon,
+.bond-type-note-icon .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 html {
   font-size: calc(16px * var(--font-scale));
 }
@@ -1121,7 +1134,7 @@ body.high-contrast .bond-type-note { border-color: var(--hc-fg); background: var
   box-shadow: 0 0 0 3px rgba(71,182,255,.2);
 }
 .bond-mode-btn[aria-pressed="true"]::after {
-  content: ' ✓ ativo';
+  content: ' · ativo';
   font-size: .65rem;
   font-weight: 600;
   opacity: .8;
@@ -1134,7 +1147,7 @@ body.high-contrast .bond-type-note { border-color: var(--hc-fg); background: var
    Nao redefine cor nenhuma: as regras por tipo de ligacao
    (.panel--covalente/--ionica/--metalica) continuam mandando. */
 .bond-mode-btn[aria-pressed="true"]:hover::after {
-  content: ' ✕ desativar';
+  content: ' · desativar';
   opacity: 1;
 }
 .bond-mode-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -1237,10 +1250,16 @@ body.high-contrast .bond-type-note { border-color: var(--hc-fg); background: var
   color: #a87e00;
   border-color: rgba(253,230,138,.35);
 }
+.ion-pair-chip--cov {
+  background: rgba(79,195,247,.12);
+  color: #4fc3f7;
+  border-color: rgba(79,195,247,.35);
+}
 /* O chip metalico ja tinha variante clara; o chip base (ionico) nao —
    ficava #ffb74d a 1.42:1 sobre o fundo claro. */
 body.light-mode .ion-pair-chip      { color: #975a00; }   /* 4.56:1 */
 body.light-mode .ion-pair-chip--met { color: #78590a; }   /* 5.33:1 */
+body.light-mode .ion-pair-chip--cov { color: #076f9e; }   /* 4.56:1 — mesmo tom de .panel-badge--cov */
 
 /* ── Indicador de modo ativo no canvas ── */
 .bond-mode-indicator {
@@ -1528,7 +1547,7 @@ body.simple-read .bond-info-grid { grid-template-columns: 1fr 1fr; gap: 8px 14px
 
 /* Faixa de confirmação visível enquanto o modo está ativo */
 body.simple-read .sidebar-header::after {
-  content: "📖 Leitura simples ativa — espaçamento e clareza priorizados";
+  content: "Leitura simples ativa — espaçamento e clareza priorizados";
   display: block;
   background: var(--accent);
   color: #00131a;

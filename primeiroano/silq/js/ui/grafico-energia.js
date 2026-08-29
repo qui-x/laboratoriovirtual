@@ -91,8 +91,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cE=SILQ.potE(d,r0,depth);
     SILQ.esvg.append('circle').attr('class','energy-marker').attr('r',4)
       .attr('cx',SILQ.xSc(Math.min(Math.max(d,r0*.55),rMax))).attr('cy',SILQ.ySc(Math.max(cE,-depth*1.15)));
-    SILQ.energyCaption.textContent=Math.abs(d-r0)<=r0*.15
-      ? `✅ ${a.element}–${b.element} na energia mínima — ligação estável.`
+    SILQ.energyCaption.innerHTML=Math.abs(d-r0)<=r0*.15
+      ? `<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> ${a.element}–${b.element} na energia mínima — ligação estável.`
       : `d=${d.toFixed(0)} / r₀=${r0.toFixed(0)} px (${bond.type})`;
   };
 });

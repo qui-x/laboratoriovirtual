@@ -25,6 +25,54 @@
   </defs>
 </svg>
 
+<!-- ═══════════════════════════════════════════════════════════════
+     BIBLIOTECA DE ÍCONES SVG — substitui todos os emojis do SIQI
+     ───────────────────────────────────────────────────────────────
+     Mesmo mecanismo do resto da família: um bloco de <symbol>, usado
+     como <svg class="icon"><use href="#ic-NOME"/></svg>. stroke/
+     fill:currentColor herda a cor do texto ao redor; width/height:1em
+     (ver .icon em stylesiqi.css) acompanha o tamanho de fonte do
+     elemento-pai. Cobre tanto os ícones de interface (menu, engrenagem,
+     fechar...) quanto as CHAVES usadas no campo `icon` dos bancos de
+     reação (data/reacoes-livres-*.js, data/experimentos.js) — ali o
+     valor do campo já é a própria chave (ex.: icon:'bolt'), montada em
+     <use href="#ic-‹chave›"> no ponto de renderização (lab/reacoes-livres.js).
+     ═══════════════════════════════════════════════════════════════ */
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="ic-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="ic-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 3.5v2.4M12 18.1v2.4M20.5 12h-2.4M5.9 12H3.5M17.8 6.2l-1.7 1.7M7.9 16.1l-1.7 1.7M17.8 17.8l-1.7-1.7M7.9 7.9 6.2 6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol>
+    <symbol id="ic-check" viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-warning" viewBox="0 0 24 24"><path d="M12 3l10 18H2L12 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.15" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-flask" viewBox="0 0 24 24"><path d="M9 2h6M10 2v6.2L4.8 18a2 2 0 0 0 1.75 3h10.9a2 2 0 0 0 1.75-3L14 8.2V2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.5 15h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="ic-precipitate" viewBox="0 0 24 24"><path d="M9 2h6M10 2v6.2L4.8 18a2 2 0 0 0 1.75 3h10.9a2 2 0 0 0 1.75-3L14 8.2V2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 17.5c1 .8 2.2 1.2 5 1.2s4-.4 5-1.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="10.3" cy="16.3" r=".9" fill="currentColor" stroke="none"/><circle cx="13.7" cy="17" r=".8" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-flame" viewBox="0 0 24 24"><path d="M12 21.5c-3.6 0-6.4-2.5-6.4-6 0-2.7 1.7-4.3 2.5-6.4.5 1.4 1.4 2 2.1 1.4-.4-2.6.4-5 3-8 .8 3 3.6 4.7 5 7.4.9 1.7 1.2 3.3 1.2 4.6 0 3.9-3.4 7-7.4 7z" fill="currentColor" opacity=".92" stroke="none"/></symbol>
+    <symbol id="ic-factory" viewBox="0 0 24 24"><path d="M3 21V11l5 3v-3l5 3V6l7-3v18H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 21v-4M11 21v-4M15 21v-4M19 21v-4" stroke="currentColor" stroke-width="1.4"/><path d="M17 3.5c0 1.2-1 1.2-1 2.4s1 1.2 1 2.4" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></symbol>
+    <symbol id="ic-thermometer" viewBox="0 0 24 24"><path d="M12 14.5V5a2 2 0 1 0-4 0v9.5a4 4 0 1 0 4 0z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="10" cy="16.2" r="1.7" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-refresh" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 1 2.34 5.66" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 17v-5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-droplet" viewBox="0 0 24 24"><path d="M12 2.5c3 3.8 6.5 8 6.5 12A6.5 6.5 0 1 1 5.5 14.5c0-4 3.5-8.2 6.5-12z" fill="currentColor" opacity=".85" stroke="none"/></symbol>
+    <symbol id="ic-cloud" viewBox="0 0 24 24"><path d="M7 18h10.5a3.5 3.5 0 0 0 .5-6.96A5.5 5.5 0 0 0 7.6 9.5 4 4 0 0 0 7 18z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-leaf" viewBox="0 0 24 24"><path d="M5 19c0-8 4-13.5 14-14 -.5 10-6 14-14 14z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 18c3-4 6.5-7 12-11.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="ic-rocket" viewBox="0 0 24 24"><path d="M12 2c3 2 4.5 5.5 4.5 9.5 0 2-1 4-2 5.2l-2.5 2-2.5-2c-1-1.2-2-3.2-2-5.2C7.5 7.5 9 4 12 2z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="1.6" fill="currentColor" stroke="none"/><path d="M9 16l-2.5 1.5.5-3M15 16l2.5 1.5-.5-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2.5v2.6M12 18.9v2.6M21.5 12h-2.6M5.1 12H2.5M18.4 5.6l-1.9 1.9M7.5 16.5l-1.9 1.9M18.4 18.4l-1.9-1.9M7.5 7.5 5.6 5.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+    <symbol id="ic-dot" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-explosion" viewBox="0 0 24 24"><path d="M12 2 9.5 8 4 6l3 5-5 2 5.5 1.5L6 20l6-3.5L18 20l-1.5-5.5L22 13l-5-2 3-5-5.5 2z" fill="currentColor" stroke="none" opacity=".9"/></symbol>
+    <symbol id="ic-pill" viewBox="0 0 24 24"><rect x="3" y="9.5" width="18" height="5" rx="2.5" transform="rotate(-32 12 12)" fill="none" stroke="currentColor" stroke-width="1.7"/><line x1="11" y1="7.2" x2="13" y2="16.8" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="ic-snow" viewBox="0 0 24 24"><path d="M12 2v20M4.2 6.5l15.6 11M4.2 17.5l15.6-11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></symbol>
+    <symbol id="ic-sparkle" viewBox="0 0 24 24"><path d="M12 3c.6 4 2.6 6 6.5 6.5-3.9.5-5.9 2.5-6.5 6.5-.6-4-2.6-6-6.5-6.5C9.4 9 11.4 7 12 3z" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-puzzle" viewBox="0 0 24 24"><path d="M9 4h4a1.6 1.6 0 0 1 0 3.2 1.6 1.6 0 0 0 0 3.2H17a2 2 0 0 1 2 2v3.6a1.6 1.6 0 0 1-3.2 0 1.6 1.6 0 0 0-3.2 0V20H6a2 2 0 0 1-2-2v-4.4a1.6 1.6 0 0 1 3.2 0 1.6 1.6 0 0 0 3.2 0V9H6a2 2 0 0 1-2-2V4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-tag" viewBox="0 0 24 24"><path d="M11.5 3.5H5a1.5 1.5 0 0 0-1.5 1.5v6.5a1.5 1.5 0 0 0 .44 1.06l9 9a1.5 1.5 0 0 0 2.12 0l6.5-6.5a1.5 1.5 0 0 0 0-2.12l-9-9a1.5 1.5 0 0 0-1.06-.44z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="8" cy="8" r="1.4" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.7.5 1.1 1.3 1.1 2.2h5.4c0-.9.4-1.7 1.1-2.2A6.5 6.5 0 0 0 12 2.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v18H6.5A2.5 2.5 0 0 1 4 18.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v18h5.5a2.5 2.5 0 0 0 2.5-2.5v-13Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3v18M8 21h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 6 4 8m8-2 8 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 8l-2.2 5.2a2.6 2.6 0 0 0 4.9 1L4 8zM20 8l2.2 5.2a2.6 2.6 0 0 1-4.9 1L20 8z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+    <symbol id="ic-clipboard" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><rect x="9" y="2.3" width="6" height="3.4" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 11h8M8 14.5h8M8 18h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></symbol>
+    <symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7a4 4 0 1 1 8 0v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="ic-microscope" viewBox="0 0 24 24"><path d="M8 21h8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M12 21v-3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M6.5 17.5h8a2.3 2.3 0 0 0 0-4.6h-3.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 12.9 7.4 9.3a2.1 2.1 0 1 1 3-3l4.6 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="14" y1="4.5" x2="16.5" y2="7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+  </defs>
+</svg>
+
 <!-- Overlay fixo de daltonismo (backdrop-filter, pointer-events:none) —
      evita aplicar o filtro direto num wrapper, o que quebraria elementos
      position:fixed/absolute (modais, tooltips, painéis flutuantes). -->
@@ -77,10 +125,10 @@
       </span>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
         aria-label="Abrir painel de compostos e busca"
-        aria-expanded="false" aria-controls="sidebar-left">☰</button>
+        aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
         aria-label="Abrir propriedades e laboratório"
-        aria-expanded="false" aria-controls="sidebar-right">⚙</button>
+        aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-gear"/></svg></button>
     </div>
   </header>
 
@@ -105,7 +153,7 @@
       <section class="panel panel--mode" data-mode-card="construtor" data-open="false" aria-labelledby="hdr-mode-construtor">
         <button type="button" class="panel-header" id="hdr-mode-construtor"
                 aria-expanded="false" aria-controls="body-mode-construtor">
-          <span class="panel-icon" aria-hidden="true">🧩</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-puzzle"/></svg></span>
           <span class="panel-label">Construtor</span>
           <span class="panel-badge">96</span>
           <span class="mode-active-tag">Ativo</span>
@@ -149,7 +197,7 @@
           </div>
 
           <p class="mode-note">
-            <span class="mode-note-icon" aria-hidden="true">🧩</span>
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-puzzle"/></svg></span>
             <span><strong>Ideal para começar</strong>: monte o nome peça por peça e entenda a
                gramática por trás dele — antes de simplesmente consultar fichas prontas
                na Nomenclatura.</span>
@@ -166,7 +214,7 @@
       <section class="panel panel--mode" data-mode-card="nomenclatura" data-open="false" aria-labelledby="hdr-mode-nomenclatura">
         <button type="button" class="panel-header" id="hdr-mode-nomenclatura"
                 aria-expanded="false" aria-controls="body-mode-nomenclatura">
-          <span class="panel-icon" aria-hidden="true">🏷️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-tag"/></svg></span>
           <span class="panel-label">Nomenclatura</span>
           <span class="panel-badge">100</span>
           <span class="mode-active-tag">Ativo</span>
@@ -208,7 +256,7 @@
           </div>
 
           <p class="mode-note">
-            <span class="mode-note-icon" aria-hidden="true">🏷️</span>
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-tag"/></svg></span>
             <span>Consulta mais direta e concisa: depois de treinar a construção do nome no
                Construtor, use este módulo para conferir dados completos de cada composto
                (propriedades, estrutura, aplicações).</span>
@@ -223,7 +271,7 @@
 
       <!-- Toggle Lab / Ficha -->
       <div class="view-toggle" role="group" aria-label="Modo">
-        <button type="button" class="view-toggle-btn" id="view-lab-btn" aria-pressed="false">⚗ Lab</button>
+        <button type="button" class="view-toggle-btn" id="view-lab-btn" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg> Lab</button>
         <button type="button" class="view-toggle-btn" id="view-info-btn" aria-pressed="false">◈ Ficha</button>
       </div>
 
@@ -239,7 +287,7 @@
            (desativarModulo()). -->
       <div id="panel-none" class="sim-panel">
         <div class="sim-hint">
-          <span aria-hidden="true">🧪</span>
+          <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
           <p>Escolha um módulo ao lado e clique em <strong>"Selecionar módulo"</strong> para começar.</p>
         </div>
       </div>
@@ -362,14 +410,14 @@
 
           <!-- Curiosidade -->
           <div class="ficha-curiosidade-wrap">
-            <p class="ficha-section-label">💡 Curiosidade</p>
+            <p class="ficha-section-label"><svg class="icon" aria-hidden="true"><use href="#ic-bulb"/></svg> Curiosidade</p>
             <p class="curiosidade-txt" id="curiosidade-txt">—</p>
           </div>
 
           <!-- Botão voltar ao Lab -->
           <div class="ficha-footer">
             <button type="button" class="ficha-btn-lab" onclick="if(window._setView)window._setView('lab')">
-              ⚗ Voltar ao Laboratório
+              <svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg> Voltar ao Laboratório
             </button>
           </div>
 
@@ -393,7 +441,7 @@
         <div class="ficha-scroll">
           <div id="construtor-central-content" class="construtor-central">
             <div class="construtor-central-empty">
-              <span aria-hidden="true">🧩</span>
+              <span aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-puzzle"/></svg></span>
               <p>Escolha um composto na <strong>Biblioteca</strong>, na barra lateral, para começar a montar o nome aqui.</p>
             </div>
           </div>
@@ -434,7 +482,7 @@
       <!-- ══ MÓDULO 1 — Nomenclatura (Biblioteca, já existente) ══ -->
       <section class="panel" data-open="true" data-module-content="nomenclatura" hidden>
         <button class="panel-header" id="hdr-compostos" type="button" aria-expanded="true" aria-controls="body-compostos">
-          <span class="panel-icon" aria-hidden="true">🏷️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-tag"/></svg></span>
           <span class="panel-label">Biblioteca</span>
           <span class="panel-badge" id="badge-total">14</span>
           <span class="chevron" aria-hidden="true">▾</span>
@@ -466,7 +514,7 @@
            a montagem. -->
       <section class="panel" data-open="true" data-module-content="construtor" hidden>
         <button class="panel-header" id="hdr-construtor-biblioteca" type="button" aria-expanded="true" aria-controls="body-construtor-biblioteca">
-          <span class="panel-icon" aria-hidden="true">📚</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-book"/></svg></span>
           <span class="panel-label">Biblioteca</span>
           <span class="panel-badge" id="construtor-badge-total">5</span>
           <span class="chevron" aria-hidden="true">▾</span>
@@ -492,7 +540,7 @@
            NOX, prefixos e sufixos sozinho, sem a resposta pronta. -->
       <section class="panel" data-open="true" data-module-content="construtor" hidden>
         <button class="panel-header" id="hdr-construtor-info" type="button" aria-expanded="true" aria-controls="body-construtor-info">
-          <span class="panel-icon" aria-hidden="true">🧪</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
           <span class="panel-label">Informações do Composto</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -518,7 +566,7 @@
            agregada de acerto/erro. -->
       <section class="panel" data-open="true" data-module-content="construtor" hidden>
         <button class="panel-header" id="hdr-construtor-regras" type="button" aria-expanded="true" aria-controls="body-construtor-regras">
-          <span class="panel-icon" aria-hidden="true">✅</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg></span>
           <span class="panel-label">Validador</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -538,7 +586,7 @@
            Lab/Ficha no topo do canvas central — só sai da SIDEBAR. ══ -->
       <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura">
         <button class="panel-header" id="hdr-balanco" type="button" aria-expanded="true" aria-controls="body-balanco">
-          <span class="panel-icon" aria-hidden="true">⚖️</span>
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-scale"/></svg></span>
           <span class="panel-label">Balanço Atômico</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -556,7 +604,7 @@
       <section class="panel" data-open="true" data-hide-for-module="construtor,nomenclatura">
         <div class="panel-header-row">
           <button class="panel-header" id="hdr-ficha" type="button" aria-expanded="true" aria-controls="body-ficha">
-            <span class="panel-icon" aria-hidden="true">📋</span>
+            <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-clipboard"/></svg></span>
             <span class="panel-label">Dados &amp; Estrutura</span>
             <span class="chevron" aria-hidden="true">▾</span>
           </button>
@@ -632,7 +680,7 @@
   <div class="expand-modal">
     <div class="expand-modal-hd">
       <h2 id="expand-title">Detalhes</h2>
-      <button type="button" class="expand-close" id="expand-close" aria-label="Fechar painel expandido">✕</button>
+      <button type="button" class="expand-close" id="expand-close" aria-label="Fechar painel expandido"><svg class="icon" aria-hidden="true"><use href="#ic-close"/></svg></button>
     </div>
     <div class="expand-modal-bd" id="expand-body"></div>
   </div>
@@ -680,6 +728,7 @@
 <script src="js/ui/paineis.js"></script>
 <script src="js/ui/modal-expandir.js"></script>
 <script src="js/ui/menu-mobile.js"></script>
+<script src="js/ui/sidebar-resizer.js"></script>
 <script src="js/ui/canvas-particulas.js"></script>
 
 <!-- ═══ MÓDULO 1: NOMENCLATURA ═══ -->

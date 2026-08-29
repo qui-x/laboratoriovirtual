@@ -63,6 +63,10 @@
       <symbol id="ic-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
       <symbol id="ic-expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 21h6v-6M21 3l-8 8M3 21l8-8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
       <symbol id="ic-gas" viewBox="0 0 24 24"><circle cx="7" cy="8" r="2.1" fill="currentColor" opacity=".85" stroke="none"/><circle cx="15.5" cy="6.5" r="1.5" fill="currentColor" opacity=".65" stroke="none"/><circle cx="17" cy="13" r="2.4" fill="currentColor" opacity=".8" stroke="none"/><circle cx="8.5" cy="16" r="1.7" fill="currentColor" opacity=".7" stroke="none"/><circle cx="12.5" cy="11" r="1.3" fill="currentColor" opacity=".55" stroke="none"/></symbol>
+      <symbol id="ic-liquid" viewBox="0 0 24 24"><path d="M12 2.5c3 3.8 6.5 8 6.5 12A6.5 6.5 0 1 1 5.5 14.5c0-4 3.5-8.2 6.5-12z" fill="currentColor" opacity=".85" stroke="none"/></symbol>
+      <symbol id="ic-solid" viewBox="0 0 24 24"><path d="M12 3 20 7.5v9L12 21 4 16.5v-9L12 3z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4 7.5 12 12l8-4.5M12 12v9" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+      <symbol id="ic-play" viewBox="0 0 24 24"><path d="M7 5l12 7-12 7V5z" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="ic-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V7a4 4 0 1 1 8 0v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="12" cy="15.3" r="1.3" fill="currentColor" stroke="none"/></symbol>
     </defs>
   </svg>
 
@@ -73,9 +77,9 @@
        o simulador. ══════════════ -->
   <nav class="skip-nav" aria-label="Atalhos de navegação">
     <a href="#main-content"   class="skip-link">Pular para o conteúdo principal</a>
-    <a href="#sidebar-left"   class="skip-link">Pular para a substância e o diagrama</a>
+    <a href="#sidebar-left"   class="skip-link">Pular para os módulos de estado físico</a>
     <a href="#sim-area"       class="skip-link">Pular para a simulação</a>
-    <a href="#sidebar-right"  class="skip-link">Pular para os controles e medidas</a>
+    <a href="#sidebar-right"  class="skip-link">Pular para substância, diagrama, controles e medidas</a>
   </nav>
 
   <!-- Os recursos de acessibilidade (tema claro/escuro, alto contraste,
@@ -97,7 +101,7 @@
         <p class="header-sub">Simulador Interativo de Estrutura da Matéria</p>
       </div>
     </div>
-    <div class="header-right">
+    <div class="header-actions">
       <!-- Badge de estado. O rotulo em .sr-only da contexto a quem usa
            leitor de tela: sem ele, o aria-live anunciava so "travessao" ou
            so "Liquido", sem dizer do que se tratava. O texto visivel fica
@@ -105,9 +109,9 @@
       <span class="state-pill state-pill--vazio" id="state-pill" role="status" aria-live="polite">
         <span class="sr-only">Estado físico da substância: </span><span id="state-pill-text">sem substância</span>
       </span>
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir painel de substância e dados"
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir módulos de estado físico"
               aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right" aria-label="Abrir painel de temperatura, pressão, medidas e diagrama de fases"
+      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right" aria-label="Abrir substância, diagrama, controles e medidas"
               aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-gear"/></svg></button>
     </div>
   </header>
@@ -115,46 +119,175 @@
   <div class="app-body" id="main-content">
 
     <!-- ══════════ PAINEL ESQUERDO — substância + dados ══════════ -->
-    <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Substância e dados">
+    <aside class="sidebar sidebar--left" id="sidebar-left" aria-label="Módulos de estado físico da matéria">
 
-      <section class="panel" data-open="true">
-        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia"><span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span><span class="panel-label">Substância</span><span class="panel-badge">95</span><span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span></button>
-        <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
-          <p class="mode-define">95 substâncias com dados experimentais reais de fusão, ebulição, ponto triplo e ponto crítico. A escolha aqui <strong>calibra todos os outros painéis</strong>.</p>
-          <div class="search-wrap">
-            <label for="sub-search" class="sr-only">Buscar substância por nome ou fórmula</label>
-            <input type="search" id="sub-search" class="search-input" placeholder="Nome ou fórmula…" autocomplete="off" spellcheck="false" />
-            <span class="search-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-search"/></svg></span>
+      <!-- Módulo: GASES -->
+      <section class="panel panel--mode" data-modulo="gasoso" data-open="true">
+        <button class="panel-header" id="hdr-mod-gasoso" type="button" aria-expanded="true" aria-controls="body-mod-gasoso">
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-gas"/></svg></span>
+          <span class="panel-label">Gases</span>
+          <span class="panel-badge" id="badge-mod-gasoso">—</span>
+          <span class="mode-active-tag">Ativo</span>
+          <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+        </button>
+        <div class="panel-body" id="body-mod-gasoso" role="region" aria-labelledby="hdr-mod-gasoso">
+
+          <button type="button" class="mode-activate-btn" data-modulo-ativar="gasoso"
+                  aria-pressed="false" title="Filtrar a lista de substâncias para mostrar só os gases">
+            <span class="mode-dot" aria-hidden="true"></span>
+            <svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg> Ativar módulo <span class="model-name">Gases</span>
+          </button>
+
+          <p class="mode-define">
+            <strong>Partículas livres</strong>: energia cinética alta o bastante para vencer quase por
+            completo as forças intermoleculares. Ocupam todo o volume disponível e são facilmente compressíveis.
+          </p>
+
+          <div class="fact-grid">
+            <div class="fact-cell"><span class="fact-label">Forma</span><span class="fact-value">Indefinida</span></div>
+            <div class="fact-cell"><span class="fact-label">Compressibilidade</span><span class="fact-value">Alta</span></div>
+            <div class="fact-cell"><span class="fact-label">No diagrama P×T</span><span class="fact-value">Acima da curva</span></div>
+            <div class="fact-cell"><span class="fact-label">Acima de Tc, Pc</span><span class="fact-value">Fluido supercrítico</span></div>
           </div>
-          <div class="mol-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar substâncias por categoria"></div>
-          <ul id="sub-list" class="sub-list" role="listbox" aria-label="Lista de substâncias"></ul>
+
+          <div class="canvas-interactions">
+            <p class="canvas-interactions-title">No diagrama de fases</p>
+            <p>Com um gás selecionado, o ponto atual aparece <strong>acima da curva de ebulição/sublimação</strong>
+               no diagrama P×T. Resfrie ou comprima para cruzar a curva e condensar em líquido (ou solidificar
+               direto, se estiver abaixo do ponto triplo).</p>
+          </div>
+
+          <div class="recommended">
+            <p class="recommended-title">Exemplos — clique para carregar</p>
+            <div class="chip-row">
+              <button type="button" class="chip" data-sub-formula="CO₂">CO₂</button>
+              <button type="button" class="chip" data-sub-formula="N₂">N₂</button>
+              <button type="button" class="chip" data-sub-formula="O₂">O₂</button>
+              <button type="button" class="chip" data-sub-formula="NH₃">NH₃</button>
+              <button type="button" class="chip" data-sub-formula="CH₄">CH₄</button>
+              <button type="button" class="chip" data-sub-formula="He">He</button>
+            </div>
+          </div>
+
+          <p class="mode-note">
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-gas"/></svg></span>
+            <span>Acima do <strong>ponto crítico</strong> (Tc, Pc) a fronteira entre líquido e gás desaparece — vira um único fluido supercrítico. O CO₂ deste catálogo é usado assim industrialmente, como solvente supercrítico.</span>
+          </p>
         </div>
       </section>
 
-      <!-- ══ MOVIDO DA DIREITA: DIAGRAMA DE FASES ══
-           O diagrama e o unico grafico do simulador e o painel mais alto
-           da pagina; na coluna da direita ele empurrava os controles para
-           fora da tela. Aqui, embaixo da lista de substancias, fica na
-           mesma coluna do objeto que ele descreve — trocar de substancia
-           redesenha o diagrama logo acima do dedo/cursor.
-           Nada mudou de id: #phase-diagram continua sendo achado por
-           getElementById e o botao ⤢ continua usando closest('.panel'). -->
-      <section class="panel" data-open="true">
-        <div class="panel-header-row">
-          <button class="panel-header" id="hdr-diagrama" type="button" aria-expanded="true" aria-controls="body-diagrama">
-            <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chart"/></svg></span>
-            <span class="panel-label">Diagrama de fases</span>
-            <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+      <!-- Módulo: LÍQUIDOS -->
+      <section class="panel panel--mode" data-modulo="liquido" data-open="false">
+        <button class="panel-header" id="hdr-mod-liquido" type="button" aria-expanded="false" aria-controls="body-mod-liquido">
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-liquid"/></svg></span>
+          <span class="panel-label">Líquidos</span>
+          <span class="panel-badge" id="badge-mod-liquido">—</span>
+          <span class="mode-active-tag">Ativo</span>
+          <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+        </button>
+        <div class="panel-body" id="body-mod-liquido" role="region" aria-labelledby="hdr-mod-liquido">
+
+          <button type="button" class="mode-activate-btn" data-modulo-ativar="liquido"
+                  aria-pressed="false" title="Filtrar a lista de substâncias para mostrar só os líquidos">
+            <span class="mode-dot" aria-hidden="true"></span>
+            <svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg> Ativar módulo <span class="model-name">Líquidos</span>
           </button>
-          <button type="button" class="expand-btn" data-expand="diagrama" aria-label="Expandir diagrama de fases para leitura ampliada" title="Expandir para leitura"><svg class="icon" aria-hidden="true"><use href="#ic-expand"/></svg></button>
+
+          <p class="mode-define">
+            <strong>Volume próprio, forma do recipiente</strong>: as partículas mantêm-se unidas por
+            forças intermoleculares moderadas a fortes, mas ainda deslizam umas sobre as outras.
+          </p>
+
+          <div class="fact-grid">
+            <div class="fact-cell"><span class="fact-label">Forma</span><span class="fact-value">Do recipiente</span></div>
+            <div class="fact-cell"><span class="fact-label">Compressibilidade</span><span class="fact-value">Muito baixa</span></div>
+            <div class="fact-cell"><span class="fact-label">No diagrama P×T</span><span class="fact-value">Entre as curvas</span></div>
+            <div class="fact-cell"><span class="fact-label">Abaixo do pto. triplo</span><span class="fact-value">Não existe</span></div>
+          </div>
+
+          <div class="canvas-interactions">
+            <p class="canvas-interactions-title">No diagrama de fases</p>
+            <p>Com um líquido selecionado, o ponto atual aparece <strong>entre a curva de fusão e a de
+               ebulição</strong> no diagrama P×T — a região estreita que só existe acima da pressão do
+               ponto triplo daquela substância.</p>
+          </div>
+
+          <div class="recommended">
+            <p class="recommended-title">Exemplos — clique para carregar</p>
+            <div class="chip-row">
+              <button type="button" class="chip" data-sub-formula="H₂O">H₂O</button>
+              <button type="button" class="chip" data-sub-formula="Hg">Hg</button>
+              <button type="button" class="chip" data-sub-formula="C₂H₅OH">C₂H₅OH</button>
+              <button type="button" class="chip" data-sub-formula="Br₂">Br₂</button>
+              <button type="button" class="chip" data-sub-formula="CCl₄">CCl₄</button>
+              <button type="button" class="chip" data-sub-formula="C₆H₁₂">C₆H₁₂</button>
+            </div>
+          </div>
+
+          <p class="mode-note">
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-liquid"/></svg></span>
+            <span>A água é a referência do catálogo: é uma das poucas substâncias com <strong>densidade anômala</strong> (o campo <code>anomalyDensity</code> nos dados) — o sólido é menos denso que o líquido, por isso o gelo flutua.</span>
+          </p>
         </div>
-        <div class="panel-body chart-bd" id="body-diagrama" role="region" aria-labelledby="hdr-diagrama">
-          <p class="mode-define">Diagrama de fases P × T da substância, com o ponto atual marcado. Sólido, líquido, vapor, ponto triplo e ponto crítico.</p>
-          <canvas id="phase-diagram" class="mini-chart phase-diagram-canvas" role="img" aria-label="Diagrama de pressão e temperatura mostrando as curvas de fusão, ebulição e sublimação da substância selecionada, com a posição atual definida pelos controles de temperatura e pressão"></canvas>
+      </section>
+
+      <!-- Módulo: SÓLIDOS -->
+      <section class="panel panel--mode" data-modulo="solido" data-open="false">
+        <button class="panel-header" id="hdr-mod-solido" type="button" aria-expanded="false" aria-controls="body-mod-solido">
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-solid"/></svg></span>
+          <span class="panel-label">Sólidos</span>
+          <span class="panel-badge" id="badge-mod-solido">—</span>
+          <span class="mode-active-tag">Ativo</span>
+          <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+        </button>
+        <div class="panel-body" id="body-mod-solido" role="region" aria-labelledby="hdr-mod-solido">
+
+          <button type="button" class="mode-activate-btn" data-modulo-ativar="solido"
+                  aria-pressed="false" title="Filtrar a lista de substâncias para mostrar só os sólidos">
+            <span class="mode-dot" aria-hidden="true"></span>
+            <svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg> Ativar módulo <span class="model-name">Sólidos</span>
+          </button>
+
+          <p class="mode-define">
+            <strong>Forma e volume próprios</strong>: partículas presas numa rede quase fixa por
+            forças intermoleculares fortes, vibrando em torno de uma posição de equilíbrio.
+          </p>
+
+          <div class="fact-grid">
+            <div class="fact-cell"><span class="fact-label">Forma</span><span class="fact-value">Própria</span></div>
+            <div class="fact-cell"><span class="fact-label">Compressibilidade</span><span class="fact-value">Praticamente nula</span></div>
+            <div class="fact-cell"><span class="fact-label">No diagrama P×T</span><span class="fact-value">Abaixo da curva</span></div>
+            <div class="fact-cell"><span class="fact-label">Sublimação</span><span class="fact-value">Sob baixa pressão</span></div>
+          </div>
+
+          <div class="canvas-interactions">
+            <p class="canvas-interactions-title">No diagrama de fases</p>
+            <p>Com um sólido selecionado, o ponto atual aparece <strong>abaixo da curva de fusão</strong>
+               no diagrama P×T. Aqueça até cruzá-la para fundir em líquido — ou, se a pressão estiver abaixo
+               do ponto triplo, aqueça até cruzar a curva de sublimação e ir direto para gás.</p>
+          </div>
+
+          <div class="recommended">
+            <p class="recommended-title">Exemplos — clique para carregar</p>
+            <div class="chip-row">
+              <button type="button" class="chip" data-sub-formula="Na">Na</button>
+              <button type="button" class="chip" data-sub-formula="Fe">Fe</button>
+              <button type="button" class="chip" data-sub-formula="NaCl">NaCl</button>
+              <button type="button" class="chip" data-sub-formula="I₂">I₂</button>
+              <button type="button" class="chip" data-sub-formula="Cu">Cu</button>
+              <button type="button" class="chip" data-sub-formula="Al">Al</button>
+            </div>
+          </div>
+
+          <p class="mode-note">
+            <span class="mode-note-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-solid"/></svg></span>
+            <span>O iodo (I₂) sublima visivelmente à pressão ambiente — vapor roxo sai direto do sólido sem passar por líquido, porque a pressão do ambiente já está abaixo do ponto triplo dele.</span>
+          </p>
         </div>
       </section>
 
     </aside>
+
 
     <!-- ══════════ CENTRO — simulação ══════════ -->
     <main class="sim-area" id="sim-area">
@@ -170,29 +303,77 @@
     </main>
 
     <!-- ══════════════════════════════════════════════════════════════
-         DIREITA — remodelada em DOIS paineis
+         DIREITA — QUATRO paineis
 
-         Antes eram SEIS paineis empilhados:
-           Dados Gerais · Temperatura · Pressao · Particulas · Medidas ·
-           Diagrama de fases
-         mais o alternador 2D/3D flutuando sobre o canvas — ou seja,
-         QUATRO controles em quatro lugares diferentes.
+         Reorganização (mesmo espírito do SIMA/SIME: a coluna esquerda
+         só tem cartões de módulo — Gases/Líquidos/Sólidos — tudo o
+         resto foi para a direita):
 
-         Agora:
-           1) CONTROLES        — os quatro controles num painel unico,
+           1) SUBSTÂNCIA       — volta a viver aqui (antes ficava na
+                                 esquerda); a lista agora também é
+                                 filtrada pelo módulo de estado físico
+                                 ativo à esquerda (ver ui/app-modulos.js).
+           2) DIAGRAMA DE FASES — também voltou pra cá, junto da
+                                 substância que ele descreve.
+           3) CONTROLES        — os quatro controles num painel unico,
                                  cada um no seu bloco identificado.
-           2) DADOS & MEDIDAS  — a ficha da substancia e as leituras ao
+           4) DADOS & MEDIDAS  — a ficha da substancia e as leituras ao
                                  vivo integradas: as duas respondem
                                  "como esta a substancia agora", uma com
                                  constantes de tabela e a outra com o
                                  valor recalculado na pressao em uso.
-         O Diagrama de fases foi para a coluna da ESQUERDA.
     ══════════════════════════════════════════════════════════════ -->
-    <aside class="sidebar sidebar--right" id="sidebar-right" aria-label="Controles, dados e medidas">
+    <aside class="sidebar sidebar--right" id="sidebar-right" aria-label="Substância, diagrama, controles e medidas">
 
-      <!-- ══════════ PAINEL 1 — CONTROLES UNIFICADOS ══════════ -->
+      <!-- Aviso exibido só enquanto NENHUM módulo está ativo — some sozinho
+           por CSS (:has()) assim que um botão "Ativar módulo" é pressionado.
+           Os 4 painéis abaixo também recebem o atributo `inert` via JS (ver
+           ui/app-modulos.js): o CSS só cuida da aparência, quem bloqueia de
+           verdade clique/foco/leitor de tela é o `inert`. -->
+      <div class="sidebar-lock-hint" id="sidebar-right-lock" role="note">
+        <svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg>
+        <p>Ative um módulo à esquerda — <strong>Gases</strong>, <strong>Líquidos</strong> ou <strong>Sólidos</strong> — para liberar a substância, o diagrama, os controles e as medidas.</p>
+      </div>
+
+      <!-- ══════════ PAINEL 1 — SUBSTÂNCIA ══════════ -->
       <section class="panel" data-open="true">
-        <button class="panel-header" id="hdr-controles" type="button" aria-expanded="true" aria-controls="body-controles">
+        <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia">
+          <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
+          <span class="panel-label">Substância</span>
+          <span class="panel-badge">95</span>
+          <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+        </button>
+        <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
+          <p class="mode-define">95 substâncias com dados experimentais reais de fusão, ebulição, ponto triplo e ponto crítico. A escolha aqui <strong>calibra todos os outros painéis</strong>. Ative um módulo à esquerda para filtrar por estado físico.</p>
+          <div class="search-wrap">
+            <label for="sub-search" class="sr-only">Buscar substância por nome ou fórmula</label>
+            <input type="search" id="sub-search" class="search-input" placeholder="Nome ou fórmula…" autocomplete="off" spellcheck="false" />
+            <span class="search-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-search"/></svg></span>
+          </div>
+          <div class="mol-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar substâncias por categoria"></div>
+          <ul id="sub-list" class="sub-list" role="listbox" aria-label="Lista de substâncias"></ul>
+        </div>
+      </section>
+
+      <!-- ══════════ PAINEL 2 — DIAGRAMA DE FASES ══════════ -->
+      <section class="panel" data-open="false">
+        <div class="panel-header-row">
+          <button class="panel-header" id="hdr-diagrama" type="button" aria-expanded="false" aria-controls="body-diagrama">
+            <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chart"/></svg></span>
+            <span class="panel-label">Diagrama de fases</span>
+            <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
+          </button>
+          <button type="button" class="expand-btn" data-expand="diagrama" aria-label="Expandir diagrama de fases para leitura ampliada" title="Expandir para leitura"><svg class="icon" aria-hidden="true"><use href="#ic-expand"/></svg></button>
+        </div>
+        <div class="panel-body chart-bd" id="body-diagrama" role="region" aria-labelledby="hdr-diagrama">
+          <p class="mode-define">Diagrama de fases P × T da substância, com o ponto atual marcado. Sólido, líquido, vapor, ponto triplo e ponto crítico.</p>
+          <canvas id="phase-diagram" class="mini-chart phase-diagram-canvas" role="img" aria-label="Diagrama de pressão e temperatura mostrando as curvas de fusão, ebulição e sublimação da substância selecionada, com a posição atual definida pelos controles de temperatura e pressão"></canvas>
+        </div>
+      </section>
+
+      <!-- ══════════ PAINEL 3 — CONTROLES UNIFICADOS ══════════ -->
+      <section class="panel" data-open="false">
+        <button class="panel-header" id="hdr-controles" type="button" aria-expanded="false" aria-controls="body-controles">
           <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-sliders"/></svg></span>
           <span class="panel-label">Controles</span>
           <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
@@ -278,7 +459,7 @@
         </div>
       </section>
 
-      <!-- ══════════ PAINEL 2 — DADOS & MEDIDAS INTEGRADOS ══════════
+      <!-- ══════════ PAINEL 4 — DADOS & MEDIDAS INTEGRADOS ══════════
            Eram dois paineis: "Dados Gerais" (constantes de tabela, a 1 atm)
            e "Medidas" (leituras ao vivo, na pressao em uso). Ler um sem o
            outro nao serve para nada: o sentido esta justamente em comparar
@@ -286,9 +467,9 @@
            sub-blocos do mesmo painel, e um unico botao ⤢ expande a ficha
            completa.  data-expand mudou de "gerais" para "dados" — o titulo
            correspondente foi atualizado em scriptsiem.js (_initExpand). -->
-      <section class="panel" data-open="true">
+      <section class="panel" data-open="false">
         <div class="panel-header-row">
-          <button class="panel-header" id="hdr-dados" type="button" aria-expanded="true" aria-controls="body-dados">
+          <button class="panel-header" id="hdr-dados" type="button" aria-expanded="false" aria-controls="body-dados">
             <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-databox"/></svg></span>
             <span class="panel-label">Dados &amp; Medidas</span>
             <span class="chevron" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-chevron"/></svg></span>
@@ -393,6 +574,7 @@
   <!-- ═══ APLICAÇÃO (classe App) ═══ -->
   <script src="js/app/app-core.js"></script>
   <script src="js/app/app-substancias.js"></script>
+  <script src="js/app/app-modulos.js"></script>
   <script src="js/app/app-controles.js"></script>
   <script src="js/app/app-dados-medidas.js"></script>
   <script src="js/app/app-paineis.js"></script>

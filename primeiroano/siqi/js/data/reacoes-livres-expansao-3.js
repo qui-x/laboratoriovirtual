@@ -22,7 +22,7 @@
   /* ══ H₂SO₄ — 3 novas reações (processo industrial, oxidante, baterias) ══ */
   'H2SO4': [
     {
-      id:'h2so4_zn', icon:'⚡', familia:'Deslocamento / Oxirredução',
+      id:'h2so4_zn', icon:'bolt', familia:'Deslocamento / Oxirredução',
       titulo:'Zn + H₂SO₄ → ZnSO₄ + H₂',
       reagentes:['Zn','H₂SO₄'], condicao:'diluído', coefR:{'Zn':1,'H₂SO₄':1}, coefP:[1,1],
       produtos_visuais:['ZnSO₄','H₂'],
@@ -33,7 +33,7 @@
       explicacao:'Zn+H₂SO₄→ZnSO₄+H₂  ·  Metal ativo desloca H⁺. Usado para produzir H₂ em laboratório e galvanizar aço'
     },
     {
-      id:'h2so4_cu_conc', icon:'🌡️', familia:'Oxidação / Ácido Concentrado',
+      id:'h2so4_cu_conc', icon:'thermometer', familia:'Oxidação / Ácido Concentrado',
       titulo:'Cu + 2 H₂SO₄(conc) → CuSO₄ + SO₂ + 2 H₂O',
       reagentes:['Cu','H₂SO₄'], condicao:'conc./Δ', coefR:{'Cu':1,'H₂SO₄':2}, coefP:[1,1,2],
       produtos_visuais:['CuSO₄','SO₂','H₂O'],
@@ -44,7 +44,7 @@
       explicacao:'Cu+2H₂SO₄(conc)→CuSO₄+SO₂+2H₂O  ·  H₂SO₄ conc. age como oxidante (≠ diluído que libera H₂). Exemplo clássico de oxirredução'
     },
     {
-      id:'h2so4_so3', icon:'🏭', familia:'Síntese Industrial (Processo de Contato)',
+      id:'h2so4_so3', icon:'factory', familia:'Síntese Industrial (Processo de Contato)',
       titulo:'SO₃ + H₂O → H₂SO₄',
       reagentes:['SO₃','H₂O'], condicao:'', coefR:{'SO₃':1,'H₂O':1}, coefP:[1],
       produtos_visuais:['H₂SO₄'],
@@ -59,7 +59,7 @@
   /* ══ HCl — 3 novas reações (precipitação, amadurecimento industrial) ══ */
   'HCl': [
     {
-      id:'hcl_agno3_precip', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'hcl_agno3_precip', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'HCl + AgNO₃ → AgCl↓ + HNO₃',
       reagentes:['HCl','AgNO₃'], condicao:'', coefR:{'HCl':1,'AgNO₃':1}, coefP:[1,1],
       produtos_visuais:['AgCl','HNO₃'],
@@ -70,7 +70,7 @@
       explicacao:'HCl+AgNO₃→AgCl↓+HNO₃  ·  AgCl precipitado branco — teste qualitativo para halogênio cloreto. Fundamento da fotografia em prata'
     },
     {
-      id:'hcl_fe', icon:'⚡', familia:'Deslocamento / Oxirredução',
+      id:'hcl_fe', icon:'bolt', familia:'Deslocamento / Oxirredução',
       titulo:'Fe + 2 HCl → FeCl₂ + H₂',
       reagentes:['Fe','HCl'], condicao:'', coefR:{'Fe':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['FeCl₂','H₂'],
@@ -81,7 +81,7 @@
       explicacao:'Fe+2HCl→FeCl₂+H₂  ·  Metal ativo + ácido diluído → sal de Fe(II) + H₂. Diferente do Cl₂ que forma FeCl₃'
     },
     {
-      id:'hcl_al', icon:'⚡', familia:'Deslocamento / Oxirredução',
+      id:'hcl_al', icon:'bolt', familia:'Deslocamento / Oxirredução',
       titulo:'2 Al + 6 HCl → 2 AlCl₃ + 3 H₂',
       reagentes:['Al','HCl'], condicao:'', coefR:{'Al':2,'HCl':6}, coefP:[2,3],
       produtos_visuais:['AlCl₃','H₂'],
@@ -96,7 +96,7 @@
   /* ══ NaOH — 3 novas reações ══ */
   'NaOH': [
     {
-      id:'naoh_al_anfotero', icon:'⚡', familia:'Deslocamento (Anfótero)',
+      id:'naoh_al_anfotero', icon:'bolt', familia:'Deslocamento (Anfótero)',
       titulo:'2 Al + 2 NaOH + 2 H₂O → 2 NaAlO₂ + 3 H₂',
       reagentes:['Al','NaOH','H₂O'], condicao:'', coefR:{'Al':2,'NaOH':2,'H₂O':2}, coefP:[2,3],
       produtos_visuais:['NaAlO₂','H₂'],
@@ -107,7 +107,7 @@
       explicacao:'2Al+2NaOH+2H₂O→2NaAlO₂+3H₂  ·  Al anfótero reage com base forte — tema recorrente no ENEM. Explica efervescência ao colocar Al em NaOH'
     },
     {
-      id:'naoh_co2_carbonato', icon:'🌿', familia:'Síntese / Absorção de CO₂',
+      id:'naoh_co2_carbonato', icon:'leaf', familia:'Síntese / Absorção de CO₂',
       titulo:'CO₂ + 2 NaOH → Na₂CO₃ + H₂O',
       reagentes:['CO₂','NaOH'], condicao:'excesso NaOH', coefR:{'CO₂':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Na₂CO₃','H₂O'],
@@ -118,7 +118,7 @@
       explicacao:'CO₂+2NaOH→Na₂CO₃+H₂O  ·  Reação de absorção industrial de CO₂. Scrubbers de NaOH capturam CO₂ de gases de combustão'
     },
     {
-      id:'naoh_fecl3_precip', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'naoh_fecl3_precip', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl',
       reagentes:['FeCl₃','NaOH'], condicao:'', coefR:{'FeCl₃':1,'NaOH':3}, coefP:[1,3],
       produtos_visuais:['Fe(OH)₃','NaCl'],
@@ -133,7 +133,7 @@
   /* ══ NH₃ — 3 novas reações (Haber-Bosch, fertilizantes) ══ */
   'NH3': [
     {
-      id:'nh3_haber', icon:'🏭', familia:'Síntese Industrial (Haber-Bosch)',
+      id:'nh3_haber', icon:'factory', familia:'Síntese Industrial (Haber-Bosch)',
       titulo:'N₂ + 3 H₂ → 2 NH₃',
       reagentes:['N₂','H₂'], condicao:'Fe/400°C/200atm', coefR:{'N₂':1,'H₂':3}, coefP:[2],
       produtos_visuais:['NH₃'],
@@ -144,7 +144,7 @@
       explicacao:'N₂+3H₂⇌2NH₃  ·  Processo Haber-Bosch (1909). Responsável por alimentar ~50% da humanidade via fertilizantes nitrogenados. Nobel de Química 1918 (Haber)'
     },
     {
-      id:'nh3_oxidacao_ostwald', icon:'🏭', familia:'Oxidação Catalítica',
+      id:'nh3_oxidacao_ostwald', icon:'factory', familia:'Oxidação Catalítica',
       titulo:'4 NH₃ + 5 O₂ → 4 NO + 6 H₂O',
       reagentes:['NH₃','O₂'], condicao:'Pt/830°C', coefR:{'NH₃':4,'O₂':5}, coefP:[4,6],
       produtos_visuais:['NO','H₂O'],
@@ -155,7 +155,7 @@
       explicacao:'4NH₃+5O₂→4NO+6H₂O  ·  1ª etapa do processo Ostwald para produção de HNO₃ industrial. NH₃→NO→NO₂→HNO₃. Toda a indústria de explosivos depende desta reação'
     },
     {
-      id:'nh3_h2so4_sal', icon:'⚗️', familia:'Neutralização',
+      id:'nh3_h2so4_sal', icon:'flask', familia:'Neutralização',
       titulo:'2 NH₃ + H₂SO₄ → (NH₄)₂SO₄',
       reagentes:['NH₃','H₂SO₄'], condicao:'', coefR:{'NH₃':2,'H₂SO₄':1}, coefP:[1],
       produtos_visuais:['(NH₄)₂SO₄'],
@@ -170,7 +170,7 @@
   /* ══ HNO₃ — 2 novas reações (metais, oxidante) ══ */
   'HNO3': [
     {
-      id:'hno3_fe_diluido', icon:'⚡', familia:'Oxidação / Ácido Diluído',
+      id:'hno3_fe_diluido', icon:'bolt', familia:'Oxidação / Ácido Diluído',
       titulo:'4 Fe + 10 HNO₃(diluído) → 4 Fe(NO₃)₂ + NH₄NO₃ + 3 H₂O',
       reagentes:['Fe','HNO₃'], condicao:'muito diluído', coefR:{'Fe':4,'HNO₃':10}, coefP:[4,1,3],
       produtos_visuais:['Fe(NO₃)₂','NH₄NO₃','H₂O'],
@@ -181,7 +181,7 @@
       explicacao:'Fe+HNO₃(muito dil.)→Fe(NO₃)₂+NH₄NO₃+H₂O  ·  Diferença crucial: concentração do ácido determina o produto da redução do N (NO₂/NO/NH₄⁺)'
     },
     {
-      id:'hno3_cu_diluido', icon:'⚡', familia:'Oxidação / Ácido Diluído',
+      id:'hno3_cu_diluido', icon:'bolt', familia:'Oxidação / Ácido Diluído',
       titulo:'3 Cu + 8 HNO₃(diluído) → 3 Cu(NO₃)₂ + 2 NO + 4 H₂O',
       reagentes:['Cu','HNO₃'], condicao:'diluído', coefR:{'Cu':3,'HNO₃':8}, coefP:[3,2,4],
       produtos_visuais:['Cu(NO₃)₂','NO','H₂O'],
@@ -196,7 +196,7 @@
   /* ══ H₂CO₃ — nova reação ══ */
   'H2CO3': [
     {
-      id:'h2co3_nahco3_decomp', icon:'🌡️', familia:'Decomposição / Cotidiano',
+      id:'h2co3_nahco3_decomp', icon:'thermometer', familia:'Decomposição / Cotidiano',
       titulo:'2 NaHCO₃ → Na₂CO₃ + H₂O + CO₂',
       reagentes:['NaHCO₃'], condicao:'Δ', coefR:{'NaHCO₃':2}, coefP:[1,1,1],
       produtos_visuais:['Na₂CO₃','H₂O','CO₂'],
@@ -211,7 +211,7 @@
   /* ══ CaO — 2 novas reações ══ */
   'CaO': [
     {
-      id:'cao_co2_sindrome', icon:'🔥', familia:'Síntese / Indústria',
+      id:'cao_co2_sindrome', icon:'flame', familia:'Síntese / Indústria',
       titulo:'CaO + CO₂ → CaCO₃',
       reagentes:['CaO','CO₂'], condicao:'', coefR:{'CaO':1,'CO₂':1}, coefP:[1],
       produtos_visuais:['CaCO₃'],
@@ -222,7 +222,7 @@
       explicacao:'CaO+CO₂→CaCO₃  ·  Formação do calcário a partir da cal viva. Reação inversa da calcinação. Ocorre em furnas kársticas na formação de estalactites e estalagmites'
     },
     {
-      id:'cao_so3_anidro', icon:'🏭', familia:'Síntese / Neutralização Anidra',
+      id:'cao_so3_anidro', icon:'factory', familia:'Síntese / Neutralização Anidra',
       titulo:'CaO + SO₃ → CaSO₄',
       reagentes:['CaO','SO₃'], condicao:'', coefR:{'CaO':1,'SO₃':1}, coefP:[1],
       produtos_visuais:['CaSO₄'],
@@ -237,7 +237,7 @@
   /* ══ CO₂ — 2 novas reações ══ */
   'CO2': [
     {
-      id:'co2_ca_oh2_excesso', icon:'🔬', familia:'Dupla Troca (excesso CO₂)',
+      id:'co2_ca_oh2_excesso', icon:'precipitate', familia:'Dupla Troca (excesso CO₂)',
       titulo:'CaCO₃ + CO₂ + H₂O → Ca(HCO₃)₂',
       reagentes:['CaCO₃','CO₂','H₂O'], condicao:'CO₂ excesso', coefR:{'CaCO₃':1,'CO₂':1,'H₂O':1}, coefP:[1],
       produtos_visuais:['Ca(HCO₃)₂'],
@@ -248,7 +248,7 @@
       explicacao:'CaCO₃+CO₂+H₂O→Ca(HCO₃)₂  ·  Dissolução do calcário com CO₂ excesso. Causa a dureza temporária da água. Forma grutas kársticas; ao aquecer, CaCO₃ deposita e entupe canos'
     },
     {
-      id:'co2_na2o_basico', icon:'🔥', familia:'Síntese',
+      id:'co2_na2o_basico', icon:'flame', familia:'Síntese',
       titulo:'CO₂ + Na₂O → Na₂CO₃',
       reagentes:['CO₂','Na₂O'], condicao:'', coefR:{'CO₂':1,'Na₂O':1}, coefP:[1],
       produtos_visuais:['Na₂CO₃'],
@@ -263,7 +263,7 @@
   /* ══ CaCO₃ — nova reação (calcário e chuva ácida) ══ */
   'CaCO3': [
     {
-      id:'caco3_hno3_chuva', icon:'🌧️', familia:'Dupla Troca / Chuva Ácida',
+      id:'caco3_hno3_chuva', icon:'cloud', familia:'Dupla Troca / Chuva Ácida',
       titulo:'CaCO₃ + 2 HNO₃ → Ca(NO₃)₂ + H₂O + CO₂',
       reagentes:['CaCO₃','HNO₃'], condicao:'', coefR:{'CaCO₃':1,'HNO₃':2}, coefP:[1,1,1],
       produtos_visuais:['Ca(NO₃)₂','H₂O','CO₂'],
@@ -278,7 +278,7 @@
   /* ══ Fe₂O₃ — nova reação (termita) ══ */
   'Fe2O3': [
     {
-      id:'fe2o3_al_termita', icon:'⚡', familia:'Deslocamento / Termita',
+      id:'fe2o3_al_termita', icon:'bolt', familia:'Deslocamento / Termita',
       titulo:'Fe₂O₃ + 2 Al → Al₂O₃ + 2 Fe',
       reagentes:['Fe₂O₃','Al'], condicao:'Mg/>2500°C', coefR:{'Fe₂O₃':1,'Al':2}, coefP:[1,2],
       produtos_visuais:['Al₂O₃','Fe'],
@@ -293,7 +293,7 @@
   /* ══ KMnO₄ — 2 novas reações ══ */
   'KMnO4': [
     {
-      id:'kmno4_fe2_acido', icon:'🔬', familia:'Oxirredução / Titulação',
+      id:'kmno4_fe2_acido', icon:'precipitate', familia:'Oxirredução / Titulação',
       titulo:'MnO₄⁻ + 5 Fe²⁺ + 8 H⁺ → Mn²⁺ + 5 Fe³⁺ + 4 H₂O',
       reagentes:['KMnO₄','FeSO₄','H₂SO₄'], condicao:'ácido', coefR:{'KMnO₄':2,'FeSO₄':10,'H₂SO₄':8}, coefP:[2,10,8],
       produtos_visuais:['MnSO₄','Fe₂(SO₄)₃','K₂SO₄','H₂O'],
@@ -304,7 +304,7 @@
       explicacao:'KMnO₄+FeSO₄+H₂SO₄→MnSO₄+Fe₂(SO₄)₃  ·  Titulação permanganométrica — padrão de dosagem de Fe²⁺ em sangue/medicamentos. Ponto final: permanência da cor rosa'
     },
     {
-      id:'kmno4_decomp', icon:'🌡️', familia:'Decomposição Térmica',
+      id:'kmno4_decomp', icon:'thermometer', familia:'Decomposição Térmica',
       titulo:'2 KMnO₄ → K₂MnO₄ + MnO₂ + O₂',
       reagentes:['KMnO₄'], condicao:'Δ ~240°C', coefR:{'KMnO₄':2}, coefP:[1,1,1],
       produtos_visuais:['K₂MnO₄','MnO₂','O₂'],
@@ -319,7 +319,7 @@
   /* ══ NaHCO₃ — nova reação (efervescente) ══ */
   'NaHCO3': [
     {
-      id:'nahco3_hcl_efervescente', icon:'💊', familia:'Dupla Troca / Cotidiano',
+      id:'nahco3_hcl_efervescente', icon:'pill', familia:'Dupla Troca / Cotidiano',
       titulo:'NaHCO₃ + HCl → NaCl + H₂O + CO₂',
       reagentes:['NaHCO₃','HCl'], condicao:'', coefR:{'NaHCO₃':1,'HCl':1}, coefP:[1,1,1],
       produtos_visuais:['NaCl','H₂O','CO₂'],
@@ -334,7 +334,7 @@
   /* ══ FeSO₄ — nova reação ══ */
   'FeSO4': [
     {
-      id:'feso4_naoh_precipita', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'feso4_naoh_precipita', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'FeSO₄ + 2 NaOH → Fe(OH)₂↓ + Na₂SO₄',
       reagentes:['FeSO₄','NaOH'], condicao:'', coefR:{'FeSO₄':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Fe(OH)₂','Na₂SO₄'],
@@ -349,7 +349,7 @@
   /* ══ ZnSO₄ — nova reação ══ */
   'ZnSO4': [
     {
-      id:'znso4_naoh_zincato', icon:'🔬', familia:'Dupla Troca / Anfótero',
+      id:'znso4_naoh_zincato', icon:'precipitate', familia:'Dupla Troca / Anfótero',
       titulo:'ZnSO₄ + 2 NaOH → Zn(OH)₂↓ + Na₂SO₄',
       reagentes:['ZnSO₄','NaOH'], condicao:'', coefR:{'ZnSO₄':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Zn(OH)₂','Na₂SO₄'],
@@ -364,7 +364,7 @@
   /* ══ AlCl₃ — nova reação ══ */
   'AlCl3': [
     {
-      id:'alcl3_naoh_excesso', icon:'🔬', familia:'Dupla Troca / Anfótero (excesso)',
+      id:'alcl3_naoh_excesso', icon:'precipitate', familia:'Dupla Troca / Anfótero (excesso)',
       titulo:'AlCl₃ + 4 NaOH(excesso) → NaAlO₂ + 3 NaCl + 2 H₂O',
       reagentes:['AlCl₃','NaOH'], condicao:'excesso NaOH', coefR:{'AlCl₃':1,'NaOH':4}, coefP:[1,3,2],
       produtos_visuais:['NaAlO₂','NaCl','H₂O'],
@@ -379,7 +379,7 @@
   /* ══ BaSO₄ — nova reação (insolúvel, diagnóstico) ══ */
   'BaSO4': [
     {
-      id:'baso4_precip_diag', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'baso4_precip_diag', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2 NaCl',
       reagentes:['BaCl₂','Na₂SO₄'], condicao:'', coefR:{'BaCl₂':1,'Na₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['BaSO₄','NaCl'],
@@ -394,7 +394,7 @@
   /* ══ KNO₃ — nova reação (pólvora negra) ══ */
   'KNO3': [
     {
-      id:'kno3_polvoranegra', icon:'💥', familia:'Decomposição / Oxidação',
+      id:'kno3_polvoranegra', icon:'explosion', familia:'Decomposição / Oxidação',
       titulo:'2 KNO₃ + S + 3 C → K₂S + N₂ + 3 CO₂',
       reagentes:['KNO₃','S','C'], condicao:'Δ (ignição)', coefR:{'KNO₃':2,'S':1,'C':3}, coefP:[1,1,3],
       produtos_visuais:['K₂S','N₂','CO₂'],
@@ -409,7 +409,7 @@
   /* ══ H₂O₂ — reações (novo composto) ══ */
   'H2O2': [
     {
-      id:'h2o2_decomp_mno2', icon:'🧪', familia:'Decomposição Catalítica',
+      id:'h2o2_decomp_mno2', icon:'flask', familia:'Decomposição Catalítica',
       titulo:'2 H₂O₂ → 2 H₂O + O₂',
       reagentes:['H₂O₂'], condicao:'MnO₂ (catalisador)', coefR:{'H₂O₂':2}, coefP:[2,1],
       produtos_visuais:['H₂O','O₂'],
@@ -420,7 +420,7 @@
       explicacao:'2H₂O₂→2H₂O+O₂  ·  Decomposição catalisada por MnO₂ ou enzima catalase. Elefante de pasta de dente usa H₂O₂ concentrado. A efervescência ao desinfetar ferida é esta reação na catalase sanguínea'
     },
     {
-      id:'h2o2_ki_redox', icon:'🔬', familia:'Oxirredução',
+      id:'h2o2_ki_redox', icon:'precipitate', familia:'Oxirredução',
       titulo:'H₂O₂ + 2 KI → 2 KOH + I₂',
       reagentes:['H₂O₂','KI'], condicao:'', coefR:{'H₂O₂':1,'KI':2}, coefP:[2,1],
       produtos_visuais:['KOH','I₂'],
@@ -431,7 +431,7 @@
       explicacao:'H₂O₂+2KI→2KOH+I₂  ·  H₂O₂ oxida o iodeto a I₂ (marrom-escuro). Reação de referência para demostrar poder oxidante do H₂O₂. Mesma reação que ocorre no "elefante de pasta de dente"'
     },
     {
-      id:'h2o2_h2o2_disproportionate', icon:'🧪', familia:'Desproporcionamento',
+      id:'h2o2_h2o2_disproportionate', icon:'flask', familia:'Desproporcionamento',
       titulo:'2 H₂O₂ → 2 H₂O + O₂ (espontânea)',
       reagentes:['H₂O₂'], condicao:'luz / Δ / metais', coefR:{'H₂O₂':2}, coefP:[2,1],
       produtos_visuais:['H₂O','O₂'],
@@ -446,7 +446,7 @@
   /* ══ Na₂SO₄ — reações (novo composto) ══ */
   'Na2SO4': [
     {
-      id:'na2so4_bacl2_precip', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'na2so4_bacl2_precip', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'Na₂SO₄ + BaCl₂ → BaSO₄↓ + 2 NaCl',
       reagentes:['Na₂SO₄','BaCl₂'], condicao:'', coefR:{'Na₂SO₄':1,'BaCl₂':1}, coefP:[1,2],
       produtos_visuais:['BaSO₄','NaCl'],
@@ -457,7 +457,7 @@
       explicacao:'Na₂SO₄+BaCl₂→BaSO₄↓+2NaCl  ·  Precipitação de BaSO₄ — teste qualitativo de SO₄²⁻. Insolúvel em HCl (diferencia de carbonatos). Base do método gravimétrico de análise de sulfato'
     },
     {
-      id:'na2so4_h2so4_formacao', icon:'⚗️', familia:'Neutralização',
+      id:'na2so4_h2so4_formacao', icon:'flask', familia:'Neutralização',
       titulo:'2 NaOH + H₂SO₄ → Na₂SO₄ + 2 H₂O',
       reagentes:['NaOH','H₂SO₄'], condicao:'', coefR:{'NaOH':2,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['Na₂SO₄','H₂O'],
@@ -468,7 +468,7 @@
       explicacao:'2NaOH+H₂SO₄→Na₂SO₄+2H₂O  ·  Neutralização total do H₂SO₄ dibásico. Sal de Glauber (Na₂SO₄·10H₂O) — indústria de papel. Controlar proporção: 1:1 → sal ácido; 2:1 → sal neutro'
     },
     {
-      id:'na2so4_reducao_papel', icon:'🏭', familia:'Redução Industrial',
+      id:'na2so4_reducao_papel', icon:'factory', familia:'Redução Industrial',
       titulo:'Na₂SO₄ + 2 C → Na₂S + 2 CO₂',
       reagentes:['Na₂SO₄','C'], condicao:'Δ ~900°C', coefR:{'Na₂SO₄':1,'C':2}, coefP:[1,2],
       produtos_visuais:['Na₂S','CO₂'],
@@ -483,7 +483,7 @@
   /* ══ MgSO₄ — reações (novo composto) ══ */
   'MgSO4': [
     {
-      id:'mgso4_naoh_precip', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'mgso4_naoh_precip', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'MgSO₄ + 2 NaOH → Mg(OH)₂↓ + Na₂SO₄',
       reagentes:['MgSO₄','NaOH'], condicao:'', coefR:{'MgSO₄':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Mg(OH)₂','Na₂SO₄'],
@@ -494,7 +494,7 @@
       explicacao:'MgSO₄+2NaOH→Mg(OH)₂↓+Na₂SO₄  ·  Mg(OH)₂ = leite de magnésia (antiácido não sistêmico). Insolúvel em água — neutraliza ácido gástrico sem ser absorvido. Produção industrial: MgCl₂ da água do mar + Ca(OH)₂'
     },
     {
-      id:'mgso4_h2so4_formacao', icon:'⚗️', familia:'Síntese',
+      id:'mgso4_h2so4_formacao', icon:'flask', familia:'Síntese',
       titulo:'MgO + H₂SO₄ → MgSO₄ + H₂O',
       reagentes:['MgO','H₂SO₄'], condicao:'', coefR:{'MgO':1,'H₂SO₄':1}, coefP:[1,1],
       produtos_visuais:['MgSO₄','H₂O'],
@@ -509,7 +509,7 @@
   /* ══ CaCl₂ — reações (novo composto) ══ */
   'CaCl2': [
     {
-      id:'cacl2_na2co3_precip', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'cacl2_na2co3_precip', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'CaCl₂ + Na₂CO₃ → CaCO₃↓ + 2 NaCl',
       reagentes:['CaCl₂','Na₂CO₃'], condicao:'', coefR:{'CaCl₂':1,'Na₂CO₃':1}, coefP:[1,2],
       produtos_visuais:['CaCO₃','NaCl'],
@@ -520,7 +520,7 @@
       explicacao:'CaCl₂+Na₂CO₃→CaCO₃↓+2NaCl  ·  Precipitação clássica de carbonato. Base do processo industrial Solvay para produção de Na₂CO₃. CaCO₃ precipita, NaCl permanece em solução para reutilização'
     },
     {
-      id:'cacl2_caoh2_formacao', icon:'⚗️', familia:'Neutralização',
+      id:'cacl2_caoh2_formacao', icon:'flask', familia:'Neutralização',
       titulo:'Ca(OH)₂ + 2 HCl → CaCl₂ + 2 H₂O',
       reagentes:['Ca(OH)₂','HCl'], condicao:'', coefR:{'Ca(OH)₂':1,'HCl':2}, coefP:[1,2],
       produtos_visuais:['CaCl₂','H₂O'],
@@ -535,7 +535,7 @@
   /* ══ Cu(OH)₂ — reações (novo composto) ══ */
   'Cu(OH)2': [
     {
-      id:'cuoh2_decomp', icon:'🌡️', familia:'Decomposição Térmica',
+      id:'cuoh2_decomp', icon:'thermometer', familia:'Decomposição Térmica',
       titulo:'Cu(OH)₂ → CuO + H₂O',
       reagentes:['Cu(OH)₂'], condicao:'Δ ~80°C', coefR:{'Cu(OH)₂':1}, coefP:[1,1],
       produtos_visuais:['CuO','H₂O'],
@@ -546,7 +546,7 @@
       explicacao:'Cu(OH)₂→CuO+H₂O  ·  Decomposição de base insolúvel em óxido. Regra geral da química inorgânica: Me(OH)n → MeO(n/2) + nH₂O. Azul→preto ao aquecer. CuO usado em pigmentos e catalisadores'
     },
     {
-      id:'cuoh2_nacl_formacao', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'cuoh2_nacl_formacao', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'CuSO₄ + 2 NaOH → Cu(OH)₂↓ + Na₂SO₄',
       reagentes:['CuSO₄','NaOH'], condicao:'', coefR:{'CuSO₄':1,'NaOH':2}, coefP:[1,1],
       produtos_visuais:['Cu(OH)₂','Na₂SO₄'],
@@ -557,7 +557,7 @@
       explicacao:'CuSO₄+2NaOH→Cu(OH)₂↓+Na₂SO₄  ·  Precipitado azul de Cu(OH)₂. Base da Solução de Fehling (análise de glicose). Reage com açúcar redutor: Cu(OH)₂→Cu₂O vermelho tijolo (Fehling positivo)'
     },
     {
-      id:'cuoh2_hcl_dissolucao', icon:'⚗️', familia:'Reação Ácido-Base',
+      id:'cuoh2_hcl_dissolucao', icon:'flask', familia:'Reação Ácido-Base',
       titulo:'Cu(OH)₂ + 2 HCl → CuCl₂ + 2 H₂O',
       reagentes:['Cu(OH)₂','HCl'], condicao:'', coefR:{'Cu(OH)₂':1,'HCl':2}, coefP:[1,2],
       produtos_visuais:['CuCl₂','H₂O'],
@@ -572,7 +572,7 @@
   /* ══ Fe(OH)₂ — reações (novo composto) ══ */
   'Fe(OH)2': [
     {
-      id:'feoh2_oxidacao', icon:'🌿', familia:'Oxidação pelo O₂',
+      id:'feoh2_oxidacao', icon:'leaf', familia:'Oxidação pelo O₂',
       titulo:'4 Fe(OH)₂ + O₂ + 2 H₂O → 4 Fe(OH)₃',
       reagentes:['Fe(OH)₂','O₂','H₂O'], condicao:'ar', coefR:{'Fe(OH)₂':4,'O₂':1,'H₂O':2}, coefP:[4],
       produtos_visuais:['Fe(OH)₃'],
@@ -583,7 +583,7 @@
       explicacao:'4Fe(OH)₂+O₂+2H₂O→4Fe(OH)₃  ·  Oxidação do hidróxido de Fe(II) a Fe(III). É o mecanismo da ferrugem úmida. Fe(OH)₃ desidrata: 2Fe(OH)₃→Fe₂O₃·3H₂O (ferrugem). O verde→castanho é observável em segundos'
     },
     {
-      id:'feoh2_h2so4_dissolve', icon:'⚗️', familia:'Reação Ácido-Base',
+      id:'feoh2_h2so4_dissolve', icon:'flask', familia:'Reação Ácido-Base',
       titulo:'Fe(OH)₂ + H₂SO₄ → FeSO₄ + 2 H₂O',
       reagentes:['Fe(OH)₂','H₂SO₄'], condicao:'', coefR:{'Fe(OH)₂':1,'H₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['FeSO₄','H₂O'],
@@ -598,7 +598,7 @@
   /* ══ K₂CO₃ — reações (novo composto) ══ */
   'K2CO3': [
     {
-      id:'k2co3_hcl_neutraliz', icon:'⚗️', familia:'Neutralização',
+      id:'k2co3_hcl_neutraliz', icon:'flask', familia:'Neutralização',
       titulo:'K₂CO₃ + 2 HCl → 2 KCl + H₂O + CO₂',
       reagentes:['K₂CO₃','HCl'], condicao:'', coefR:{'K₂CO₃':1,'HCl':2}, coefP:[2,1,1],
       produtos_visuais:['KCl','H₂O','CO₂'],
@@ -609,7 +609,7 @@
       explicacao:'K₂CO₃+2HCl→2KCl+H₂O+CO₂  ·  Carbonato reage com ácido forte liberando CO₂. KCl é o cloreto de potássio (substituto do NaCl para hipertensos). CO₂ efervescente é a evidência visual'
     },
     {
-      id:'k2co3_co2_bicarbonato', icon:'🌿', familia:'Síntese',
+      id:'k2co3_co2_bicarbonato', icon:'leaf', familia:'Síntese',
       titulo:'K₂CO₃ + CO₂ + H₂O → 2 KHCO₃',
       reagentes:['K₂CO₃','CO₂','H₂O'], condicao:'', coefR:{'K₂CO₃':1,'CO₂':1,'H₂O':1}, coefP:[2],
       produtos_visuais:['KHCO₃'],
@@ -620,7 +620,7 @@
       explicacao:'K₂CO₃+CO₂+H₂O→2KHCO₃  ·  Carbonatação de carbonato. KHCO₃ é bicarbonato de potássio — fermento de panificação alternativo ao NaHCO₃ para dietas com restrição de sódio'
     },
     {
-      id:'k2co3_caco3_vidro', icon:'🏭', familia:'Síntese Industrial (Vidro)',
+      id:'k2co3_caco3_vidro', icon:'factory', familia:'Síntese Industrial (Vidro)',
       titulo:'K₂CO₃ + SiO₂ → K₂SiO₃ + CO₂',
       reagentes:['K₂CO₃','SiO₂'], condicao:'Δ ~1400°C', coefR:{'K₂CO₃':1,'SiO₂':1}, coefP:[1,1],
       produtos_visuais:['K₂SiO₃','CO₂'],
@@ -635,7 +635,7 @@
   /* ══ Pb(NO₃)₂ — reações (novo composto) ══ */
   'Pb(NO3)2': [
     {
-      id:'pbno32_ki_precipitado', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'pbno32_ki_precipitado', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'Pb(NO₃)₂ + 2 KI → PbI₂↓ + 2 KNO₃',
       reagentes:['Pb(NO₃)₂','KI'], condicao:'', coefR:{'Pb(NO₃)₂':1,'KI':2}, coefP:[1,2],
       produtos_visuais:['PbI₂','KNO₃'],
@@ -646,7 +646,7 @@
       explicacao:'Pb(NO₃)₂+2KI→PbI₂↓+2KNO₃  ·  PbI₂ amarelo canário — experimento "chuva dourada". Em solução quente dissolve; ao resfriar, cristais amarelos precipitam lentamente como flocos dourados. Demonstração clássica'
     },
     {
-      id:'pbno32_na2so4_precipita', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'pbno32_na2so4_precipita', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'Pb(NO₃)₂ + Na₂SO₄ → PbSO₄↓ + 2 NaNO₃',
       reagentes:['Pb(NO₃)₂','Na₂SO₄'], condicao:'', coefR:{'Pb(NO₃)₂':1,'Na₂SO₄':1}, coefP:[1,2],
       produtos_visuais:['PbSO₄','NaNO₃'],
@@ -657,7 +657,7 @@
       explicacao:'Pb(NO₃)₂+Na₂SO₄→PbSO₄↓+2NaNO₃  ·  PbSO₄ precipitado branco. Usado em análise qualitativa para identificar Pb²⁺. Baterias de chumbo-ácido geram PbSO₄ durante a descarga: Pb+PbO₂+2H₂SO₄→2PbSO₄+2H₂O'
     },
     {
-      id:'pbno32_decomp_termica', icon:'🌡️', familia:'Decomposição Térmica',
+      id:'pbno32_decomp_termica', icon:'thermometer', familia:'Decomposição Térmica',
       titulo:'2 Pb(NO₃)₂ → 2 PbO + 4 NO₂ + O₂',
       reagentes:['Pb(NO₃)₂'], condicao:'Δ ~470°C', coefR:{'Pb(NO₃)₂':2}, coefP:[2,4,1],
       produtos_visuais:['PbO','NO₂','O₂'],
@@ -672,7 +672,7 @@
   /* ══ NaN₃ — reações (novo composto) ══ */
   'NaN3': [
     {
-      id:'nan3_airbag_decomp', icon:'💥', familia:'Decomposição / Airbag',
+      id:'nan3_airbag_decomp', icon:'explosion', familia:'Decomposição / Airbag',
       titulo:'2 NaN₃ → 2 Na + 3 N₂',
       reagentes:['NaN₃'], condicao:'faísca elétrica', coefR:{'NaN₃':2}, coefP:[2,3],
       produtos_visuais:['Na','N₂'],
@@ -683,7 +683,7 @@
       explicacao:'2NaN₃→2Na+3N₂  ·  Princípio do airbag: 130g de NaN₃ geram 67L de N₂ em 30ms. O Na metálico formado é perigoso mas reage com KNO₃ e SiO₂ presentes no cartucho, gerando silicato inofensivo'
     },
     {
-      id:'nan3_h2o_hidroxido', icon:'🔬', familia:'Hidrólise',
+      id:'nan3_h2o_hidroxido', icon:'precipitate', familia:'Hidrólise',
       titulo:'NaN₃ + H₂O → NaOH + HN₃',
       reagentes:['NaN₃','H₂O'], condicao:'(parcial)', coefR:{'NaN₃':1,'H₂O':1}, coefP:[1,1],
       produtos_visuais:['NaOH','HN₃'],
@@ -694,7 +694,7 @@
       explicacao:'NaN₃+H₂O⇌NaOH+HN₃  ·  Hidrólise básica parcial da azida. HN₃ é o ácido hidrazoico (extremamente tóxico em vapor). Por isso NaN₃ é manuseado em meio aquoso com cautela máxima em laboratório'
     },
     {
-      id:'nan3_nacl_formacao', icon:'🏭', familia:'Síntese Industrial',
+      id:'nan3_nacl_formacao', icon:'factory', familia:'Síntese Industrial',
       titulo:'NaNH₂ + N₂O → NaN₃ + H₂O',
       reagentes:['NaNH₂','N₂O'], condicao:'Δ 190°C', coefR:{'NaNH₂':1,'N₂O':1}, coefP:[1,1],
       produtos_visuais:['NaN₃','H₂O'],
@@ -709,7 +709,7 @@
   /* ══ MgCl₂ — reações (novo composto) ══ */
   'MgCl2': [
     {
-      id:'mgcl2_naoh_precipita', icon:'🔬', familia:'Dupla Troca / Precipitação',
+      id:'mgcl2_naoh_precipita', icon:'precipitate', familia:'Dupla Troca / Precipitação',
       titulo:'MgCl₂ + 2 NaOH → Mg(OH)₂↓ + 2 NaCl',
       reagentes:['MgCl₂','NaOH'], condicao:'', coefR:{'MgCl₂':1,'NaOH':2}, coefP:[1,2],
       produtos_visuais:['Mg(OH)₂','NaCl'],
@@ -720,7 +720,7 @@
       explicacao:'MgCl₂+2NaOH→Mg(OH)₂↓+2NaCl  ·  Produção do leite de magnésia. Industrialmente: MgCl₂ (bittern da salina) + Ca(OH)₂. Mg(OH)₂ filtra-se e calcina: Mg(OH)₂→MgO (magnésia). Base da produção de Mg metálico'
     },
     {
-      id:'mgcl2_mg_eletrolitico', icon:'🏭', familia:'Eletrólise Industrial',
+      id:'mgcl2_mg_eletrolitico', icon:'factory', familia:'Eletrólise Industrial',
       titulo:'MgCl₂ →(eletrólise)→ Mg + Cl₂',
       reagentes:['MgCl₂'], condicao:'eletrólise fundido', coefR:{'MgCl₂':1}, coefP:[1,1],
       produtos_visuais:['Mg','Cl₂'],
@@ -731,7 +731,7 @@
       explicacao:'MgCl₂→Mg+Cl₂  ·  Processo Dow — eletrólise do MgCl₂ fundido (660°C). Cl₂ vendido para PVC e HCl. Mg usado em ligas aeronáuticas, estruturas de carros e baterias Mg-íon de nova geração'
     },
     {
-      id:'mgcl2_mg_formacao', icon:'⚗️', familia:'Síntese',
+      id:'mgcl2_mg_formacao', icon:'flask', familia:'Síntese',
       titulo:'Mg + 2 HCl → MgCl₂ + H₂',
       reagentes:['Mg','HCl'], condicao:'', coefR:{'Mg':1,'HCl':2}, coefP:[1,1],
       produtos_visuais:['MgCl₂','H₂'],

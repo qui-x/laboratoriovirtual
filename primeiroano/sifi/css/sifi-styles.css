@@ -185,7 +185,7 @@ body.high-contrast .axis-label  { fill: var(--hc-fg); }
   flex-shrink:0;
 }
 .header-brand{ display:flex; align-items:center; gap:.6rem; min-width:0; }
-.header-right{ display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
+.header-actions{ display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
 .header-back{
   display:inline-flex; align-items:center; gap:.3rem;
   background:transparent; border:1px solid var(--border-color); color: var(--text-muted);

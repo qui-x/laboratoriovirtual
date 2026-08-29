@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnFrz) {
           btnFrz.classList.remove('active-a11y');
           btnFrz.setAttribute('aria-pressed','false');
-          btnFrz.textContent = '🔓 Física Livre';
+          btnFrz.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-unlock"/></svg> Física Livre';
         }
       }
     });

@@ -20,7 +20,7 @@ function abrirReacoesLivres(formulaId, composto){
   /* Header */
   var expHdr = document.getElementById('exp-header');
   if(expHdr) expHdr.hidden = false;
-  txt('exp-num', '🔬  Laboratório Livre');
+  txt('exp-num', 'Laboratório Livre');
   txt('exp-fam', sub2(formulaId) + ' — ' + composto.nome);
 
   var rxnWrap = document.getElementById('rxn-wrapper');
@@ -92,7 +92,7 @@ function abrirReacoesLivres(formulaId, composto){
         '<span class="rxl-card-cond">'+rxn.condicao+'</span>' : '';
 
       card.innerHTML =
-        '<span class="rxl-card-icon">'+rxn.icon+'</span>' +
+        '<span class="rxl-card-icon"><svg class="icon" aria-hidden="true"><use href="#ic-'+rxn.icon+'"/></svg></span>' +
         '<div class="rxl-card-info">' +
           '<div class="rxl-card-eq">'+
             reagStr +
@@ -156,7 +156,7 @@ function abrirReacaoLivre(rxn, formulaId, composto){
   /* Header: familia + titulo da reação */
   var expHdr = document.getElementById('exp-header');
   if(expHdr) expHdr.hidden = false;
-  txt('exp-num', rxn.icon + '  ' + rxn.familia);
+  txt('exp-num', rxn.familia);
   txt('exp-fam', rxn.titulo + (rxn.descricao ? '  ·  ' + rxn.descricao : ''));
 
   /* Builder */

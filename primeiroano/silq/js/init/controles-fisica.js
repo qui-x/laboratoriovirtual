@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnFrz) {
           btnFrz.classList.remove('active-a11y');
           btnFrz.setAttribute('aria-pressed','false');
-          btnFrz.textContent = '\uD83D\uDD13 F\u00edsica Livre';
+          btnFrz.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-unlock"/></svg> F\u00edsica Livre';
         }
       }
       SILQ.physicsEnabled=!SILQ.physicsEnabled;
-      SILQ.btnPhysics.textContent=SILQ.physicsEnabled?'\u23f8 Pausar F\u00edsica':'\u25b6 Ativar F\u00edsica';
+      SILQ.btnPhysics.innerHTML=SILQ.physicsEnabled?'<svg class="icon" aria-hidden="true"><use href="#ic-pause"/></svg> Pausar F\u00edsica':'<svg class="icon" aria-hidden="true"><use href="#ic-play"/></svg> Ativar F\u00edsica';
       SILQ.btnPhysics.classList.toggle('btn-outline-warning',!SILQ.physicsEnabled);
       SILQ.btnPhysics.classList.toggle('btn-warning',SILQ.physicsEnabled);
       SILQ.setToggleState(SILQ.btnPhysics, !SILQ.physicsEnabled);
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) {
       btn.classList.toggle('active-a11y', SILQ.frozenGeometry);
       btn.setAttribute('aria-pressed', SILQ.frozenGeometry ? 'true' : 'false');
-      btn.textContent = SILQ.frozenGeometry ? '\uD83D\uDD12 Geometria Travada' : '\uD83D\uDD13 F\u00edsica Livre';
+      btn.innerHTML = SILQ.frozenGeometry ? '<svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg> Geometria Travada' : '<svg class="icon" aria-hidden="true"><use href="#ic-unlock"/></svg> F\u00edsica Livre';
     }
     if (SILQ.frozenGeometry) {
       // Zera velocidades para não haver impulso ao destravar depois
@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (btnFrz) {
         btnFrz.classList.add('active-a11y');
         btnFrz.setAttribute('aria-pressed', 'true');
-        btnFrz.textContent = '🔒 Geometria Travada';
+        btnFrz.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg> Geometria Travada';
       }
       if (!SILQ.simLoop) SILQ.startSimLoop();
 

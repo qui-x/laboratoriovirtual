@@ -261,12 +261,12 @@ document.addEventListener('DOMContentLoaded', () => {
   SILQ.showBondValidationWarning = function showBondValidationWarning(result, symA, symB) {
     const warn = document.getElementById('bond-order-warning');
     if (!warn) return;
-    let msg = `⚠️ ${symA}–${symB}: ${result.reason}`;
+    let msg = `<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> ${symA}–${symB}: ${result.reason}`;
     if (result.suggestedType) {
       const names = { covalent:'Covalente', ionic:'Iônica', metallic:'Metálica' };
       msg += ` Sugestão: tente Ligação ${names[result.suggestedType]}.`;
     }
-    warn.textContent = msg;
+    warn.innerHTML = msg;
     warn.style.display = 'block';
     clearTimeout(warn._t);
     warn._t = setTimeout(() => { warn.style.display = 'none'; }, 5000);
@@ -364,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (SILQ.isMetalloid(a.category) || SILQ.isMetalloid(b.category)) {
       if (dEN >= 1.2 && dEN <= 1.7) return {
         type:'covalent', subtype:'covalent_transition',
-        polarNote:`⚠️ <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)}: ligação com <strong>caráter iônico parcial</strong> (IUPAC).`
+        polarNote:`<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)}: ligação com <strong>caráter iônico parcial</strong> (IUPAC).`
       };
       if (dEN >= 0.4) return { type:'covalent', subtype:'covalent_polar', polarNote:null };
       return              { type:'covalent', subtype:'covalent_nonpolar', polarNote:null };
@@ -375,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dEN > 1.7) return { type:'ionic', subtype:'ionic', polarNote:null };
       if (dEN >= 1.2) return {
         type:'covalent', subtype:'covalent_transition',
-        polarNote:`⚠️ <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)} (1,2–1,7): ligação com <strong>caráter iônico parcial</strong>. A distinção iônica/covalente é uma simplificação didática (IUPAC).`
+        polarNote:`<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)} (1,2–1,7): ligação com <strong>caráter iônico parcial</strong>. A distinção iônica/covalente é uma simplificação didática (IUPAC).`
       };
       if (dEN >= 0.4) return { type:'covalent', subtype:'covalent_polar', polarNote:null };
       return              { type:'covalent', subtype:'covalent_nonpolar', polarNote:null };
@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Dois ametais: covalente
     if (dEN >= 1.2 && dEN <= 1.7) return {
       type:'covalent', subtype:'covalent_transition',
-      polarNote:`⚠️ <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)}: caráter iônico parcial (IUPAC).`
+      polarNote:`<svg class="icon" aria-hidden="true"><use href="#ic-warning"/></svg> <em>Zona de transição</em> ΔEN=${dEN.toFixed(2)}: caráter iônico parcial (IUPAC).`
     };
     if (dEN >= 0.4) return { type:'covalent', subtype:'covalent_polar',    polarNote:null };
     return              { type:'covalent', subtype:'covalent_nonpolar', polarNote:null };

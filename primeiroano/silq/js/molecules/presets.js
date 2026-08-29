@@ -129,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFrz) {
       btnFrz.classList.add('active-a11y');
       btnFrz.setAttribute('aria-pressed','true');
-      btnFrz.textContent = '🔒 Geometria Travada';
+      btnFrz.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-lock"/></svg> Geometria Travada';
     }
     // Atualiza botão de física (visualmente continua "ativo")
     if (SILQ.btnPhysics) {
-      SILQ.btnPhysics.textContent = '⏸ Pausar Física';
+      SILQ.btnPhysics.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-pause"/></svg> Pausar Física';
       SILQ.btnPhysics.classList.remove('btn-outline-warning');
       SILQ.btnPhysics.classList.add('btn-warning');
     }

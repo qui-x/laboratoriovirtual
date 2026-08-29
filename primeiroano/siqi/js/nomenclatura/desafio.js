@@ -122,7 +122,7 @@ function _mostrarDesafio(formulaId){
         '<div id="nom-feedback" class="nom-feedback" aria-live="polite"></div>' +
       '</div>' +
       '<div class="nom-dica-wrap">' +
-        '<button type="button" id="nom-dica-btn" class="nom-dica-btn">💡 Pedir dica ('+(dicas.length)+')</button>' +
+        '<button type="button" id="nom-dica-btn" class="nom-dica-btn"><svg class="icon" aria-hidden="true"><use href="#ic-bulb"/></svg> Pedir dica ('+(dicas.length)+')</button>' +
         '<div id="nom-dica-txt" class="nom-dica-txt" hidden></div>' +
       '</div>' +
       '<div class="nom-pistas">'+pistasHtml+'</div>' +
@@ -161,7 +161,7 @@ function _mostrarDesafio(formulaId){
         dicaTxt.textContent = dicas[dicasNivel++];
         dicaTxt.hidden = false;
         if(dicasNivel >= dicas.length) dicaBtn.disabled = true;
-        else dicaBtn.textContent = '💡 Pedir dica ('+(dicas.length-dicasNivel)+' restantes)';
+        else dicaBtn.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-bulb"/></svg> Pedir dica ('+(dicas.length-dicasNivel)+' restantes)';
       }
     });
   }
@@ -191,7 +191,7 @@ function _mostrarDesafio(formulaId){
 
     if(acertou){
       feedback.className = 'nom-feedback nom-feedback-ok';
-      feedback.textContent = '✓ Correto! "' + c.nome + '" — desbloqueado!';
+      feedback.innerHTML = '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Correto! "' + c.nome + '" — desbloqueado!';
       input.disabled = true;
       var btnV = document.getElementById('nom-btn');
       if(btnV) btnV.disabled = true;
@@ -247,7 +247,7 @@ function _limparPainelFicha(formulaId){
   /* Chip de consulta: mantem a formula (ela nao e segredo — aparece na
      biblioteca e no proprio desafio), mas o nome vira o aviso de bloqueio */
   txt('consulta-formula', formulaId ? sub2(formulaId) : '—');
-  txt('consulta-nome',    '🔒 Bloqueado — acerte a nomenclatura');
+  txt('consulta-nome',    'Bloqueado — acerte a nomenclatura');
   var chip=$('consulta-chip');
   if(chip){
     chip.style.borderColor = 'var(--bdr2)';
@@ -271,7 +271,7 @@ function _limparPainelFicha(formulaId){
   var pill=$('state-pill');
   if(pill){
     var t0=document.getElementById('state-pill-text');
-    if(t0) t0.textContent='🔒 Bloqueado';
+    if(t0) t0.textContent='Bloqueado';
     pill.className='state-pill';
   }
 }

@@ -246,7 +246,7 @@ function mod2AtualizarValidador(){
     estado = 'correto';
     /* SÓ AQUI, depois de resolvido de verdade, é que o nome completo
        aparece — recompensa final, não dica antecipada. */
-    mensagem = '✓ Nome completo e correto: "' + _mod2DesafioAtual.nome_correto + '"';
+    mensagem = '<svg class="icon" aria-hidden="true"><use href="#ic-check"/></svg> Nome completo e correto: "' + _mod2DesafioAtual.nome_correto + '"';
   }
 
   div.className = 'construtor-validador construtor-validador--' + estado;
