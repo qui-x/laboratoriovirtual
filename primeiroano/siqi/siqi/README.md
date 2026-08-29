@@ -68,11 +68,10 @@ funcionalidade foram aplicadas por cima dela:
    Portados para `js/data/catalogo-compostos.js`.
 7. **Auditoria completa da Estrutura Molecular + motor 3D do SILQ.**
    Ver seção dedicada logo abaixo.
-8. **Módulo 3: Redox → Hibridização de Nuvens Eletrônicas.** A pedido
-   explícito do usuário, o módulo de transferência de elétrons foi
-   substituído por um módulo sobre hibridização de orbitais atômicos
-   (sp/sp²/sp³/sp³d/sp³d²) em ligações químicas gerais. Ver seção
-   dedicada mais abaixo.
+8. **Módulo 3: criado (Redox → Hibridização de Nuvens Eletrônicas) e,
+   depois, removido por completo.** A pedido do usuário, o app voltou
+   a ter só 2 módulos (Construtor e Nomenclatura). Ver seção dedicada
+   mais abaixo.
 
 ## Auditoria da Estrutura Molecular + integração com o motor 3D do SILQ
 
@@ -290,208 +289,45 @@ nomenclatura, então "NaCl" encontra tanto "NaCl" quanto "NaClO", já
 que um é substring do outro) — não é um bug. Suíte completa de
 regressão revalidada, 0 erros de JavaScript.
 
-## Módulo 3: de Redox para Hibridização de Nuvens Eletrônicas
+## Módulo 3 (Redox → Hibridização de Nuvens Eletrônicas) — removido
 
-O usuário pediu a substituição completa do módulo de Redox
-(transferência de elétrons, balanceamento por íon-elétron) por um
-módulo sobre **hibridização de nuvens eletrônicas** — como orbitais
-atômicos (s, p, d) se misturam pra formar os orbitais híbridos usados
-nas ligações covalentes, e como isso se correlaciona com a geometria
-molecular observada.
+O app teve, por um tempo, um 3º módulo — originalmente Redox
+(transferência de elétrons), depois substituído por Hibridização de
+Nuvens Eletrônicas (contagem de domínios VSEPR, orbitais híbridos
+sp/sp²/sp³/sp³d/sp³d², com um diagrama animado mostrando os orbitais
+puros se misturando). A pedido explícito do usuário, esse módulo foi
+**removido por completo** — o app agora tem só 2 módulos:
+**Construtor** e **Nomenclatura**.
 
-### Reaproveitamento em vez de reconstrução
+Removidos: `js/hibridizacao/` (pasta inteira — detector, animação,
+lógica), `js/render/orbitais-atomicos.js`,
+`js/data/hibridizacoes-nuvens.js`, o mode-card "Hibridização" e a
+view central correspondente no HTML, os 2 painéis da sidebar-right
+("Compostos por Hibridização" e "Controles da Animação"), as tags
+`<script>` que carregavam esses arquivos, e ~230 linhas de CSS
+específicas do módulo (`.redox-*`, `.modh-*`, `.orb-*`, `.diff-btn*`)
+— incluindo referências espalhadas em regras de tema/acessibilidade
+(`data-reading`, `data-contrast`, `data-theme`) que precisaram de
+edição cirúrgica pra remover só os seletores órfãos, preservando
+outros seletores ainda em uso na mesma regra.
 
-O motor VSEPR já construído pra integração com o SILQ
-(`silqVsepAngle`, em `js/render/silq-integracao.js`) já recebia
-exatamente o número de domínios eletrônicos (ligantes σ + pares
-isolados) pra calcular o ângulo de ligação — a MESMA contagem é o que
-determina o tipo de hibridização (2 domínios→sp, 3→sp², 4→sp³,
-5→sp³d, 6→sp³d²). O novo módulo reaproveita essa correlação
-diretamente, em vez de duplicar lógica.
+**O que NÃO foi removido**: toda a integração com o SILQ
+(`js/render/silq-integracao.js`, `silq-2d-preview.js`,
+`view3d-silq.js`, `js/data/elementos-silq.js`,
+`geometrias-moleculares-silq.js`) continua no lugar — é usada pela
+Ficha da Nomenclatura (estrutura 3D central + SVG 2D compacto da
+sidebar), não era exclusiva do módulo removido.
 
-### Dados: 15 compostos reais cobrindo os 5 tipos
+`js/redox/eventos-finais.js` também continua — é o composition-root
+do app inteiro (nome do arquivo é histórico), não específico de
+módulo nenhum.
 
-`js/data/hibridizacoes-nuvens.js` documenta, pra cada composto, a
-contagem de domínios do átomo central, o tipo de hibridização
-resultante, a geometria ELETRÔNICA (dos domínios) separada da
-geometria MOLECULAR (só dos átomos — que diverge quando há pares
-isolados, ex.: NH₃ é tetraédrico na nuvem eletrônica mas pirâmide
-trigonal na forma observada), os ângulos ideal (VSEPR) e medido (da
-literatura, quando diferem — ex.: H₂S mede 92°, bem abaixo do ideal
-109,5°, ilustrando a regra de Bent), e uma explicação de qual orbital
-se mistura com qual.
-
-| Tipo | Exemplos | Domínios |
-|---|---|---|
-| sp | CO₂, BeCl₂, C₂H₂ (acetileno) | 2 |
-| sp² | SO₃, BF₃, HNO₃, SO₂, C₂H₄ (eteno) | 3 |
-| sp³ | CH₄, NH₃, H₂S, H₂SO₄, H₃PO₄ | 4 |
-| sp³d | PCl₅ | 5 |
-| sp³d² | SF₆ | 6 |
-
-8 desses compostos já existiam em `CATALOGO_SIQI` (reaproveitados
-com seus dados reais de geometria); os outros 7 (BeCl₂, C₂H₂, BF₃,
-CH₄, PCl₅, SF₆, C₂H₄) são exemplos clássicos de hibridização que não
-fazem parte do catálogo inorgânico da Nomenclatura (ácidos/bases/
-sais/óxidos) — adicionados como dados próprios deste módulo.
-
-### Bug real encontrado durante a implementação
-
-A primeira tentativa tentou reaproveitar o despachante de construção
-de moléculas já existente (`silqConstruirMolecula`, usado na Ficha da
-Nomenclatura), que decide a receita certa consultando `c.funcao`
-(ácido/base/sal/óxido). Mas vários compostos deste módulo não são
-NENHUMA dessas categorias — BeCl₂ não tem oxigênio nenhum, por
-exemplo — e tentar classificá-los à força fazia o despachante
-desenhar um PAR IÔNICO (Be²⁺⋯Cl⁻) em vez da molécula COVALENTE linear
-que o exemplo pedagógico pede (justamente pra ilustrar hibridização
-sp em uma ligação covalente).
-
-Corrigido com um construtor de estrutura DEDICADO
-(`modHConstruirEstrutura`, em `js/hibridizacao/logica.js`), que usa a
-contagem de domínios já presente nos próprios dados — sem precisar
-adivinhar função química nenhuma — com casos especiais pra oxiácidos
-(o H fica pendurado num oxigênio periférico, não ligado direto ao
-átomo central — mesmo padrão já resolvido antes na Ficha) e pras 2
-moléculas orgânicas com dois carbonos ligados entre si (C₂H₂/C₂H₄).
-
-### Coerência com o resto do app
-
-Aplicado o mesmo padrão já estabelecido nos outros módulos: Balanço
-Atômico, Dados & Estrutura e Verificar/Reiniciar agora ficam ocultos
-também quando Hibridização está ativa (antes só Construtor e
-Nomenclatura escondiam esses painéis) — não fazem sentido pro tema
-deste módulo. O botão "Voltar ao Laboratório" também foi removido da
-view central (mesma correção já aplicada ao Construtor antes).
-
-**Validação:** os 15 compostos testados sistematicamente, um por um,
-em Chromium real (estrutura desenhada sem erro, contagem de átomos
-batendo com a fórmula real) — 0 falhas. Suíte completa de regressão
-revalidada (accordion, Construtor, Nomenclatura, e o novo módulo) —
-0 falhas, 0 erros de JavaScript.
-
-### Diagrama "orbitais puros → orbitais híbridos"
-
-Depois de entregue o módulo, o usuário pediu uma mecânica mais
-próxima da representação espacial REAL dos orbitais atômicos —
-mandou uma imagem de referência mostrando as formas de lóbulo dos
-subníveis d e f (a mesma ilustração clássica de livro-texto: d em
-"folha de trevo", f com formas ainda mais complexas). O módulo até
-então só mostrava a molécula em si (bola-e-vareta) e um resumo em
-texto da contagem de domínios — faltava a peça central da teoria de
-hibridização: MOSTRAR os orbitais puros (s esférico, p em halteres,
-d em folha de trevo) se misturando pra formar os híbridos.
-
-**Arquivo novo dedicado**: `js/render/orbitais-atomicos.js` — funções
-de desenho SVG para cada forma de orbital, com a convenção de cor
-usada na maioria dos livros-texto (e na imagem de referência do
-usuário): os 2 lados de um orbital p/d têm FASES opostas da função de
-onda (azul/ciano positivo, rosa/magenta negativo — um detalhe
-quimicamente real, não só estético); o orbital HÍBRIDO resultante é
-mostrado numa cor quente única (âmbar), já que ele não tem mais essa
-distinção de fase isolada — é o orbital que a ligação realmente usa.
-
-Cobre s/p/d (o suficiente pra sp/sp²/sp³/sp³d/sp³d²) — não cobre f,
-já que nenhuma hibridização do currículo de Ensino Médio/Química
-Geral usa orbital f.
-
-O diagrama mostra, lado a lado: os orbitais puros que entram na
-mistura (contados a partir do próprio tipo de hibridização — sp=1s+1p,
-sp³d²=1s+3p+2d, etc.), uma seta com a "equação" da mistura, e os N
-orbitais híbridos resultantes já apontando nos ângulos geométricos
-corretos (mesmo ângulo mostrado no resto da análise), reforçando
-visualmente que a contagem bate: nº de orbitais que entram = nº de
-híbridos que saem.
-
-**Bug real de espaçamento, achado testando visualmente**: pra tipos
-com 4+ orbitais puros empilhados (sp³: 1s+3p), o último rótulo ficava
-espremido quase em cima da legenda de fase no rodapé do diagrama —
-confirmado no DOM (rótulo do 3º "p" a menos de 5px da legenda).
-Corrigido reservando espaço fixo pro título de cima e pra legenda de
-baixo ANTES de distribuir os itens da coluna, em vez de usar a altura
-total do card — testado nos 5 tipos de hibridização, distância mínima
-da legenda agora ≥19,6px em todos.
-
-**Validação:** os 15 compostos testados sistematicamente contra o
-diagrama de orbitais (contagem de formas/rótulos batendo com a
-receita de cada tipo de hibridização) — 0 falhas. Cores dos 3 tipos
-de orbital (fase +/fase −/híbrido) com contraste ≥5,6:1 contra o
-fundo do card. Suíte completa de regressão revalidada — 0 falhas, 0
-erros de JavaScript.
-
-### Área central grande + animação controlada + compatibilidade total com o catálogo
-
-Depois de entregue o diagrama estático "orbitais puros → híbridos", o
-usuário pediu 3 mudanças ao mesmo tempo: (1) uma área grande no
-centro com gatilhos que disparam uma animação controlada da
-hibridização acontecendo; (2) um menu recolhível na direita pra
-controlar essa animação; (3) o banco de dados compatível com TODOS os
-compostos que já existem no módulo de Nomenclatura, não só os 15
-exemplos curados à mão.
-
-**Compatibilidade total — de 15 pra 53 compostos.** Novo arquivo
-`js/hibridizacao/detector.js`: em vez de reaproveitar o despachante
-de `silqConstruirMolecula()` (que decide a receita certa consultando
-`c.funcao`, categorias da Nomenclatura), o detector analisa
-diretamente a TOPOLOGIA (átomos/ligações já construídos) — conta
-ligações covalentes distintas do átomo mais conectado, calcula pares
-isolados pela valência, e aplica a mesma regra de domínios já usada
-no motor VSEPR do SILQ. Funciona pra qualquer composto do catálogo,
-sem precisar de dado escrito à mão.
-
-Nem todo composto tem hibridização covalente pra mostrar — pares
-iônicos simples (NaCl, CaO) e metais puros (Zn, Al, Cu) não têm
-ligação covalente nenhuma, e o detector corretamente retorna "sem
-hibridização" pra esses 47 casos, em vez de inventar um número.
-Resultado: **53 dos 100 compostos do catálogo** ganham análise
-completa (15 curados com texto pedagógico rico + 38 detectados
-automaticamente, com uma explicação genérica do padrão de domínios).
-
-**2 bugs reais encontrados testando o detector contra os 100
-compostos:**
-1. A regex que decide "esse composto é covalente?" (usada desde a
-   integração original com o SILQ) não reconhecia a frase "iônica
-   **com** caráter covalente" (Al₂O₃) — só cobria "caráter iônico"
-   (ordem inversa). Corrigida.
-2. N₂O₅ e P₂O₅ têm DOIS átomos centrais (2 N, ou na real estrutura
-   P₄O₁₀) — o construtor de molécula deste app foi feito pra 1 único
-   centro por composto (o suficiente pra quase tudo), e nesses 2
-   casos específicos juntava todos os oxigênios num átomo central só,
-   inflando a contagem de domínios pra um valor que não existe de
-   verdade. Excluídos explicitamente do detector automático em vez de
-   mostrar um número errado.
-
-**Diagrama animado, canvas único centrado no núcleo.** O diagrama
-estático anterior (2 colunas lado a lado: "puros" à esquerda,
-"híbridos" à direita) virou uma animação de verdade: em progresso=0,
-todos os orbitais puros (s/p/d) aparecem SOBREPOSTOS no núcleo — a
-"situação de partida"; ao tocar, eles encolhem e desaparecem enquanto
-os híbridos crescem e aparecem já nos ângulos geométricos corretos;
-em progresso=1, só os híbridos ficam. `js/hibridizacao/animacao.js`
-controla um valor de progresso (0 a 1) com um loop de
-`requestAnimationFrame`, com easing suave (ease-in-out cúbico) pra um
-efeito de transição mais natural; `desenharOrbitaisAnimado()` (em
-`js/render/orbitais-atomicos.js`) sabe desenhar UM frame dado esse
-progresso — a separação entre "controlar o progresso" e "desenhar um
-frame" deixa os dois arquivos pequenos e testáveis separadamente.
-
-**Controles**: gatilho grande (▶ Iniciar hibridização) direto na área
-central, pra ficar óbvio que é interativo assim que a análise
-carrega; e um painel recolhível na sidebar-right ("Controles da
-Animação") com pausar, avançar/voltar por etapa (incrementos de
-20%), reiniciar, seletor de velocidade (0,5×/1×/2×) e uma barra de
-progresso clicável (pra pular direto pra qualquer ponto da mistura).
-Os dois botões de play (central e lateral) ficam sincronizados —
-pausar em qualquer um dos dois reflete no outro.
-
-**Validação:** os 53 compostos testados sistematicamente contra o
-diagrama animado e a estrutura molecular — 0 falhas. Todos os
-controles (tocar, pausar, etapa, velocidade, reiniciar, arrastar na
-barra) testados individualmente com valores exatos esperados — todos
-corretos. Contraste do botão de gatilho e da barra de progresso
-≥5,9:1. Suíte completa de regressão revalidada (accordion, os 3
-módulos, e a troca de composto no meio de uma animação em curso
-reseta corretamente) — 0 falhas, 0 erros de JavaScript.
+**Validação:** suíte completa de regressão reescrita pra 2 módulos
+(as verificações de "3 cards"/"Card Redox" viraram "2 cards", e as
+seções inteiras de teste do módulo removido foram excluídas) — 0
+falhas, 0 erros de JavaScript. Testado também que a integração SILQ
+da Nomenclatura (3D + 2D) continua funcionando normalmente depois da
+remoção.
 
 ## Uma curiosidade do maior arquivo de dados da coleção
 
@@ -550,8 +386,7 @@ hoisting entre arquivos.
 | `js/data/ligantes-metais.js` | Dados | Ligantes, metais, prefixos gregos |
 | `js/data/desafios-construtor.js` | Dados | 96 desafios do Construtor |
 | `js/data/regras-iupac.js` | Dados | Regras IUPAC (dado disponível; não renderizado — Guia de Regras removido) |
-| `js/data/reacoes-redox.js` | Dados | **Esvaziado** — substituído por `hibridizacoes-nuvens.js` |
-| `js/data/hibridizacoes-nuvens.js` | Dados | 15 compostos: domínios VSEPR, hibridização, geometrias |
+| `js/data/reacoes-redox.js` | Dados | **Removido** (módulo de Hibridização/Redox foi excluído do app) |
 | `js/a11y/preferencias.js` | Acessibilidade | Tema/contraste/daltonismo |
 | `js/core/dados-adapter.js` | Núcleo | Catálogo bruto → dicionário COMPOSTOS |
 | `js/core/desbloqueio.js` | Núcleo | Compostos desbloqueados (memória) |
@@ -582,11 +417,7 @@ hoisting entre arquivos.
 | `js/modulos/alternar.js` | Módulos | Alternar entre os 3 módulos |
 | `js/construtor/estado-biblioteca.js` | Módulo 2 | Estado + biblioteca de desafios |
 | `js/construtor/bancada.js` | Módulo 2 | Bancada de montagem + validador (sem guia de regras) |
-| `js/redox/logica.js` | Módulo 3 (antigo) | **Esvaziado** — substituído por `js/hibridizacao/logica.js` |
-| `js/hibridizacao/logica.js` | Módulo 3 | Tipos de hibridização, lista de compostos, análise (domínios/geometria/estrutura) |
-| `js/render/orbitais-atomicos.js` | Renderização | Formas de orbitais s/p/d + diagrama animável "puros → híbridos" |
-| `js/hibridizacao/detector.js` | Módulo 3 | Detector genérico de hibridização (compatível com os 100 compostos do catálogo) |
-| `js/hibridizacao/animacao.js` | Módulo 3 | Controlador da animação (progresso, play/pause/etapa/velocidade) |
+| `js/redox/logica.js` | Módulo 3 (antigo) | **Removido** (módulo de Hibridização/Redox foi excluído do app) |
 | `js/redox/eventos-finais.js` | Entrada | Disparo final (≈"main.js") — continua no lugar, não é específico de um módulo |
 | `css/stylesiqi.css` | Estilo | Sincronizado com as atualizações (CSS morto do Guia de Regras removido) |
 
