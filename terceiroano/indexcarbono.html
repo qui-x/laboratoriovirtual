@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#0E1320">
 <!-- MEMORIA DE ACESSIBILIDADE: precisa ser o PRIMEIRO script da pagina -->
 <script src="../a11y.js"></script>
   <meta name="description" content="Explore a hibridização do carbono, a classificação das cadeias carbônicas e as classes de carbono primário a quaternário."/>
@@ -198,5 +200,16 @@
   </div>
   <script src="dadoscarbono.js"></script>
   <script src="scriptcarbono.js"></script>
+<script>
+// Registra o service worker do PWA (cache/offline + instalação como app).
+// Cada página registra o mesmo sw.js da raiz do projeto; o navegador só
+// instala de verdade uma vez, então repetir isso em cada página é seguro.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('../sw.js')
+      .catch(function (erro) { console.warn('Não consegui registrar o service worker (PWA):', erro); });
+  });
+}
+</script>
 </body>
 </html>

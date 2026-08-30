@@ -5,6 +5,8 @@
 <script src="../a11y.js"></script>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="manifest" href="../../manifest.json">
+<meta name="theme-color" content="#0E1320">
   <meta name="description" content="SIMA — Simulador Interativo dos Modelos Atômicos com física rigorosa, tabela periódica completa e recursos de acessibilidade WCAG 2.1 AA."/>
   <title>SIMA — Simulador Interativo dos Modelos Atômicos</title>
   <link rel="stylesheet" href="css/stylesima.css"/>
@@ -631,5 +633,16 @@
 
   <!-- ═══ PONTO DE ENTRADA (deve ser o último) ═══ -->
   <script src="js/main.js"></script>
+<script>
+// Registra o service worker do PWA (cache/offline + instalação como app).
+// Cada página registra o mesmo sw.js da raiz do projeto; o navegador só
+// instala de verdade uma vez, então repetir isso em cada página é seguro.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('../../sw.js')
+      .catch(function (erro) { console.warn('Não consegui registrar o service worker (PWA):', erro); });
+  });
+}
+</script>
 </body>
 </html>
