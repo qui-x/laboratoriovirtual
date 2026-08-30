@@ -24,7 +24,7 @@
 
 // TROQUE pela URL que o Google Apps Script te dá depois do deploy
 // como Web App (termina em "/exec"). Veja LEIA-ME-LOGIN.md.
-var API_URL = 'https://script.google.com/macros/s/AKfycbzOoJMqrEpVjIpdJreayNLfrMPuBQTH7azSW7zbFG_yL-Jg2T2XsSNaUmbEqUh79nSWzQ/exec';
+var API_URL = 'https://script.google.com/macros/s/AKfycbxI3maiU6_YWPdZkUBQS1YTlMpg3kLMl_YJZJN3KDiCcGNkvMux6lpoo-uO981Y2qKj_A/exec';
 
 async function chamarAPI(payload) {
   var resposta = await fetch(API_URL, {
