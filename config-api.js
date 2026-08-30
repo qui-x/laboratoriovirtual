@@ -22,6 +22,7 @@
    NÃO adicione headers em chamarAPI() sem entender essa parte.
    ================================================================ */
 
+
 // TROQUE pela URL que o Google Apps Script te dá depois do deploy
 // como Web App (termina em "/exec"). Veja LEIA-ME-LOGIN.md.
 var API_URL = 'https://script.google.com/macros/s/AKfycbxI3maiU6_YWPdZkUBQS1YTlMpg3kLMl_YJZJN3KDiCcGNkvMux6lpoo-uO981Y2qKj_A/exec';
