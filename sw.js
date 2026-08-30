@@ -24,7 +24,7 @@
      precisam ir na rede de verdade, nunca responder com algo velho.
    ================================================================ */
 
-const CACHE_NAME = 'quimix-cache-v1';
+const CACHE_NAME = 'quimix-cache-v2';
 
 // Alguns arquivos "essenciais" da página inicial são pré-carregados
 // assim que o service worker instala, pra primeira visita offline já
