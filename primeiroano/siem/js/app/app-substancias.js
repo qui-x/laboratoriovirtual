@@ -2,80 +2,40 @@
    CAMADA: APLICAÇÃO — Lista de substâncias
    ARQUIVO: app-substancias.js
    ───────────────────────────────────────────────────────────────
-   Constrói as abas de categoria e a lista de substâncias (com
-   busca), e trata a seleção de uma substância: recalibra o slider
-   de temperatura, atualiza o painel de dados e reinicia a simulação
-   para a nova substância.
-   Adiciona a App.prototype: _buildSubCatTabs, _buildList,
-   _selectEntry.
+   Constrói a lista de substâncias (com busca por nome/fórmula, sem
+   classificação por categoria química), e trata a seleção de uma
+   substância: recalibra o slider de temperatura, atualiza o painel
+   de dados e reinicia a simulação para a nova substância.
+   Adiciona a App.prototype: _buildList, _selectEntry.
    Depende de: app/app-core.js, data/catalogo-substancias.js
-               (CATALOG).
+               (CATALOG). O campo `cat` de cada substância continua
+               nos dados, mas não é mais usado para classificar ou
+               filtrar a interface.
 ═══════════════════════════════════════════════════════════════ */
 
 'use strict';
 
-App.prototype._buildSubCatTabs = function() {
-    const wrap=document.getElementById('sub-cat-tabs');
-    if (!wrap) return;
-    // Categorias na ordem em que aparecem no catálogo (sem duplicar)
-    const cats=[];
-    for (const e of CATALOG) if (!cats.includes(e.cat)) cats.push(e.cat);
-
-    wrap.innerHTML='';
-    const makeBtn=(label,cat)=>{
-      const btn=document.createElement('button');
-      btn.type='button'; btn.className='mol-cat-btn'+(cat==='all'?' active-cat':'');
-      btn.dataset.cat=cat; btn.textContent=label;
-      btn.setAttribute('role','tab');
-      btn.setAttribute('aria-selected', cat==='all'?'true':'false');
-      btn.addEventListener('click',()=>{
-        this._activeSubCat=cat;
-        wrap.querySelectorAll('.mol-cat-btn').forEach(b=>{
-          const isActive=b===btn;
-          b.classList.toggle('active-cat',isActive);
-          b.setAttribute('aria-selected',isActive?'true':'false');
-        });
-        const search=document.getElementById('sub-search');
-        this._buildList(search?search.value:'');
-      });
-      return btn;
-    };
-    wrap.appendChild(makeBtn('Todas','all'));
-    cats.forEach(cat=>wrap.appendChild(makeBtn(cat,cat)));
-  };
-
-  App.prototype._buildList = function(filter='') {
+App.prototype._buildList = function(filter='') {
     const list=document.getElementById('sub-list');
     const q=filter.toLowerCase().trim();
     const mapaEstado = { solid:'solido', liquid:'liquido', gas:'gasoso' };
-    const cats={};
+    let visiveis = 0;
+    list.innerHTML='';
     for (const e of CATALOG) {
-      if (this._activeSubCat && this._activeSubCat!=='all' && e.cat!==this._activeSubCat) continue;
-      // Filtro de MÓDULO (Gases/Líquidos/Sólidos, sidebar esquerda) — além
-      // do filtro de categoria química (abas acima da lista). Com um
+      // Filtro de MÓDULO (Gases/Líquidos/Sólidos, sidebar esquerda): com um
       // módulo ativo, só aparecem substâncias daquele estado físico de
       // referência (25°C, 1atm — ver estadoPadrao() em termodinamica.js).
       if (this._activeModulo && mapaEstado[estadoPadrao(e)] !== this._activeModulo) continue;
       if (q && !e.name.toLowerCase().includes(q) && !e.formula.toLowerCase().includes(q)) continue;
-      if (!cats[e.cat]) cats[e.cat]=[];
-      cats[e.cat].push(e);
-    }
-    list.innerHTML='';
-    let visiveis = 0;
-    for (const [cat,items] of Object.entries(cats)) {
-      const hdr=document.createElement('li'); hdr.className='sub-group-hdr'; hdr.setAttribute('role','presentation'); hdr.textContent=cat;
-      list.appendChild(hdr);
-      for (const e of items) {
-        visiveis++;
-        const li=document.createElement('li');
-        li.className='sub-item'; li.setAttribute('role','option'); li.setAttribute('tabindex','0');
-        li.innerHTML=`<span class="si-dot" style="background:${e.color};color:${e.color}"></span>
-          <span class="si-formula">${e.formula}</span>
-          <span class="si-name">${e.name}</span>`;
-        li.addEventListener('click',()=>this._selectEntry(e,li));
-        li.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' ')this._selectEntry(e,li);});
-        list.appendChild(li);
-      }
+      visiveis++;
+      const li=document.createElement('li');
+      li.className='sub-item'; li.setAttribute('role','option'); li.setAttribute('tabindex','0');
+      li.innerHTML=`<span class="si-dot" style="background:${e.color};color:${e.color}"></span>
+        <span class="si-formula">${e.formula}</span>
+        <span class="si-name">${e.name}</span>`;
+      li.addEventListener('click',()=>this._selectEntry(e,li));
+      li.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' ')this._selectEntry(e,li);});
+      list.appendChild(li);
     }
     if (visiveis === 0) {
       const vazio = document.createElement('li');

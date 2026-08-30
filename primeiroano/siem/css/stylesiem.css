@@ -217,19 +217,6 @@ background:var(--bg1);overflow-y:auto;padding:.5rem;flex-shrink:0;display:flex;f
 .search-input:focus{border-color:var(--bdr-a);}
 .search-icon{position:absolute;right:.5rem;top:50%;transform:translateY(-50%);color:var(--tx3);pointer-events:none;}
 
-/* ── Abas de categoria — mesma mecânica do SILQ (.mol-cat-tabs/.mol-cat-btn):
-   fileira de pills que filtram a lista, com "Todas" sempre disponível e
-   seleção exclusiva (clicar numa categoria desmarca a anterior). ── */
-.mol-cat-tabs{display:flex;flex-wrap:wrap;gap:3px;margin:.4rem 0 .3rem;}
-.mol-cat-btn{
-  padding:3px 8px;border-radius:5px;border:1px solid var(--bdr);
-  background:var(--bg3);color:var(--tx2);font-size:.63rem;font-weight:600;
-  cursor:pointer;transition:all .15s;min-height:24px;font-family:var(--font);
-}
-.mol-cat-btn:hover{background:var(--bg1);color:var(--tx1);border-color:var(--cyan);}
-.mol-cat-btn.active-cat{background:linear-gradient(135deg,var(--cyan2),var(--cyan));color:#04101a;border-color:transparent;}
-.mol-cat-btn:focus-visible{outline:2px solid var(--cyan);outline-offset:2px;}
-
 .sub-list{list-style:none;display:flex;flex-direction:column;gap:.18rem;max-height:280px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--bdr) transparent;}
 .sub-list::-webkit-scrollbar{width:3px;}
 .sub-list::-webkit-scrollbar-thumb{background:var(--bdr);}
@@ -241,9 +228,6 @@ background:var(--bg1);overflow-y:auto;padding:.5rem;flex-shrink:0;display:flex;f
 .si-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 4px currentColor;}
 .si-formula{font-family:var(--mono);font-size:.76rem;color:var(--cyan);font-weight:600;min-width:50px;}
 .si-name{font-size:.72rem;color:var(--tx2);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sub-group-hdr{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--tx3);padding:.4rem .4rem .12rem;list-style:none;pointer-events:none;border-top:1px solid var(--bdr);margin-top:.1rem;}
-.sub-group-hdr:first-child{border-top:none;margin-top:0;}
-
 .ctrl-group{display:flex;flex-direction:column;gap:.22rem;}
 .ctrl-label-row{display:flex;justify-content:space-between;align-items:baseline;}
 .ctrl-label{font-size:.68rem;color:var(--tx2);}

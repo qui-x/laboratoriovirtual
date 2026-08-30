@@ -2,14 +2,17 @@
    CAMADA: INTERFACE (renderização + interação)
    ARQUIVO: painel-substancias.js
    ───────────────────────────────────────────────────────────────
-   Constrói a lista de substâncias do painel esquerdo (com abas de
-   categoria) e trata a seleção de uma substância: reseta pressão e
-   volume para os valores padrão, recalibra o slider de temperatura
-   para a nova substância e dispara uma renderização completa.
-   A lista combina dois filtros: a aba de categoria química (acima da
-   lista) e o módulo de estado físico ativo na sidebar esquerda —
-   Gases/Líquidos/Sólidos, ver ui/painel-modulos.js — através de
-   estado.modulo e da função pura estadoPadrao() (core/fisica.js).
+   Constrói a lista de substâncias do painel esquerdo (lista única,
+   sem classificação por categoria química) e trata a seleção de uma
+   substância: reseta pressão e volume para os valores padrão,
+   recalibra o slider de temperatura para a nova substância e dispara
+   uma renderização completa.
+   A lista é filtrada apenas pelo módulo de estado físico ativo na
+   sidebar esquerda — Gases/Líquidos/Sólidos, ver ui/painel-modulos.js
+   — através de estado.modulo e da função pura estadoPadrao()
+   (core/fisica.js). O campo `categoria` de cada substância (ver
+   data/catalogo-substancias.js) continua nos dados, mas não é mais
+   usado para classificar/filtrar a interface.
    Depende de: data/catalogo-substancias.js, core/estado-simulacao.js,
                core/fisica.js (estadoPadrao, calcularTransicoesEfetivas),
                ui/dom-cache.js, ui/render-temperatura.js
@@ -88,60 +91,26 @@ function selecionarSubstancia(sub) {
   atualizarSimulador();
 }
  
-/* Categoria química (aba) atualmente selecionada acima da lista — lembrada
-   aqui para que ativar/desativar um módulo físico (Gases/Líquidos/Sólidos,
-   sidebar esquerda) possa re-renderizar a lista sem "esquecer" a aba em
-   que o usuário estava. Ver ui/painel-modulos.js. */
-var _categoriaAtiva = 'Todas';
-
 /* ═══════════════════════════════════════════════════════
    CONSTRUIR PAINEL DE SUBSTÂNCIAS
 ═══════════════════════════════════════════════════════ */
 function construirPainelSubstancia() {
   if (!D.subLista) return;
-  var tabs = document.getElementById('sub-cat-tabs');
-  // Coletar categorias únicas
-  var cats = ['Todas'];
-  for (var i = 0; i < SUBSTANCIAS.length; i++) {
-    if (cats.indexOf(SUBSTANCIAS[i].categoria) === -1)
-      cats.push(SUBSTANCIAS[i].categoria);
-  }
-  // Criar abas
-  if (tabs) {
-    tabs.innerHTML = '';
-    cats.forEach(function(cat) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'sub-cat-tab' + (cat === 'Todas' ? ' ativa' : '');
-      btn.textContent = cat;
-      btn.setAttribute('role','tab');
-      btn.addEventListener('click', function() {
-        tabs.querySelectorAll('.sub-cat-tab').forEach(function(b){ b.classList.remove('ativa'); });
-        btn.classList.add('ativa');
-        _categoriaAtiva = cat;
-        renderizarLista(cat);
-      });
-      tabs.appendChild(btn);
-    });
-  }
-  renderizarLista('Todas');
+  renderizarLista();
 }
 
-function renderizarLista(filtro) {
+function renderizarLista() {
   if (!D.subLista) return;
-  if (filtro === undefined) filtro = _categoriaAtiva;
   D.subLista.innerHTML = '';
   var visiveis = 0;
   for (var i = 0; i < SUBSTANCIAS.length; i++) {
     var s = SUBSTANCIAS[i];
-    if (filtro !== 'Todas' && s.categoria !== filtro) continue;
     var estadoAgora = estadoPadrao(s);
-    /* Filtro de MÓDULO (Gases/Líquidos/Sólidos, sidebar esquerda) — além
-       do filtro de categoria química (abas acima da lista). Os dois se
-       combinam: com um módulo ativo, só aparecem substâncias daquele
-       estado físico de referência; dentro delas, a aba de categoria
-       ainda pode restringir mais (ex.: módulo "Gases" + aba "Gases
-       Nobres" mostra só He, Ne, Ar, Kr, Xe, Rn). */
+    /* Filtro de MÓDULO (Gases/Líquidos/Sólidos, sidebar esquerda): com um
+       módulo ativo, só aparecem substâncias daquele estado físico de
+       referência (25°C, 1 atm). Não há mais classificação por categoria
+       química — a lista mostra todas as substâncias do estado físico
+       escolhido, em uma lista só. */
     if (estado.modulo && estadoAgora !== estado.modulo) continue;
     visiveis++;
     /* Ícone SVG (ver <defs> de <symbol> no indexsime.html) + abreviação —

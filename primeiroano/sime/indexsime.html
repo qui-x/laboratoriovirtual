@@ -437,9 +437,10 @@
  
       <!-- ══════════ PAINEL 1 — SUBSTÂNCIA ══════════
            Movido da antiga sidebar esquerda: mesmo markup e mesmo JS
-           (ui/painel-substancias.js) — só o LUGAR na página mudou. Os
-           ids (sub-cat-tabs, sub-lista) continuam os mesmos, então nada
-           no JS precisou mudar por causa da troca de coluna. -->
+           (ui/painel-substancias.js) — só o LUGAR na página mudou.
+           As abas de categoria química foram removidas: a lista agora
+           mostra todas as substâncias do módulo ativo, sem classificação
+           por categoria. -->
       <section class="panel" data-open="true">
         <button class="panel-header" id="hdr-substancia" type="button" aria-expanded="true" aria-controls="body-substancia">
           <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
@@ -448,7 +449,6 @@
         </button>
         <div class="panel-body" id="body-substancia" role="region" aria-labelledby="hdr-substancia">
           <p class="mode-define">Escolha a substância a estudar. Fusão, ebulição e comportamento sob pressão são os valores <strong>experimentais reais</strong> dela — todo o resto do simulador se recalibra a partir daqui. Ative um módulo à esquerda para filtrar por estado físico.</p>
-          <div class="sub-cat-tabs" id="sub-cat-tabs" role="tablist" aria-label="Filtrar por categoria"></div>
           <ul id="sub-lista" class="sub-lista" role="listbox" aria-label="Substâncias disponíveis"></ul>
         </div>
       </section>

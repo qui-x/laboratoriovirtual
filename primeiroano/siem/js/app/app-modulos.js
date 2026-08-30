@@ -124,17 +124,15 @@ App.prototype._initModulos = function() {
       }
       // Reaproveita a mesma seleção de sempre: busca o <li> que
       // representa essa substância na lista (pode não existir ainda
-      // se o filtro de categoria da aba ativa não bater — nesse caso
-      // simplesmente troca a substância sem destacar nenhum <li>).
+      // se houver texto no campo de busca escondendo essa substância —
+      // nesse caso, limpa a busca e tenta de novo).
       const liExistente = Array.from(document.querySelectorAll('#sub-list .sub-item'))
         .find((li) => li.querySelector('.si-formula')?.textContent === entry.formula);
       if (liExistente) {
         this._selectEntry(entry, liExistente);
       } else {
-        // Substância filtrada para fora da aba de categoria atual:
-        // volta a aba para "Todas" e tenta de novo.
-        const tabTodas = document.querySelector('#sub-cat-tabs .mol-cat-btn[data-cat="all"]');
-        if (tabTodas) tabTodas.click();
+        const campoBusca = document.getElementById('sub-search');
+        if (campoBusca) { campoBusca.value = ''; this._buildList(''); }
         const li = Array.from(document.querySelectorAll('#sub-list .sub-item'))
           .find((el) => el.querySelector('.si-formula')?.textContent === entry.formula);
         if (li) this._selectEntry(entry, li);

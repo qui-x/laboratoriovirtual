@@ -341,21 +341,6 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* ── Painel de Substância ───────────────────────────── */
-.sub-cat-tabs { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: .35rem; }
-.sub-cat-tab {
-  padding: 3px 8px; border-radius: 5px;
-  border: 1px solid var(--bdr); background: var(--bg3);
-  color: var(--tx2); font-size: .62rem; font-weight: 600;
-  cursor: pointer; transition: all .15s; font-family: var(--font);
-}
-.sub-cat-tab:hover { background: var(--bg1); color: var(--tx1); border-color: var(--cyan); }
-.sub-cat-tab.ativa {
-  /* o segundo stop ficou no ciano da paleta antiga (#0090bb) quando o
-     primeiro passou a var(--cyan). Agora e o proprio acento escurecido a
-     60%, entao o gradiente acompanha o card. Texto #04101a: 5,62:1. */
-  background: linear-gradient(135deg,var(--cyan),#5C9498);
-  color: #04101a; border-color: transparent;
-}
 /* Lista de substâncias: altura relativa ao painel */
 .sub-lista {
   list-style: none; display: flex; flex-direction: column; gap: .15rem;

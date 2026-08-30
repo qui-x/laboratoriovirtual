@@ -35,7 +35,7 @@ class App {
     this.canvas=document.getElementById('sim-canvas');
     this.sim=new Simulation(this.canvas);
     this.phaseDiagram=new PhaseDiagram(document.getElementById('phase-diagram'), this.sim);
-    this._resize(); this._activeSubCat='all'; this._activeModulo=null; this._buildSubCatTabs(); this._buildList(); this._initModulos(); this._bindEvents(); this._initPanels(); this._initExpand(); this._initMobileMenu(); this._loop();
+    this._resize(); this._activeModulo=null; this._buildList(); this._initModulos(); this._bindEvents(); this._initPanels(); this._initExpand(); this._initMobileMenu(); this._loop();
     // Exposto globalmente para o accessibility.js poder redesenhar o
     // diagrama de fases nativamente dentro do canvas clonado do modal de
     // expansão, em vez de copiar pixels esticados do canvas pequeno
