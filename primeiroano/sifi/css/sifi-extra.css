@@ -77,8 +77,7 @@ body.light-mode #sandbox {
 .mol-panel-icon svg,
 .btn-icon svg,
 #module-indicator-icon svg,
-#module-indicator-clear svg,
-.mobile-menu-btn svg {
+#module-indicator-clear svg {
   width: 16px;
   height: 16px;
   display: block;

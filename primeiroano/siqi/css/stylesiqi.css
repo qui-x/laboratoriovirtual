@@ -229,31 +229,31 @@ body { flex:1; overflow:hidden; font-size:calc(13px * var(--a11y-font-scale)); }
 /* ── Header ──────────────────────────────────────────────────── */
 .app-header { height:var(--hh); background:var(--bg1); border-bottom:1px solid var(--bdr);
   display:flex; align-items:center; justify-content:space-between;
-  padding:0 1.1rem; flex-shrink:0; gap:1rem; }
-.header-brand { display:flex; align-items:center; gap:.55rem; min-width:0; }
+  padding:0 1.1rem; flex-shrink:0; }
+.header-brand { display:flex; align-items:center; gap:.6rem; min-width:0; }
 .header-brand > div { min-width:0; }
-.header-back { display:inline-flex; align-items:center; gap:.3rem;
-  background:transparent; border:1px solid var(--bdr); color:var(--tx1);
-  border-radius:6px; padding:.3rem .55rem; margin-right:.5rem;
-  font-size:12.48px; font-weight:600; text-decoration:none; white-space:nowrap;
+.header-back { display:flex; align-items:center; gap:.3rem;
+  background:transparent; border:1px solid var(--bdr); color:var(--tx2);
+  border-radius:var(--rs); padding:.3rem .55rem; margin-right:.5rem;
+  font-size:.78rem; font-weight:600; letter-spacing:.02em; text-decoration:none; white-space:nowrap;
   flex-shrink:0; transition:color .15s, border-color .15s; }
 .header-back:hover, .header-back:focus-visible { color:var(--tx1); border-color:var(--coral); }
-.header-logo { font-size:22.4px; line-height:1; color:var(--header-accent);
+.header-logo { font-size:1.4rem; line-height:1; color:var(--header-accent);
   display:flex; animation:pulse-logo 3s ease-in-out infinite; }
-.header-logo svg { width:22.4px; height:22.4px; }
+.header-logo svg { width:1.4rem; height:1.4rem; }
 @keyframes pulse-logo {
   0%,100% { filter:drop-shadow(0 0 5px var(--header-accent)); }
   50%      { filter:drop-shadow(0 0 14px var(--coral2)); }
 }
-.header-brand h1 { font-size:16px; font-weight:700; letter-spacing:.06em;
+.header-brand h1 { font-size:1rem; font-weight:700; letter-spacing:.06em;
   color:var(--header-accent); animation:pulse-txt 3s ease-in-out infinite; }
 @keyframes pulse-txt {
   0%,100% { text-shadow:0 0 5px var(--header-accent); }
   50%      { text-shadow:0 0 14px var(--coral2); }
 }
-.header-sub { font-size:9.92px; color:var(--tx1); white-space:nowrap;
+.header-sub { font-size:.62rem; color:var(--tx2); white-space:nowrap;
   overflow:hidden; text-overflow:ellipsis; max-width:100%; }
-.header-right { display:flex; align-items:center; gap:.6rem; flex-shrink:0; }
+.header-right { display:flex; align-items:center; gap:.4rem; flex-shrink:0; }
 
 /* Pill de estado (mesmo padrão do SIEM, cores adaptadas para funções) */
 .state-pill { font-size:.64rem; font-weight:700; letter-spacing:.06em;
@@ -265,9 +265,9 @@ body { flex:1; overflow:hidden; font-size:calc(13px * var(--a11y-font-scale)); }
 .state-pill.oxido   { background:var(--oxido-bg); color:var(--oxido-col); border-color:var(--oxido-col); }
 
 .mobile-menu-btn { display:none; align-items:center; justify-content:center;
-  background:transparent; border:1px solid var(--bdr);
-  color:var(--tx1); border-radius:6px; padding:.3rem .55rem;
-  font-size:.9rem; cursor:pointer; }
+  background:var(--bg2); border:1px solid var(--bdr);
+  color:var(--tx2); border-radius:var(--rs); padding:4.8px 8.8px;
+  font-size:14.4px; cursor:pointer; }
 .mobile-menu-btn:hover, .mobile-menu-btn:focus-visible {
   color:var(--tx1); border-color:var(--coral); outline:2px solid var(--coral); outline-offset:2px; }
 
@@ -1264,9 +1264,8 @@ html[data-motion="true"] .rxb-acerto-screen
 }
 
 /* ── 1100: desktop compact — sidebars apertam ────────────────── */
-@media (max-width:1100px){
+@media (max-width:960px){
   :root{ --sl:clamp(220px,22vw,290px); --sr:clamp(190px,19vw,250px); }
-  .header-sub { font-size:.56rem; max-width:34vw; }
   .rxb-root { padding:1rem 1rem .8rem; }
   :root{
     --rxb-mol-fs:.95rem;
@@ -1278,8 +1277,6 @@ html[data-motion="true"] .rxb-acerto-screen
 
 /* ── 900: tablet landscape / small desktop ───────────────────── */
 @media (max-width:900px){
-  :root{ --hh:48px; }
-
   /* Sidebars viram off-canvas deslizante */
   .mobile-menu-btn { display:flex !important; }
   .sidebar {
@@ -1291,12 +1288,6 @@ html[data-motion="true"] .rxb-acerto-screen
   }
   .sidebar--right { left:auto; right:0; transform:translateX(110%); }
   .sidebar.mobile-open  { transform:translateX(0); }
-
-
-  /* Header compacto */
-  .header-back span { display:none; }
-  .header-back { padding:.3rem .45rem; }
-  .header-brand h1 { font-size:.92rem; }
   .state-pill { display:none; }
 
   /* Builder: elementos menores */
@@ -1313,14 +1304,6 @@ html[data-motion="true"] .rxb-acerto-screen
 
 /* ── 640: tablet portrait / mobile landscape ─────────────────── */
 @media (max-width:640px){
-  :root{ --hh:44px; }
-
-  /* Header mínimo */
-  .header-back { display:none; }
-  .header-logo svg { width:1.1rem; height:1.1rem; }
-  .header-brand h1 { font-size:.82rem; letter-spacing:.03em; }
-  .mobile-menu-btn { padding:.25rem .45rem; font-size:.82rem; }
-
   /* Builder: equação em coluna no mobile */
   .rxb-eq-row {
     flex-direction:column; align-items:center;
@@ -1372,13 +1355,6 @@ html[data-motion="true"] .rxb-acerto-screen
 
 /* ── 480: mobile portrait ─────────────────────────────────────── */
 @media (max-width:480px){
-  :root{ --hh:40px; }
-
-  /* Header mínimo absoluto */
-  .header-brand h1 { font-size:.78rem; }
-  .header-logo { font-size:1.1rem; }
-  .mobile-menu-btn { padding:.22rem .38rem; font-size:.78rem; }
-
   /* Builder ainda menor */
   .rxb-root { padding:.65rem .7rem .5rem; }
   .rxb-mol-formula { font-size:.82rem; padding:.26rem .55rem; border-radius:7px; }
@@ -1416,8 +1392,6 @@ html[data-motion="true"] .rxb-acerto-screen
 
 /* ── 360: mobile pequeno / fold ───────────────────────────────── */
 @media (max-width:360px){
-  .header-brand h1 { font-size:.72rem; }
-  .header-logo { display:none; }
   .rxb-root { padding:.5rem .55rem .4rem; }
   .rxb-mol-formula { font-size:.76rem; padding:.22rem .48rem; }
   .rxb-slot { min-width:70px; min-height:62px; }
@@ -1808,59 +1782,21 @@ html[data-motion="true"] .rxb-acerto-screen
 
 
 /* ================================================================
-   CORREÇÃO — BOTÃO "← 1º Ano" EM TELAS PEQUENAS
+   PADRONIZAÇÃO SIMA — CABEÇALHO EM TELAS PEQUENAS
    ================================================================
-   PROBLEMA: em telas estreitas a seta e o texto "1º Ano" sumiam.
-
-   Havia uma inversão de prioridade nas media queries: o SUBTÍTULO
-   decorativo ("Simulador Interativo de...") era preservado, apenas
-   encolhido para ~9px, enquanto o RÓTULO DE NAVEGAÇÃO — a única
-   forma de voltar dentro da página — era apagado com display:none.
-   O que é essencial cedeu espaço para o que é enfeite.
-
-   REGRA GERAL: em tela pequena, o primeiro item a sair é a
-   decoração. Navegação é o último. Nunca o primeiro.
-
-   Este bloco está no FIM do arquivo de propósito: em CSS, entre
-   regras de mesma especificidade, a última escrita vence. Por isso
-   ele corrige as media queries acima sem precisar de !important e
-   sem você ter que editá-las.
+   Histórico: havia um bug de inversão de prioridade nas media queries
+   (o SUBTÍTULO decorativo era preservado, encolhido, enquanto o RÓTULO
+   DE NAVEGAÇÃO "1º Ano" — a única forma de voltar dentro da página —
+   era apagado com display:none) e depois um bloco de correção. Nenhum
+   dos dois existe no SIMA: lá, `.header-brand > div { min-width: 0 }`
+   (regra base, sem media query) já deixa o bloco título+subtítulo
+   encolher, e `.header-sub` trunca sozinho com reticências
+   (overflow:hidden + text-overflow:ellipsis + max-width:100%, também
+   na base). O botão de voltar tem flex-shrink:0 e por isso nunca
+   encolhe — não precisa de proteção extra em nenhuma largura. A altura
+   do cabeçalho (--hh) também parou de variar por largura — no SIMA
+   ela é sempre a mesma, em qualquer tela.
    ================================================================ */
-
-@media (max-width: 900px) {
-
-  /* 1. O rótulo volta. Uma seta sozinha não diz PARA ONDE leva —
-        quem chega direto por um link não tem como adivinhar. */
-  .header-back span { display: inline; }
-
-  /* 2. Quem cede espaço é o subtítulo. Ele sai da tela, mas
-        continua sendo lido por leitores de tela (não use
-        display:none aqui: isso apagaria a informação também para
-        quem usa NVDA, VoiceOver ou TalkBack). */
-  .header-sub {
-    position: absolute;
-    width: 1px; height: 1px;
-    margin: -1px; padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  /* 3. O botão não encolhe junto com o resto. */
-  .header-back {
-    display: inline-flex;
-    padding: .35rem .55rem;
-    font-size: 12.48px;
-  }
-}
-
-/* 4. Em telas muito estreitas o botão continua existindo.
-      "1º Ano" tem 6 caracteres: cabe em 320px depois que o
-      subtítulo saiu. */
-@media (max-width: 640px) {
-  .header-back { display: inline-flex; }
-  .header-back span { display: inline; }
-}
 
 /* 5. Alvo de toque de 44x44px em dedo (WCAG 2.5.5).
       O truque: a área clicável cresce com um ::after invisível e

@@ -185,7 +185,7 @@ body.high-contrast .axis-label  { fill: var(--hc-fg); }
   flex-shrink:0;
 }
 .header-brand{ display:flex; align-items:center; gap:.6rem; min-width:0; }
-.header-actions{ display:flex; align-items:center; gap:.5rem; flex-shrink:0; }
+.header-actions{ display:flex; align-items:center; gap:.4rem; flex-shrink:0; }
 .header-back{
   display:inline-flex; align-items:center; gap:.3rem;
   background:transparent; border:1px solid var(--border-color); color: var(--text-muted);
@@ -205,10 +205,11 @@ body.high-contrast .axis-label  { fill: var(--hc-fg); }
 /* Botão de menu mobile (abre a sidebar como gaveta em telas estreitas) */
 .mobile-menu-btn {
   display:none; align-items:center; justify-content:center;
-  background:transparent; border:1px solid var(--border-color);
-  color:var(--text-muted); border-radius:6px; padding:.3rem .55rem;
-  font-size:.9rem; cursor:pointer;
+  background:var(--bg-card); border:1px solid var(--border-color);
+  color:var(--text-muted); border-radius:6px; padding:4.8px 8.8px;
+  font-size:14.4px; cursor:pointer;
 }
+.mobile-menu-btn span[data-icon]{ display:flex; align-items:center; justify-content:center; line-height:1; }
 .mobile-menu-btn:hover, .mobile-menu-btn:focus-visible {
   color:var(--text-primary); border-color:var(--accent);
   outline:2px solid var(--accent); outline-offset:2px;
@@ -244,6 +245,31 @@ body.high-contrast .header-brand h1{ color:var(--header-accent); text-shadow:non
 
 /* ============================================================  RESET  */
 *{box-sizing:border-box;}
+
+/* =====================================================================
+   BUG CORRIGIDO: faltava esta classe. Todo ícone deste app é injetado
+   via SIFI.aplicarIcones() (js/ui/icones.js), que troca o innerHTML de
+   qualquer elemento com data-icon="nome" pelo <svg> correspondente —
+   um <svg viewBox="0 0 24 24" ...> SEM atributos width/height (o
+   tamanho deveria vir do CSS). Sem uma regra dando esse tamanho, um
+   <svg> sem width/height cai no valor padrão do navegador para
+   elementos substituídos (300×150px) — gigante, muito maior que
+   qualquer botão ou cabeçalho de painel que deveria contê-lo. Isso
+   afetava TODOS os 19 usos de data-icon no app (painéis dos 3 módulos,
+   botão fechar, lixeira, biblioteca) — não só os botões de abrir as
+   gavetas em tela estreita, onde ficava mais visível por serem os
+   únicos elementos escondidos por padrão (display:none) e só
+   aparecerem ao redimensionar/testar em mobile.
+   width/height:1em faz o ícone acompanhar o tamanho de fonte do
+   elemento-pai (.panel-icon, .mobile-menu-btn...), exatamente como já
+   funciona nos outros 6 simuladores da família.
+   ===================================================================== */
+.icon{
+  width:1em; height:1em; display:inline-block;
+  vertical-align:-.125em; flex-shrink:0;
+}
+.panel-icon .icon{ width:1.05em; height:1.05em; vertical-align:-.15em; }
+
 html {
   font-size: calc(16px * var(--font-scale));
 }
@@ -1479,8 +1505,6 @@ body.high-contrast .mol-cat-btn.active-cat { background: var(--hc-fg) !important
   .canvas-area{width:100%;height:calc(100vh - 54px); height:calc(100dvh - 54px);}
   .pt-cell .c-name{display:none;}
   .panel-header { padding: 7px 9px; font-size: .76rem; }
-  .app-header{ padding:6px 10px; }
-  .header-back span{ display:none; }
 }
 
 /* Touch devices */
@@ -1585,59 +1609,19 @@ body.high-contrast .pt-legend-dot {
 
 
 /* ================================================================
-   CORREÇÃO — BOTÃO "← 1º Ano" EM TELAS PEQUENAS
+   PADRONIZAÇÃO SIMA — CABEÇALHO EM TELAS PEQUENAS
    ================================================================
-   PROBLEMA: em telas estreitas a seta e o texto "1º Ano" sumiam.
-
-   Havia uma inversão de prioridade nas media queries: o SUBTÍTULO
-   decorativo ("Simulador Interativo de...") era preservado, apenas
-   encolhido para ~9px, enquanto o RÓTULO DE NAVEGAÇÃO — a única
-   forma de voltar dentro da página — era apagado com display:none.
-   O que é essencial cedeu espaço para o que é enfeite.
-
-   REGRA GERAL: em tela pequena, o primeiro item a sair é a
-   decoração. Navegação é o último. Nunca o primeiro.
-
-   Este bloco está no FIM do arquivo de propósito: em CSS, entre
-   regras de mesma especificidade, a última escrita vence. Por isso
-   ele corrige as media queries acima sem precisar de !important e
-   sem você ter que editá-las.
+   Histórico: havia um bug de inversão de prioridade nas media queries
+   (o SUBTÍTULO decorativo era preservado, encolhido, enquanto o RÓTULO
+   DE NAVEGAÇÃO "1º Ano" — a única forma de voltar dentro da página —
+   era apagado com display:none) e depois um bloco de correção. Nenhum
+   dos dois existe no SIMA: lá, `.header-brand > div { min-width: 0 }`
+   (regra base, sem media query) já deixa o bloco título+subtítulo
+   encolher, e `.header-sub` trunca sozinho com reticências
+   (overflow:hidden + text-overflow:ellipsis + max-width:100%, também
+   na base). O botão de voltar tem flex-shrink:0 e por isso nunca
+   encolhe — não precisa de proteção extra em nenhuma largura.
    ================================================================ */
-
-@media (max-width: 900px) {
-
-  /* 1. O rótulo volta. Uma seta sozinha não diz PARA ONDE leva —
-        quem chega direto por um link não tem como adivinhar. */
-  .header-back span { display: inline; }
-
-  /* 2. Quem cede espaço é o subtítulo. Ele sai da tela, mas
-        continua sendo lido por leitores de tela (não use
-        display:none aqui: isso apagaria a informação também para
-        quem usa NVDA, VoiceOver ou TalkBack). */
-  .header-sub {
-    position: absolute;
-    width: 1px; height: 1px;
-    margin: -1px; padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  /* 3. O botão não encolhe junto com o resto. */
-  .header-back {
-    display: inline-flex;
-    padding: .35rem .55rem;
-    font-size: 12.48px;
-  }
-}
-
-/* 4. Em telas muito estreitas o botão continua existindo.
-      "1º Ano" tem 6 caracteres: cabe em 320px depois que o
-      subtítulo saiu. */
-@media (max-width: 640px) {
-  .header-back { display: inline-flex; }
-  .header-back span { display: inline; }
-}
 
 /* 5. Alvo de toque de 44x44px em dedo (WCAG 2.5.5).
       O truque: a área clicável cresce com um ::after invisível e

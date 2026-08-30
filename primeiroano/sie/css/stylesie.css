@@ -150,23 +150,23 @@ html[data-reading="on"] .sb-subtitle { font-size: 13px; }
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 1.1rem;
-  position: relative; z-index: 10; flex-shrink: 0;
+  flex-shrink: 0;
 }
 .header-brand { display: flex; align-items: center; gap: .6rem; min-width: 0; }
 .header-back {
-  display: inline-flex; align-items: center; gap: .3rem;
+  display: flex; align-items: center; gap: .3rem;
   background: transparent; border: 1px solid var(--border);
-  color: var(--text-secondary); border-radius: 6px; padding: .3rem .55rem; margin-right: .5rem;
-  font-family: var(--font-body); font-size: 12.48px; font-weight: 600;
+  color: var(--text-secondary); border-radius: var(--radius-sm); padding: .3rem .55rem; margin-right: .5rem;
+  font-family: var(--font-body); font-size: .78rem; font-weight: 600; letter-spacing: .02em;
   text-decoration: none; transition: color .15s, border-color .15s; flex-shrink: 0;
 }
 .header-back:hover, .header-back:focus-visible { color: var(--text-primary); border-color: var(--header-accent); }
 .header-back svg { width: 16px; height: 16px; flex-shrink: 0; }
 .header-logo {
-  font-size: 22.4px; color: var(--header-accent); display: flex; flex-shrink: 0;
+  font-size: 1.4rem; color: var(--header-accent); display: flex; flex-shrink: 0;
   animation: pulse-logo-sie 3s ease-in-out infinite;
 }
-.header-logo svg { width: 22.4px; height: 22.4px; }
+.header-logo svg { width: 1.4rem; height: 1.4rem; }
 @keyframes pulse-logo-sie {
   0%,100%{ filter:drop-shadow(0 0 5px var(--header-accent)); }
   50%     { filter:drop-shadow(0 0 14px var(--header-accent)); }
@@ -622,10 +622,10 @@ html, body {
 .calc-row.is-leftover .calc-detail { color: var(--accent-green); }
 
 /* =================================================================
-   RESPONSIVIDADE
-   - Desktop (>1100px): layout de 3 colunas fixo, como já era.
-   - Tablet (701–1100px): mesmas 3 colunas, só mais estreitas.
-   - Mobile (≤768px): sidebars viram GAVETAS sobrepostas (com overlay
+   RESPONSIVIDADE — mesmos dois cortes do SIMA (960px e 900px)
+   - Desktop (>960px): layout de 3 colunas fixo, como já era.
+   - Tablet (901–960px): mesmas 3 colunas, só mais estreitas.
+   - Mobile (≤900px): sidebars viram GAVETAS sobrepostas (com overlay
      de fundo), abertas pelos botões do cabeçalho — o canvas usa a tela
      inteira o tempo todo (areaDeJogo() no JS já trata esse caso).
    ================================================================= */
@@ -641,23 +641,23 @@ html, body {
    pratico: com [hidden] o estado vive no proprio elemento, entao a mesma
    funcao initMobileSidebar() dos outros 19 serve aqui sem adaptacao.
    ----------------------------------------------------------------- */
-.header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+.header-actions { display: flex; align-items: center; gap: .4rem; flex-shrink: 0; }
 
 .mobile-menu-btn {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
+  background: var(--bg-panel);
   border: 1px solid var(--border);
-  background: var(--bg-void);
-  color: var(--text-primary);
+  color: var(--text-secondary);
+  border-radius: var(--radius-sm);
+  padding: 4.8px 8.8px;
+  font-size: 14.4px;
   cursor: pointer;
   flex-shrink: 0;
 }
-.mobile-menu-btn svg { width: 17px; height: 17px; }
-.mobile-menu-btn:hover { border-color: var(--accent-main); color: var(--accent-main); }
+.mobile-menu-btn svg { width: 1em; height: 1em; }
+.mobile-menu-btn:hover { color: var(--text-primary); border-color: var(--header-accent); }
 .mobile-menu-btn[aria-expanded="true"] { border-color: var(--accent-main); color: var(--accent-main); box-shadow: 0 0 8px rgba(92,160,255, 0.35); }
 
 .mobile-backdrop {
@@ -671,21 +671,16 @@ html, body {
 .mobile-backdrop[hidden] { display: none; }
 
 /* ---------- Tablet: 3 colunas mais estreitas ---------- */
-@media (max-width: 1100px) {
-  :root { --sidebar-w: 290px; --sidebar-right-w: 250px; }
-}
-@media (max-width: 980px) {
+@media (max-width: 960px) {
   :root { --sidebar-w: 260px; --sidebar-right-w: 230px; }
   .sidebar--right { padding: 14px 14px; }
 }
 
 /* ---------- Mobile: sidebars como gavetas sobrepostas ---------- */
-@media (max-width: 768px) {
-  :root { --sidebar-w: min(86vw, 360px); --sidebar-right-w: min(86vw, 360px); }
+@media (max-width: 900px) {
+  :root { --sidebar-w: min(88vw, 340px); --sidebar-right-w: min(88vw, 340px); }
 
   .mobile-menu-btn { display: flex; }
-  .header-brand { gap: 0.45rem; }
-  .header-brand h1 { font-size: 0.85rem; }
 
   /* gavetas: acima do conteúdo, deslizando de cada lado; fechadas por padrão */
   .sidebar {
@@ -699,16 +694,15 @@ html, body {
      (antes era body.sidebar-left-open / body.sidebar-right-open) */
   .sidebar.mobile-open { transform: translateX(0); }
 
-  /* alvos de toque maiores — diretrizes de acessibilidade (mín. ~44px) */
-  .btn, .reaction-card, .panel-header, .rc-filter-chip, button { min-height: 38px; }
+  /* alvos de toque maiores — diretrizes de acessibilidade (mín. ~44px).
+     button:not(.mobile-menu-btn): o SIMA nunca estica o botão de gaveta
+     por essa regra — só .panel--mode .panel-header e .mode-activate-btn,
+     que já têm sua própria proteção de 44px. Sem o :not(), esse seletor
+     genérico "button" também pegava .mobile-menu-btn, deixando-o mais
+     alto (38px) que o padrão da família (26px). */
+  .btn, .reaction-card, .panel-header, .rc-filter-chip, button:not(.mobile-menu-btn) { min-height: 38px; }
   .panel-header { padding: 12px 4px; }
   .reaction-card { padding: 12px; }
-}
-
-@media (max-width: 480px) {
-  :root { --sidebar-w: 92vw; --sidebar-right-w: 92vw; }
-  .header-brand { gap: 0.4rem; }
-  .header-logo { font-size: 1.15rem; }
 }
 
 /* ---------- Dispositivos por toque (independente da largura) ---------- */
@@ -734,40 +728,24 @@ html, body {
 .sidebar-resizer--right{ left:-3px; }
 .sidebar-resizer:hover,
 .sidebar-resizer.dragging{ background:rgba(92,160,255,.45); }
-@media(max-width:768px){ .sidebar-resizer{ display:none; } }
+@media(max-width:900px){ .sidebar-resizer{ display:none; } }
 
 
 /* ================================================================
-   CABEÇALHO EM TELAS PEQUENAS — mesmo padrão do SIME
+   PADRONIZAÇÃO SIMA — CABEÇALHO EM TELAS PEQUENAS
    ================================================================
-   Histórico: este bloco já tentou duas soluções erradas. 1ª: esconder
-   o texto "1º Ano". 2ª: forçar uma segunda linha a partir de 900px com
-   flex-wrap. A 2ª quebrava mesmo com espaço de sobra — a regra
-   `.header-brand > div { flex: 1 1 100% }` obriga aquele bloco a pedir
-   100% de largura sempre que o media query está ativo, sem checar se
-   cabia numa linha só. Comparando com o SIME (que mantém tudo numa
-   linha só até telas bem estreitas): ele não força nada. A base já tem
-   `.header-brand > div { min-width: 0 }`, que é o que permite ao texto
-   ENCOLHER (e, se preciso, truncar em reticências) em vez de estourar
-   ou empurrar outro elemento para quebrar de linha. Não existe regra
-   de quebra de linha nenhuma — só compactação.
-
-   Copiado do SIME (stylesime.css): a única degradação visual acontece
-   em ≤480px, e é a MESMA dupla ali — fonte do subtítulo encolhe com um
-   teto de 32vw, e o texto "1º Ano" desaparece (fica só a seta, com o
-   destino ainda anunciado por voz via aria-label). Isso é o piso real:
-   abaixo de 480px não há mais como manter os dois textos por extenso
-   sem sobrepor os ícones do menu mobile.
-
-   Este bloco está no FIM do arquivo de propósito: em CSS, entre regras
-   de mesma especificidade, a última escrita vence.
+   Histórico: este bloco já tentou soluções demais — esconder o texto
+   "1º Ano", forçar segunda linha com flex-wrap, encolher fonte do
+   subtítulo, e por fim uma versão que escondia o subtítulo inteiro via
+   clip-path (sr-only) para proteger o botão de voltar. Nenhuma dessas
+   soluções existe no SIMA, que resolve isso sem NENHUMA regra de
+   cabeçalho em media query: `.header-brand > div { min-width: 0 }` (na
+   regra base, sem breakpoint) já deixa o bloco título+subtítulo
+   encolher, e `.header-sub` trunca sozinho com reticências
+   (overflow:hidden + text-overflow:ellipsis + max-width:100%, também
+   na base). O botão de voltar tem flex-shrink:0 e por isso nunca
+   encolhe — não precisa de proteção extra em nenhuma largura.
    ================================================================ */
-
-@media (max-width: 480px) {
-  .header-brand h1 { font-size: .9rem; }
-  .header-sub { font-size: .54rem; max-width: 32vw; }
-  .header-back span { display: none; }
-}
 
 /* Alvo de toque de 44x44px em dedo (WCAG 2.5.5). O truque: a área
    clicável cresce com um ::after invisível e posicionado de forma
@@ -933,8 +911,8 @@ body.simple-read .mode-note{ line-height:1.75; font-size:.74rem; }
    Este @media precisa vir DEPOIS da regra #canvas-area acima: as duas tem
    a mesma especificidade (um id), e media query nao adiciona peso nenhum —
    quem ganha e a ultima declarada. Medido: com o override no bloco de
-   768px lá em cima do arquivo, a largura da moldura dava 0 no celular. */
-@media (max-width: 768px){
+   900px lá em cima do arquivo, a largura da moldura dava 0 no celular. */
+@media (max-width: 900px){
   #canvas-area{ left:0; right:0; }
 }
 
@@ -1205,7 +1183,7 @@ body.high-contrast :focus-visible{ outline:3px solid var(--hc-fg) !important; }
 
 /* Em tela pequena as sidebars viram gavetas sobre o canvas: aí a coluna
    volta a poder rolar, porque a altura disponível é bem menor. */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .sidebar--right { overflow-y: auto; }
   .sidebar--right .accordion { flex: 0 0 auto; }
   .sidebar--right .panel[data-open="true"] { flex: 0 0 auto; }
