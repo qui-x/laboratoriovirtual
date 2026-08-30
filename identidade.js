@@ -12,7 +12,10 @@
    liga e desliga junto com a sessão.
    ================================================================ */
 
-var CHAVE_TOKEN = 'quimix_token'; // sessionStorage: sobrevive a F5, não a fechar a aba
+var CHAVE_TOKEN = 'quimix_token'; // localStorage: sobrevive a F5, a trocar de aba e ao
+                                   // navegador descartar a aba da memória (comum no Android
+                                   // quando o app fica em segundo plano). Quem expira a
+                                   // sessão de verdade é o servidor (VALIDADE_SESSAO_HORAS).
 
 function aplicarSessao(dadosLogin) {
   sessaoUsuario = {
@@ -22,7 +25,7 @@ function aplicarSessao(dadosLogin) {
     email: dadosLogin.email,
     papel: dadosLogin.papel
   };
-  try { sessionStorage.setItem(CHAVE_TOKEN, dadosLogin.token); } catch (e) { /* modo privado: segue só na memória */ }
+  try { localStorage.setItem(CHAVE_TOKEN, dadosLogin.token); } catch (e) { /* modo privado: segue só na memória */ }
 
   document.getElementById('auth-gate').classList.add('hidden');
   document.getElementById('conteudo').classList.remove('hidden');
@@ -43,7 +46,7 @@ function encerrarSessaoLocal() {
   usuariosCarregado = false;
   usuariosRoster = [];
   atividadeLog = [];
-  try { sessionStorage.removeItem(CHAVE_TOKEN); } catch (e) { /* nada a fazer */ }
+  try { localStorage.removeItem(CHAVE_TOKEN); } catch (e) { /* nada a fazer */ }
 
   document.getElementById('conteudo').classList.add('hidden');
   document.getElementById('identity-bar').classList.add('hidden');
@@ -77,7 +80,7 @@ function atualizarBarraIdentidade() {
    --------------------------------------------------------------- */
 async function iniciarSessao() {
   var tokenSalvo = null;
-  try { tokenSalvo = sessionStorage.getItem(CHAVE_TOKEN); } catch (e) { /* sem sessionStorage: segue pro login */ }
+  try { tokenSalvo = localStorage.getItem(CHAVE_TOKEN); } catch (e) { /* sem localStorage: segue pro login */ }
 
   if (!tokenSalvo) {
     document.getElementById('auth-gate').classList.remove('hidden');
