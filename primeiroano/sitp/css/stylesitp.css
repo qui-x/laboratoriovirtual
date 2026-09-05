@@ -661,17 +661,19 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
    Fechar deixou de precisar de um botão próprio: toque fora do
    modal, Esc, ou arrastar o cabeçalho pra baixo já bastam (ver
    initDragToDismiss() em js/modal/abrir-fechar.js). */
-.modal-nav-mini { margin-left:auto; align-self:flex-start; display:flex; gap:6px; flex-shrink:0; }
+.modal-nav-mini {
+  margin-left:auto; align-self:flex-start; flex-shrink:0;
+  display:flex; background:var(--bg-card); border:1px solid var(--border);
+  border-radius:999px; overflow:hidden;
+}
 .modal-nav-mini-btn {
-  background:transparent; border:1px solid var(--border); border-radius:8px;
-  color:var(--text-dim); cursor:pointer; transition:all .15s;
-  width:calc(32px * var(--font-scale)); height:calc(32px * var(--font-scale));
+  background:transparent; border:none; color:var(--text-dim); cursor:pointer; transition:all .15s;
+  width:calc(34px * var(--font-scale)); height:calc(34px * var(--font-scale));
   display:flex; align-items:center; justify-content:center;
 }
-.modal-nav-mini-btn:hover:not(:disabled), .modal-nav-mini-btn:focus-visible {
-  background:var(--bg-hover); color:var(--text-main); border-color:var(--accent);
-  outline:2px solid var(--accent); outline-offset:2px;
-}
+.modal-nav-mini-btn + .modal-nav-mini-btn { border-left:1px solid var(--border); }
+.modal-nav-mini-btn:hover:not(:disabled) { background:var(--bg-hover); color:var(--accent); }
+.modal-nav-mini-btn:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; color:var(--accent); }
 .modal-nav-mini-btn:disabled { opacity:.35; cursor:default; }
 @media (pointer: coarse) { .modal-nav-mini-btn { width:40px; height:40px; } }
 .modal-body { padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)); display:flex; flex-direction:column; gap:calc(10px * var(--font-scale)); overflow-y:auto; }
