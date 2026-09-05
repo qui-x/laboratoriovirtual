@@ -1161,7 +1161,7 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .header-sub {
   font-size: 9.92px; color: var(--text-dim);
   font-family: 'Rajdhani', sans-serif; line-height: 1.2;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
 }
 
 /* ── ACOES DO HEADER (canto oposto ao botao de voltar) ────────────────
@@ -1252,18 +1252,14 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 }
 
 @media (max-width: 620px) {
-  /* o subtitulo e o primeiro a sair: o cabecalho tem altura fixa de 54px
-     e nao quebra em duas linhas, entao o que nao cabe empurraria o
-     controle de temperatura para fora da tela */
-  .header-sub { display: none; }
+  /* Padronização SIMA: nada no header-brand é mais escondido por
+     media query. .header-brand > div já tem min-width:0 (regra base)
+     e .header-sub trunca sozinho com reticências (overflow:hidden +
+     text-overflow:ellipsis + max-width:100%, também na base) — o
+     mesmo mecanismo do SIMA e dos demais simuladores do 1º Ano.
+     Só o padding do header encolhe aqui, pra sobrar espaço pro
+     controle de temperatura. */
   .app-header { padding: 0 .6rem; }
-}
-@media (max-width: 480px) {
-  .header-brand h1 { font-size: 16px; }
-  .header-back span { display: none; }   /* sobra a seta */
-}
-@media (max-width: 380px) {
-  .header-logo { display: none; }
 }
 
 /* =====================================================================

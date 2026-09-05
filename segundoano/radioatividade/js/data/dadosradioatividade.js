@@ -110,7 +110,7 @@ window.SIM_DATA = {
       formula: 'N = N₀ · (1/2)^(t/t½)',
       formulaNote: 'Após 1 t½ resta 50 %; após 2, 25 %; após 3, 12,5 %… A atividade cai na mesma proporção.',
       hintCanvas: 'Enter/Espaço sorteia quais átomos decaem',
-      icon: '⏳',
+      icon: '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22h14" /><path d="M5 2h14" /><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" /><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" /></svg>',
       def: 'Meia-vida é o tempo pra metade dos núcleos decair — fixa pra cada isótopo, não depende de temperatura ou pressão.',
       fatos: [
         { l: 'Fórmula',    v: 'N=N₀·(1/2)^(t/t½)' },

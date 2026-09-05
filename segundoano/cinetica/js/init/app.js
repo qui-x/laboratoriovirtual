@@ -141,7 +141,7 @@ SICIN.App = class App {
       // Botao de ativacao e um toggle de estado -> aria-pressed (igual ao
       // .bond-mode-btn do SILQ). Sincronizado em setMode().
       activateBtn.setAttribute('aria-pressed', 'false');
-      activateBtn.innerHTML = `<span aria-hidden="true">▶</span> Ativar ${m.nome}`;
+      activateBtn.innerHTML = `<span aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg></span> Ativar ${m.nome}`;
       // TOGGLE — mesmo contrato do SILQ: clicar no modo JA ativo desativa e
       // devolve o simulador ao estado neutro (canvas em branco).
       activateBtn.addEventListener('click', () => {
@@ -424,14 +424,14 @@ SICIN.App = class App {
           ovTxt.appendChild(sp);
         }
       }
-      if (ovIco) ovIco.textContent = this.mode.icon || '';
+      if (ovIco) ovIco.innerHTML = this.mode.icon || '';
     }
     this._refreshResultChart();
 
     // botão Iniciar/Pausar da Ordem de Reação alterna de rótulo
     if (this.mode && this.mode.id === 'ordem') {
       const btn = document.querySelector('[data-action="ord-play"]');
-      if (btn) btn.innerHTML = this.mech.ordRunning ? '<span aria-hidden="true">⏸</span> Pausar corrida' : '<span aria-hidden="true">▶</span> Iniciar corrida';
+      if (btn) btn.innerHTML = this.mech.ordRunning ? '<span aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></svg></span> Pausar corrida' : '<span aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg></span> Iniciar corrida';
     }
   }
 
