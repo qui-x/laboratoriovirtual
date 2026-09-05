@@ -6,7 +6,8 @@
    estado físico, configuração, raio, propriedades, obtenção,
    curiosidade) e fecha o modal — incluindo o atalho de teclado Esc.
    Depende de: modal/estado-modal.js, modal/secoes-mobile.js (monta a
-               barra de abas do bottom sheet mobile) e praticamente
+               barra de abas do bottom sheet mobile), modal/navegacao.js
+               (atualiza os botões Anterior/Próximo) e praticamente
                todos os módulos de render/.
 ═══════════════════════════════════════════════════════════════ */
 
@@ -86,6 +87,7 @@ function abrirModal(el,divEl){
   // foram preenchidas — em telas largas isso não muda nada visualmente
   // (ver secoes-mobile.js e o CSS do @media 760px).
   montarAbasSecoesMobile();
+  atualizarBotoesNavegacao();
   modalOverlay.classList.add('aberto');
   modalOverlay.setAttribute('aria-hidden','false');
   anunciar(`${el.nome}, número atômico ${Z}, ${el.cat}, ${ESTADO_LABEL[est]}.`);

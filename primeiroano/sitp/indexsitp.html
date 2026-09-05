@@ -116,6 +116,19 @@
         </div>
         <button class="modal-close-btn" id="btnClose" aria-label="Fechar detalhes do elemento"><span aria-hidden="true">✕</span></button>
       </div>
+      <!-- ════════ NAVEGAÇÃO ENTRE ELEMENTOS ════════
+           Troca de elemento sem fechar o modal — ver js/modal/navegacao.js.
+           Desabilita sozinho nas pontas (Z=1 e Z=118). -->
+      <div class="modal-nav-row" id="modalNavRow">
+        <button type="button" class="modal-nav-btn" id="btnPrevEl" aria-label="Elemento anterior">
+          <svg class="ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          Anterior
+        </button>
+        <button type="button" class="modal-nav-btn" id="btnNextEl" aria-label="Próximo elemento">
+          Próximo
+          <svg class="ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
     </div>
     <!-- ════════ ABAS DE SEÇÃO (SÓ NO BOTTOM SHEET MOBILE) ════════
          Em telas largas fica escondida (ver CSS) e todas as seções do
@@ -247,6 +260,7 @@
 <script src="js/modal/estado-modal.js"></script>
 <script src="js/modal/secoes-mobile.js"></script>
 <script src="js/modal/abrir-fechar.js"></script>
+<script src="js/modal/navegacao.js"></script>
 <script src="js/modal/config-eletronica-ui.js"></script>
 
 <!-- ═══ INTERFACE: SÉRIES, FILTROS, NAVEGAÇÃO ═══ -->

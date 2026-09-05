@@ -651,6 +651,28 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .badge { padding:3px 10px; border-radius:20px; font-size:calc(0.7rem * var(--font-scale)); font-weight:700; letter-spacing:.04em; text-transform:uppercase; border:1px solid transparent; }
 .modal-close-btn { margin-left:auto; align-self:flex-start; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text-dim); min-width:calc(40px * var(--font-scale)); min-height:calc(40px * var(--font-scale)); cursor:pointer; font-size:calc(1.2rem * var(--font-scale)); display:flex; align-items:center; justify-content:center; transition:all .15s; flex-shrink:0; }
 .modal-close-btn:hover, .modal-close-btn:focus-visible { background:var(--bg-hover); color:var(--text-main); border-color:var(--accent); outline:2px solid var(--accent); outline-offset:2px; }
+
+/* ════════ NAVEGAÇÃO ENTRE ELEMENTOS (◀ Anterior / Próximo ▶) ════════
+   Linha fixa no topo do modal/bottom sheet, logo abaixo do símbolo e
+   nome — troca de elemento SEM fechar o modal (chama abrirModal() de
+   novo por dentro, ver js/modal/navegacao.js). Funciona igual em
+   desktop e mobile: é a mesma dúvida em qualquer largura de tela
+   ("como vejo o próximo elemento sem fechar isto e caçar na tabela?"). */
+.modal-nav-row { display:flex; gap:8px; padding:0 calc(16px * var(--font-scale)) calc(10px * var(--font-scale)); }
+.modal-nav-btn {
+  flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+  background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
+  color:var(--text-main); font-size:calc(.85rem * var(--font-scale)); font-weight:600;
+  padding:calc(7px * var(--font-scale)) 10px; cursor:pointer; transition:all .15s;
+  min-height:calc(38px * var(--font-scale));
+}
+.modal-nav-btn:hover:not(:disabled), .modal-nav-btn:focus-visible {
+  background:var(--bg-hover); border-color:var(--accent); color:var(--accent);
+  outline:2px solid var(--accent); outline-offset:2px;
+}
+.modal-nav-btn:disabled { opacity:.4; cursor:default; }
+.modal-nav-btn .ico { flex-shrink:0; }
+@media (pointer: coarse) { .modal-nav-btn { min-height:44px; } }
 .modal-body { padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)); display:flex; flex-direction:column; gap:calc(10px * var(--font-scale)); overflow-y:auto; }
 .modal-body::-webkit-scrollbar { width:5px; }
 .modal-body::-webkit-scrollbar-track { background:transparent; }
@@ -1395,7 +1417,7 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
   .modal-overlay { align-items: flex-end; }
   .modal {
     width: 100%; max-width: none;
-    height: 50vh; height: 50dvh; max-height: 50vh; max-height: 50dvh;
+    height: 85vh; height: 85dvh; max-height: 85vh; max-height: 85dvh;
     border-radius: 16px 16px 0 0;
     /* estado fechado: fora da tela, embaixo — igual à gaveta de
        controles dos simuladores de 2º ano (mesma técnica, mesmo
