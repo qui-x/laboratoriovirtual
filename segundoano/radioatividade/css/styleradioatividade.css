@@ -1072,3 +1072,22 @@ body.high-contrast.light-mode {
   --flame-b:       #fff;
   --ice:           #0ff;
 }
+
+
+/* ═══ BARRA DE ROLAGEM — estilo consistente (auto-inserido) ═══ */
+/* Troca a barra de rolagem padrão do sistema (cinza, quadrada) por uma
+   fina e na cor do tema — aplicado de forma GERAL (seletor *) pra
+   cobrir sidebars, bottom sheet, barras de aba e qualquer área com
+   rolagem que ainda não tinha estilo próprio. Onde já existe uma regra
+   mais específica em algum lugar do arquivo (ex.: .modal-body::-webkit-
+   scrollbar), ela continua valendo — seletor de classe é mais
+   específico que o universal, então nada muda para quem já tinha
+   estilo. As cores usam var(--border)/var(--accent-main): como essas
+   variáveis já mudam sozinhas por tema (claro/escuro/alto contraste),
+   a barra de rolagem acompanha automaticamente, sem regra extra. */
+* { scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+*::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
+*::-webkit-scrollbar-corner { background: transparent; }
