@@ -84,16 +84,19 @@
          que funcionavam mas divergiam do resto do projeto. Os icones em
          SVG foram mantidos: sao melhores que o ☰/🎛 em texto dos outros. -->
     <div class="header-actions">
-      <button type="button" class="mobile-menu-btn" id="mobile-info-btn"
-        aria-label="Abrir reações prontas" aria-expanded="false" aria-controls="sidebar-left">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-      </button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
         aria-label="Abrir análise estequiométrica" aria-expanded="false" aria-controls="sidebar-right">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg>
       </button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda (☰)
+       pelos 2 módulos (Estequiometria/Mols) como abas roláveis.
+       Preenchida em buildModeTabsMobile() (js/ui/modo-mobile.js). -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Módulos do simulador" aria-orientation="horizontal"></nav>
 
   <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 
@@ -622,6 +625,7 @@
 
   <!-- ═══ INTERFACE: MÓDULOS ATIVOS E PAINÉIS ═══ -->
   <script src="js/ui/modulos-ativos.js"></script>
+  <script src="js/ui/modo-mobile.js"></script>
   <script src="js/ui/paineis-acordeao.js"></script>
 
   <!-- ═══ ESTEQUIOMETRIA: FÓRMULAS E CALCULADORA ═══ -->
@@ -653,6 +657,20 @@
   <script src="js/mols/canvas-reacao.js"></script>
   <script src="js/mols/interacao-atomos.js"></script>
   <script src="js/mols/tally-resultado.js"></script>
+
+<!-- ════════ MODAL — INFORMAÇÕES DO MÓDULO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+<div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+  <div class="mode-info-modal" id="modeInfoModal">
+    <div class="mode-info-header">
+      <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+      <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+      <button type="button" class="mode-info-close" id="modeInfoClose"
+              aria-label="Fechar informações do módulo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+    </div>
+    <div class="mode-info-body" id="modeInfoBody"></div>
+  </div>
+</div>
 
 <div vw class="enabled">
   <div vw-access-button class="active"></div>

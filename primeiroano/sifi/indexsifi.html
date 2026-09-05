@@ -75,16 +75,20 @@
       </div>
     </div>
     <div class="header-actions">
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
-        aria-label="Abrir menu de moléculas" aria-expanded="false" aria-controls="sidebar-left">
-        <span data-icon="hamburguer" aria-hidden="true"></span>
-      </button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
         aria-label="Abrir biblioteca de compostos e força detectada" aria-expanded="false" aria-controls="sidebar-right">
         <span data-icon="controles" aria-hidden="true"></span>
       </button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda pelos
+       3 módulos como abas roláveis. Preenchida em buildModeTabsMobile()
+       (js/ui/modo-mobile.js), DEPOIS de js/ui/icones.js (pra clonar os
+       ícones já preenchidos). -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Módulos do simulador" aria-orientation="horizontal"></nav>
 
   <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 
@@ -551,6 +555,20 @@
 
   </div><!-- /.app-container -->
 
+  <!-- ════════ MODAL — INFORMAÇÕES DO MÓDULO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+  <div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+       aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+    <div class="mode-info-modal" id="modeInfoModal">
+      <div class="mode-info-header">
+        <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+        <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+        <button type="button" class="mode-info-close" id="modeInfoClose"
+                aria-label="Fechar informações do módulo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+      </div>
+      <div class="mode-info-body" id="modeInfoBody"></div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
@@ -593,6 +611,7 @@
 
   <!-- ═══ INICIALIZAÇÃO (ponto de entrada) ═══ -->
   <script src="js/init/ativacao-modulos.js"></script>
+  <script src="js/ui/modo-mobile.js"></script>
   <script src="js/init/inicializacao-sifi.js"></script>
 
   <!-- ═══ INTERFACE — gavetas mobile (independente do namespace SIFI) ═══ -->

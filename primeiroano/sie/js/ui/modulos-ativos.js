@@ -165,6 +165,7 @@ document.querySelectorAll(".mode-activate-btn[data-modulo]").forEach((btn) => {
       atualizarCanvasHint();
       atualizarModeIndicator();
       sincronizarPaineisDireitaPorModulo();
+      if (typeof syncMobileModeUI === "function") syncMobileModeUI(null);
       anunciar(`Módulo ${NOMES_MODULO[modulo]} desativado.`);
       return;
     }
@@ -187,9 +188,20 @@ document.querySelectorAll(".mode-activate-btn[data-modulo]").forEach((btn) => {
     if (modulo === "mols") {
       document.getElementById("molsReactionSearch").disabled = false;
     }
+    // Ao ativar, o painel se RECOLHE — o gatilho abre espaço pro
+    // canvas. Reabrir é um clique no cabeçalho, a qualquer momento.
+    // SIE usa data-open no <section class="panel"> (ver
+    // js/ui/paineis-acordeao.js), não uma classe .collapsed no corpo.
+    const painelAtivado = btn.closest(".panel[data-modulo]");
+    if (painelAtivado) {
+      const hdrAtivado = painelAtivado.querySelector(".panel-header");
+      painelAtivado.dataset.open = "false";
+      if (hdrAtivado) hdrAtivado.setAttribute("aria-expanded", "false");
+    }
     atualizarCanvasHint();
     atualizarModeIndicator();
     sincronizarPaineisDireitaPorModulo();
+    if (typeof syncMobileModeUI === "function") syncMobileModeUI(modulo);
 
     // Mesmo padrão do SIMA: "Modelo X selecionado. [1ª frase da
     // descrição]." — não só o nome, também o que o módulo faz, pra

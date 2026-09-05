@@ -150,6 +150,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (SIFI.sandbox && cfg) SIFI.sandbox.classList.add(cfg.canvasCls);
     atualizarVisibilidadePorModulo(num);
 
+    // Ao ativar, o painel se RECOLHE — o gatilho abre espaço pro
+    // canvas. Reabrir é um clique no cabeçalho, a qualquer momento.
+    const painelAtivado = document.querySelector(`.bond-mode-btn[data-module="${num}"]`)?.closest('.panel');
+    if (painelAtivado) {
+      const hdr = painelAtivado.querySelector('.panel-header');
+      const bd = painelAtivado.querySelector('.panel-body');
+      if (hdr) hdr.setAttribute('aria-expanded', 'false');
+      if (bd) bd.classList.add('collapsed');
+    }
+    if (SIFI.syncMobileModeUI) SIFI.syncMobileModeUI(num);
+
     atualizarBloqueioMenu();
     if (SIFI.updateSandboxHint) SIFI.updateSandboxHint();
 
@@ -175,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
     atualizarVisibilidadePorModulo(null);
     atualizarBloqueioMenu();
     if (SIFI.updateSandboxHint) SIFI.updateSandboxHint();
+    if (SIFI.syncMobileModeUI) SIFI.syncMobileModeUI(null);
 
     if (SIFI.announce) SIFI.announce('Nenhum módulo ativo.');
   }

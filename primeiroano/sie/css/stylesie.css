@@ -677,6 +677,7 @@ html, body {
 }
 
 /* ---------- Mobile: sidebars como gavetas sobrepostas ---------- */
+.mode-tabs-mobile { display: none; }
 @media (max-width: 900px) {
   :root { --sidebar-w: min(88vw, 340px); --sidebar-right-w: min(88vw, 340px); }
 
@@ -688,11 +689,40 @@ html, body {
     box-shadow: 0 0 32px rgba(0, 0, 0, 0.5);
     transition: transform 0.25s ease;
   }
-  .sidebar--left  { transform: translateX(-100%); }
-  .sidebar--right { transform: translateX(100%); }
-  /* .mobile-open no proprio painel — mesmo contrato dos outros 19
-     (antes era body.sidebar-left-open / body.sidebar-right-open) */
-  .sidebar.mobile-open { transform: translateX(0); }
+  /* sidebar esquerda (módulos) fica ESCONDIDA no mobile — a barra de
+     modos rolável (.mode-tabs-mobile) assume essa função. */
+  .sidebar--left { display: none; }
+  /* sidebar direita (análise estequiométrica) vira um BOTTOM SHEET. */
+  .sidebar--right {
+    left: 0; right: 0; top: auto; bottom: 0;
+    width: auto; max-width: none; min-width: 0;
+    height: auto; max-height: 75vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.55);
+    transform: translateY(105%);
+    overflow-y: auto; padding-top: .35rem;
+  }
+  .sidebar--right.mobile-open { transform: translateY(0); }
+  .sidebar--right::before {
+    content: ''; display: block; width: 36px; height: 4px; border-radius: 2px;
+    background: var(--border); margin: .5rem auto .25rem;
+  }
+
+  .mode-tabs-mobile {
+    display: flex; gap: .4rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: .5rem .6rem; background: var(--bg-panel); border-bottom: 1px solid var(--border);
+    scrollbar-width: thin;
+  }
+  .mode-tab {
+    flex: none; display: flex; align-items: center; gap: .3rem;
+    padding: .4rem .7rem; border-radius: 999px; border: 1px solid var(--border);
+    background: transparent; color: var(--text-secondary);
+    font-size: .78rem; white-space: nowrap; cursor: pointer; min-height: 36px;
+  }
+  .mode-tab[aria-selected="true"] {
+    border-color: var(--accent-main); color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent-main) 18%, transparent);
+  }
 
   /* alvos de toque maiores — diretrizes de acessibilidade (mín. ~44px).
      button:not(.mobile-menu-btn): o SIMA nunca estica o botão de gaveta
@@ -704,6 +734,41 @@ html, body {
   .panel-header { padding: 12px 4px; }
   .reaction-card { padding: 12px; }
 }
+
+.mode-info-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s;
+}
+.mode-info-overlay.aberto { opacity: 1; visibility: visible; }
+.mode-info-modal {
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
+  width: min(420px, 94vw); max-height: 80vh; max-height: 80dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  transform: scale(.94) translateY(10px);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-info-overlay.aberto .mode-info-modal { transform: scale(1) translateY(0); }
+.mode-info-header {
+  display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem;
+  background: color-mix(in srgb, var(--bg-panel) 85%, black); border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.mode-info-icon { font-size: 1.3rem; color: var(--accent-main); flex-shrink: 0; display: flex; }
+.mode-info-title { flex: 1; margin: 0; font-size: 1.02rem; color: var(--text-primary); }
+.mode-info-close {
+  background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary);
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mode-info-close:hover, .mode-info-close:focus-visible {
+  background: color-mix(in srgb, var(--accent-main) 15%, var(--bg-panel)); color: var(--text-primary); border-color: var(--accent-main);
+  outline: 2px solid var(--accent-main); outline-offset: 2px;
+}
+.mode-info-body { padding: 1rem; overflow-y: auto; font-size: .88rem; color: var(--text-secondary); }
+.mode-info-body .mode-define { color: var(--text-primary); margin: 0 0 .6rem; line-height: 1.5; }
+@media (pointer: coarse) { .mode-info-close { min-width: 44px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .mode-info-modal { transition: none; } }
 
 /* ---------- Dispositivos por toque (independente da largura) ---------- */
 @media (hover: none) and (pointer: coarse) {
@@ -914,6 +979,17 @@ body.simple-read .mode-note{ line-height:1.75; font-size:.74rem; }
    900px lá em cima do arquivo, a largura da moldura dava 0 no celular. */
 @media (max-width: 900px){
   #canvas-area{ left:0; right:0; }
+  /* Precisa vir DEPOIS da regra base do #canvas-area (acima), pelo mesmo
+     motivo do left/right nesta mesma regra: a barra de modos mobile
+     (.mode-tabs-mobile) ocupa espaço logo abaixo do cabeçalho, e sem
+     empurrar o top pra baixo o <canvas> fica por baixo dela e rouba o
+     toque (o canvas tem pointer-events próprio, pra arrastar átomos).
+     ~52px é a altura real da barra (padding .5rem + .mode-tab
+     min-height:36px). #scene tem posicionamento PRÓPRIO (não herdado de
+     #canvas-area — ver a regra #scene{ inset: var(--header-h) 0 0 0 }
+     lá em cima), por isso os dois precisam do mesmo ajuste aqui. */
+  #canvas-area{ top: calc(var(--header-h) + 52px); }
+  #scene{ inset: calc(var(--header-h) + 52px) 0 0 0; }
 }
 
 body:has(.reaction-card.is-active) #canvas-area{
