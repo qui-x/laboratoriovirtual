@@ -642,7 +642,24 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
    mas sem o contorno azul padrão do navegador em volta da caixa toda. */
 .modal:focus { outline:none; }
 .modal-overlay.aberto .modal { transform:scale(1) translateY(0); }
-.modal-header { padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)) calc(10px * var(--font-scale)); background:var(--bg-deep); border-bottom:1px solid var(--border); flex-shrink:0; }
+.modal-header {
+  padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)) calc(10px * var(--font-scale));
+  border-bottom:1px solid var(--border); flex-shrink:0; position:relative;
+  /* Plano de fundo sugerindo a aparência real do elemento (ver
+     js/render/aparencia-fundo.js) — a variável --aparencia-bg é
+     escrita pelo JS a cada elemento aberto. Uma camada escura
+     (color-mix com --bg-deep, funciona em qualquer tema sem precisar
+     de uma cor em RGB separada) fica POR CIMA da cor do elemento, só
+     como uma sugestão sutil por trás do texto — não uma foto, um
+     "clima" de cor. */
+  background-color: var(--bg-deep);
+  background-image:
+    linear-gradient(160deg,
+      color-mix(in srgb, var(--bg-deep) 74%, transparent) 0%,
+      color-mix(in srgb, var(--bg-deep) 90%, transparent) 75%),
+    var(--aparencia-bg, none);
+  transition: background-image .35s ease;
+}
 .modal-top-row { display:flex; align-items:flex-start; gap:12px; }
 .modal-sym-col { display:flex; flex-direction:column; align-items:flex-start; }
 .modal-symbol  { font-family:'Rajdhani',sans-serif; font-size:calc(4.2rem * var(--font-scale)); font-weight:700; line-height:1; }

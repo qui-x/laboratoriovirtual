@@ -7,7 +7,8 @@
    curiosidade) e fecha o modal — incluindo o atalho de teclado Esc.
    Depende de: modal/estado-modal.js, modal/secoes-mobile.js (monta a
                barra de abas do bottom sheet mobile), modal/navegacao.js
-               (atualiza os botões Anterior/Próximo) e praticamente
+               (atualiza os botões Anterior/Próximo), render/aparencia-
+               fundo.js (plano de fundo do cabeçalho) e praticamente
                todos os módulos de render/. Também liga o gesto de
                arrastar o cabeçalho pra baixo pra fechar (mobile).
 ═══════════════════════════════════════════════════════════════ */
@@ -24,6 +25,10 @@ function abrirModal(el,divEl){
   if(elementoAtivo===el.numero){fecharModal();return;}
   if(divAtiva)divAtiva.classList.remove('selected');
   elementoAtivo=el.numero;divAtiva=divEl;divEl.classList.add('selected');
+  // Plano de fundo do cabeçalho sugerindo a aparência real do elemento
+  // em CNTP (metálico/gasoso/cristalino/líquido) — ver
+  // js/render/aparencia-fundo.js e js/data/aparencia-real.js.
+  aplicarFundoAparencia(el.numero, el, est);
   const sym=document.getElementById('modalSymbol');
   sym.textContent=el.simbolo;sym.style.color=ccHex;
   document.getElementById('modalNumber').textContent='#'+el.numero;
