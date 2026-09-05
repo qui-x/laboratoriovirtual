@@ -34,10 +34,17 @@ class AtomicApp {
     this.fpsEl    = document.getElementById('fps-counter');
     this._ptFocusGrid = [];
     this._categoryFilter = null;
+    // Modos já vistos nesta sessão (modal de 1ª ativação) + controle da
+    // "largada com antecipação" do gatilho — ver eventos.js/loop.js.
+    this._modosVistos = new Set();
+    this._modeStartsAt = 0;
+    this._modeStartTimer = null;
 
     this._resize();
     this._buildPeriodicTable();
     this._bindEvents();
+    this._buildModeTabsMobile();
+    this._bindModeInfoModal();
     this._updateElementUI();
     this._updateOverlay();
     this._syncModelPanels();

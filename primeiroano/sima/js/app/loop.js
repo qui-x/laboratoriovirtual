@@ -14,7 +14,10 @@
 'use strict';
 
 AtomicApp.prototype._loop = function() {
-    this.sim.update();
+    // "Largada com antecipação": _modeStartsAt (marcado em eventos.js) segura
+    // o UPDATE por 2s — o desenho continua rodando (mostra o quadro
+    // congelado), só a física não avança até o tempo passar.
+    if (performance.now() >= this._modeStartsAt) this.sim.update();
     this.sim.draw();
     this.fpsF++;
     const now=performance.now();

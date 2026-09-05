@@ -418,8 +418,25 @@ html[data-spacing="true"] * {
     transform:translateX(-110%); transition:transform .25s ease;
     box-shadow:4px 0 20px rgba(0,0,0,.5);
   }
-  .sidebar--right{left:auto; right:0; transform:translateX(110%);}
-  .sidebar.mobile-open{transform:translateX(0);}
+  /* sidebar direita (substância, diagrama, controles, medidas) vira um
+     BOTTOM SHEET: sobe da base da tela em vez de entrar pela lateral —
+     mesmo padrão dos outros simuladores da coleção. A esquerda (só
+     filtro de módulo) continua como gaveta lateral, sem mudança. */
+  .sidebar--right{
+    left:0; right:0; top:auto; bottom:0;
+    width:auto; max-width:none; min-width:0;
+    height:auto; max-height:75vh;
+    transform:translateY(105%);
+    border-radius:16px 16px 0 0;
+    box-shadow:0 -4px 24px rgba(0,0,0,.55);
+    overflow-y:auto; padding-top:.35rem;
+  }
+  .sidebar--right.mobile-open{transform:translateY(0);}
+  .sidebar--right::before{
+    content:''; display:block; width:36px; height:4px; border-radius:2px;
+    background:var(--bdr); margin:.5rem auto .25rem;
+  }
+  .sidebar--left.mobile-open{transform:translateX(0);}
   .mobile-backdrop{
     position:fixed; inset:0; z-index:90;
     background:rgba(0,0,0,.55); backdrop-filter:blur(1px);

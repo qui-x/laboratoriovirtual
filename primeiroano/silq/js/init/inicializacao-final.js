@@ -190,6 +190,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (SILQ.molPanel) SILQ.molPanel.style.display = 'none';
         SILQ.clearChart();
       }
+
+      // Ao ativar, o painel se RECOLHE — o gatilho abre espaço pro
+      // canvas. Reabrir é um clique no cabeçalho, a qualquer momento.
+      if (type) {
+        const painelAtivo = document.querySelector(`#sidebar-left [data-bond-type="${type}"]`)?.closest('.panel');
+        if (painelAtivo) {
+          const hdr = painelAtivo.querySelector('.panel-header');
+          const bd = painelAtivo.querySelector('.panel-body');
+          if (hdr) hdr.setAttribute('aria-expanded', 'false');
+          if (bd) bd.classList.add('collapsed');
+        }
+      }
+      SILQ.syncMobileModeUI(type);
     }
 
     function clearMode() {

@@ -103,7 +103,40 @@
         this._updateElementUI();
         this._updateBohrShellSelectors();
         const name=btn.querySelector('.model-name').textContent;
-        announce(`Modelo ${name} selecionado. ${MODEL_INFO[btn.dataset.model].split('.')[0]}.`);
+        // Ao ativar, o painel se RECOLHE — o gatilho abre espaço pro
+        // canvas. Reabrir é um clique no cabeçalho, a qualquer momento.
+        const painelAtivo = btn.closest('.panel[data-mode-card]');
+        if (painelAtivo) {
+          const header = painelAtivo.querySelector('.panel-header');
+          const body = painelAtivo.querySelector('.panel-body');
+          if (header) header.setAttribute('aria-expanded', 'false');
+          if (body) body.classList.add('collapsed');
+        }
+        this._syncMobileModeUI(btn.dataset.model);
+        // No mobile, ativar um modelo RECOLHE o bottom sheet de controles
+        // (se estiver aberto) em vez de abri-lo — reabrir pra ajustar
+        // parâmetros é um toque no botão 🎛 do cabeçalho, a qualquer
+        // momento, inclusive com a simulação já rodando.
+        if (window.innerWidth <= 900 && typeof window._closeSidebar === 'function') {
+          window._closeSidebar();
+        }
+        // ── largada com 2s de antecipação ──
+        // O ESTADO já foi montado acima (sim.rebuild()), então o canvas
+        // mostra o quadro inicial "parado" imediatamente — só a FÍSICA
+        // (sim.update, chamada em _loop) fica pausada por 2s. O
+        // #canvas-hint normalmente fica hidden com um modelo ativo (ver
+        // _syncModelPanels() acima) — reaproveitado aqui por 2s só pra
+        // avisar a largada, depois volta a ficar escondido.
+        const hint = document.getElementById('canvas-hint');
+        if (this._modeStartTimer) clearTimeout(this._modeStartTimer);
+        this._modeStartsAt = performance.now() + 2000;
+        if (hint) { hint.hidden = false; hint.textContent = 'Iniciando em instantes…'; }
+        const modeloAtivado = btn.dataset.model;
+        this._modeStartTimer = setTimeout(() => {
+          const h = document.getElementById('canvas-hint');
+          if (h && this.sim.model === modeloAtivado) h.hidden = true;
+        }, 2000);
+        announce(`Modelo ${name} selecionado. A animação começa em 2 segundos. ${MODEL_INFO[btn.dataset.model].split('.')[0]}.`);
       });
     });
 

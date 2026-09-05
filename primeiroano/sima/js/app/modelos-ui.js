@@ -20,6 +20,10 @@
   AtomicApp.prototype.clearModel = function() {
     playTone(420, .06, .05);
     this.sim.model = null;
+    // Cancela qualquer "largada com antecipação" pendente do modelo
+    // anterior.
+    if (this._modeStartTimer) { clearTimeout(this._modeStartTimer); this._modeStartTimer = null; }
+    this._modeStartsAt = 0;
     // desliga eventuais easter eggs que pertencem a um modelo especifico
     this.sim.ruthEggMode = false;
     this.sim.bohrEggMode = false;
@@ -34,6 +38,7 @@
     this._updateOverlay();
     this._updateElementUI();
     this._syncModelPanels();
+    this._syncMobileModeUI(null);
     announce('Modelo desativado. Canvas em branco — escolha um modelo e ative-o para voltar a simular.');
   };
 

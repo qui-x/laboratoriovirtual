@@ -126,12 +126,18 @@
       </div>
     </div>
     <div class="header-actions">
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
-        aria-label="Abrir painel de ligações e controles" aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
         aria-label="Abrir tabela periódica, moléculas e análise" aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda (☰)
+       pelos 3 tipos de ligação como abas roláveis. Preenchida em
+       _buildModeTabsMobile() (js/ui/modo-mobile.js), lendo direto dos
+       3 cards de modo da #sidebar-left. -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Tipos de ligação química" aria-orientation="horizontal"></nav>
 
 <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 
@@ -740,6 +746,20 @@
   </aside>
 </div><!-- /.app-container -->
 
+<!-- ════════ MODAL — INFORMAÇÕES DO TIPO DE LIGAÇÃO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+<div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+  <div class="mode-info-modal" id="modeInfoModal">
+    <div class="mode-info-header">
+      <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+      <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+      <button type="button" class="mode-info-close" id="modeInfoClose"
+              aria-label="Fechar informações do tipo de ligação"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+    </div>
+    <div class="mode-info-body" id="modeInfoBody"></div>
+  </div>
+</div>
+
 <!-- Scripts -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -805,6 +825,7 @@
 <script src="js/molecules/estereoquimica.js"></script>
 <script src="js/molecules/presets.js"></script>
 <script src="js/init/inicializacao-final.js"></script>
+<script src="js/ui/modo-mobile.js"></script>
 
 <!-- ═══ INTERFACE — menu mobile e sidebars redimensionáveis ═══ -->
 <script src="js/ui/menu-mobile.js"></script>

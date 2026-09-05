@@ -111,12 +111,20 @@
          aria-controls, e um backdrop compartilhado. Ficam display:none
          acima de 900px. -->
     <div class="header-actions">
-      <button type="button" class="mobile-menu-btn" id="mobile-info-btn"
-        aria-label="Abrir modelos atômicos" aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
         aria-label="Abrir controles da simulação" aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-sliders"/></svg></button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODELOS (MOBILE) ════════
+       Só aparece em telas estreitas (@media 900px) — substitui a gaveta
+       esquerda (☰) por uma barra rolável sempre visível. Preenchida em
+       _buildModeTabsMobile() (app/modo-mobile.js), lendo direto dos 5
+       cards de modelo da #sidebar-left. O botão "mobile-info-btn" que
+       abria essa gaveta foi removido de propósito: esta barra assume
+       essa função no mobile. -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Modelos atômicos" aria-orientation="horizontal"></nav>
 
   <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 
@@ -424,6 +432,18 @@
          uma unica coluna com os cinco modelos (11 paineis empilhados). -->
     <aside class="sidebar sidebar--right" id="sidebar-right"
            aria-label="Dados e controles da simulacao">
+
+      <!-- ════════ RESUMO DO MODELO (MOBILE) ════════
+           Só usado dentro do bottom sheet mobile. Populado por
+           _syncMobileModeUI() (app/modo-mobile.js). -->
+      <div class="mode-summary-mobile" id="mode-summary-mobile" hidden>
+        <button type="button" class="mode-summary-toggle" id="mode-summary-toggle"
+                aria-expanded="false" aria-controls="mode-summary-body">
+          <span aria-hidden="true">ℹ️</span> Sobre este modelo
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="mode-summary-body" id="mode-summary-body"></div>
+      </div>
 <section class="panel" aria-labelledby="hdr-periodic">
         <button type="button" class="panel-header" id="hdr-periodic" aria-expanded="true" aria-controls="body-periodic">
           <span class="panel-icon" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#ic-flask"/></svg></span>
@@ -582,6 +602,20 @@
 
   </main>
 
+  <!-- ════════ MODAL — INFORMAÇÕES DO MODELO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+  <div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+       aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+    <div class="mode-info-modal" id="modeInfoModal">
+      <div class="mode-info-header">
+        <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+        <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+        <button type="button" class="mode-info-close" id="modeInfoClose"
+                aria-label="Fechar informações do modelo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+      </div>
+      <div class="mode-info-body" id="modeInfoBody"></div>
+    </div>
+  </div>
+
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>
@@ -624,6 +658,7 @@
   <script src="js/app/tabela-periodica.js"></script>
   <script src="js/app/elemento-ui.js"></script>
   <script src="js/app/modelos-ui.js"></script>
+  <script src="js/app/modo-mobile.js"></script>
   <script src="js/app/eventos.js"></script>
   <script src="js/app/easter-eggs.js"></script>
   <script src="js/app/loop.js"></script>

@@ -56,5 +56,13 @@ function initMobileSidebar() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharTodas(); });
 
   window._closeSidebar = fecharTodas;
+  // Abertura PROGRAMÁTICA de uma gaveta específica — usada pela barra de
+  // modelos mobile (mode-tabs-mobile) para fechar/abrir o bottom sheet
+  // de controles sem duplicar a mecânica de abrir/fechar já existente
+  // aqui (mesma técnica dos outros 19 simuladores).
+  window._openSidebar = function (elId) {
+    const g = gavetas.find(x => x.el.id === elId);
+    if (g) abrir(g);
+  };
 }
 

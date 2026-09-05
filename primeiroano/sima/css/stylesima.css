@@ -547,6 +547,7 @@ body.simple-read .canvas-wrap canvas{ filter:contrast(1.15) brightness(1.05); }
 }
 .fps-counter{ position:absolute; bottom:.5rem; right:.65rem; font-family:var(--font-mono); font-size:.58rem; color:var(--text-muted); }
 
+.mode-tabs-mobile, .mode-summary-mobile { display: none; }
 @media (max-width: 960px) {
   .sidebar { min-width: 220px; max-width: 320px; }
   .sidebar--left  { width: var(--swl, 260px); }
@@ -561,22 +562,100 @@ body.simple-read .canvas-wrap canvas{ filter:contrast(1.15) brightness(1.05); }
      Para voltar ao empilhamento, basta restaurar este bloco: as regras
      antigas nao dependiam de JS nenhum. */
   .mobile-menu-btn { display:flex !important; align-items:center; justify-content:center; }
-  .sidebar {
-    position: fixed; top: var(--header-h); bottom: 0; z-index: 100;
-    width: min(88vw, 340px); max-width: 340px; min-width: 0;
-    height: auto; max-height: none; overflow-y: auto;
-    border-right: none; border-bottom: none; border-left: none; border-top: none;
+  /* sidebar esquerda (modelos) fica ESCONDIDA no mobile — a barra de
+     modelos rolável (.mode-tabs-mobile, logo abaixo) assume essa função. */
+  .sidebar--left { display: none; }
+
+  /* sidebar direita (controles) vira um BOTTOM SHEET: sobe da base da
+     tela em vez de entrar pela lateral. */
+  .sidebar--right {
+    position: fixed; z-index: 100;
+    left: 0; right: 0; bottom: 0; top: auto;
+    width: auto; max-width: none; min-width: 0;
+    height: auto; max-height: 75vh;
+    border: none; border-top: 1px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,.55);
+    transform: translateY(105%);
     transition: transform .25s ease;
+    overflow-y: auto;
+    padding-top: .35rem;
   }
-  .sidebar--left  { left: 0; right: auto; transform: translateX(-110%); box-shadow: 4px 0 24px rgba(0,0,0,.55); }
-  .sidebar--right { right: 0; left: auto;  transform: translateX(110%);  box-shadow: -4px 0 24px rgba(0,0,0,.55); }
-  .sidebar.mobile-open { transform: translateX(0); }
+  .sidebar--right.mobile-open { transform: translateY(0); }
+  .sidebar--right::before {
+    content: ''; display: block; width: 36px; height: 4px; border-radius: 2px;
+    background: var(--border); margin: .5rem auto .25rem;
+  }
   .canvas-wrap { width: 100%; height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h)); min-height: 300px; flex: none; }
   .sidebar-resizer { display: none; }   /* alca de redimensionar nao faz sentido na gaveta */
   .a11y-bar { gap: .15rem; }
   .a11y-btn { padding: .25rem .4rem; font-size: .65rem; }
   .keyboard-hints { display: none; }
+
+  .mode-tabs-mobile {
+    display: flex; gap: .4rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: .5rem .6rem; background: var(--bg-panel); border-bottom: 1px solid var(--border);
+    scrollbar-width: thin;
+  }
+  .mode-tab {
+    flex: none; display: flex; align-items: center; gap: .3rem;
+    padding: .4rem .7rem; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--bg-elevated, transparent); color: var(--text-secondary);
+    font-size: .78rem; white-space: nowrap; cursor: pointer; min-height: 36px;
+  }
+  .mode-tab .icon { width: 1em; height: 1em; }
+  .mode-tab[aria-selected="true"] {
+    border-color: var(--accent-main); color: var(--text-primary);
+    background: color-mix(in srgb, var(--accent-main) 18%, transparent);
+  }
+
+  .mode-summary-mobile { display: block; border-bottom: 1px dashed var(--border); margin: 0 .6rem .5rem; padding-bottom: .5rem; }
+  .mode-summary-toggle {
+    width: 100%; display: flex; align-items: center; gap: .4rem; text-align: left;
+    background: none; border: none; color: var(--text-secondary); font-size: .82rem;
+    padding: .3rem 0; cursor: pointer;
+  }
+  .mode-summary-toggle .chevron { margin-left: auto; transition: transform .15s ease; }
+  .mode-summary-toggle[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+  .mode-summary-body { display: none; padding: .3rem .1rem .1rem; font-size: .8rem; color: var(--text-secondary); }
+  .mode-summary-body.open { display: block; }
 }
+
+.mode-info-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s;
+}
+.mode-info-overlay.aberto { opacity: 1; visibility: visible; }
+.mode-info-modal {
+  background: var(--bg-panel2); border: 1px solid var(--border); border-radius: var(--radius);
+  width: min(420px, 94vw); max-height: 80vh; max-height: 80dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  transform: scale(.94) translateY(10px);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-info-overlay.aberto .mode-info-modal { transform: scale(1) translateY(0); }
+.mode-info-header {
+  display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem;
+  background: var(--bg-panel); border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.mode-info-icon { font-size: 1.3rem; color: var(--accent-main); flex-shrink: 0; display: flex; }
+.mode-info-icon .icon { width: 1.2em; height: 1.2em; }
+.mode-info-title { flex: 1; margin: 0; font-size: 1.02rem; color: var(--text-primary); }
+.mode-info-close {
+  background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary);
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mode-info-close:hover, .mode-info-close:focus-visible {
+  background: var(--bg-hover); color: var(--text-primary); border-color: var(--accent-main);
+  outline: 2px solid var(--accent-main); outline-offset: 2px;
+}
+.mode-info-body { padding: 1rem; overflow-y: auto; font-size: .88rem; color: var(--text-secondary); }
+.mode-info-body .mode-define { color: var(--text-primary); margin: 0 0 .6rem; line-height: 1.5; }
+@media (pointer: coarse) { .mode-info-close { min-width: 44px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .mode-info-modal { transition: none; } }
 @media (max-width: 400px) {
   .shell-btns, .model-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(65px, 1fr)); gap: .2rem; }
   .model-btn { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: .4rem; text-align: center; }
