@@ -32,6 +32,15 @@ function renderLewis(Z, el, sub, atomCor, atomGlow, escala){
   const R_PT = 5.5 * escala;
   const GAP  = 14 * escala;
   const fSz  = Math.round(10 * escala);
+  // Espaço extra reservado à direita pro rótulo da anotação ("N e⁻ de
+  // valência" / "Parcialmente preenchido" etc.) — sem isso o texto
+  // ultrapassava a largura do próprio SVG e ficava cortado (o <svg>
+  // recorta tudo fora do viewBox, do mesmo jeito em qualquer tamanho
+  // de tela — só ficava mais visível no bottom sheet mobile, mais
+  // estreito). "Parcialmente preenchido" é o rótulo mais longo
+  // possível (ver config-eletronica.js), por isso a margem é generosa.
+  const ANNO_W = Math.round(130 * escala);
+  const VB_W = SZ + ANNO_W;
   const FACES = [
     {dx:0,   dy:-DIST, ax: 0,  ay:-1, label:''},
     {dx:DIST, dy:0,    ax: 1,  ay: 0, label:''},
@@ -50,7 +59,7 @@ function renderLewis(Z, el, sub, atomCor, atomGlow, escala){
       <path d="M0,0 L6,3 L0,6 Z" fill="${COR_ACCENT}"/>
     </marker>
   </defs>`;
-  parts.push(`<rect width="${SZ}" height="${SZ}" fill="transparent"/>`);
+  parts.push(`<rect width="${VB_W}" height="${SZ}" fill="transparent"/>`);
   FACES.forEach(({dx,dy,ax,ay}, fi)=>{
     const n = ocup[fi];
     if(n===0) return;
@@ -102,8 +111,8 @@ function renderLewis(Z, el, sub, atomCor, atomGlow, escala){
            font-family="Rajdhani,sans-serif" font-size="${fSz}"
            fill="${COR_DIM}">${sub.statusLabel}</text>`
   );
-  const maxW = Math.round(260 * escala);
-  const svgLewis = `<svg viewBox="0 0 ${SZ} ${SZ}"
+  const maxW = Math.round(290 * escala);
+  const svgLewis = `<svg viewBox="0 0 ${VB_W} ${SZ}"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
     aria-labelledby="lewis-t-${Z} lewis-d-${Z}"

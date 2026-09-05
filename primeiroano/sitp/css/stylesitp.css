@@ -645,20 +645,31 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .modal-header {
   padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)) calc(10px * var(--font-scale));
   border-bottom:1px solid var(--border); flex-shrink:0; position:relative;
-  /* Plano de fundo sugerindo a aparência real do elemento (ver
-     js/render/aparencia-fundo.js) — a variável --aparencia-bg é
-     escrita pelo JS a cada elemento aberto. Uma camada escura
-     (color-mix com --bg-deep, funciona em qualquer tema sem precisar
-     de uma cor em RGB separada) fica POR CIMA da cor do elemento, só
-     como uma sugestão sutil por trás do texto — não uma foto, um
-     "clima" de cor. */
+  /* Foto real do elemento como plano de fundo (ver js/render/imagem-
+     fundo.js) — a variável --foto-elemento é escrita pelo JS a cada
+     elemento aberto. Uma camada escura (color-mix com --bg-deep,
+     funciona em qualquer tema sem precisar de uma cor em RGB
+     separada) fica POR CIMA da foto, só o bastante pra manter o
+     texto legível. background-image (não <img>): se a foto não
+     carregar — sem internet, ou o arquivo mudou de lugar no Commons —
+     o cabeçalho só fica na cor sólida de sempre, sem ícone de link
+     quebrado. */
   background-color: var(--bg-deep);
   background-image:
     linear-gradient(160deg,
-      color-mix(in srgb, var(--bg-deep) 74%, transparent) 0%,
-      color-mix(in srgb, var(--bg-deep) 90%, transparent) 75%),
-    var(--aparencia-bg, none);
+      color-mix(in srgb, var(--bg-deep) 55%, transparent) 0%,
+      color-mix(in srgb, var(--bg-deep) 78%, transparent) 60%,
+      color-mix(in srgb, var(--bg-deep) 92%, transparent) 100%),
+    var(--foto-elemento, none);
+  background-size: cover, cover;
+  background-position: center, center;
   transition: background-image .35s ease;
+}
+/* Crédito da foto — pequeno, discreto, mas visível (a maioria das
+   licenças CC BY/BY-SA exige atribuição, não é só cortesia). */
+.modal-foto-credito {
+  margin: .4rem 0 0; font-size: calc(.62rem * var(--font-scale));
+  color: var(--text-dim); opacity: .75; text-align: right;
 }
 .modal-top-row { display:flex; align-items:flex-start; gap:12px; }
 .modal-sym-col { display:flex; flex-direction:column; align-items:flex-start; }
