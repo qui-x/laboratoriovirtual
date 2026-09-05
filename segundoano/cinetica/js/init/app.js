@@ -48,6 +48,10 @@ SICIN.App = class App {
     // bottom sheet mobile, abre sozinho (1ª ativação) ou já vem recolhido
     // (ativações seguintes). Não persiste entre visitas de propósito.
     this._modosVistos = new Set();
+    // Controla a "largada com antecipação" do gatilho de ativação — ver
+    // setMode()/_loop(). 0 = física liberada (nenhuma pausa pendente).
+    this._modeStartsAt = 0;
+    this._modeStartTimer = null;
     this.canvas = document.getElementById('sim-canvas');
     this.ctx = this.canvas.getContext('2d');
     this._resize();
@@ -320,6 +324,11 @@ SICIN.App = class App {
      Mesmo contrato de toggle do SILQ (setMode / clearMode). ── */
   clearMode() {
     this.mode = null;
+    // Cancela qualquer "largada com antecipação" pendente do modo anterior
+    // — sem isso, um setTimeout de 2s de um modo já desativado poderia
+    // reescrever o hint do canvas por cima do texto neutro logo abaixo.
+    if (this._modeStartTimer) { clearTimeout(this._modeStartTimer); this._modeStartTimer = null; }
+    this._modeStartsAt = 0;
     document.querySelectorAll('.panel[data-mode-card]').forEach(panel => {
       panel.classList.remove('active');
       const header = panel.querySelector('.panel-header');
@@ -363,29 +372,46 @@ SICIN.App = class App {
         const nomeMod = (this.D.MODES.find(x => x.id === panel.dataset.modeCard) || {}).nome || '';
         actBtn.title = on ? 'Desativar ' + nomeMod : 'Ativar ' + nomeMod + ' no canvas';
       }
+      // Ao ativar, o painel se RECOLHE (em vez de expandir) — o gatilho de
+      // ativação abre espaço pro canvas, não pede pra continuar lendo a
+      // definição. Reabrir é um clique no cabeçalho, a qualquer momento,
+      // inclusive com a simulação já rodando.
       if (on) {
-        if (header) header.setAttribute('aria-expanded', 'true');
+        if (header) header.setAttribute('aria-expanded', 'false');
         const body = panel.querySelector('.panel-body');
-        if (body) body.classList.remove('collapsed');
+        if (body) body.classList.add('collapsed');
       }
     });
     document.querySelectorAll('.panel[data-owner]').forEach(p => {
       p.hidden = !(m.panels || []).includes(p.id);
     });
     const hint = document.getElementById('canvas-hint');
-    if (hint) hint.textContent = m.hintCanvas || '';
     this.mech.setMode(id);
     this.refresh();
     this._syncMobileModeUI(id);
-    // No mobile, ativar um modo pela barra de abas já abre o bottom sheet
-    // de controles sozinho — no desktop essa chamada não faz nada (a
-    // sidebar direita já está sempre visível, sem gaveta).
-    if (window.innerWidth <= 1100 && typeof window._openSidebar === 'function') {
-      window._openSidebar('sidebar-right');
+    // No mobile, ativar um modo RECOLHE o bottom sheet de controles (se
+    // estiver aberto) em vez de abri-lo — o gatilho libera o canvas
+    // inteiro pra tela. Reabrir os controles pra ajustar parâmetros é um
+    // toque no botão 🎛 do cabeçalho, a qualquer momento, inclusive com a
+    // simulação já rodando.
+    if (window.innerWidth <= 1100 && typeof window._closeSidebar === 'function') {
+      window._closeSidebar();
     }
+    // ── largada com 2s de antecipação ──
+    // O ESTADO já foi montado (mech.setMode acima), então o canvas mostra
+    // o quadro inicial "parado" imediatamente — só a FÍSICA (mech.update,
+    // chamado em _loop) fica pausada por 2s, dando tempo de os controles
+    // recolherem e o aluno olhar pro canvas antes de algo se mexer.
+    if (this._modeStartTimer) clearTimeout(this._modeStartTimer);
+    this._modeStartsAt = performance.now() + 2000;
+    if (hint) hint.textContent = 'Iniciando em instantes…';
+    this._modeStartTimer = setTimeout(() => {
+      const h = document.getElementById('canvas-hint');
+      if (h && this.mode && this.mode.id === id) h.textContent = m.hintCanvas || '';
+    }, 2000);
     if (!silent) {
       SICIN.playTone(760, .06, .05);
-      SICIN.announce(`Modo ${m.nome} selecionado. ${(m.info || '').split('.')[0]}.`);
+      SICIN.announce(`Modo ${m.nome} selecionado. A animação começa em 2 segundos. ${(m.info || '').split('.')[0]}.`);
     }
   }
 
@@ -685,8 +711,13 @@ SICIN.App = class App {
     // Sem modo ativo → canvas permanece em branco (nada é desenhado
     // "sozinho"; exige ativação explícita do usuário no painel).
     if (this.mode) {
-      this.time += dt;
-      this.mech.update(dt, this);
+      // "Largada com antecipação": _modeStartsAt (marcado em setMode) segura
+      // o UPDATE por 2s — o desenho continua rodando (mostra o quadro
+      // congelado), só a física não avança até o tempo passar.
+      if (now >= this._modeStartsAt) {
+        this.time += dt;
+        this.mech.update(dt, this);
+      }
       this.mech.draw(ctx, this.W, this.H, this);
 
       // Painel de Resultados (texto + gráfico auxiliar) precisa
