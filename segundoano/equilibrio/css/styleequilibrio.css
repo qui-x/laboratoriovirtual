@@ -666,8 +666,12 @@ body.light-mode .overlay-label{ background:rgba(255,255,255,.85); }
     background: color-mix(in srgb, var(--accent-main) 18%, transparent);
   }
 
-  /* ── resumo do modo, dentro do bottom sheet ── */
-  .mode-summary-mobile { border-bottom: 1px dashed var(--border); margin: 0 .6rem .5rem; padding-bottom: .5rem; }
+  /* ── resumo do modo, dentro do bottom sheet ──
+     display:block aqui é OBRIGATÓRIO: a regra "escondido por padrão"
+     (antes desta media query, pensada pro desktop) deixa .mode-summary-mobile
+     em display:none o tempo todo; sem sobrescrever aqui dentro, o box.hidden
+     = false do JS nunca vira visível de verdade. */
+  .mode-summary-mobile { display: block; border-bottom: 1px dashed var(--border); margin: 0 .6rem .5rem; padding-bottom: .5rem; }
   .mode-summary-toggle {
     width: 100%; display: flex; align-items: center; gap: .4rem; text-align: left;
     background: none; border: none; color: var(--text-secondary); font-size: .82rem;
@@ -678,6 +682,49 @@ body.light-mode .overlay-label{ background:rgba(255,255,255,.85); }
   .mode-summary-body { display: none; padding: .3rem .1rem .1rem; font-size: .8rem; color: var(--text-secondary); }
   .mode-summary-body.open { display: block; }
 }
+
+/* ════════ MODAL — INFORMAÇÕES DO MODO (1ª ATIVAÇÃO) ════════
+   Fora da media query de propósito: a estrutura funciona em qualquer
+   largura (opacity/visibility, não display — anima igual ao modal de
+   elemento do SITP), mas quem decide QUANDO abrir é o JS
+   (_showModeInfoModal, chamado só com window.innerWidth <= 1100).
+   Em telas largas ela nunca ganha a classe .aberto, então fica
+   sempre invisível na prática — nenhuma regra extra de esconder é
+   necessária. */
+.mode-info-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s;
+}
+.mode-info-overlay.aberto { opacity: 1; visibility: visible; }
+.mode-info-modal {
+  background: var(--bg-panel2); border: 1px solid var(--border); border-radius: var(--radius);
+  width: min(420px, 94vw); max-height: 80vh; max-height: 80dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  transform: scale(.94) translateY(10px);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-info-overlay.aberto .mode-info-modal { transform: scale(1) translateY(0); }
+.mode-info-header {
+  display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem;
+  background: var(--bg-panel); border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.mode-info-icon { font-size: 1.3rem; color: var(--accent-main); flex-shrink: 0; display: flex; }
+.mode-info-title { flex: 1; margin: 0; font-size: 1.02rem; color: var(--text-primary); }
+.mode-info-close {
+  background: transparent; border: 1px solid var(--border); border-radius: 8px; color: var(--text-secondary);
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mode-info-close:hover, .mode-info-close:focus-visible {
+  background: var(--bg-hover); color: var(--text-primary); border-color: var(--accent-main);
+  outline: 2px solid var(--accent-main); outline-offset: 2px;
+}
+.mode-info-body { padding: 1rem; overflow-y: auto; font-size: .88rem; color: var(--text-secondary); }
+.mode-info-body .mode-define { color: var(--text-primary); margin: 0 0 .6rem; line-height: 1.5; }
+@media (pointer: coarse) { .mode-info-close { min-width: 44px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .mode-info-modal { transition: none; } }
 
 @media (max-width: 400px) {
   .panel[data-mode-card] .panel-label { font-size: .7rem; }

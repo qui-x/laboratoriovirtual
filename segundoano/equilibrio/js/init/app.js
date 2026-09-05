@@ -71,6 +71,7 @@ SIEQ.App = class App {
     this._buildModeTabsMobile();
     this._bindSidebar();
     this._bindModeIndicator();
+    this._bindModeInfoModal();
     this._bindHeader();
     this._bindCanvasKeys();
     if (typeof mech.build === 'function') mech.build(this);
@@ -254,10 +255,16 @@ SIEQ.App = class App {
     if (!m) { box.hidden = true; return; }
     box.hidden = false;
     body.innerHTML = this._modeSummaryHTML(m);
+    // 1ª ativação do modo nesta sessão -> abre o MODAL (por cima de
+    // tudo, força a leitura antes de simular). Nas ativações seguintes
+    // o resumo já fica disponível dentro do bottom sheet, recolhido,
+    // sem interromper de novo — o aluno abre manualmente pelo toggle
+    // "Sobre este modo" se quiser reler.
     const primeiraVez = !this._modosVistos.has(id);
     this._modosVistos.add(id);
-    toggle.setAttribute('aria-expanded', primeiraVez ? 'true' : 'false');
-    body.classList.toggle('open', primeiraVez);
+    toggle.setAttribute('aria-expanded', 'false');
+    body.classList.remove('open');
+    if (primeiraVez && window.innerWidth <= 1100) this._showModeInfoModal(m);
     if (!toggle._wired) {
       toggle._wired = true;
       toggle.addEventListener('click', () => {
@@ -266,6 +273,45 @@ SIEQ.App = class App {
         body.classList.toggle('open', !open);
       });
     }
+  }
+
+  /* ── MODAL de informações do modo (1ª ativação, mobile) ──
+     Reaproveita _modeSummaryHTML(m) — o MESMO texto que aparece no
+     "Sobre este modo" do bottom sheet — só muda a apresentação:
+     aqui é um diálogo por cima de tudo, com foco automático no ✕
+     para quem navega por teclado. ── */
+  _showModeInfoModal(m) {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    const icon = document.getElementById('modeInfoIcon');
+    const title = document.getElementById('modeInfoTitle');
+    const body = document.getElementById('modeInfoBody');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (icon) icon.innerHTML = m.icon || '';
+    if (title) title.textContent = m.nome;
+    if (body) body.innerHTML = this._modeSummaryHTML(m);
+    overlay.classList.add('aberto');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 220);
+  }
+  _hideModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('aberto');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+  /* Fechamento: botão ✕, toque no fundo escurecido (fora da caixa) ou
+     Esc — mesmo contrato do modal de elemento do SITP. Ligado uma
+     única vez, no construtor. ── */
+  _bindModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (!overlay || !closeBtn) return;
+    closeBtn.addEventListener('click', () => this._hideModeInfoModal());
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) this._hideModeInfoModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('aberto')) this._hideModeInfoModal();
+    });
   }
 
   /* ── DESATIVAR o modo — volta ao estado neutro, o mesmo em que o

@@ -55,6 +55,14 @@ function initMobileSidebar() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharTodas(); });
 
   window._closeSidebar = fecharTodas;
+  // Abertura PROGRAMÁTICA de uma gaveta específica pelo id do elemento —
+  // usada pela barra de modos mobile (mode-tabs-mobile, dentro de app.js)
+  // para abrir o bottom sheet de controles ao tocar um modo, sem precisar
+  // duplicar a mecânica de abrir/fechar que já existe aqui.
+  window._openSidebar = function (elId) {
+    const g = gavetas.find(x => x.el.id === elId);
+    if (g) abrir(g);
+  };
 }
 window.addEventListener('DOMContentLoaded', initMobileSidebar);
 

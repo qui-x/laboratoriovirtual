@@ -1365,6 +1365,13 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
   #periodic-table { gap: 2px; }
   .footer-fonte-item { font-size: 9px; }
 }
+
+/* Barra de abas do bottom sheet (ver js/modal/secoes-mobile.js):
+   escondida por padrão (telas largas). A media query 760px abaixo
+   reativa. Regra precisa vir ANTES da media query — depois dela um
+   "display:none" incondicional venceria por ordem de cascata. */
+.modal-section-tabs { display: none; }
+
 @media (max-width: 760px) {
   body { height: auto; min-height: 100vh; min-height: 100dvh; overflow: auto; }
   .page-wrapper { overflow: visible; }
@@ -1374,10 +1381,74 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
     grid-template-rows: 16px repeat(7, minmax(46px, 1fr)) 5px minmax(46px,1fr) minmax(46px,1fr);
   }
   .tabela-scroll-hint { display: block; }
-  /* Modal ocupa quase toda a tela em mobile */
-  .modal { width: 96vw; max-height: 94vh; max-height: 94dvh; }
-  .modal-symbol { font-size: calc(3rem * var(--font-scale)); }
   div[vw] { z-index: 1000; }
+
+  /* ════════ FICHA DO ELEMENTO → BOTTOM SHEET ════════
+     Em telas largas ".modal" é uma janela central (ver regra base,
+     acima neste arquivo). Aqui ela vira um bottom sheet: sobe da base
+     da tela cobrindo metade dela, em vez de aparecer flutuando no
+     meio. O fechamento continua IGUAL — o mesmo botão ✕ (#btnClose) e
+     o mesmo toque fora do modal (".modal-overlay" — ver
+     js/modal/abrir-fechar.js), nenhuma linha de JS muda por causa
+     disso. Só a posição/animação do CSS mudam de "aparecer no centro"
+     para "subir de baixo". */
+  .modal-overlay { align-items: flex-end; }
+  .modal {
+    width: 100%; max-width: none;
+    height: 50vh; height: 50dvh; max-height: 50vh; max-height: 50dvh;
+    border-radius: 16px 16px 0 0;
+    /* estado fechado: fora da tela, embaixo — igual à gaveta de
+       controles dos simuladores de 2º ano (mesma técnica, mesmo
+       motivo: transform anima em vez de display, então o navegador
+       não recalcula layout a cada quadro). */
+    transform: translateY(100%);
+  }
+  .modal-overlay.aberto .modal { transform: translateY(0); }
+  /* alça visual no topo do sheet — mesmo padrão da gaveta de
+     controles mobile dos simuladores de 2º ano: só indica "isto
+     desliza", não é arrastável de propósito (fecha por ✕ ou toque no
+     fundo escurecido, de forma previsível). */
+  .modal::before {
+    content: ''; display: block; width: 36px; height: 4px; border-radius: 2px;
+    background: var(--border); margin: .5rem auto 0;
+  }
+  .modal-symbol { font-size: calc(3rem * var(--font-scale)); }
+
+  /* ════════ BARRA DE ABAS DE SEÇÃO ════════
+     Uma pílula por .info-card do modal (Estado físico, Distribuição
+     Eletrônica, Como é obtido, Curiosidades, propriedades e Raio
+     atômico), montada em montarAbasSecoesMobile(). Mesma linguagem
+     visual da barra de modos mobile dos simuladores de 2º ano
+     (.mode-tab), para o aluno reconhecer o mesmo padrão de navegação
+     em toda a coleção. */
+  .modal-section-tabs {
+    display: flex; gap: .4rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: .55rem .7rem; background: var(--bg-deep); border-bottom: 1px solid var(--border);
+    scrollbar-width: thin; flex-shrink: 0;
+  }
+  .modal-tab {
+    flex: none; display: flex; align-items: center; gap: .3rem;
+    padding: .4rem .75rem; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-dim);
+    font-size: .78rem; white-space: nowrap; cursor: pointer; min-height: 36px;
+    max-width: 46vw; overflow: hidden; text-overflow: ellipsis;
+  }
+  .modal-tab .ico { flex-shrink: 0; }
+  .modal-tab span { overflow: hidden; text-overflow: ellipsis; }
+  .modal-tab[aria-selected="true"] {
+    border-color: var(--accent); color: var(--text-main);
+    background: color-mix(in srgb, var(--accent) 18%, var(--bg-card));
+  }
+  @media (pointer: coarse) { .modal-tab { min-height: 44px; } }
+
+  /* Só a seção da aba ativa fica visível — as demais continuam no
+     DOM (dados intactos, sem re-render ao trocar de aba), só
+     escondidas. renderCardsPropriedade() pode recriar os cards de
+     propriedade a qualquer momento; a classe abaixo é reaplicada do
+     zero a cada elemento aberto, então nunca fica "presa" num card
+     antigo. */
+  .modal-body .info-card { display: none; }
+  .modal-body .info-card.mobile-section-active { display: block; }
 }
 @media (max-width: 480px) {
   .modal-top-row { flex-wrap: wrap; }

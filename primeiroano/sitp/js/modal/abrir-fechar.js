@@ -5,8 +5,9 @@
    Monta e abre a ficha completa de um elemento (todas as seções:
    estado físico, configuração, raio, propriedades, obtenção,
    curiosidade) e fecha o modal — incluindo o atalho de teclado Esc.
-   Depende de: modal/estado-modal.js e praticamente todos os módulos
-               de render/.
+   Depende de: modal/estado-modal.js, modal/secoes-mobile.js (monta a
+               barra de abas do bottom sheet mobile) e praticamente
+               todos os módulos de render/.
 ═══════════════════════════════════════════════════════════════ */
 
 'use strict';
@@ -80,6 +81,11 @@ function abrirModal(el,divEl){
   document.getElementById('modalCuriosidade').textContent=CURIOSIDADES[el.numero]||'—';
   document.getElementById("modalRaio").innerHTML=renderRaio(Z,el,ccHex);
   renderCardsPropriedade(Z, el);
+  // Bottom sheet mobile: monta a barra de abas (Estado físico,
+  // Distribuição Eletrônica etc.) DEPOIS que todas as seções acima já
+  // foram preenchidas — em telas largas isso não muda nada visualmente
+  // (ver secoes-mobile.js e o CSS do @media 760px).
+  montarAbasSecoesMobile();
   modalOverlay.classList.add('aberto');
   modalOverlay.setAttribute('aria-hidden','false');
   anunciar(`${el.nome}, número atômico ${Z}, ${el.cat}, ${ESTADO_LABEL[est]}.`);

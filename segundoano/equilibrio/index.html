@@ -446,6 +446,29 @@
 
   </main>
 
+  <!-- ════════ MODAL — INFORMAÇÕES DO MODO (1ª ATIVAÇÃO, MOBILE) ════════
+       Aberto por _showModeInfoModal() (app.js) na 1ª vez que cada modo é
+       ativado nesta sessão, pelo toque na barra de modos mobile
+       (mode-tabs-mobile). Mesmo conteúdo de "Sobre este modo" no bottom
+       sheet (_modeSummaryHTML, sem duplicar dado) — só a APRESENTAÇÃO é
+       diferente: aqui é um modal de verdade, por cima de tudo, que força
+       a leitura antes de simular pela 1ª vez. Fecha pelo ✕, por toque no
+       fundo escurecido, ou Esc — depois disso o mesmo conteúdo continua
+       acessível quando o aluno quiser, recolhido dentro do próprio bottom
+       sheet. -->
+  <div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+       aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+    <div class="mode-info-modal" id="modeInfoModal">
+      <div class="mode-info-header">
+        <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+        <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+        <button type="button" class="mode-info-close" id="modeInfoClose"
+                aria-label="Fechar informações do modo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+      </div>
+      <div class="mode-info-body" id="modeInfoBody"></div>
+    </div>
+  </div>
+
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
     <div vw-plugin-wrapper>

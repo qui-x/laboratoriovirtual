@@ -44,6 +44,10 @@ SICIN.App = class App {
     this._curio = 0;
     this._fpsN = 0;
     this._fpsT = 0;
+    // Modos já vistos nesta sessão — controla se o resumo do modo, no
+    // bottom sheet mobile, abre sozinho (1ª ativação) ou já vem recolhido
+    // (ativações seguintes). Não persiste entre visitas de propósito.
+    this._modosVistos = new Set();
     this.canvas = document.getElementById('sim-canvas');
     this.ctx = this.canvas.getContext('2d');
     this._resize();
@@ -64,8 +68,10 @@ SICIN.App = class App {
       window.visualViewport.addEventListener('resize', () => this._resize());
     }
     this._buildModes();
+    this._buildModeTabsMobile();
     this._bindSidebar();
     this._bindModeIndicator();
+    this._bindModeInfoModal();
     this._bindHeader();
     this._bindCanvasKeys();
     if (typeof mech.build === 'function') mech.build(this);
@@ -190,6 +196,124 @@ SICIN.App = class App {
     });
   }
 
+  /* ── barra de modos MOBILE — mesma ordem/dados de _buildModes() acima,
+     só que como abas roláveis em vez de acordeão (ver CSS, ativa só
+     abaixo de 1100px). Clicar chama setMode/clearMode, o MESMO contrato
+     de sempre — a barra não tem lógica própria de estado, só delega. ── */
+  _buildModeTabsMobile() {
+    const bar = document.getElementById('mode-tabs-mobile');
+    if (!bar) return;
+    this.D.MODES.forEach(m => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'mode-tab';
+      tab.dataset.modeTab = m.id;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', 'false');
+      tab.innerHTML = `<span aria-hidden="true">${m.icon || '<svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke:none;fill:currentColor" width=".55em" height=".55em"><circle cx="12" cy="12" r="10" /></svg>'}</span><span>${m.nome}</span>`;
+      tab.title = m.nome;
+      tab.addEventListener('click', () => {
+        if (this.mode && this.mode.id === m.id) this.clearMode();else this.setMode(m.id);
+      });
+      bar.appendChild(tab);
+    });
+  }
+
+  /* ── resumo do modo, para dentro do bottom sheet mobile (definição +
+     fatos-chave — a mesma informação que já existe no acordeão da
+     sidebar esquerda, só que reduzida e em outro lugar, pensada pra
+     leitura rápida no celular). Retorna string HTML pronta. ── */
+  _modeSummaryHTML(m) {
+    let html = '';
+    if (m.def) html += `<p class="mode-define">${m.def}</p>`;
+    if (m.fatos && m.fatos.length) {
+      html += '<div class="fact-grid">' + m.fatos.map(ft =>
+        `<div class="fact-cell"><span class="fact-label">${ft.l}</span><span class="fact-value">${ft.v}</span></div>`
+      ).join('') + '</div>';
+    }
+    return html;
+  }
+
+  /* ── sincroniza a barra de modos e o resumo do bottom sheet com o modo
+     ativo — chamada por setMode()/clearMode(), nunca sozinha. Segura
+     mesmo se os elementos não existirem (desktop puro, ou simulador sem
+     esse recurso ainda). ── */
+  _syncMobileModeUI(id) {
+    document.querySelectorAll('.mode-tab').forEach(tab => {
+      tab.setAttribute('aria-selected', tab.dataset.modeTab === id ? 'true' : 'false');
+    });
+    const activeTab = id && document.querySelector(`.mode-tab[data-mode-tab="${id}"]`);
+    if (activeTab && typeof activeTab.scrollIntoView === 'function') {
+      activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: SICIN.isReduced() ? 'auto' : 'smooth' });
+    }
+    const box = document.getElementById('mode-summary-mobile');
+    const toggle = document.getElementById('mode-summary-toggle');
+    const body = document.getElementById('mode-summary-body');
+    if (!box || !toggle || !body) return;
+    if (!id) { box.hidden = true; return; }
+    const m = this.D.MODES.find(x => x.id === id);
+    if (!m) { box.hidden = true; return; }
+    box.hidden = false;
+    body.innerHTML = this._modeSummaryHTML(m);
+    // 1ª ativação do modo nesta sessão -> abre o MODAL (por cima de
+    // tudo, força a leitura antes de simular). Nas ativações seguintes
+    // o resumo já fica disponível dentro do bottom sheet, recolhido,
+    // sem interromper de novo — o aluno abre manualmente pelo toggle
+    // "Sobre este modo" se quiser reler.
+    const primeiraVez = !this._modosVistos.has(id);
+    this._modosVistos.add(id);
+    toggle.setAttribute('aria-expanded', 'false');
+    body.classList.remove('open');
+    if (primeiraVez && window.innerWidth <= 1100) this._showModeInfoModal(m);
+    if (!toggle._wired) {
+      toggle._wired = true;
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        body.classList.toggle('open', !open);
+      });
+    }
+  }
+
+  /* ── MODAL de informações do modo (1ª ativação, mobile) ──
+     Reaproveita _modeSummaryHTML(m) — o MESMO texto que aparece no
+     "Sobre este modo" do bottom sheet — só muda a apresentação:
+     aqui é um diálogo por cima de tudo, com foco automático no ✕
+     para quem navega por teclado. ── */
+  _showModeInfoModal(m) {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    const icon = document.getElementById('modeInfoIcon');
+    const title = document.getElementById('modeInfoTitle');
+    const body = document.getElementById('modeInfoBody');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (icon) icon.innerHTML = m.icon || '';
+    if (title) title.textContent = m.nome;
+    if (body) body.innerHTML = this._modeSummaryHTML(m);
+    overlay.classList.add('aberto');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 220);
+  }
+  _hideModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('aberto');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+  /* Fechamento: botão ✕, toque no fundo escurecido (fora da caixa) ou
+     Esc — mesmo contrato do modal de elemento do SITP. Ligado uma
+     única vez, no construtor. ── */
+  _bindModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (!overlay || !closeBtn) return;
+    closeBtn.addEventListener('click', () => this._hideModeInfoModal());
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) this._hideModeInfoModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('aberto')) this._hideModeInfoModal();
+    });
+  }
+
   /* ── DESATIVAR o modo — volta ao estado neutro, o mesmo em que o
      simulador abre (this.mode = null). Todo o resto do codigo ja trata
      esse caso: refresh(), o hint do canvas e os paineis por modo.
@@ -217,6 +341,7 @@ SICIN.App = class App {
     if (ind0) ind0.classList.remove('mode-on');
     if (this.mech && typeof this.mech.setMode === 'function') this.mech.setMode(null);
     this.refresh();
+    this._syncMobileModeUI(null);
     if (typeof SICIN.playTone === 'function') SICIN.playTone(420, .06, .05);
     SICIN.announce('Modo desativado. Nenhum modo ativo — escolha um modo e ative-o para voltar a simular.');
   }
@@ -251,6 +376,13 @@ SICIN.App = class App {
     if (hint) hint.textContent = m.hintCanvas || '';
     this.mech.setMode(id);
     this.refresh();
+    this._syncMobileModeUI(id);
+    // No mobile, ativar um modo pela barra de abas já abre o bottom sheet
+    // de controles sozinho — no desktop essa chamada não faz nada (a
+    // sidebar direita já está sempre visível, sem gaveta).
+    if (window.innerWidth <= 1100 && typeof window._openSidebar === 'function') {
+      window._openSidebar('sidebar-right');
+    }
     if (!silent) {
       SICIN.playTone(760, .06, .05);
       SICIN.announce(`Modo ${m.nome} selecionado. ${(m.info || '').split('.')[0]}.`);
