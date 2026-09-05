@@ -44,6 +44,19 @@ function trocarModulo(nome, btn) {
   });
   btn.setAttribute('aria-pressed', 'true');
 
+  // Ao ativar, o painel se RECOLHE — o gatilho abre espaço pra view
+  // central. Reabrir é um clique no cabeçalho, a qualquer momento.
+  // SIQI usa data-open no <section class="panel">, não uma classe
+  // .collapsed no corpo (ver js/ui/paineis.js) — segue o MESMO
+  // mecanismo aqui.
+  var painel = btn.closest('.panel[data-mode-card]');
+  if (painel) {
+    var hdr = painel.querySelector('.panel-header');
+    painel.dataset.open = 'false';
+    if (hdr) hdr.setAttribute('aria-expanded', 'false');
+  }
+  if (typeof syncMobileModeUI === 'function') syncMobileModeUI(nome);
+
   // 'construtor' tem sua própria view; 'nomenclatura' reaproveita a
   // Ficha (mesma tela de detalhes do composto que o Lab usa) — o
   // desafio de nomenclatura troca o conteúdo dela por dentro
@@ -57,5 +70,6 @@ function trocarModulo(nome, btn) {
 
 function desativarModulo(btn) {
   btn.setAttribute('aria-pressed', 'false');
+  if (typeof syncMobileModeUI === 'function') syncMobileModeUI(null);
   if (window._setView) window._setView('none');
 }

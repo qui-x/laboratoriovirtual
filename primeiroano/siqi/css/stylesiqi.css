@@ -1276,6 +1276,7 @@ html[data-motion="true"] .rxb-acerto-screen
 }
 
 /* ── 900: tablet landscape / small desktop ───────────────────── */
+.mode-tabs-mobile { display: none; }
 @media (max-width:900px){
   /* Sidebars viram off-canvas deslizante */
   .mobile-menu-btn { display:flex !important; }
@@ -1286,9 +1287,42 @@ html[data-motion="true"] .rxb-acerto-screen
     box-shadow:4px 0 24px rgba(0,0,0,.55);
     width:min(88vw, 320px); max-width:320px;
   }
-  .sidebar--right { left:auto; right:0; transform:translateX(110%); }
-  .sidebar.mobile-open  { transform:translateX(0); }
+  /* sidebar esquerda (módulos) fica ESCONDIDA no mobile — a barra de
+     modos rolável (.mode-tabs-mobile) assume essa função. */
+  .sidebar--left { display: none; }
+  /* sidebar direita (propriedades/laboratório) vira um BOTTOM SHEET. */
+  .sidebar--right {
+    left:0; right:0; top:auto; bottom:0;
+    width:auto; max-width:none; min-width:0;
+    height:auto; max-height:75vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow:0 -4px 24px rgba(0,0,0,.55);
+    transform:translateY(105%);
+    overflow-y:auto; padding-top:.35rem;
+  }
+  .sidebar--right.mobile-open { transform:translateY(0); }
+  .sidebar--right::before {
+    content:''; display:block; width:36px; height:4px; border-radius:2px;
+    background:var(--bdr); margin:.5rem auto .25rem;
+  }
   .state-pill { display:none; }
+
+  .mode-tabs-mobile {
+    display: flex; gap: .4rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: .5rem .6rem; background: var(--bg1); border-bottom: 1px solid var(--bdr);
+    scrollbar-width: thin;
+  }
+  .mode-tab {
+    flex: none; display: flex; align-items: center; gap: .3rem;
+    padding: .4rem .7rem; border-radius: 999px; border: 1px solid var(--bdr);
+    background: transparent; color: var(--tx2);
+    font-size: .78rem; white-space: nowrap; cursor: pointer; min-height: 36px;
+  }
+  .mode-tab .icon { width: 1em; height: 1em; }
+  .mode-tab[aria-selected="true"] {
+    border-color: var(--coral); color: var(--tx1);
+    background: color-mix(in srgb, var(--coral) 18%, transparent);
+  }
 
   /* Builder: elementos menores */
   .rxb-root { padding:.85rem .9rem .7rem; }
@@ -1301,6 +1335,42 @@ html[data-motion="true"] .rxb-acerto-screen
   .rxb-acerto-eq { font-size:clamp(.9rem,2.5vw,1.3rem); }
   .rxb-acerto-eq-wrap { padding:1rem 1.4rem; }
 }
+
+.mode-info-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s;
+}
+.mode-info-overlay.aberto { opacity: 1; visibility: visible; }
+.mode-info-modal {
+  background: var(--bg2); border: 1px solid var(--bdr); border-radius: var(--r);
+  width: min(420px, 94vw); max-height: 80vh; max-height: 80dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  transform: scale(.94) translateY(10px);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-info-overlay.aberto .mode-info-modal { transform: scale(1) translateY(0); }
+.mode-info-header {
+  display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem;
+  background: var(--bg1); border-bottom: 1px solid var(--bdr); flex-shrink: 0;
+}
+.mode-info-icon { font-size: 1.3rem; color: var(--coral); flex-shrink: 0; display: flex; }
+.mode-info-icon .icon { width: 1.2em; height: 1.2em; }
+.mode-info-title { flex: 1; margin: 0; font-size: 1.02rem; color: var(--tx1); }
+.mode-info-close {
+  background: transparent; border: 1px solid var(--bdr); border-radius: 8px; color: var(--tx2);
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mode-info-close:hover, .mode-info-close:focus-visible {
+  background: var(--bg3); color: var(--tx1); border-color: var(--coral);
+  outline: 2px solid var(--coral); outline-offset: 2px;
+}
+.mode-info-body { padding: 1rem; overflow-y: auto; font-size: .88rem; color: var(--tx2); }
+.mode-info-body .mode-define { color: var(--tx1); margin: 0 0 .6rem; line-height: 1.5; }
+@media (pointer: coarse) { .mode-info-close { min-width: 44px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .mode-info-modal { transition: none; } }
 
 /* ── 640: tablet portrait / mobile landscape ─────────────────── */
 @media (max-width:640px){

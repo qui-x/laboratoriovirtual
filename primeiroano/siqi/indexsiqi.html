@@ -125,14 +125,18 @@
       <span class="state-pill state-pill--vazio" id="state-pill" role="status" aria-live="polite">
         <span class="sr-only">Função inorgânica do composto: </span><span id="state-pill-text">sem composto</span>
       </span>
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
-        aria-label="Abrir painel de compostos e busca"
-        aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
         aria-label="Abrir propriedades e laboratório"
         aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-gear"/></svg></button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda (☰)
+       pelos módulos (Construtor/Nomenclatura) como abas roláveis.
+       Preenchida em buildModeTabsMobile() (js/ui/modo-mobile.js). -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Módulos de química inorgânica" aria-orientation="horizontal"></nav>
 
   <!-- ═══ CORPO ═══ -->
   <div class="app-body" id="main-content">
@@ -688,6 +692,20 @@
   </div>
 </div>
 
+<!-- ════════ MODAL — INFORMAÇÕES DO MÓDULO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+<div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+  <div class="mode-info-modal" id="modeInfoModal">
+    <div class="mode-info-header">
+      <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+      <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+      <button type="button" class="mode-info-close" id="modeInfoClose"
+              aria-label="Fechar informações do módulo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+    </div>
+    <div class="mode-info-body" id="modeInfoBody"></div>
+  </div>
+</div>
+
 <!-- VLibras -->
 <div vw class="enabled">
   <div vw-access-button class="active"></div>
@@ -768,6 +786,7 @@
 
 <!-- ═══ ALTERNÂNCIA DE MÓDULOS ═══ -->
 <script src="js/modulos/alternar.js"></script>
+<script src="js/ui/modo-mobile.js"></script>
 
 <!-- ═══ MÓDULO 2: CONSTRUTOR ═══ -->
 <script src="js/construtor/estado-biblioteca.js"></script>
