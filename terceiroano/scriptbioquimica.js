@@ -759,6 +759,11 @@ class App {
     this.time = 0;
     this._curio = 0;
     this._fpsN = 0; this._fpsT = 0;
+    // Modos já vistos nesta sessão (modal de 1ª ativação) + controle da
+    // "largada com antecipação" do gatilho — ver setMode()/_loop().
+    this._modosVistos = new Set();
+    this._modeStartsAt = 0;
+    this._modeStartTimer = null;
 
     this.canvas = document.getElementById('sim-canvas');
     this.ctx = this.canvas.getContext('2d');
@@ -777,8 +782,10 @@ class App {
     }
 
     this._buildModes();
+    this._buildModeTabsMobile();
     this._bindSidebar();
     this._bindModeIndicator();
+    this._bindModeInfoModal();
     this._bindHeader();
     this._bindCanvasKeys();
     if (typeof mech.build === 'function') mech.build(this);
@@ -912,6 +919,10 @@ class App {
      Mesmo contrato de toggle do SILQ (setMode / clearMode). ── */
   clearMode() {
     this.mode = null;
+    // Cancela qualquer "largada com antecipação" pendente do modo
+    // anterior.
+    if (this._modeStartTimer) { clearTimeout(this._modeStartTimer); this._modeStartTimer = null; }
+    this._modeStartsAt = 0;
     document.querySelectorAll('.panel[data-mode-card]').forEach(panel => {
       panel.classList.remove('active');
       const header = panel.querySelector('.panel-header');
@@ -931,6 +942,7 @@ class App {
     if (ind0) ind0.classList.remove('mode-on');
     if (this.mech && typeof this.mech.setMode === 'function') this.mech.setMode(null);
     this.refresh();
+    this._syncMobileModeUI(null);
     if (typeof playTone === 'function') playTone(420, .06, .05);
     announce('Modo desativado. Nenhum modo ativo — escolha um modo e ative-o para voltar a simular.');
   }
@@ -953,23 +965,147 @@ class App {
         const nomeMod = (this.D.MODES.find(x => x.id === panel.dataset.modeCard) || {}).nome || '';
         actBtn.title = on ? ('Desativar ' + nomeMod) : ('Ativar ' + nomeMod + ' no canvas');
       }
+      // Ao ativar, o painel se RECOLHE (em vez de expandir) — o gatilho de
+      // ativação abre espaço pro canvas. Reabrir é um clique no
+      // cabeçalho, a qualquer momento, inclusive com a simulação rodando.
       if (on) {
-        if (header) header.setAttribute('aria-expanded', 'true');
+        if (header) header.setAttribute('aria-expanded', 'false');
         const body = panel.querySelector('.panel-body');
-        if (body) body.classList.remove('collapsed');
+        if (body) body.classList.add('collapsed');
       }
     });
     document.querySelectorAll('.panel[data-owner]').forEach(p => {
       p.hidden = !(m.panels || []).includes(p.id);
     });
     const hint = document.getElementById('canvas-hint');
-    if (hint) hint.textContent = m.hintCanvas || '';
     this.mech.setMode(id);
     this.refresh();
+    this._syncMobileModeUI(id);
+    // No mobile, ativar um modo RECOLHE o bottom sheet de controles (se
+    // estiver aberto) em vez de abri-lo — reabrir pra ajustar parâmetros
+    // é um toque no botão 🎛 do cabeçalho, a qualquer momento.
+    if (window.innerWidth <= 1100 && typeof window._closeSidebar === 'function') {
+      window._closeSidebar();
+    }
+    // ── largada com 2s de antecipação ──
+    // O ESTADO já foi montado (mech.setMode acima), então o canvas mostra
+    // o quadro inicial "parado" imediatamente — só a FÍSICA (mech.update,
+    // chamada em _loop) fica pausada por 2s.
+    if (this._modeStartTimer) clearTimeout(this._modeStartTimer);
+    this._modeStartsAt = performance.now() + 2000;
+    if (hint) hint.textContent = 'Iniciando em instantes…';
+    this._modeStartTimer = setTimeout(() => {
+      const h = document.getElementById('canvas-hint');
+      if (h && this.mode && this.mode.id === id) h.textContent = m.hintCanvas || '';
+    }, 2000);
     if (!silent) {
       playTone(760, .06, .05);
-      announce(`Modo ${m.nome} selecionado. ${(m.info || '').split('.')[0]}.`);
+      announce(`Modo ${m.nome} selecionado. A animação começa em 2 segundos. ${(m.info || '').split('.')[0]}.`);
     }
+  }
+
+  /* ── barra de modos MOBILE — mesma ordem/dados de _buildModes() acima,
+     como abas roláveis em vez de acordeão (ver CSS, ativa só abaixo de
+     1100px). Clicar chama setMode/clearMode, o MESMO contrato de sempre —
+     a barra não tem lógica própria de estado, só delega. ── */
+  _buildModeTabsMobile() {
+    const bar = document.getElementById('mode-tabs-mobile');
+    if (!bar) return;
+    this.D.MODES.forEach(m => {
+      const tab = document.createElement('button');
+      tab.type = 'button';
+      tab.className = 'mode-tab';
+      tab.dataset.modeTab = m.id;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', 'false');
+      tab.innerHTML = `<span aria-hidden="true">${m.icon || ''}</span><span>${m.nome}</span>`;
+      tab.title = m.nome;
+      tab.addEventListener('click', () => {
+        if (this.mode && this.mode.id === m.id) this.clearMode();else this.setMode(m.id);
+      });
+      bar.appendChild(tab);
+    });
+  }
+
+  /* ── resumo do modo, para dentro do bottom sheet mobile (definição +
+     fatos-chave — a mesma informação que já existe no acordeão da
+     sidebar esquerda, só que reduzida e em outro lugar). ── */
+  _modeSummaryHTML(m) {
+    let html = '';
+    if (m.def) html += `<p class="mode-define">${m.def}</p>`;
+    if (m.fatos && m.fatos.length) {
+      html += '<div class="fact-grid">' + m.fatos.map(ft =>
+        `<div class="fact-cell"><span class="fact-label">${ft.l}</span><span class="fact-value">${ft.v}</span></div>`
+      ).join('') + '</div>';
+    }
+    return html;
+  }
+
+  /* ── sincroniza a barra de modos e o resumo do bottom sheet com o modo
+     ativo — chamada por setMode()/clearMode(), nunca sozinha. ── */
+  _syncMobileModeUI(id) {
+    document.querySelectorAll('.mode-tab').forEach(tab => {
+      tab.setAttribute('aria-selected', tab.dataset.modeTab === id ? 'true' : 'false');
+    });
+    const activeTab = id && document.querySelector(`.mode-tab[data-mode-tab="${id}"]`);
+    if (activeTab && typeof activeTab.scrollIntoView === 'function') {
+      const reduzido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      activeTab.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduzido ? 'auto' : 'smooth' });
+    }
+    const box = document.getElementById('mode-summary-mobile');
+    const toggle = document.getElementById('mode-summary-toggle');
+    const body = document.getElementById('mode-summary-body');
+    if (!box || !toggle || !body) return;
+    if (!id) { box.hidden = true; return; }
+    const m = this.D.MODES.find(x => x.id === id);
+    if (!m) { box.hidden = true; return; }
+    box.hidden = false;
+    body.innerHTML = this._modeSummaryHTML(m);
+    const primeiraVez = !this._modosVistos.has(id);
+    this._modosVistos.add(id);
+    toggle.setAttribute('aria-expanded', 'false');
+    body.classList.remove('open');
+    if (primeiraVez && window.innerWidth <= 1100) this._showModeInfoModal(m);
+    if (!toggle._wired) {
+      toggle._wired = true;
+      toggle.addEventListener('click', () => {
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        body.classList.toggle('open', !open);
+      });
+    }
+  }
+
+  /* ── MODAL de informações do modo (1ª ativação, mobile) ── */
+  _showModeInfoModal(m) {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    const icon = document.getElementById('modeInfoIcon');
+    const title = document.getElementById('modeInfoTitle');
+    const body = document.getElementById('modeInfoBody');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (icon) icon.innerHTML = m.icon || '';
+    if (title) title.textContent = m.nome;
+    if (body) body.innerHTML = this._modeSummaryHTML(m);
+    overlay.classList.add('aberto');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (closeBtn) setTimeout(() => closeBtn.focus(), 220);
+  }
+  _hideModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    if (!overlay) return;
+    overlay.classList.remove('aberto');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+  _bindModeInfoModal() {
+    const overlay = document.getElementById('modeInfoOverlay');
+    const closeBtn = document.getElementById('modeInfoClose');
+    if (!overlay || !closeBtn) return;
+    closeBtn.addEventListener('click', () => this._hideModeInfoModal());
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) this._hideModeInfoModal(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('aberto')) this._hideModeInfoModal();
+    });
   }
 
   /* ── delegação de controles declarativos nas duas sidebars ──
@@ -1183,8 +1319,13 @@ class App {
     // Sem modo ativo → canvas permanece em branco (nada é desenhado
     // "sozinho"; exige ativação explícita do usuário no painel).
     if (this.mode) {
-      this.time += dt;
-      this.mech.update(dt, this);
+      // "Largada com antecipação": _modeStartsAt (marcado em setMode) segura
+      // o UPDATE por 2s — o desenho continua rodando (mostra o quadro
+      // congelado), só a física não avança até o tempo passar.
+      if (now >= this._modeStartsAt) {
+        this.time += dt;
+        this.mech.update(dt, this);
+      }
       this.mech.draw(ctx, this.W, this.H, this);
 
       // O painel de Resultados acompanha o tempo real da simulação,
@@ -1252,6 +1393,14 @@ function initMobileSidebar() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') fecharTodas(); });
 
   window._closeSidebar = fecharTodas;
+  // Abertura PROGRAMÁTICA de uma gaveta específica — usada pela barra de
+  // modos mobile (mode-tabs-mobile) para abrir/fechar o bottom sheet de
+  // controles ao tocar um modo, sem duplicar a mecânica de abrir/fechar
+  // que já existe aqui.
+  window._openSidebar = function (elId) {
+    const g = gavetas.find(x => x.el.id === elId);
+    if (g) abrir(g);
+  };
 }
 window.addEventListener('DOMContentLoaded', initMobileSidebar);
 

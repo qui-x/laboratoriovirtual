@@ -71,11 +71,18 @@
       </div>
     </div>
 
-    <button type="button" class="mobile-menu-btn" id="mobile-info-btn"
-      aria-label="Abrir menus e informações" aria-expanded="false" aria-controls="sidebar-left">☰</button>
     <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
       aria-label="Abrir controles da simulação" aria-expanded="false" aria-controls="sidebar-right">🎛</button>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda (☰)
+       por uma barra rolável sempre visível, na MESMA ordem/dados de
+       SIM_DATA.MODES. Preenchida em _buildModeTabsMobile() (mesmo
+       arquivo). O botão "mobile-info-btn" foi removido de propósito:
+       esta barra assume essa função no mobile. -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Modos do simulador" aria-orientation="horizontal"></nav>
 
   <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
 
@@ -116,6 +123,20 @@
 
     <aside class="sidebar sidebar--right" id="sidebar-right"
            aria-label="Controles da simulação">
+
+      <!-- ════════ RESUMO DO MODO (MOBILE) ════════
+           Só usado dentro do bottom sheet mobile — no desktop essa
+           informação já aparece no acordeão da sidebar esquerda, então
+           aqui fica escondida (ver CSS). Populado por
+           _syncMobileModeUI() a partir do mesmo SIM_DATA.MODES. -->
+      <div class="mode-summary-mobile" id="mode-summary-mobile" hidden>
+        <button type="button" class="mode-summary-toggle" id="mode-summary-toggle"
+                aria-expanded="false" aria-controls="mode-summary-body">
+          <span aria-hidden="true">ℹ️</span> Sobre este modo
+          <span class="chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="mode-summary-body" id="mode-summary-body"></div>
+      </div>
 
       <!-- ════════ MODO 1 — BIOMOLÉCULAS ════════ -->
       <section class="panel" id="panel-biomoleculas" data-owner hidden aria-labelledby="hdr-bio">
@@ -206,6 +227,20 @@
     </aside>
 
   </main>
+
+  <!-- ════════ MODAL — INFORMAÇÕES DO MODO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+  <div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+       aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+    <div class="mode-info-modal" id="modeInfoModal">
+      <div class="mode-info-header">
+        <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+        <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+        <button type="button" class="mode-info-close" id="modeInfoClose"
+                aria-label="Fechar informações do modo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+      </div>
+      <div class="mode-info-body" id="modeInfoBody"></div>
+    </div>
+  </div>
 
   <div vw class="enabled">
     <div vw-access-button class="active"></div>
