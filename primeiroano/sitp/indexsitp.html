@@ -101,7 +101,12 @@
 </div>
 <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true"
      aria-labelledby="modalName" aria-hidden="true">
-  <div class="modal" id="modal">
+  <div class="modal" id="modal" tabindex="-1">
+    <!-- Alça de arrastar — elemento real (não ::before), pra poder receber o
+         gesto de arrastar pra baixo e fechar (ver initDragToDismiss() em
+         js/modal/abrir-fechar.js). Puramente decorativa pro mouse/teclado:
+         o gesto funciona em qualquer ponto do cabeçalho, não só aqui. -->
+    <div class="modal-drag-handle" aria-hidden="true"></div>
     <div class="modal-header">
       <div class="modal-top-row">
         <div class="modal-sym-col" aria-hidden="true">
@@ -114,20 +119,20 @@
           <div class="modal-meta"   id="modalMeta"></div>
           <div class="modal-badges" id="modalBadges"></div>
         </div>
-        <button class="modal-close-btn" id="btnClose" aria-label="Fechar detalhes do elemento"><span aria-hidden="true">✕</span></button>
-      </div>
-      <!-- ════════ NAVEGAÇÃO ENTRE ELEMENTOS ════════
-           Troca de elemento sem fechar o modal — ver js/modal/navegacao.js.
-           Desabilita sozinho nas pontas (Z=1 e Z=118). -->
-      <div class="modal-nav-row" id="modalNavRow">
-        <button type="button" class="modal-nav-btn" id="btnPrevEl" aria-label="Elemento anterior">
-          <svg class="ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-          Anterior
-        </button>
-        <button type="button" class="modal-nav-btn" id="btnNextEl" aria-label="Próximo elemento">
-          Próximo
-          <svg class="ico" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-        </button>
+        <!-- ════════ NAVEGAÇÃO ENTRE ELEMENTOS ════════
+             No lugar do antigo botão ✕ — troca de elemento sem fechar o
+             modal (ver js/modal/navegacao.js). Fechar agora é por toque
+             fora do modal, Esc, ou arrastando o cabeçalho pra baixo (ver
+             js/modal/abrir-fechar.js). Desabilita sozinho nas pontas
+             (Z=1 e Z=118). -->
+        <div class="modal-nav-mini" id="modalNavRow">
+          <button type="button" class="modal-nav-mini-btn" id="btnPrevEl" aria-label="Elemento anterior">
+            <svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button type="button" class="modal-nav-mini-btn" id="btnNextEl" aria-label="Próximo elemento">
+            <svg viewBox="0 0 24 24" width="1.1em" height="1.1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
       </div>
     </div>
     <!-- ════════ ABAS DE SEÇÃO (SÓ NO BOTTOM SHEET MOBILE) ════════

@@ -4,7 +4,7 @@
    ───────────────────────────────────────────────────────────────
    O estado do modal de elemento: quais séries (lantanídeos/
    actinídeos) estão expandidas, elemento/célula em foco, filtros
-   ativos, e as referências ao overlay e botão de fechar.
+   ativos, e a referência ao overlay do modal.
    Depende de: nada.
    Usado por: praticamente todo o resto do projeto.
 ═══════════════════════════════════════════════════════════════ */
@@ -20,6 +20,4 @@ let filtroCategoria=null,filtroEstado=null,filtroLamber=null;
 const botoesToggle={},posicaoMap={};
 
 const modalOverlay=document.getElementById('modalOverlay');
-
-const btnClose=document.getElementById('btnClose');
 

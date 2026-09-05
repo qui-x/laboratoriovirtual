@@ -637,6 +637,10 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.82); backdrop-filter:blur(5px); display:flex; align-items:center; justify-content:center; z-index:500; opacity:0; visibility:hidden; transition:opacity .25s,visibility .25s; }
 .modal-overlay.aberto { opacity:1; visibility:visible; }
 .modal { background:var(--bg-panel); border:1px solid var(--border); border-radius:14px; width:min(calc(580px * var(--font-scale)),97vw); max-height:92vh; max-height:92dvh; display:flex; flex-direction:column; overflow:hidden; box-shadow:0 28px 64px rgba(0,0,0,.75); transform:scale(.93) translateY(16px); transition:transform .25s cubic-bezier(.34,1.56,.64,1); }
+/* Sem botão ✕ próprio: o modal recebe o foco ao abrir (tabindex="-1" no
+   HTML), pra Tab funcionar e leitores de tela anunciarem o diálogo —
+   mas sem o contorno azul padrão do navegador em volta da caixa toda. */
+.modal:focus { outline:none; }
 .modal-overlay.aberto .modal { transform:scale(1) translateY(0); }
 .modal-header { padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)) calc(10px * var(--font-scale)); background:var(--bg-deep); border-bottom:1px solid var(--border); flex-shrink:0; }
 .modal-top-row { display:flex; align-items:flex-start; gap:12px; }
@@ -649,30 +653,27 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .modal-meta    { font-size:calc(0.82rem * var(--font-scale)); color:var(--text-main); letter-spacing:.04em; text-transform:uppercase; line-height:1.5; }
 .modal-badges  { display:flex; gap:5px; flex-wrap:wrap; margin-top:6px; }
 .badge { padding:3px 10px; border-radius:20px; font-size:calc(0.7rem * var(--font-scale)); font-weight:700; letter-spacing:.04em; text-transform:uppercase; border:1px solid transparent; }
-.modal-close-btn { margin-left:auto; align-self:flex-start; background:transparent; border:1px solid var(--border); border-radius:8px; color:var(--text-dim); min-width:calc(40px * var(--font-scale)); min-height:calc(40px * var(--font-scale)); cursor:pointer; font-size:calc(1.2rem * var(--font-scale)); display:flex; align-items:center; justify-content:center; transition:all .15s; flex-shrink:0; }
-.modal-close-btn:hover, .modal-close-btn:focus-visible { background:var(--bg-hover); color:var(--text-main); border-color:var(--accent); outline:2px solid var(--accent); outline-offset:2px; }
 
-/* ════════ NAVEGAÇÃO ENTRE ELEMENTOS (◀ Anterior / Próximo ▶) ════════
-   Linha fixa no topo do modal/bottom sheet, logo abaixo do símbolo e
-   nome — troca de elemento SEM fechar o modal (chama abrirModal() de
-   novo por dentro, ver js/modal/navegacao.js). Funciona igual em
-   desktop e mobile: é a mesma dúvida em qualquer largura de tela
-   ("como vejo o próximo elemento sem fechar isto e caçar na tabela?"). */
-.modal-nav-row { display:flex; gap:8px; padding:0 calc(16px * var(--font-scale)) calc(10px * var(--font-scale)); }
-.modal-nav-btn {
-  flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
-  background:var(--bg-card); border:1px solid var(--border); border-radius:8px;
-  color:var(--text-main); font-size:calc(.85rem * var(--font-scale)); font-weight:600;
-  padding:calc(7px * var(--font-scale)) 10px; cursor:pointer; transition:all .15s;
-  min-height:calc(38px * var(--font-scale));
+/* ════════ NAVEGAÇÃO ENTRE ELEMENTOS (◀ ▶) ════════
+   No lugar do antigo botão ✕ de fechar — duas setas pequenas, no
+   cabeçalho, que trocam de elemento SEM fechar o modal (chamam
+   abrirModal() de novo por dentro, ver js/modal/navegacao.js).
+   Fechar deixou de precisar de um botão próprio: toque fora do
+   modal, Esc, ou arrastar o cabeçalho pra baixo já bastam (ver
+   initDragToDismiss() em js/modal/abrir-fechar.js). */
+.modal-nav-mini { margin-left:auto; align-self:flex-start; display:flex; gap:6px; flex-shrink:0; }
+.modal-nav-mini-btn {
+  background:transparent; border:1px solid var(--border); border-radius:8px;
+  color:var(--text-dim); cursor:pointer; transition:all .15s;
+  width:calc(32px * var(--font-scale)); height:calc(32px * var(--font-scale));
+  display:flex; align-items:center; justify-content:center;
 }
-.modal-nav-btn:hover:not(:disabled), .modal-nav-btn:focus-visible {
-  background:var(--bg-hover); border-color:var(--accent); color:var(--accent);
+.modal-nav-mini-btn:hover:not(:disabled), .modal-nav-mini-btn:focus-visible {
+  background:var(--bg-hover); color:var(--text-main); border-color:var(--accent);
   outline:2px solid var(--accent); outline-offset:2px;
 }
-.modal-nav-btn:disabled { opacity:.4; cursor:default; }
-.modal-nav-btn .ico { flex-shrink:0; }
-@media (pointer: coarse) { .modal-nav-btn { min-height:44px; } }
+.modal-nav-mini-btn:disabled { opacity:.35; cursor:default; }
+@media (pointer: coarse) { .modal-nav-mini-btn { width:40px; height:40px; } }
 .modal-body { padding:calc(14px * var(--font-scale)) calc(16px * var(--font-scale)); display:flex; flex-direction:column; gap:calc(10px * var(--font-scale)); overflow-y:auto; }
 .modal-body::-webkit-scrollbar { width:5px; }
 .modal-body::-webkit-scrollbar-track { background:transparent; }
@@ -1393,6 +1394,7 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
    reativa. Regra precisa vir ANTES da media query — depois dela um
    "display:none" incondicional venceria por ordem de cascata. */
 .modal-section-tabs { display: none; }
+.modal-drag-handle { display: none; }
 
 @media (max-width: 760px) {
   body { height: auto; min-height: 100vh; min-height: 100dvh; overflow: auto; }
@@ -1408,12 +1410,12 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
   /* ════════ FICHA DO ELEMENTO → BOTTOM SHEET ════════
      Em telas largas ".modal" é uma janela central (ver regra base,
      acima neste arquivo). Aqui ela vira um bottom sheet: sobe da base
-     da tela cobrindo metade dela, em vez de aparecer flutuando no
-     meio. O fechamento continua IGUAL — o mesmo botão ✕ (#btnClose) e
-     o mesmo toque fora do modal (".modal-overlay" — ver
-     js/modal/abrir-fechar.js), nenhuma linha de JS muda por causa
-     disso. Só a posição/animação do CSS mudam de "aparecer no centro"
-     para "subir de baixo". */
+     da tela cobrindo a maior parte dela, em vez de aparecer flutuando
+     no meio. Fechar agora é por toque fora do modal (".modal-overlay"),
+     Esc, ou arrastando o cabeçalho pra baixo (ver initDragToDismiss()
+     em js/modal/abrir-fechar.js) — não depende de nenhum botão próprio.
+     Só a posição/animação do CSS mudam de "aparecer no centro" para
+     "subir de baixo"; o JS de abrir/fechar não muda por causa disso. */
   .modal-overlay { align-items: flex-end; }
   .modal {
     width: 100%; max-width: none;
@@ -1426,14 +1428,19 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
     transform: translateY(100%);
   }
   .modal-overlay.aberto .modal { transform: translateY(0); }
-  /* alça visual no topo do sheet — mesmo padrão da gaveta de
-     controles mobile dos simuladores de 2º ano: só indica "isto
-     desliza", não é arrastável de propósito (fecha por ✕ ou toque no
-     fundo escurecido, de forma previsível). */
-  .modal::before {
-    content: ''; display: block; width: 36px; height: 4px; border-radius: 2px;
+  /* alça de arrastar — elemento real (não ::before, ver HTML), pra
+     poder receber o gesto de arrastar pra baixo. touch-action:none
+     desliga o scroll/zoom nativo do navegador NESTA área específica,
+     senão o gesto de arrastar competeria com o navegador tentando
+     rolar a página por baixo. O cabeçalho inteiro também é arrastável
+     (ver JS) — a alça é só o indicador visual de "isto desliza". */
+  .modal-drag-handle {
+    display: block;
+    width: 36px; height: 4px; border-radius: 2px;
     background: var(--border); margin: .5rem auto 0;
+    touch-action: none;
   }
+  .modal-header { touch-action: none; }
   .modal-symbol { font-size: calc(3rem * var(--font-scale)); }
 
   /* ════════ BARRA DE ABAS DE SEÇÃO ════════
@@ -1503,7 +1510,7 @@ h4 > .ico, .legend-demo-footer-text > .ico, .raio-tend-titulo > .ico,
 .legend-item, .raio-vbtn, .nuvem-select { min-height: 28px; }
 @media (pointer: coarse) {
   .legend-item { min-height: 36px; }
-  .modal-close-btn, .guia-close, .fullscreen-close { min-width: 44px; min-height: 44px; }
+  .guia-close, .fullscreen-close { min-width: 44px; min-height: 44px; }
 }
 
 /* ---------------------------------------------------------------------
