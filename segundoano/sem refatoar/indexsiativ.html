@@ -40,9 +40,9 @@
 
     <div class="header-actions">
       <button type="button" class="mobile-menu-btn" id="mobile-info-btn"
-        aria-label="Abrir menus e informações" aria-expanded="false" aria-controls="sidebar-left"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg></button>
+        aria-label="Abrir menus e informações" aria-expanded="false" aria-controls="sidebar-left">☰</button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
-        aria-label="Abrir progresso e ações" aria-expanded="false" aria-controls="sidebar-right"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 8h4" /><path d="M12 21v-9" /><path d="M12 8V3" /><path d="M17 16h4" /><path d="M19 12V3" /><path d="M19 21v-5" /><path d="M3 14h4" /><path d="M5 10V3" /><path d="M5 21v-7" /></svg></button>
+        aria-label="Abrir progresso e ações" aria-expanded="false" aria-controls="sidebar-right">🎛</button>
     </div>
   </header>
 
@@ -62,7 +62,7 @@
       <!-- ════════ CONTEÚDOS ════════ -->
       <section class="panel" aria-labelledby="hdr-mode">
         <button class="panel-header" id="hdr-mode" aria-expanded="true" aria-controls="body-mode">
-          <span class="panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" /></svg></span>
+          <span class="panel-icon" aria-hidden="true">📚</span>
           <span class="panel-label">Conteúdo</span>
           <span class="panel-badge">7</span>
           <span class="chevron" aria-hidden="true">▾</span>
@@ -88,7 +88,7 @@
       <!-- ════════ RESULTADOS ════════ -->
       <section class="panel" aria-labelledby="hdr-result">
         <button class="panel-header" id="hdr-result" aria-expanded="true" aria-controls="body-result">
-          <span class="panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 21v-6" /><path d="M12 21V9" /><path d="M19 21V3" /></svg></span>
+          <span class="panel-icon" aria-hidden="true">📊</span>
           <span class="panel-label">Resultados</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -110,7 +110,7 @@
       <!-- ════════ PROGRESSO ════════ -->
       <section class="panel" aria-labelledby="hdr-prog">
         <button class="panel-header" id="hdr-prog" aria-expanded="true" aria-controls="body-prog">
-          <span class="panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528" /></svg></span>
+          <span class="panel-icon" aria-hidden="true">🏁</span>
           <span class="panel-label">Progresso do Bloco</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
@@ -121,7 +121,7 @@
           <p class="hint-text" id="ativ-count" aria-live="polite">0 de 5 respondidas · 0 certas</p>
 
           <div class="action-row">
-            <button class="action-btn" data-action="refazer"><span aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" /><path d="M3 3v5h5" /><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" /><path d="M16 16h5v5" /></svg></span> Reiniciar conteúdo</button>
+            <button class="action-btn" data-action="refazer"><span aria-hidden="true">↺</span> Reiniciar conteúdo</button>
           </div>
         </div>
       </section>
@@ -129,7 +129,7 @@
       <!-- ════════ COMO RESPONDER ════════ -->
       <section class="panel" aria-labelledby="hdr-como">
         <button class="panel-header" id="hdr-como" aria-expanded="true" aria-controls="body-como">
-          <span class="panel-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" /><path d="M9 18h6" /><path d="M10 22h4" /></svg></span>
+          <span class="panel-icon" aria-hidden="true">💡</span>
           <span class="panel-label">Como Responder</span>
           <span class="chevron" aria-hidden="true">▾</span>
         </button>
