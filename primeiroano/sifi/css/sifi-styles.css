@@ -1931,3 +1931,50 @@ body.high-contrast .btn{
 *::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
 *::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 *::-webkit-scrollbar-corner { background: transparent; }
+
+/* ════════════════════════════════════════════════════════════════
+   COACHMARK — balão flutuante do tour guiado (ver js/coachmark.js e
+   js/a11y/tour.js). Mesma estética já usada no SILQ (compartilha o
+   código-base), tokens idênticos.
+   ════════════════════════════════════════════════════════════════ */
+.coach-overlay{ position:fixed; inset:0; z-index:500; }
+.coach-spot{
+  position:fixed; z-index:501; border-radius:10px;
+  box-shadow:0 0 0 9999px rgba(0,0,0,.65);
+  border:2px solid var(--accent);
+  pointer-events:none;
+  transition:top .25s ease, left .25s ease, width .25s ease, height .25s ease;
+}
+.coach-overlay:has(.coach-spot[hidden])::before{
+  content:''; position:fixed; inset:0; z-index:501; background:rgba(0,0,0,.65);
+}
+.coach-balao{
+  position:fixed; z-index:502; width:min(320px, 88vw);
+  background:var(--bg-card); border:1px solid var(--border-color); border-radius:14px;
+  padding:18px 18px 14px; box-shadow:0 20px 48px rgba(0,0,0,.5);
+  transition:top .25s ease, left .25s ease;
+}
+.coach-balao--centro{ position:fixed; top:50% !important; left:50% !important; transform:translate(-50%,-50%); }
+.coach-pular{
+  position:absolute; top:10px; right:12px;
+  background:none; border:none; color:var(--text-muted); font-size:12px; cursor:pointer;
+  padding:4px 6px; border-radius:6px;
+}
+.coach-pular:hover{ color:var(--text-primary); background:var(--bg-surface3); }
+.coach-titulo{ font-weight:700; font-size:16px; color:var(--text-primary); margin:4px 30px 8px 0; }
+.coach-texto{ font-size:13.5px; color:var(--text-muted); line-height:1.55; margin:0 0 16px; }
+.coach-rodape{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.coach-pontos{ display:flex; gap:5px; }
+.coach-ponto{ width:6px; height:6px; border-radius:50%; background:var(--border-color); }
+.coach-ponto--ativo{ background:var(--accent); width:16px; border-radius:3px; }
+.coach-botoes{ display:flex; gap:8px; }
+.coach-btn{ font-weight:600; font-size:13px; padding:8px 14px; border-radius:8px; cursor:pointer; transition:filter .2s, background .2s; }
+.coach-btn--voltar{ background:transparent; border:1px solid var(--border-color); color:var(--text-muted); }
+.coach-btn--voltar:hover{ background:var(--bg-surface3); }
+.coach-btn--avancar{ background:var(--accent); border:1px solid var(--accent); color:#04141A; }
+.coach-btn--avancar:hover{ filter:brightness(1.08); }
+@media (max-width:480px){
+  .coach-balao{ padding:16px 16px 12px; }
+  .coach-rodape{ flex-direction:column; align-items:stretch; gap:12px; }
+  .coach-botoes{ justify-content:space-between; }
+}
