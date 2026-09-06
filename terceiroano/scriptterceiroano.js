@@ -64,13 +64,24 @@
 
   var grid = document.getElementById('grid');
   if (grid){
-    grid.querySelectorAll('.tile[data-file]').forEach(function(tile){
+    grid.querySelectorAll('.year-card[data-file]').forEach(function(tile){
       tile.addEventListener('click', function(e){
         e.preventDefault();
         window.location.href = buildUrl(tile.dataset.file);
       });
     });
   }
+
+  /* ---------- prévias AO VIVO dos cards — mesmos parâmetros de
+     acessibilidade da navegação normal (buildUrl, acima). src fica
+     vazio no HTML de propósito (ver data-src) até esta função
+     rodar. ---------- */
+  function atualizarPreviasIframe(){
+    document.querySelectorAll('.year-card-preview-frame[data-src]').forEach(function(frame){
+      frame.src = buildUrl(frame.dataset.src);
+    });
+  }
+  atualizarPreviasIframe();
 
   /* ---------- VLibras ---------- */
   function loadVLibrasScript(){

@@ -412,3 +412,37 @@
    por tema, com o valor que a medicao mostrou ser o melhor.
    --------------------------------------------------------------------- */
 body.light-mode .skip-link{ color:#FFF; }   /* 5.42:1 sobre #06776F */
+
+/* ════════════════════════════════════════════════════════════════
+   YEAR-CARD — cards com prévia AO VIVO dos simuladores (substituem
+   os .tile antigos, mesmo estilo dos cards "Alguns exemplos" da
+   Central). Reaproveita .grid (grid responsivo já existente).
+   ════════════════════════════════════════════════════════════════ */
+.year-card{
+  display:flex; flex-direction:column; align-items:flex-start; gap:8px;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:16px 16px 18px; text-decoration:none; color:var(--ink);
+  transition:border-color var(--dur), transform var(--dur);
+}
+.year-card:hover{ border-color:var(--border-strong); transform:translateY(-2px); }
+.year-card-preview{
+  width:100%; aspect-ratio:16/10; border-radius:var(--radius-md);
+  overflow:hidden; background:var(--bg); border:1px solid var(--border);
+  position:relative; margin-bottom:2px;
+}
+.year-card-preview-frame{
+  position:absolute; top:0; left:0; width:400%; height:400%;
+  transform:scale(.25); transform-origin:top left;
+  border:none; pointer-events:none;
+}
+.year-card-sigla{
+  font-family:var(--font-mono); font-size:10.5px; font-weight:700; letter-spacing:.04em;
+  color:var(--ink); background:var(--surface-2); border-radius:999px; padding:3px 10px;
+}
+.year-card-nome{ font-family:var(--font-display); font-size:15.5px; color:var(--ink); margin:2px 0 0; line-height:1.3; }
+.year-card-desc{ font-size:13px; color:var(--ink-soft); line-height:1.5; margin:0; }
+.year-card-cta{
+  display:flex; align-items:center; gap:6px; margin-top:auto; padding-top:6px;
+  font-size:13px; font-weight:600; color:var(--ink);
+}
+.year-card-cta svg{ width:15px; height:15px; }

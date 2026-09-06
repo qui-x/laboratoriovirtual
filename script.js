@@ -165,6 +165,14 @@
     });
   });
 
+  /* ---------- trilha dos 3 anos (hero) — mesmo contrato ---------- */
+  document.querySelectorAll('.trilha-ano[data-file]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      openDestino(card.dataset.file);
+    });
+  });
+
   /* ════════ GAVETA (MENU PRINCIPAL) ════════
      Abrir/fechar: botão hambúrguer, ✕ próprio, toque no fundo
      escurecido, ou Esc — mesmo contrato de fechamento usado em toda a
@@ -201,12 +209,6 @@
       if (e.key === 'Escape' && drawer.classList.contains('open')) fechar();
     });
 
-    // Botão "Ver os simuladores" do hero — mesmo destino que o
-    // hambúrguer, só um caminho a mais até lá pra quem está lendo a
-    // apresentação e já quer ir direto.
-    var heroBtn = document.getElementById('heroAbrirMenu');
-    if (heroBtn) heroBtn.addEventListener('click', abrir);
-
     /* ════════ TOUR GUIADO (COACHMARK) — "Como funciona" ════════
        Os mesmos 4 passos que já existem como cards estáticos logo
        abaixo, só que entregues como um tour de verdade: balão
@@ -226,7 +228,7 @@
     function iniciarTourComoFunciona() {
       if (typeof Coachmark === 'undefined') return;
       Coachmark.iniciar({
-        id: 'home-como-funciona',
+        id: 'home-como-funciona-v2',
         passos: [
           {
             alvo: '#drawerToggle',
@@ -236,31 +238,21 @@
           {
             alvo: '#drawerSimuladoresSection',
             titulo: 'Escolha um simulador',
-            texto: 'Cada ano tem os simuladores daquele conteúdo. Escolha o que quiser explorar.',
+            texto: 'Cada ano tem os simuladores daquele conteúdo. Ao abrir um pela primeira vez, ele mesmo mostra um tour rápido de como funciona.',
             ao_entrar: abrirGavetaSeFechada,
             ao_sair: fecharGavetaSeAberta
-          },
-          {
-            alvo: null,
-            titulo: 'Explore os modos',
-            texto: 'Cada simulador tem modos ou módulos diferentes — ative um e ajuste os controles.'
-          },
-          {
-            alvo: null,
-            titulo: 'Veja o resultado na hora',
-            texto: 'O canvas e os painéis reagem em tempo real ao que você muda — sem esperar, sem recarregar.'
           }
         ]
       });
     }
     window.addEventListener('quimix:menu-liberado', function () {
-      if (!Coachmark.jaViu('home-como-funciona')) {
+      if (!Coachmark.jaViu('home-como-funciona-v2')) {
         setTimeout(iniciarTourComoFunciona, 500); // dá tempo da home renderizar embaixo
       }
     });
     var btnRever = document.getElementById('btnReverTour');
     if (btnRever) btnRever.addEventListener('click', function () {
-      Coachmark.reiniciar('home-como-funciona');
+      Coachmark.reiniciar('home-como-funciona-v2');
       iniciarTourComoFunciona();
     });
 

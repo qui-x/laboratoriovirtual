@@ -97,13 +97,25 @@
   // (recebido da Central raiz) antes de navegar, para o simulador já
   // abrir no tema/contraste/leitura/fonte/daltonismo escolhidos lá.
   if (grid) {
-    grid.querySelectorAll('.tile[data-file]').forEach(function(tile){
+    grid.querySelectorAll('.year-card[data-file]').forEach(function(tile){
       tile.addEventListener('click', function(e){
         e.preventDefault();
         openSimulator(tile.dataset.file);
       });
     });
   }
+
+  /* ---------- prévias AO VIVO dos cards — mesmos parâmetros de
+     acessibilidade da navegação normal (buildUrl, mais abaixo), pra
+     elas não abrirem sempre no tema padrão independente do que a
+     pessoa escolheu na Central. src fica vazio no HTML de propósito
+     (ver data-src) até esta função rodar. ---------- */
+  function atualizarPreviasIframe(){
+    document.querySelectorAll('.year-card-preview-frame[data-src]').forEach(function(frame){
+      frame.src = buildUrl(frame.dataset.src);
+    });
+  }
+  atualizarPreviasIframe();
 
   /* ---------- saudação por horário ---------- */
   function setGreeting(){

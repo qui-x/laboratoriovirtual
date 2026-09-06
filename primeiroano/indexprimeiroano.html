@@ -207,303 +207,87 @@
 
     <section class="grid" id="grid" aria-label="Lista de simuladores disponíveis">
 
-      <!-- ============ MÓDULO 01 — SIME ============ -->
-      <a class="tile" href="sime/indexsime.html" data-sim="sime"
-              aria-describedby="desc-sime"
-              data-file="sime/indexsime.html"
-              aria-label="Abrir SIME — Simulador Interativo de Matéria e Estados">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">01</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Bloco sólido: esferas organizadas em grade -->
-  <rect x="1.5" y="8" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
-  <circle cx="4"   cy="13" r="1.2" fill="currentColor"/>
-  <circle cx="7"   cy="13" r="1.2" fill="currentColor"/>
-  <circle cx="4"   cy="17" r="1.2" fill="currentColor"/>
-  <circle cx="7"   cy="17" r="1.2" fill="currentColor"/>
-  <circle cx="5.5" cy="21" r="1.2" fill="currentColor" opacity="0.5"/>
-  <!-- Bloco líquido: esferas desorganizadas no fundo -->
-  <rect x="12" y="8" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
-  <circle cx="14.5" cy="21" r="1.2" fill="currentColor"/>
-  <circle cx="17.5" cy="20" r="1.2" fill="currentColor"/>
-  <circle cx="16"   cy="18" r="1.2" fill="currentColor"/>
-  <circle cx="14.5" cy="15" r="1.2" fill="currentColor" opacity="0.45"/>
-  <!-- Bloco gasoso: esferas dispersas com linhas de movimento -->
-  <rect x="22.5" y="8" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="1.2"/>
-  <circle cx="25" cy="11.5" r="1.1" fill="currentColor"/>
-  <circle cx="28" cy="15"   r="1.1" fill="currentColor"/>
-  <circle cx="25" cy="19"   r="1.1" fill="currentColor"/>
-  <circle cx="28" cy="22"   r="1.1" fill="currentColor"/>
-  <line x1="25" y1="11.5" x2="27" y2="13"   stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
-  <line x1="28" y1="15"   x2="26" y2="16.5" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
-  <line x1="25" y1="19"   x2="27" y2="20.5" stroke="currentColor" stroke-width="0.8" opacity="0.6"/>
-</svg>
-          </span>
+      <a class="year-card" href="sime/indexsime.html" data-file="sime/indexsime.html" aria-describedby="desc-sime">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="sime/indexsime.html" title="Prévia ao vivo de Simulador Interativo de Matéria e Estados" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SIME</div>
-        <h3 class="tile-name">Simulador Interativo de Matéria e Estados</h3>
-        <p class="tile-desc" id="desc-sime">Manipule temperatura e pressão para observar transições entre sólido, líquido e gasoso.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SIME</span>
+        <h3 class="year-card-nome">Simulador Interativo de Matéria e Estados</h3>
+        <p class="year-card-desc" id="desc-sime">Manipule temperatura e pressão para observar transições entre sólido, líquido e gasoso.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 02 — SIMA ============ -->
-      <a class="tile" href="sima/indexsima.html" data-sim="sima"
-              aria-describedby="desc-sima"
-              data-file="sima/indexsima.html"
-              aria-label="Abrir SIMA — Simulador Interativo de Modelos Atômicos">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">02</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <style>
-    .e1{animation:orb1 2.4s linear infinite;}
-    .e2{animation:orb2 3.1s linear infinite;}
-    .e3{animation:orb3 1.9s linear infinite;}
-    @keyframes orb1{0%{offset-distance:0%}100%{offset-distance:100%}}
-    @keyframes orb2{0%{offset-distance:0%}100%{offset-distance:100%}}
-    @keyframes orb3{0%{offset-distance:0%}100%{offset-distance:100%}}
-  </style>
-  <!-- Núcleo -->
-  <circle cx="16" cy="16" r="2.8" fill="currentColor" opacity="0.95"/>
-  <!-- Órbita 1: horizontal -->
-  <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8"/>
-  <!-- Órbita 2: rotacionada 60° -->
-  <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(60 16 16)"/>
-  <!-- Órbita 3: rotacionada 120° -->
-  <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(120 16 16)"/>
-  <!-- Elétrons nas órbitas (posicionados estaticamente nos pontos das órbitas) -->
-  <circle cx="28" cy="16" r="1.6" fill="currentColor"/>
-  <circle cx="10" cy="9.3" r="1.6" fill="currentColor" transform="rotate(60 16 16)"/>
-  <circle cx="10" cy="9.3" r="1.6" fill="currentColor" transform="rotate(120 16 16)"/>
-</svg>
-          </span>
+      <a class="year-card" href="sima/indexsima.html" data-file="sima/indexsima.html" aria-describedby="desc-sima">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="sima/indexsima.html" title="Prévia ao vivo de Simulador Interativo de Modelos Atômicos" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SIMA</div>
-        <h3 class="tile-name">Simulador Interativo de Modelos Atômicos</h3>
-        <p class="tile-desc" id="desc-sima">Explore os modelos de Dalton, Thomson, Rutherford e Bohr e veja como a ideia de átomo evoluiu.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SIMA</span>
+        <h3 class="year-card-nome">Simulador Interativo de Modelos Atômicos</h3>
+        <p class="year-card-desc" id="desc-sima">Explore os modelos de Dalton, Thomson, Rutherford e Bohr e veja como a ideia de átomo evoluiu.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 03 — SITP ============ -->
-      <a class="tile" href="sitp/indexsitp.html" data-sim="sitp"
-              aria-describedby="desc-sitp"
-              data-file="sitp/indexsitp.html"
-              aria-label="Abrir SITP — Simulador Interativo da Tabela Periódica">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">03</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Favos de mel (fundo) — grade hexagonal simplificada -->
-  <g stroke="currentColor" stroke-width="0.8" opacity="0.35">
-    <polygon points="8,3 11,1.3 14,3 14,6.4 11,8.1 8,6.4"/>
-    <polygon points="14,3 17,1.3 20,3 20,6.4 17,8.1 14,6.4"/>
-    <polygon points="2,9.5 5,7.8 8,9.5 8,12.9 5,14.6 2,12.9"/>
-    <polygon points="20,9.5 23,7.8 26,9.5 26,12.9 23,14.6 20,12.9"/>
-  </g>
-  <!-- Card da tabela periódica (saltando do fundo) -->
-  <rect x="7" y="9" width="18" height="18" rx="2.5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-  <!-- Número atômico (canto sup esq) -->
-  <text x="9.5" y="14.5" font-family="monospace" font-size="4" fill="currentColor" opacity="0.8">12</text>
-  <!-- Sigla Tp estilizada no centro -->
-  <text x="11.5" y="22" font-family="monospace" font-size="8" font-weight="700" fill="currentColor">Tp</text>
-  <!-- Estado (canto sup dir) -->
-  <circle cx="22" cy="12" r="1.4" fill="currentColor" opacity="0.7"/>
-</svg>
-          </span>
+      <a class="year-card" href="sitp/indexsitp.html" data-file="sitp/indexsitp.html" aria-describedby="desc-sitp">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="sitp/indexsitp.html" title="Prévia ao vivo de Simulador Interativo da Tabela Periódica" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SITP</div>
-        <h3 class="tile-name">Simulador Interativo da Tabela Periódica</h3>
-        <p class="tile-desc" id="desc-sitp">Navegue por grupos e períodos, comparando propriedades e tendências entre os elementos.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SITP</span>
+        <h3 class="year-card-nome">Simulador Interativo da Tabela Periódica</h3>
+        <p class="year-card-desc" id="desc-sitp">Navegue por grupos e períodos, comparando propriedades e tendências entre os elementos.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 04 — SIEM ============ -->
-      <a class="tile" href="siem/indexsiem.html" data-sim="siem"
-              aria-describedby="desc-siem"
-              data-file="siem/indexsiem.html"
-              aria-label="Abrir SIEM — Simulador Interativo de Estrutura da Matéria">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">04</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Cabo da lupa -->
-  <line x1="22" y1="22" x2="29" y2="29" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-  <!-- Lente (círculo externo) -->
-  <circle cx="13" cy="13" r="10.5" stroke="currentColor" stroke-width="1.6"/>
-  <!-- Rede cristalina cúbica dentro da lente -->
-  <!-- Pontos da rede -->
-  <circle cx="9"  cy="9"  r="1.4" fill="currentColor"/>
-  <circle cx="13" cy="9"  r="1.4" fill="currentColor"/>
-  <circle cx="17" cy="9"  r="1.4" fill="currentColor"/>
-  <circle cx="9"  cy="13" r="1.4" fill="currentColor"/>
-  <circle cx="13" cy="13" r="1.4" fill="currentColor"/>
-  <circle cx="17" cy="13" r="1.4" fill="currentColor"/>
-  <circle cx="9"  cy="17" r="1.4" fill="currentColor"/>
-  <circle cx="13" cy="17" r="1.4" fill="currentColor"/>
-  <circle cx="17" cy="17" r="1.4" fill="currentColor"/>
-  <!-- Ligações horizontais -->
-  <line x1="9"  y1="9"  x2="17" y2="9"  stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-  <line x1="9"  y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-  <line x1="9"  y1="17" x2="17" y2="17" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-  <!-- Ligações verticais -->
-  <line x1="9"  y1="9" x2="9"  y2="17" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-  <line x1="13" y1="9" x2="13" y2="17" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-  <line x1="17" y1="9" x2="17" y2="17" stroke="currentColor" stroke-width="0.8" opacity="0.7"/>
-</svg>
-          </span>
+      <a class="year-card" href="siem/indexsiem.html" data-file="siem/indexsiem.html" aria-describedby="desc-siem">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="siem/indexsiem.html" title="Prévia ao vivo de Simulador Interativo de Estrutura da Matéria" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SIEM</div>
-        <h3 class="tile-name">Simulador Interativo de Estrutura da Matéria</h3>
-        <p class="tile-desc" id="desc-siem">Manipule temperatura e pressão para observar transições entre sólido, líquido e gasoso.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SIEM</span>
+        <h3 class="year-card-nome">Simulador Interativo de Estrutura da Matéria</h3>
+        <p class="year-card-desc" id="desc-siem">Veja como partículas, moléculas e íons se organizam em cada tipo de estrutura da matéria.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 05 — SILQ ============ -->
-      <a class="tile" href="silq/indexsilq.html" data-sim="silq"
-              aria-describedby="desc-silq"
-              data-file="silq/indexsilq.html"
-              aria-label="Abrir SILQ — Simulador Interativo de Ligações Químicas">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">05</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Átomo esquerdo -->
-  <circle cx="6.5" cy="16" r="4.5" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
-  <!-- Átomo direito -->
-  <circle cx="25.5" cy="16" r="4.5" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
-  <!-- Vareta de ligação -->
-  <line x1="11" y1="16" x2="21" y2="16" stroke="currentColor" stroke-width="1.5"/>
-  <!-- Símbolo infinito no ponto de união (centro da vareta) -->
-  <path d="M13.5 16 C13.5 14.3 14.6 13.5 16 13.5 C17.4 13.5 18 14.6 18 16 C18 17.4 17.4 18.5 16 18.5 C14.6 18.5 13.5 17.7 13.5 16 Z" stroke="currentColor" stroke-width="1.1" fill="none"/>
-  <path d="M18.5 16 C18.5 14.3 19.5 13.5 20.5 13.5" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.6"/>
-  <path d="M13.5 16 C13.5 17.7 12.5 18.5 11.5 18.5" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.6"/>
-</svg>
-          </span>
+      <a class="year-card" href="silq/indexsilq.html" data-file="silq/indexsilq.html" aria-describedby="desc-silq">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="silq/indexsilq.html" title="Prévia ao vivo de Simulador Interativo de Ligações Químicas" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SILQ</div>
-        <h3 class="tile-name">Simulador Interativo de Ligações Químicas</h3>
-        <p class="tile-desc" id="desc-silq">Monte ligações iônicas, covalentes e metálicas e entenda como os átomos se combinam.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-    <!-- ============ MÓDULO 06 — SIFI ============ -->
-      <a class="tile" href="sifi/indexsifi.html" data-sim="sifi"
-              aria-describedby="desc-sifi"
-              data-file="sifi/indexsifi.html"
-              aria-label="Abrir SIFI — Simulador Interativo de Forças Intermoleculares">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">06</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" xmlns="http://www.w3.org/2000/svg">
-          
-            <circle cx="9" cy="11" r="4" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
-  <circle cx="23" cy="21" r="4" stroke-width="1.5" fill="currentColor" fill-opacity="0.15"/>
-  <path d="M12 14 C15 16 18 18 20 19" stroke-width="1.3" stroke-dasharray="2.2 2.2"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tile-symbol" aria-hidden="true">SIFI</div>
-        <h3 class="tile-name">Simulador Interativo de Forças Intermoleculares</h3>
-        <p class="tile-desc" id="desc-sifi">Analise as interações intermoleculares dipolo-dipolo, pontes de hidrogenio e forças de London.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SILQ</span>
+        <h3 class="year-card-nome">Simulador Interativo de Ligações Químicas</h3>
+        <p class="year-card-desc" id="desc-silq">Monte ligações iônicas, covalentes e metálicas e entenda como os átomos se combinam.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 07 — SIE ============ -->
-      <a class="tile" href="sie/indexsie.html" data-sim="sie"
-              aria-describedby="desc-sie"
-              data-file="sie/indexsie.html"
-              aria-label="Abrir SIE — Simulador Interativo de Estequiometria">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">07</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Haste central -->
-  <line x1="16" y1="4" x2="16" y2="20" stroke="currentColor" stroke-width="1.5"/>
-  <!-- Triângulo do pivô -->
-  <polygon points="16,20 13,24 19,24" fill="currentColor" opacity="0.8"/>
-  <!-- Base -->
-  <line x1="10" y1="28" x2="22" y2="28" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-  <line x1="16" y1="24" x2="16" y2="28" stroke="currentColor" stroke-width="1.5"/>
-  <!-- Braço horizontal da balança -->
-  <line x1="4" y1="12" x2="28" y2="12" stroke="currentColor" stroke-width="1.3"/>
-  <!-- Correntes dos pratos -->
-  <line x1="7"  y1="12" x2="7"  y2="16" stroke="currentColor" stroke-width="1"/>
-  <line x1="25" y1="12" x2="25" y2="16" stroke="currentColor" stroke-width="1"/>
-  <!-- Prato esquerdo -->
-  <path d="M3 16 Q7 17.5 11 16" stroke="currentColor" stroke-width="1.2" fill="none"/>
-  <!-- Prato direito -->
-  <path d="M21 16 Q25 17.5 29 16" stroke="currentColor" stroke-width="1.2" fill="none"/>
-  <!-- Erlenmeyer no prato esquerdo -->
-  <path d="M5.5 16 L5 13 L9 13 L8.5 16" stroke="currentColor" stroke-width="1" fill="none"/>
-  <line x1="6" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="0.9"/>
-  <!-- Cubos de peso no prato direito -->
-  <rect x="22.5" y="13.5" width="2.5" height="2.5" rx="0.4" stroke="currentColor" stroke-width="0.9"/>
-  <rect x="25.3" y="14.2" width="2"   height="1.8" rx="0.4" stroke="currentColor" stroke-width="0.9"/>
-</svg>
-          </span>
+      <a class="year-card" href="sifi/indexsifi.html" data-file="sifi/indexsifi.html" aria-describedby="desc-sifi">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="sifi/indexsifi.html" title="Prévia ao vivo de Simulador Interativo de Forças Intermoleculares" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SIE</div>
-        <h3 class="tile-name">Simulador Interativo de Estequiometria</h3>
-        <p class="tile-desc" id="desc-sie">Monte reações químicas, balanceie equações e calcule reagente limitante e rendimento teórico.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SIFI</span>
+        <h3 class="year-card-nome">Simulador Interativo de Forças Intermoleculares</h3>
+        <p class="year-card-desc" id="desc-sifi">Analise as interações intermoleculares dipolo-dipolo, pontes de hidrogenio e forças de London.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
-      <!-- ============ MÓDULO 08 — SIQI ============ -->
-      <a class="tile" href="siqi/indexsiqi.html" data-sim="siqi"
-              aria-describedby="desc-siqi"
-              data-file="siqi/indexsiqi.html"
-              aria-label="Abrir SIQI — Simulador Interativo de Química Inorgânica">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-index" aria-hidden="true">08</span>
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <!-- Tubo de ensaio -->
-  <path d="M10 4 L10 20 Q10 27 16 27 Q22 27 22 20 L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <line x1="8" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-  <!-- Rede cristalina dentro do tubo (compostos inorgânicos) -->
-  <circle cx="14" cy="18" r="1.5" fill="currentColor"/>
-  <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
-  <circle cx="16" cy="22" r="1.5" fill="currentColor"/>
-  <line x1="14" y1="18" x2="18" y2="18" stroke="currentColor" stroke-width="0.9"/>
-  <line x1="14" y1="18" x2="16" y2="22" stroke="currentColor" stroke-width="0.9"/>
-  <line x1="18" y1="18" x2="16" y2="22" stroke="currentColor" stroke-width="0.9"/>
-  <!-- Bolhas de gás subindo (reação) -->
-  <circle cx="13" cy="13" r="1"   fill="currentColor" opacity="0.5"/>
-  <circle cx="16" cy="11" r="1.2" fill="currentColor" opacity="0.35"/>
-  <circle cx="19" cy="14" r="0.9" fill="currentColor" opacity="0.45"/>
-</svg>
-          </span>
+      <a class="year-card" href="sie/indexsie.html" data-file="sie/indexsie.html" aria-describedby="desc-sie">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="sie/indexsie.html" title="Prévia ao vivo de Simulador Interativo de Estequiometria" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
         </div>
-        <div class="tile-symbol" aria-hidden="true">SIQI</div>
-        <h3 class="tile-name">Simulador Interativo de Química Inorgânica</h3>
-        <p class="tile-desc" id="desc-siqi">Explore ácidos, bases, sais e óxidos com fórmulas, ionizações e reações modelo.</p>
-        <span class="tile-cta">Abrir simulador
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
+        <span class="year-card-sigla">SIE</span>
+        <h3 class="year-card-nome">Simulador Interativo de Estequiometria</h3>
+        <p class="year-card-desc" id="desc-sie">Monte reações químicas, balanceie equações e calcule reagente limitante e rendimento teórico.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </a>
 
+      <a class="year-card" href="siqi/indexsiqi.html" data-file="siqi/indexsiqi.html" aria-describedby="desc-siqi">
+        <div class="year-card-preview">
+          <iframe class="year-card-preview-frame" data-src="siqi/indexsiqi.html" title="Prévia ao vivo de Simulador Interativo de Química Inorgânica" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+        </div>
+        <span class="year-card-sigla">SIQI</span>
+        <h3 class="year-card-nome">Simulador Interativo de Química Inorgânica</h3>
+        <p class="year-card-desc" id="desc-siqi">Explore ácidos, bases, sais e óxidos com fórmulas, ionizações e reações modelo.</p>
+        <span class="year-card-cta">Abrir simulador <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </section>
   </main>
 
   <footer class="foot">

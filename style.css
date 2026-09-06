@@ -930,12 +930,35 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
 }
 .btn-secondary:hover{ border-color:var(--border-strong); background:var(--surface); }
 
-.hero-stats{ display:flex; flex-wrap:wrap; gap:32px; margin:0; }
-.hero-stat{ display:flex; flex-direction:column; gap:2px; }
-.hero-stat dt{
-  font-family:var(--font-display); font-weight:700; font-size:1.7rem; color:var(--ink); margin:0;
+/* ---------- TRILHA DOS 3 ANOS (substitui o contador antigo) ---------- */
+.trilha-anos{
+  display:flex; align-items:stretch; gap:14px; margin:0;
 }
-.hero-stat dd{ font-size:13px; color:var(--muted); margin:0; }
+.trilha-ano{
+  flex:1; display:flex; flex-direction:column; align-items:flex-start; gap:6px; min-width:0;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:18px 18px 16px; text-decoration:none; transition:border-color var(--dur), transform var(--dur);
+}
+.trilha-ano:hover{ border-color:var(--accent-brand); transform:translateY(-2px); }
+.trilha-ano-badge{
+  font-family:var(--font-mono); font-size:11px; font-weight:700; letter-spacing:.04em;
+  color:var(--accent-brand); background:var(--surface-2); border-radius:999px; padding:3px 10px;
+}
+.trilha-ano h3{ font-family:var(--font-display); font-size:16px; color:var(--ink); margin:4px 0 0; }
+.trilha-ano p{ font-size:13px; color:var(--ink-soft); line-height:1.5; margin:0; flex:1; }
+.trilha-ano-cta{
+  display:flex; align-items:center; gap:6px; margin-top:4px;
+  font-size:12.5px; font-weight:600; color:var(--muted);
+}
+.trilha-ano-cta svg{ width:14px; height:14px; }
+.trilha-conector{
+  width:20px; height:20px; flex-shrink:0; align-self:center;
+  color:var(--border-strong);
+}
+@media (max-width:760px){
+  .trilha-anos{ flex-direction:column; }
+  .trilha-conector{ transform:rotate(90deg); align-self:flex-start; margin-left:18px; }
+}
 
 /* ---------- NOSSA PROPOSTA ---------- */
 .proposta{ margin-bottom:46px; }
