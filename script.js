@@ -193,21 +193,89 @@
     var heroBtn = document.getElementById('heroAbrirMenu');
     if (heroBtn) heroBtn.addEventListener('click', abrir);
 
-    /* Categorias (1º/2º/3º ano + Acessibilidade): clicar expande a
-       lista ali mesmo, dentro da gaveta — clicar de novo recolhe.
-       Não é exclusivo (pode ter mais de uma aberta ao mesmo tempo),
-       igual a um acordeão comum de FAQ. */
-    document.querySelectorAll('.drawer-cat-btn').forEach(function(btn){
-      // #a11yToggle já tem o próprio listener (abre/fecha o painel de
-      // acessibilidade) — aqui só cuida do chevron/aria-expanded dos
-      // 3 anos, pra não duplicar o clique do botão de acessibilidade.
-      if (btn.id === 'a11yToggle') return;
+    /* ════════ TOUR GUIADO (COACHMARK) — "Como funciona" ════════
+       Os mesmos 4 passos que já existem como cards estáticos logo
+       abaixo, só que entregues como um tour de verdade: balão
+       apontando pro elemento real (hambúrguer, gaveta) nos passos
+       1-2; nos passos 3-4 (que descrevem o que acontece DENTRO de um
+       simulador — não tem como mostrar isso na home) o balão destaca
+       o próprio card explicativo, como reforço visual do texto.
+       Dispara sozinho na primeira vez que o menu fica disponível
+       (login feito) — depois disso, só reaparece se a pessoa pedir
+       pelo botão "Rever tour". */
+    function abrirGavetaSeFechada() {
+      if (drawer && !drawer.classList.contains('open')) toggle.click();
+    }
+    function fecharGavetaSeAberta() {
+      if (drawer && drawer.classList.contains('open')) toggle.click();
+    }
+    function iniciarTourComoFunciona() {
+      if (typeof Coachmark === 'undefined') return;
+      Coachmark.iniciar({
+        id: 'home-como-funciona',
+        passos: [
+          {
+            alvo: '#drawerToggle',
+            titulo: 'Abra o menu',
+            texto: 'Toque no ícone de menu, no canto superior — os simuladores estão organizados por ano.'
+          },
+          {
+            alvo: '#drawerSimuladoresSection',
+            titulo: 'Escolha um simulador',
+            texto: 'Cada ano tem os simuladores daquele conteúdo. Escolha o que quiser explorar.',
+            ao_entrar: abrirGavetaSeFechada,
+            ao_sair: fecharGavetaSeAberta
+          },
+          {
+            alvo: null,
+            titulo: 'Explore os modos',
+            texto: 'Cada simulador tem modos ou módulos diferentes — ative um e ajuste os controles.'
+          },
+          {
+            alvo: null,
+            titulo: 'Veja o resultado na hora',
+            texto: 'O canvas e os painéis reagem em tempo real ao que você muda — sem esperar, sem recarregar.'
+          }
+        ]
+      });
+    }
+    window.addEventListener('quimix:menu-liberado', function () {
+      if (!Coachmark.jaViu('home-como-funciona')) {
+        setTimeout(iniciarTourComoFunciona, 500); // dá tempo da home renderizar embaixo
+      }
+    });
+    var btnRever = document.getElementById('btnReverTour');
+    if (btnRever) btnRever.addEventListener('click', function () {
+      Coachmark.reiniciar('home-como-funciona');
+      iniciarTourComoFunciona();
+    });
+
+    /* Categorias (1º/2º/3º ano): clicar expande a lista ali mesmo,
+       dentro da gaveta — clicar de novo recolhe. Não é exclusivo
+       (pode ter mais de uma aberta ao mesmo tempo), igual a um
+       acordeão comum de FAQ. .drawer-cat-expand é só o botão
+       separado do link de cada ano (ver .drawer-cat-link logo
+       abaixo) — #a11yToggle continua com a própria mecânica, mais
+       abaixo neste arquivo (acessibilidade não tem "página própria"
+       pra linkar, então não faz parte deste split). */
+    document.querySelectorAll('.drawer-cat-expand').forEach(function(btn){
       btn.addEventListener('click', function(){
         var listaId = btn.getAttribute('aria-controls');
         var lista = document.getElementById(listaId);
         var aberto = btn.getAttribute('aria-expanded') === 'true';
         btn.setAttribute('aria-expanded', String(!aberto));
         if (lista) lista.hidden = aberto;
+      });
+    });
+
+    // Link do próprio ano (ícone+nome+contagem, ao lado do botão de
+    // expandir) — mesmo contrato de sempre: data-file + openDestino.
+    // A página de cada ano (indexprimeiroano.html etc.) já existe e
+    // ficava sem nenhum acesso direto por aqui antes disso.
+    document.querySelectorAll('.drawer-cat-link[data-file]').forEach(function(link){
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        openDestino(link.dataset.file);
       });
     });
   })();

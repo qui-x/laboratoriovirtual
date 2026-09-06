@@ -830,6 +830,26 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
 .drawer-cat-chevron{ flex-shrink:0; color:var(--muted); transition:transform .18s ease; }
 .drawer-cat-btn[aria-expanded="true"] .drawer-cat-chevron{ transform:rotate(90deg); }
 
+/* Linha dividida em DOIS alvos de toque: o link (ícone+nome+contagem)
+   navega direto pra página do próprio ano — que já existe e tinha
+   ficado sem esse acesso — e o botão à parte só expande/recolhe a
+   lista de simuladores ali dentro. Mesmo padrão "split button" de
+   qualquer app com item clicável + expandir separado. */
+.drawer-cat-row{ display:flex; align-items:stretch; border-radius:var(--radius-md); overflow:hidden; }
+.drawer-cat-link{
+  flex:1; display:flex; align-items:center; gap:10px; min-width:0;
+  color:var(--ink); text-decoration:none; font-family:var(--font-body);
+  font-size:14px; font-weight:600; padding:11px 10px; transition:background var(--dur);
+}
+.drawer-cat-link:hover, .drawer-cat-link:focus-visible{ background:var(--surface-2); outline:none; }
+.drawer-cat-expand{
+  display:flex; align-items:center; justify-content:center;
+  width:40px; flex-shrink:0; background:transparent; border:none; color:var(--muted);
+  cursor:pointer; transition:background var(--dur), color var(--dur);
+}
+.drawer-cat-expand:hover{ background:var(--surface-2); color:var(--ink); }
+.drawer-cat-expand[aria-expanded="true"] .drawer-cat-chevron{ transform:rotate(90deg); }
+
 .drawer-cat-list{
   list-style:none; margin:2px 0 6px; padding:0 4px 4px 40px;
   display:flex; flex-direction:column; gap:1px;
@@ -917,24 +937,22 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
 }
 .hero-stat dd{ font-size:13px; color:var(--muted); margin:0; }
 
-/* ---------- COMO FUNCIONA ---------- */
-.guide{ margin-bottom:46px; scroll-margin-top:24px; }
-.guide-steps{
-  list-style:none; margin:0; padding:0;
-  display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;
+/* ---------- NOSSA PROPOSTA ---------- */
+.proposta{ margin-bottom:46px; }
+.proposta-grid{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px;
 }
-.guide-step{
+.proposta-pilar{
   background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
-  padding:20px 18px;
+  padding:22px 20px;
 }
-.guide-step-num{
+.proposta-pilar-icone{
   display:flex; align-items:center; justify-content:center;
-  width:30px; height:30px; border-radius:50%;
-  background:var(--accent-brand); color:var(--accent-brand-ink);
-  font-family:var(--font-mono); font-weight:700; font-size:14px; margin-bottom:14px;
+  width:42px; height:42px; border-radius:var(--radius-md);
+  background:var(--surface-2); color:var(--accent-brand); margin-bottom:14px;
 }
-.guide-step h3{ font-family:var(--font-display); font-size:15px; color:var(--ink); margin:0 0 6px; }
-.guide-step p{ font-size:13.5px; color:var(--ink-soft); line-height:1.5; margin:0; }
+.proposta-pilar h3{ font-family:var(--font-display); font-size:15.5px; color:var(--ink); margin:0 0 8px; }
+.proposta-pilar p{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0; }
 
 /* ---------- DESTAQUES ---------- */
 .destaques{ margin-bottom:46px; }
@@ -947,6 +965,24 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
   padding:20px 18px; text-decoration:none; transition:border-color var(--dur), transform var(--dur);
 }
 .destaque-card:hover{ border-color:var(--border-strong); transform:translateY(-2px); }
+/* Prévia AO VIVO: o iframe carrega o simulador de verdade, só que em
+   4x o tamanho (400%/400%) e depois encolhido com scale(.25) — assim
+   ele renderiza como se estivesse num monitor comum (com as duas
+   sidebars, como sempre), em vez de espremido no tamanho minúsculo do
+   card. pointer-events:none: o clique atravessa o iframe e cai no
+   próprio <a> do card (que já navega pra versão completa) — o
+   simulador ali dentro é só pra OLHAR, não pra mexer.
+   loading="lazy" no HTML evita carregar os 4 de uma vez fora da tela. */
+.destaque-preview{
+  width:100%; aspect-ratio:16/10; border-radius:var(--radius-md);
+  overflow:hidden; background:var(--bg); border:1px solid var(--border);
+  position:relative; margin-bottom:2px;
+}
+.destaque-preview-frame{
+  position:absolute; top:0; left:0; width:400%; height:400%;
+  transform:scale(.25); transform-origin:top left;
+  border:none; pointer-events:none;
+}
 .destaque-badge{
   font-family:var(--font-mono); font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;
   color:var(--accent-brand); background:var(--surface-2); border-radius:999px; padding:3px 10px;
@@ -977,7 +1013,7 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
   .guide, .destaques{ margin-bottom:32px; }
 }
 
-html[data-reading="on"] .guide-steps,
+html[data-reading="on"] .proposta-grid,
 html[data-reading="on"] .destaques-grid,
 html[data-reading="on"] .a11y-showcase-list{ grid-template-columns:1fr; }
 
@@ -1005,4 +1041,74 @@ html[data-reading="on"] .a11y-showcase-list{ grid-template-columns:1fr; }
 }
 .conta-secao-title{
   font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--ink); margin:0 0 8px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   COACHMARK — balão flutuante guiando o usuário (ver coachmark.js)
+   ════════════════════════════════════════════════════════════════ */
+
+.coach-overlay{
+  position:fixed; inset:0; z-index:500;
+  /* o fundo escurecido de verdade é o box-shadow gigante do
+     .coach-spot (ver abaixo) — aqui só precisa capturar cliques fora
+     do balão, então fica transparente por padrão. */
+}
+.coach-spot{
+  position:fixed; z-index:501; border-radius:10px;
+  /* truque clássico de "recorte": uma sombra do tamanho da tela
+     inteira, só que por FORA da caixa — tudo ao redor do alvo escurece,
+     o próprio alvo fica limpo (a caixa em si não tem fundo nenhum). */
+  box-shadow:0 0 0 9999px rgba(0,0,0,.65);
+  border:2px solid var(--accent-brand);
+  pointer-events:none;
+  transition:top .25s ease, left .25s ease, width .25s ease, height .25s ease;
+}
+html[data-motion="true"] .coach-spot{ transition:none; }
+/* sem alvo (passo "flutuante"): escurece a tela inteira mesmo, sem
+   nenhum recorte — o spot fica hidden (ver JS) e este pseudo-elemento
+   cobre tudo no lugar dele. */
+.coach-overlay:has(.coach-spot[hidden])::before{
+  content:''; position:fixed; inset:0; z-index:501; background:rgba(0,0,0,.65);
+}
+
+.coach-balao{
+  position:fixed; z-index:502; width:min(320px, 88vw);
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:18px 18px 14px; box-shadow:0 20px 48px rgba(0,0,0,.5);
+  transition:top .25s ease, left .25s ease;
+}
+html[data-motion="true"] .coach-balao{ transition:none; }
+.coach-balao--centro{
+  position:fixed; top:50% !important; left:50% !important;
+  transform:translate(-50%,-50%);
+}
+.coach-pular{
+  position:absolute; top:10px; right:12px;
+  background:none; border:none; color:var(--muted); font-size:12px; cursor:pointer;
+  font-family:var(--font-body); padding:4px 6px; border-radius:6px;
+}
+.coach-pular:hover{ color:var(--ink); background:var(--surface-2); }
+.coach-titulo{
+  font-family:var(--font-display); font-weight:700; font-size:16px; color:var(--ink);
+  margin:4px 30px 8px 0;
+}
+.coach-texto{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0 0 16px; }
+.coach-rodape{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.coach-pontos{ display:flex; gap:5px; }
+.coach-ponto{ width:6px; height:6px; border-radius:50%; background:var(--border-strong); }
+.coach-ponto--ativo{ background:var(--accent-brand); width:16px; border-radius:3px; }
+.coach-botoes{ display:flex; gap:8px; }
+.coach-btn{
+  font-family:var(--font-body); font-weight:600; font-size:13px;
+  padding:8px 14px; border-radius:var(--radius-sm); cursor:pointer; transition:filter var(--dur), background var(--dur);
+}
+.coach-btn--voltar{ background:transparent; border:1px solid var(--border); color:var(--ink-soft); }
+.coach-btn--voltar:hover{ background:var(--surface-2); }
+.coach-btn--avancar{ background:var(--accent-brand); border:1px solid var(--accent-brand); color:var(--accent-brand-ink); }
+.coach-btn--avancar:hover{ filter:brightness(1.08); }
+
+@media (max-width:480px){
+  .coach-balao{ padding:16px 16px 12px; }
+  .coach-rodape{ flex-direction:column; align-items:stretch; gap:12px; }
+  .coach-botoes{ justify-content:space-between; }
 }

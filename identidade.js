@@ -78,6 +78,10 @@ function encerrarSessaoLocal() {
 function mostrarMenuPrincipal() {
   var btn = document.getElementById('drawerToggle');
   if (btn) btn.hidden = false;
+  // Aviso pra quem quiser reagir ao menu ficar disponível (hoje, só
+  // o tour guiado da home — ver script.js) sem acoplar os dois
+  // arquivos diretamente.
+  window.dispatchEvent(new CustomEvent('quimix:menu-liberado'));
 }
 function esconderMenuPrincipal() {
   var btn = document.getElementById('drawerToggle');
