@@ -84,6 +84,7 @@ App.prototype._alternarModulo = function(modulo, btn) {
   const search = document.getElementById('sub-search');
   this._buildList(search ? search.value : '');
   this._atualizarTrancaSidebarDireita();
+  this._syncMobileModeUI(jaEstavaAtivo ? null : modulo);
 
   if (typeof announce === 'function') {
     announce(jaEstavaAtivo

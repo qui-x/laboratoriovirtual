@@ -106,6 +106,7 @@ function alternarModulo(modulo, btn) {
   }
   renderizarLista();
   atualizarTrancaSidebarDireita();
+  if (typeof syncMobileModeUI === 'function') syncMobileModeUI(jaEstavaAtivo ? null : modulo);
 }
 
 /* ═══════════════════════════════════════════════════════

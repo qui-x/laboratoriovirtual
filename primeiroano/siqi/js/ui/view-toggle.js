@@ -32,6 +32,19 @@ function initViewToggle(){
     if(panelLab) panelLab.hidden=!isLab;
     if(panelInfo) panelInfo.hidden=!isInfo;
     if(panelConstrutor) panelConstrutor.hidden=!isConstrutor;
+    /* BUG CORRIGIDO: os painéis de CONTROLES de cada módulo, na sidebar
+       (data-module-content="nomenclatura"/"construtor" — Biblioteca,
+       Informações do Composto, Validador) nunca eram mostrados: esta
+       função só cuidava da VIEW central, nunca tocava neles. Resultado:
+       o Construtor "nunca iniciava direito" — o aluno nunca via a
+       Biblioteca pra escolher um composto e começar a montar o nome.
+       O NOME da view central ('info') e o valor de data-module-content
+       ('nomenclatura') são propositalmente diferentes (view é genérica,
+       conteúdo é por módulo de verdade) — por isso o mapa abaixo. */
+    var moduloDaView = { info: 'nomenclatura', construtor: 'construtor' }[v] || null;
+    document.querySelectorAll('[data-module-content]').forEach(function(p){
+      p.hidden = p.dataset.moduleContent !== moduloDaView;
+    });
   }
   btnLab.addEventListener('click',function(){ setView('lab'); });
   btnInfo.addEventListener('click',function(){
