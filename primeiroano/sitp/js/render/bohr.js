@@ -171,10 +171,9 @@ function renderBohr(Z, el, sub, atomCor, atomGlow, escala){
     return `<svg viewBox="0 0 ${SVG_W.toFixed(0)} ${SVG_H.toFixed(0)}"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-labelledby="bohr-t-${Z}-${modo} bohr-d-${Z}-${modo}"
+      aria-labelledby="bohr-d-${Z}-${modo}"
       >
-      <title id="bohr-t-${Z}-${modo}">Diagrama de Bohr de ${el.nome||el.simbolo||''}</title>
-      <desc id="bohr-d-${Z}-${modo}">Modelo de Bohr mostrando ${nCamadas} ${nCamadas===1?'camada eletrônica':'camadas eletrônicas'} ao redor do núcleo. A camada de valência ${nomeVal} contém ${elVal} ${elVal===1?'elétron':'elétrons'}.</desc>
+      <desc id="bohr-d-${Z}-${modo}">Diagrama de Bohr de ${el.nome||el.simbolo||''}. Modelo de Bohr mostrando ${nCamadas} ${nCamadas===1?'camada eletrônica':'camadas eletrônicas'} ao redor do núcleo. A camada de valência ${nomeVal} contém ${elVal} ${elVal===1?'elétron':'elétrons'}.</desc>
       ${defs}
       ${p.join('\n      ')}
     </svg>`;

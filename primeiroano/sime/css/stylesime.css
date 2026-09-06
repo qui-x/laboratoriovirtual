@@ -506,6 +506,7 @@ input[type="range"]::-moz-range-thumb {
   .seringa-svg { width: clamp(120px, calc(100vw - var(--sl) - var(--sr) - 40px), 300px); }
 }
 
+.mode-tabs-mobile { display: none; }
 /* ── ≤900px: sidebars off-canvas, SVG ocupa tudo ─────── */
 @media (max-width: 900px) {
   :root { --sl: 0px; --sr: 0px; }
@@ -519,6 +520,10 @@ input[type="range"]::-moz-range-thumb {
     box-shadow: 4px 0 20px rgba(0,0,0,.5);
     overflow-y: auto;
   }
+  /* sidebar esquerda (módulos) fica ESCONDIDA no mobile — a barra de
+     modos rolável (.mode-tabs-mobile, logo abaixo do cabeçalho) assume
+     essa função. */
+  .sidebar--left { display: none; }
   .sidebar--right {
     left: 0; right: 0; top: auto; bottom: 0;
     width: auto; max-width: none; min-width: 0;
@@ -533,7 +538,6 @@ input[type="range"]::-moz-range-thumb {
     content: ''; display: block; width: 36px; height: 4px; border-radius: 2px;
     background: var(--bdr); margin: .5rem auto .25rem;
   }
-  .sidebar--left.mobile-open { transform: translateX(0); }
 
   .mobile-backdrop {
     position: fixed; inset: 0; z-index: 90;
@@ -547,7 +551,60 @@ input[type="range"]::-moz-range-thumb {
   .panel-body { max-height: calc(var(--body-h) * 0.75); }
   .sub-lista { max-height: clamp(150px, 30vh, 320px); max-height: clamp(150px, 30dvh, 320px); }
   .manometro-svg { width: clamp(150px, 55vw, 220px); }
+
+  .mode-tabs-mobile {
+    display: flex; gap: .4rem; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding: .5rem .6rem; background: var(--bg1); border-bottom: 1px solid var(--bdr);
+    scrollbar-width: thin;
+  }
+  .mode-tab {
+    flex: none; display: flex; align-items: center; gap: .3rem;
+    padding: .4rem .7rem; border-radius: 999px; border: 1px solid var(--bdr);
+    background: transparent; color: var(--tx2);
+    font-size: .78rem; white-space: nowrap; cursor: pointer; min-height: 36px;
+  }
+  .mode-tab .icon { width: 1em; height: 1em; }
+  .mode-tab[aria-selected="true"] {
+    border-color: var(--bdr-a); color: var(--tx1);
+    background: color-mix(in srgb, var(--bdr-a) 18%, transparent);
+  }
 }
+
+.mode-info-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.72); backdrop-filter: blur(3px);
+  display: flex; align-items: center; justify-content: center; padding: 1rem;
+  opacity: 0; visibility: hidden; transition: opacity .2s, visibility .2s;
+}
+.mode-info-overlay.aberto { opacity: 1; visibility: visible; }
+.mode-info-modal {
+  background: var(--bg2); border: 1px solid var(--bdr); border-radius: var(--r);
+  width: min(420px, 94vw); max-height: 80vh; max-height: 80dvh; overflow: hidden;
+  display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+  transform: scale(.94) translateY(10px);
+  transition: transform .22s cubic-bezier(.34,1.56,.64,1);
+}
+.mode-info-overlay.aberto .mode-info-modal { transform: scale(1) translateY(0); }
+.mode-info-header {
+  display: flex; align-items: center; gap: .6rem; padding: .9rem 1rem;
+  background: var(--bg1); border-bottom: 1px solid var(--bdr); flex-shrink: 0;
+}
+.mode-info-icon { font-size: 1.3rem; color: var(--bdr-a); flex-shrink: 0; display: flex; }
+.mode-info-icon .icon { width: 1.2em; height: 1.2em; }
+.mode-info-title { flex: 1; margin: 0; font-size: 1.02rem; color: var(--tx1); }
+.mode-info-close {
+  background: transparent; border: 1px solid var(--bdr); border-radius: 8px; color: var(--tx2);
+  min-width: 36px; min-height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.mode-info-close:hover, .mode-info-close:focus-visible {
+  background: var(--bg3); color: var(--tx1); border-color: var(--bdr-a);
+  outline: 2px solid var(--bdr-a); outline-offset: 2px;
+}
+.mode-info-body { padding: 1rem; overflow-y: auto; font-size: .88rem; color: var(--tx2); }
+.mode-info-body .mode-define { color: var(--tx1); margin: 0 0 .6rem; line-height: 1.5; }
+@media (pointer: coarse) { .mode-info-close { min-width: 44px; min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .mode-info-modal { transition: none; } }
 
 /* ── ≤640px: celulares médios ────────────────────────── */
 @media (max-width: 640px) {

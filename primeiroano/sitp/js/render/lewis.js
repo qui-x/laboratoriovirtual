@@ -115,10 +115,9 @@ function renderLewis(Z, el, sub, atomCor, atomGlow, escala){
   const svgLewis = `<svg viewBox="0 0 ${VB_W} ${SZ}"
     xmlns="http://www.w3.org/2000/svg"
     role="img"
-    aria-labelledby="lewis-t-${Z} lewis-d-${Z}"
+    aria-labelledby="lewis-d-${Z}"
     style="max-width:${maxW}px;">
-    <title id="lewis-t-${Z}">Diagrama de Lewis de ${el.nome||el.simbolo||''}</title>
-    <desc id="lewis-d-${Z}">Estrutura de Lewis mostrando o símbolo ${el.simbolo||''} ao centro, rodeado por ${eValTotal} ${eValTotal===1?'elétron de valência':'elétrons de valência'} representados como pontos. Estado de preenchimento: ${sub.statusLabel}.</desc>
+    <desc id="lewis-d-${Z}">Diagrama de Lewis de ${el.nome||el.simbolo||''}. Estrutura de Lewis mostrando o símbolo ${el.simbolo||''} ao centro, rodeado por ${eValTotal} ${eValTotal===1?'elétron de valência':'elétrons de valência'} representados como pontos. Estado de preenchimento: ${sub.statusLabel}.</desc>
     ${defs}
     ${parts.join('\n    ')}
   </svg>`;

@@ -90,14 +90,20 @@
         <span id="state-pill-icon" aria-hidden="true"></span>
         <span id="state-pill-text">sem substância</span>
       </span>
-      <button type="button" class="mobile-menu-btn" id="mobile-menu-btn"
-        aria-label="Abrir módulos de estado físico"
-        aria-expanded="false" aria-controls="sidebar-left"><svg class="icon" aria-hidden="true"><use href="#ic-menu"/></svg></button>
       <button type="button" class="mobile-menu-btn" id="mobile-menu-btn-right"
         aria-label="Abrir substância, controles e medidas"
         aria-expanded="false" aria-controls="sidebar-right"><svg class="icon" aria-hidden="true"><use href="#ic-gear"/></svg></button>
     </div>
   </header>
+
+  <!-- ════════ BARRA DE MODOS (MOBILE) ════════
+       Só aparece em telas estreitas — substitui a gaveta esquerda pelos
+       3 módulos (Gases/Líquidos/Sólidos) como abas roláveis. Preenchida
+       em buildModeTabsMobile() (js/ui/modo-mobile.js). O botão que abria
+       essa gaveta foi removido de propósito: esta barra assume essa
+       função no mobile. -->
+  <nav id="mode-tabs-mobile" class="mode-tabs-mobile" role="tablist"
+       aria-label="Módulos de estado físico" aria-orientation="horizontal"></nav>
  
   <!-- Dicas de teclado (visíveis apenas ao focar skip-link) -->
   <div class="keyboard-hints" role="note" aria-label="Atalhos de teclado disponíveis">
@@ -610,6 +616,20 @@
  
 <div class="mobile-backdrop" id="mobile-backdrop" hidden></div>
  
+<!-- ════════ MODAL — INFORMAÇÕES DO MÓDULO (1ª ATIVAÇÃO, MOBILE) ════════ -->
+<div class="mode-info-overlay" id="modeInfoOverlay" role="dialog"
+     aria-modal="true" aria-labelledby="modeInfoTitle" aria-hidden="true">
+  <div class="mode-info-modal" id="modeInfoModal">
+    <div class="mode-info-header">
+      <span class="mode-info-icon" id="modeInfoIcon" aria-hidden="true"></span>
+      <h2 class="mode-info-title" id="modeInfoTitle"></h2>
+      <button type="button" class="mode-info-close" id="modeInfoClose"
+              aria-label="Fechar informações do módulo"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>
+    </div>
+    <div class="mode-info-body" id="modeInfoBody"></div>
+  </div>
+</div>
+
 <div vw class="enabled">
   <div vw-access-button class="active"></div>
   <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
@@ -650,6 +670,7 @@
 <!-- ═══ INTERFACE — interação do usuário ═══ -->
 <script src="js/ui/painel-substancias.js?v=1"></script>
 <script src="js/ui/painel-modulos.js?v=1"></script>
+<script src="js/ui/modo-mobile.js?v=1"></script>
 <script src="js/ui/paineis-recolhiveis.js?v=1"></script>
 <script src="js/ui/menu-mobile.js?v=1"></script>
 <script src="js/ui/eventos.js?v=1"></script>
