@@ -99,16 +99,40 @@ var Coachmark = (function () {
     els.spot.style.width = (r.width + pad * 2) + 'px';
     els.spot.style.height = (r.height + pad * 2) + 'px';
 
-    // Tenta embaixo do alvo; se não couber, tenta em cima. Sempre
-    // dentro da largura da tela, com uma margem mínima nas bordas.
+    /* Ordem de tentativa: embaixo → em cima → à direita → à esquerda
+       → por último, cola no topo da tela (alvo mais alto que a tela
+       inteira, ex.: uma barra lateral esticada — nenhuma das quatro
+       serve). Cada tentativa checa se cabe de verdade, sem cortar
+       nas bordas. */
     var margemTela = 12;
     var balaoRect = els.balao.getBoundingClientRect();
-    var top = r.bottom + pad + 10;
-    if (top + balaoRect.height > window.innerHeight - margemTela) {
+    var top, left;
+
+    var cabeEmbaixo = r.bottom + pad + 10 + balaoRect.height <= window.innerHeight - margemTela;
+    var cabeEmCima = r.top - pad - 10 - balaoRect.height >= margemTela;
+    var cabeDireita = r.right + pad + 10 + balaoRect.width <= window.innerWidth - margemTela;
+    var cabeEsquerda = r.left - pad - 10 - balaoRect.width >= margemTela;
+
+    if (cabeEmbaixo) {
+      top = r.bottom + pad + 10;
+      left = r.left + r.width / 2 - balaoRect.width / 2;
+    } else if (cabeEmCima) {
       top = r.top - pad - 10 - balaoRect.height;
-      if (top < margemTela) top = margemTela; // não coube nem embaixo nem em cima: cola no topo
+      left = r.left + r.width / 2 - balaoRect.width / 2;
+    } else if (cabeDireita) {
+      left = r.right + pad + 10;
+      top = r.top + r.height / 2 - balaoRect.height / 2;
+    } else if (cabeEsquerda) {
+      left = r.left - pad - 10 - balaoRect.width;
+      top = r.top + r.height / 2 - balaoRect.height / 2;
+    } else {
+      // alvo maior que a tela em todas as direções: última saída,
+      // cola no topo, centralizado na largura.
+      top = margemTela;
+      left = window.innerWidth / 2 - balaoRect.width / 2;
     }
-    var left = r.left + r.width / 2 - balaoRect.width / 2;
+
+    top = Math.max(margemTela, Math.min(top, window.innerHeight - balaoRect.height - margemTela));
     left = Math.max(margemTela, Math.min(left, window.innerWidth - balaoRect.width - margemTela));
 
     els.balao.style.top = top + 'px';
