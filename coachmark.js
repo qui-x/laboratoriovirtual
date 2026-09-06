@@ -216,6 +216,23 @@ var Coachmark = (function () {
   }
 
   function iniciar(config) {
+    /* BUG CORRIGIDO: as prévias "ao vivo" da home e das páginas de
+       ano carregam a página REAL do simulador dentro de um <iframe>
+       — inclusive todo o JS dela, então o tour disparava sozinho
+       DENTRO da prévia minúscula, sem nenhum sentido ali (a prévia é
+       só pra olhar, não é a página que a pessoa está usando).
+       window.self !== window.top é o jeito padrão de saber se este
+       documento está rodando dentro de um iframe (mesmo same-origin,
+       como aqui) — se estiver, nunca inicia. Fica centralizado aqui
+       no motor de propósito: protege TODO tour, de qualquer
+       simulador, sem precisar repetir a checagem em cada tour.js. */
+    try {
+      if (window.self !== window.top) return;
+    } catch (e) {
+      // acesso a window.top bloqueado (cross-origin) — mais seguro
+      // assumir que está embutido e não iniciar.
+      return;
+    }
     if (!config || !config.passos || !config.passos.length) return;
     if (estadoAtual) encerrar(); // não empilha dois tours
 
