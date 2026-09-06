@@ -38,6 +38,23 @@
 
 'use strict';
 
+/* Esconde os painéis marcados data-hide-for-module quando o módulo
+   ativo (Construtor/Nomenclatura) está na lista de valores do
+   atributo — mesmo bug de origem do data-module-content: o HTML e os
+   comentários já descreviam a intenção ("Balanço Atômico e Dados &
+   Estrutura ocultos em Nomenclatura e Construtor — só fazem sentido
+   no Lab livre"), mas nenhum código nunca lia o atributo. Resultado:
+   a sidebar ficava com painéis redundantes sempre visíveis, mesmo
+   sem informação nenhuma pra mostrar (o composto real está na
+   Biblioteca/Ficha, não nesses dois). moduloAtivo=null (Lab, ou
+   nenhum módulo selecionado) sempre mostra tudo de novo. */
+function _atualizarOcultacaoPorModulo(moduloAtivo) {
+  document.querySelectorAll('[data-hide-for-module]').forEach(function (p) {
+    var lista = p.dataset.hideForModule.split(',').map(function (s) { return s.trim(); });
+    p.hidden = moduloAtivo != null && lista.indexOf(moduloAtivo) !== -1;
+  });
+}
+
 function trocarModulo(nome, btn) {
   document.querySelectorAll('.mode-activate-btn[data-module]').forEach(function (b) {
     if (b !== btn) b.setAttribute('aria-pressed', 'false');
@@ -56,6 +73,7 @@ function trocarModulo(nome, btn) {
     if (hdr) hdr.setAttribute('aria-expanded', 'false');
   }
   if (typeof syncMobileModeUI === 'function') syncMobileModeUI(nome);
+  _atualizarOcultacaoPorModulo(nome);
 
   // Restrito ao módulo Nomenclatura de propósito: o Construtor ainda
   // tem problemas próprios de inicialização, e alternar pra Lab/Ficha
@@ -79,6 +97,7 @@ function trocarModulo(nome, btn) {
 function desativarModulo(btn) {
   btn.setAttribute('aria-pressed', 'false');
   if (typeof syncMobileModeUI === 'function') syncMobileModeUI(null);
+  _atualizarOcultacaoPorModulo(null);
   // Sem módulo ativo, o toggle Lab/Ficha não tem o que mostrar —
   // mesmo raciocínio do bloqueio acima.
   var toggleLabFicha = document.querySelector('.view-toggle');
