@@ -75,7 +75,7 @@ function linhaPendente_(u) {
         ' <span class="user-row-email">' + escaparHtml_(u.email) + '</span>' +
       '</span>' +
       '<span class="row-btns">' +
-        '<button type="button" class="aprovar-btn" title="Aprovar acesso" onclick="handleAprovarUsuario(\'' + u.idUsuario + '\')">✓ Aprovar</button>' +
+        '<button type="button" class="aprovar-btn" title="Aprovar acesso" onclick="handleAprovarUsuario(\'' + u.idUsuario + '\')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M20 6 9 17l-5-5"/></svg> Aprovar</button>' +
         '<button type="button" class="del-x-btn" title="Recusar pedido" onclick="handleRejeitarCadastro(\'' + u.idUsuario + '\')">Recusar</button>' +
       '</span>' +
     '</div>';
@@ -84,20 +84,20 @@ function linhaPendente_(u) {
 function linhaUsuario_(u) {
   var souEu = sessaoUsuario && String(u.idUsuario) === String(sessaoUsuario.idUsuario);
   var badge = '<span class="role-badge' + (u.papel === 'administrador' ? ' admin' : '') + '">' + escaparHtml_(u.papel) + '</span>';
-  var pendente = u.resetPendente ? '<span class="pending-reset-badge">🔑 pediu troca de senha</span>' : '';
+  var pendente = u.resetPendente ? '<span class="pending-reset-badge"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.5 12.5 19 4M15 8l3 3M18 5l2 2"/></svg> pediu troca de senha</span>' : '';
 
   var acoes;
   if (souEu) {
     acoes = '<span class="empty-hint" style="padding:0;">é você</span>';
   } else {
     var proximoPapel = u.papel === 'administrador' ? 'membro' : 'administrador';
-    var rotuloPapel = u.papel === 'administrador' ? '↓ tornar membro' : '↑ tornar admin';
+    var rotuloPapel = u.papel === 'administrador' ? '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><path d="M12 5v14M5 12l7 7 7-7"/></svg> tornar membro' : '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px"><path d="M12 19V5M5 12l7-7 7 7"/></svg> tornar admin';
     acoes =
       '<button type="button" class="del-x-btn" title="Alterar papel" onclick="handleAlterarPapel(\'' + u.idUsuario + '\',\'' + proximoPapel + '\')">' + rotuloPapel + '</button>';
     if (u.resetPendente) {
       acoes += '<button type="button" class="del-x-btn" title="Enviar código temporário" onclick="handleAdminEnviarReset(\'' + u.idUsuario + '\')">Enviar código</button>';
     }
-    acoes += '<button type="button" class="del-x-btn" title="Remover conta" onclick="handleRemoverUsuario(\'' + u.idUsuario + '\')">✕</button>';
+    acoes += '<button type="button" class="del-x-btn" title="Remover conta" onclick="handleRemoverUsuario(\'' + u.idUsuario + '\')"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>';
   }
 
   return '<div class="user-row">' +

@@ -764,6 +764,8 @@ html[data-reading="on"] .log-row-acao{ font-size:calc(13px * var(--font-scale));
   color:var(--ink); cursor:pointer; transition:border-color var(--dur), background var(--dur);
 }
 .drawer-toggle:hover{ border-color:var(--border-strong); background:var(--surface-2); }
+/* mesma ressalva de sempre: display:flex acima venceria [hidden] sozinho. */
+.drawer-toggle[hidden]{ display:none; }
 
 .drawer-backdrop{
   position:fixed; inset:0; z-index:200;
@@ -832,6 +834,11 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
   list-style:none; margin:2px 0 6px; padding:0 4px 4px 40px;
   display:flex; flex-direction:column; gap:1px;
 }
+/* display:flex acima vence o atributo hidden sozinho (mesma
+   especificidade, e a regra de classe vem depois na cascata) — sem
+   isso, clicar pra recolher uma categoria não fazia nada visível: a
+   lista continuava exibida, só o aria-expanded/chevron mudavam. */
+.drawer-cat-list[hidden]{ display:none; }
 .drawer-sim-link{
   display:flex; align-items:baseline; gap:8px;
   padding:8px 10px; border-radius:var(--radius-sm); text-decoration:none;
@@ -973,3 +980,29 @@ html[data-motion="true"] .drawer, html[data-motion="true"] .drawer-backdrop{ tra
 html[data-reading="on"] .guide-steps,
 html[data-reading="on"] .destaques-grid,
 html[data-reading="on"] .a11y-showcase-list{ grid-template-columns:1fr; }
+
+/* ════════════════════════════════════════════════════════════════
+   PÁGINA "MINHA CONTA" (minha-conta.html) — antes era um modal
+   dentro da Central; virou página própria porque a conta merece um
+   espaço de verdade, não uma caixinha por cima do conteúdo.
+   ════════════════════════════════════════════════════════════════ */
+.conta-voltar{
+  display:flex; align-items:center; justify-content:center;
+  width:32px; height:32px; margin-right:4px; flex-shrink:0;
+  color:var(--ink-soft); border-radius:var(--radius-sm); transition:background var(--dur), color var(--dur);
+}
+.conta-voltar:hover{ background:var(--surface); color:var(--ink); }
+
+.conta-pagina{ max-width:520px; margin:24px auto 0; }
+.conta-pagina.hidden{ display:none; }
+.conta-card--pagina{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:18px 20px; margin-bottom:20px;
+}
+.conta-secao{
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:18px 20px; margin-bottom:16px;
+}
+.conta-secao-title{
+  font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--ink); margin:0 0 8px;
+}

@@ -5,11 +5,13 @@
    de login/cadastro), restaurar uma sessão salva ao abrir a página,
    e encerrar a sessão (local e no servidor).
 
-   O <main id="conteudo"> só aparece depois de aplicarSessao(). O
-   cabeçalho (marca + acessibilidade) NUNCA fica escondido — o botão
-   de acessibilidade continua funcionando inclusive na tela de login,
-   de propósito. Só a barra de identidade (nome/"Minha conta"/"Sair")
-   liga e desliga junto com a sessão.
+   O <main id="conteudo"> só aparece depois de aplicarSessao() — e o
+   botão de menu (hambúrguer) segue o mesmo destino: ele dá acesso a
+   conta, simuladores e acessibilidade, então só faz sentido DEPOIS
+   do login (mostrar simuladores/conta pra quem ainda não entrou não
+   faz sentido). Por isso #drawerToggle começa com o atributo hidden
+   direto no HTML — falha "fechado": se o JS falhar, o botão nunca
+   aparece antes da hora, em vez do contrário.
    ================================================================ */
 
 var CHAVE_TOKEN = 'quimix_token'; // localStorage: sobrevive a F5, a trocar de aba e ao
@@ -27,8 +29,9 @@ function aplicarSessao(dadosLogin) {
   };
   try { localStorage.setItem(CHAVE_TOKEN, dadosLogin.token); } catch (e) { /* modo privado: segue só na memória */ }
 
-  document.getElementById('auth-gate').classList.add('hidden');
-  document.getElementById('conteudo').classList.remove('hidden');
+  var _ag = document.getElementById('auth-gate'); if (_ag) _ag.classList.add('hidden');
+  var _ct = document.getElementById('conteudo'); if (_ct) _ct.classList.remove('hidden');
+  mostrarMenuPrincipal();
   aplicarPermissoesPapel();
   atualizarBarraIdentidade();
 }
@@ -48,13 +51,41 @@ function encerrarSessaoLocal() {
   atividadeLog = [];
   try { localStorage.removeItem(CHAVE_TOKEN); } catch (e) { /* nada a fazer */ }
 
-  document.getElementById('conteudo').classList.add('hidden');
-  document.getElementById('identity-bar').classList.add('hidden');
-  document.getElementById('modal-nova-senha').classList.add('hidden');
-  fecharModalConta();
-  fecharModalAdmin();
-  document.getElementById('auth-gate').classList.remove('hidden');
-  mostrarAuthView('login');
+  var _ct2 = document.getElementById('conteudo'); if (_ct2) _ct2.classList.add('hidden');
+  var _ib = document.getElementById('identity-bar'); if (_ib) _ib.classList.add('hidden');
+  var _mns = document.getElementById('modal-nova-senha'); if (_mns) _mns.classList.add('hidden');
+  if (typeof fecharModalConta === 'function') fecharModalConta();
+  if (typeof fecharModalAdmin === 'function') fecharModalAdmin();
+  esconderMenuPrincipal();
+
+  // Páginas sem #auth-gate (hoje, só minha-conta.html) não têm como
+  // "mostrar a tela de login de novo" no lugar — a tela de login só
+  // existe na Central. Sem sessão, não há mais nada pra fazer aqui, então
+  // volta pra lá (com os parâmetros de acessibilidade, via a11y.js).
+  if (!document.getElementById('auth-gate')) {
+    window.location.href = 'index.html';
+    return;
+  }
+  var _ag2 = document.getElementById('auth-gate'); if (_ag2) _ag2.classList.remove('hidden');
+  if (typeof mostrarAuthView === 'function') mostrarAuthView('login');
+}
+
+// Mostra/esconde o botão de menu (hambúrguer) e, ao esconder, garante
+// que a gaveta não fique aberta por trás da tela de login caso o
+// usuário saia com ela aberta. #drawerToggle/#appDrawer podem não
+// existir ainda dependendo da ordem de carregamento dos scripts —
+// por isso os elementos são buscados de novo aqui, sem cache.
+function mostrarMenuPrincipal() {
+  var btn = document.getElementById('drawerToggle');
+  if (btn) btn.hidden = false;
+}
+function esconderMenuPrincipal() {
+  var btn = document.getElementById('drawerToggle');
+  var drawer = document.getElementById('appDrawer');
+  var backdrop = document.getElementById('drawerBackdrop');
+  if (drawer) { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); }
+  if (backdrop) { backdrop.classList.remove('open'); backdrop.hidden = true; }
+  if (btn) { btn.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
 }
 
 // Esconde/mostra tudo que tem [data-papel="administrador"] — hoje
@@ -83,7 +114,7 @@ async function iniciarSessao() {
   try { tokenSalvo = localStorage.getItem(CHAVE_TOKEN); } catch (e) { /* sem localStorage: segue pro login */ }
 
   if (!tokenSalvo) {
-    document.getElementById('auth-gate').classList.remove('hidden');
+    var _ag3 = document.getElementById('auth-gate'); if (_ag3) _ag3.classList.remove('hidden');
     return;
   }
 
@@ -98,8 +129,9 @@ async function iniciarSessao() {
       email: resposta.dados.email,
       papel: resposta.dados.papel
     };
-    document.getElementById('auth-gate').classList.add('hidden');
-    document.getElementById('conteudo').classList.remove('hidden');
+    var _ag4 = document.getElementById('auth-gate'); if (_ag4) _ag4.classList.add('hidden');
+    var _ct4 = document.getElementById('conteudo'); if (_ct4) _ct4.classList.remove('hidden');
+    mostrarMenuPrincipal();
     aplicarPermissoesPapel();
     atualizarBarraIdentidade();
   } catch (erro) {
@@ -108,8 +140,16 @@ async function iniciarSessao() {
   }
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', iniciarSessao);
-} else {
-  iniciarSessao();
+// Só dispara sozinho em páginas que TÊM #auth-gate (hoje, só a
+// Central). minha-conta.html carrega este arquivo pelas funções
+// compartilhadas (sessaoUsuario, aplicarPermissoesPapel etc.), mas
+// tem sua PRÓPRIA guarda de sessão (ver guarda-conta.js) — sem esta
+// checagem, os dois rodariam em paralelo, e iniciarSessao() ainda
+// tentaria mexer num #auth-gate que não existe ali.
+if (document.getElementById('auth-gate')) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', iniciarSessao);
+  } else {
+    iniciarSessao();
+  }
 }

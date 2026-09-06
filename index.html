@@ -185,7 +185,7 @@
       </span>
     </div>
 
-    <button type="button" class="drawer-toggle" id="drawerToggle"
+    <button type="button" class="drawer-toggle" id="drawerToggle" hidden
             aria-haspopup="true" aria-expanded="false" aria-controls="appDrawer" aria-label="Abrir menu">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -213,8 +213,8 @@
       <!-- Barra de identidade: some/aparece com a sessão (ver identidade.js) — mesmos ids de sempre, só mudou de lugar. -->
       <div class="identity-bar hidden" id="identity-bar">
         <span class="identity-status" id="identity-status-texto"></span>
-        <button type="button" class="identity-btn" onclick="abrirModalConta()">👤 Minha conta</button>
-        <button type="button" class="identity-btn hidden" data-papel="administrador" onclick="abrirModalAdmin()">🛡️ Administração</button>
+        <a class="identity-btn" href="minha-conta.html"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21a8 8 0 0 0-16 0"/><circle cx="12" cy="7" r="4"/></svg> Minha conta</a>
+        <button type="button" class="identity-btn hidden" data-papel="administrador" onclick="abrirModalAdmin()"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3.5v5c0 4.5-3 7.7-7 9-4-1.3-7-4.5-7-9v-5z"/></svg> Administração</button>
         <button type="button" class="identity-btn" onclick="handleLogout()">Sair</button>
       </div>
 
@@ -648,7 +648,7 @@
         </form>
         <div id="cadastro-msg" class="auth-msg hidden"></div>
         <div class="auth-links">
-          <button type="button" class="link-btn" onclick="mostrarAuthView('login')">← Voltar para o login</button>
+          <button type="button" class="link-btn" onclick="mostrarAuthView('login')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Voltar para o login</button>
         </div>
       </div>
 
@@ -663,7 +663,7 @@
         </form>
         <div id="esqueci-msg" class="auth-msg hidden"></div>
         <div class="auth-links">
-          <button type="button" class="link-btn" onclick="mostrarAuthView('login')">← Voltar para o login</button>
+          <button type="button" class="link-btn" onclick="mostrarAuthView('login')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg> Voltar para o login</button>
         </div>
       </div>
     </div>
@@ -701,7 +701,7 @@
         <li class="guide-step">
           <span class="guide-step-num">1</span>
           <h3>Abra o menu</h3>
-          <p>Toque no ícone <strong>☰</strong>, no canto superior — os simuladores estão organizados por ano.</p>
+          <p>Toque no ícone <strong><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="vertical-align:-2px"><path d="M4 7h16M4 12h16M4 17h16"/></svg></strong>, no canto superior — os simuladores estão organizados por ano.</p>
         </li>
         <li class="guide-step">
           <span class="guide-step-num">2</span>
@@ -796,25 +796,6 @@
     </div>
   </div>
 
-  <!-- ===================== MINHA CONTA ===================== -->
-  <div class="modal-overlay hidden" id="modal-conta">
-    <div class="modal-card">
-      <div class="modal-card-head">
-        <p class="panel-title">Minha conta</p>
-        <button type="button" class="modal-close-btn" onclick="fecharModalConta()" aria-label="Fechar">✕</button>
-      </div>
-      <div class="conta-card" id="conta-info"></div>
-      <div id="conta-membro-area" class="hidden">
-        <p class="panel-hint">Esqueceu sua senha ou quer trocá-la? Solicite abaixo — um administrador vai liberar um código temporário por e-mail.</p>
-        <button type="button" class="launch-submit" id="solicitar-reset-btn" onclick="handleSolicitarReset()">Solicitar nova senha</button>
-        <p class="panel-hint" id="conta-reset-status" style="margin-top:10px; margin-bottom:0;"></p>
-      </div>
-      <div id="conta-admin-area" class="hidden">
-        <p class="panel-hint" style="margin-bottom:0;">Esqueceu sua própria senha? Saia da conta e use "Esqueceu sua senha?" na tela de login.</p>
-      </div>
-    </div>
-  </div>
-
   <!-- ===================== ADMINISTRAÇÃO DE USUÁRIOS ===================== -->
   <!-- Só quem tem papel="administrador" consegue abrir (ver aplicarPermissoesPapel
        em identidade.js, que esconde o botão que chama isso pra quem é membro,
@@ -823,17 +804,17 @@
     <div class="modal-card modal-card-lg">
       <div class="modal-card-head">
         <p class="panel-title">Administração de usuários</p>
-        <button type="button" class="modal-close-btn" onclick="fecharModalAdmin()" aria-label="Fechar">✕</button>
+        <button type="button" class="modal-close-btn" onclick="fecharModalAdmin()" aria-label="Fechar"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
       </div>
 
       <div id="pending-block" class="hidden">
-        <p class="panel-title panel-title-sm">🔔 Pedidos de acesso</p>
+        <p class="panel-title panel-title-sm"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg> Pedidos de acesso</p>
         <p class="panel-hint">Quem se cadastra pela tela de login cai aqui e só consegue entrar depois de aprovado(a).</p>
         <div class="user-list" id="pending-list"></div>
         <hr class="divider">
       </div>
 
-      <p class="panel-title panel-title-sm">Contas <button type="button" class="refresh-btn" onclick="carregarUsuariosSeNecessario(true)" title="Atualizar">🔄 atualizar</button></p>
+      <p class="panel-title panel-title-sm">Contas <button type="button" class="refresh-btn" onclick="carregarUsuariosSeNecessario(true)" title="Atualizar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11A8 8 0 1 0 19 15"/><path d="M20 5v6h-6"/></svg> atualizar</button></p>
       <p class="panel-hint">Administradores têm acesso a este painel; membros só acessam os simuladores.</p>
       <div class="user-list" id="user-list"><div class="empty-hint">Carregando…</div></div>
 
