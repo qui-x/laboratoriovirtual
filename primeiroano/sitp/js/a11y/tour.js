@@ -64,6 +64,11 @@ document.addEventListener('DOMContentLoaded', function () {
           texto: 'Cada célula mostra a cor da categoria química — clique numa pra ver raio, eletronegatividade, diagramas e mais.'
         },
         {
+          alvo: '.legend-grid-cats',
+          titulo: 'Filtre por categoria ou estado físico',
+          texto: 'Clique numa categoria (metal alcalino, halogênio...) ou num estado físico, logo abaixo, pra apagar o resto da tabela e destacar só o que combina.'
+        },
+        {
           alvo: '#legendPropsBotoes',
           titulo: 'Veja uma propriedade na tabela toda',
           texto: 'Escolha raio, eletronegatividade ou outra propriedade e a tabela inteira se colore em escala, do menor ao maior valor.'
@@ -76,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
       ]
     });
   }
-  if (!Coachmark.jaViu('sitp-boas-vindas')) {
+  if (!Coachmark.jaViu('sitp-boas-vindas-v2')) {
     setTimeout(tourBoasVindas, 700);
   }
 
@@ -100,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
           ao_entrar: function () { selecionarAbaMobileParaAlvo('#stateCard'); }
         },
         {
-          alvo: '#modalConfig',
+          alvo: '.info-card:has(#modalConfig)',
           titulo: 'Distribuição eletrônica',
           texto: 'A configuração eletrônica completa, camada por camada, no modelo de Pauling.',
           ao_entrar: function () { selecionarAbaMobileParaAlvo('#modalConfig'); }
