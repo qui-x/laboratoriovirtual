@@ -155,5 +155,47 @@
     if (!e.data || e.data.source !== 'central-simuladores' || e.data.type !== 'a11y-update') return;
     aplicarPayload(e.data.payload || {});
   });
+
+  /* ─────────────────────────────────────────────────────────────────
+     BUG CORRIGIDO: o bloco acima ("QUEM MANDA É O a11y.js") só lê
+     window.A11Y.estado UMA VEZ, no carregamento — nunca de novo depois
+     disso. Resultado: se o a11y.js mudar o tema/contraste/daltonismo
+     DEPOIS da página já ter carregado (ex.: voltar pelo botão do
+     navegador restaura do cache — bfcache — e o a11y.js reaplica o
+     estado salvo sem os scripts rodarem de novo), data-theme no <html>
+     muda, mas applyTheme()/refreshThemedColors() daqui nunca são
+     chamados de novo: a tabela periódica inteira, a legenda e os
+     átomos já no canvas ficavam com a cor do tema ANTERIOR.
+     Corrigido observando os atributos direto no <html>, em vez de
+     confiar só na leitura única do início — funciona não importa quem
+     mudou o estado (a11y.js, postMessage, ou o próprio código local),
+     e sincronizarA11Y() já tem guarda contra laço (_silqSincronizando),
+     então não há risco de eco infinito. ───────────────────────────── */
+  if (window.A11Y && window.A11Y.estado) {
+    // Guarda contra eco infinito: setAttribute() gera um registro de
+    // mutação mesmo reatribuindo o MESMO valor (o MutationObserver não
+    // checa "mudou de verdade" sozinho) — sincronizarA11Y() chama
+    // window.A11Y.definir() de novo dentro de applyTheme(), que
+    // reescreve o mesmo data-theme, que dispara o observer nesta
+    // mesma função, num laço sem fim. Só repinta se algum valor
+    // realmente for diferente do que já foi processado da última vez.
+    let ultimoProcessado = JSON.stringify(window.A11Y.estado);
+    new MutationObserver(() => {
+      const e = window.A11Y.estado;
+      const atual = JSON.stringify(e);
+      if (atual === ultimoProcessado) return;
+      ultimoProcessado = atual;
+      aplicarPayload({
+        theme: e.theme,
+        reading: e.reading,
+        colorblind: e.colorblind,
+        contrast: e.contrast,
+        fontScale: e.fontScale
+      });
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme', 'data-contrast', 'data-colorblind']
+    });
+  }
 })();
 

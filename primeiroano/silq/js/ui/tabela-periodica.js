@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isLant||isActin) {
           cell.className='pt-cell';
           const mc=SILQ.themedElementColor(isLant?CATEGORY_INFO['lanthanide'].color:CATEGORY_INFO['actinide'].color);
-          cell.style.backgroundColor=mc+'33'; cell.style.border=`1px solid ${mc}66`; cell.style.color='#e6edf3';
+          cell.style.backgroundColor=mc+'33'; cell.style.border=`1px solid ${mc}66`; cell.style.color=SILQ.getContrastColor(mc);
           cell.innerHTML=`<span class="c-sym" style="font-size:.6rem">${isLant?'57–71':'89–103'}</span>`;
           SILQ.ptGrid.appendChild(cell); continue;
         }

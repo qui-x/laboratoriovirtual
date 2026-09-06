@@ -148,5 +148,27 @@
     aplicarDaUrl();
     if (typeof window.__sitpRedesenharCores === 'function') window.__sitpRedesenharCores();
   });
+
+  /* ─────────────────────────────────────────────────────────────────
+     BUG CORRIGIDO: aplicarPayload() só repintava as cores quando o
+     DALTONISMO mudava (mudouDalt) — nunca quando só o TEMA mudava.
+     Passava despercebido porque, no carregamento normal (link vindo
+     da Central com ?theme=... na URL), a 2ª passada acima já pinta
+     tudo certo direto. Só ficava errado num caso real e comum: voltar
+     pelo botão do navegador restaura a página do cache (bfcache) sem
+     rodar os scripts de novo — o a11y.js (arquivo compartilhado pelas
+     25 páginas do projeto, ver pageshow lá) reaplica data-theme/
+     data-contrast/data-colorblind direto no <html>, mas não sabe que
+     esta página tem uma função própria de repintura (redesenharCores),
+     então símbolo do elemento e pontinhos da legenda ficavam com a
+     cor do tema ANTERIOR.
+     Corrigido observando os atributos direto no <html>, em vez de
+     depender de quem os mudou — funciona tanto com o a11y.js quanto
+     com o postMessage/URL legado desta página, sem precisar tocar no
+     a11y.js compartilhado (risco zero pras outras 24 páginas). ───── */
+  new MutationObserver(() => redesenharCores()).observe(root, {
+    attributes: true,
+    attributeFilter: ['data-theme', 'data-contrast', 'data-colorblind', 'data-daltonico']
+  });
 })();
 
