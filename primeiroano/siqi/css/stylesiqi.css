@@ -434,6 +434,11 @@ body { flex:1; overflow:hidden; font-size:calc(13px * var(--a11y-font-scale)); }
   background:rgba(9,9,11,.9); backdrop-filter:blur(8px);
   border:1px solid var(--bdr); border-radius:20px; padding:3px;
 }
+/* .view-toggle[hidden] precisa vencer a regra acima (mesma
+   especificidade — quem decide é a ordem, e teria perdido por vir
+   antes). Restrito a aparecer só com o módulo Nomenclatura ativo —
+   ver js/modulos/alternar.js. */
+.view-toggle[hidden] { display:none; }
 html[data-theme="light"] .view-toggle { background:rgba(255,255,255,.85); }
 .view-toggle-btn {
   background:transparent; border:none; color:var(--tx2);

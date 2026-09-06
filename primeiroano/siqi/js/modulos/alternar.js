@@ -57,6 +57,14 @@ function trocarModulo(nome, btn) {
   }
   if (typeof syncMobileModeUI === 'function') syncMobileModeUI(nome);
 
+  // Restrito ao módulo Nomenclatura de propósito: o Construtor ainda
+  // tem problemas próprios de inicialização, e alternar pra Lab/Ficha
+  // com ele ativo deixava o estado inconsistente (view central de um
+  // lado, módulo ativo de outro). Enquanto isso não for resolvido de
+  // vez, o toggle Lab/Ficha só aparece com a Nomenclatura ativa.
+  var toggleLabFicha = document.querySelector('.view-toggle');
+  if (toggleLabFicha) toggleLabFicha.hidden = (nome === 'construtor');
+
   // 'construtor' tem sua própria view; 'nomenclatura' reaproveita a
   // Ficha (mesma tela de detalhes do composto que o Lab usa) — o
   // desafio de nomenclatura troca o conteúdo dela por dentro
@@ -71,5 +79,9 @@ function trocarModulo(nome, btn) {
 function desativarModulo(btn) {
   btn.setAttribute('aria-pressed', 'false');
   if (typeof syncMobileModeUI === 'function') syncMobileModeUI(null);
+  // Sem módulo ativo, o toggle Lab/Ficha não tem o que mostrar —
+  // mesmo raciocínio do bloqueio acima.
+  var toggleLabFicha = document.querySelector('.view-toggle');
+  if (toggleLabFicha) toggleLabFicha.hidden = true;
   if (window._setView) window._setView('none');
 }
