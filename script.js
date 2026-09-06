@@ -120,21 +120,108 @@
   // acessibilidade). Com JS, reescrevemos a URL com o estado atual
   // antes de navegar, para o menu do ano (e depois o simulador) já
   // abrir no tema/contraste/leitura/fonte/daltonismo escolhidos aqui.
-  anoGrid.querySelectorAll('.tile[data-file]').forEach(function(tile){
-    tile.addEventListener('click', function(e){
+  // anoGrid pode não existir mais (a home mudou de "cards de ano" pra
+  // uma página de apresentação — os cards agora vivem só dentro da
+  // gaveta, ver bindDrawerSimLinks() logo abaixo).
+  if (anoGrid) {
+    anoGrid.querySelectorAll('.tile[data-file]').forEach(function(tile){
+      tile.addEventListener('click', function(e){
+        e.preventDefault();
+        openDestino(tile.dataset.file);
+      });
+    });
+  }
+
+  /* ---------- liga os links de simulador de dentro da GAVETA ----------
+     Mesmo contrato dos cards de ano acima (data-file + openDestino) —
+     só que agora é a fonte PRINCIPAL de navegação até um simulador,
+     já que a home deixou de ser uma grade de cards. */
+  document.querySelectorAll('.drawer-sim-link[data-file]').forEach(function(link){
+    link.addEventListener('click', function(e){
       e.preventDefault();
-      openDestino(tile.dataset.file);
+      openDestino(link.dataset.file);
     });
   });
 
+  /* ---------- cards de destaque (home) — mesmo contrato ---------- */
+  document.querySelectorAll('.destaque-card[data-file]').forEach(function(card){
+    card.addEventListener('click', function(e){
+      e.preventDefault();
+      openDestino(card.dataset.file);
+    });
+  });
+
+  /* ════════ GAVETA (MENU PRINCIPAL) ════════
+     Abrir/fechar: botão hambúrguer, ✕ próprio, toque no fundo
+     escurecido, ou Esc — mesmo contrato de fechamento usado em toda a
+     coleção de simuladores. Categorias de ano (e a seção de
+     Acessibilidade) expandem uma de cada vez dentro da gaveta, sem
+     navegar pra lugar nenhum. */
+  (function initDrawer(){
+    var toggle = document.getElementById('drawerToggle');
+    var drawer = document.getElementById('appDrawer');
+    var backdrop = document.getElementById('drawerBackdrop');
+    var closeBtn = document.getElementById('drawerClose');
+    if (!toggle || !drawer || !backdrop) return;
+
+    function abrir(){
+      drawer.classList.add('open');
+      drawer.setAttribute('aria-hidden', 'false');
+      backdrop.hidden = false;
+      requestAnimationFrame(function(){ backdrop.classList.add('open'); });
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function fechar(){
+      drawer.classList.remove('open');
+      drawer.setAttribute('aria-hidden', 'true');
+      backdrop.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      setTimeout(function(){ backdrop.hidden = true; }, 300);
+    }
+    toggle.addEventListener('click', function(){
+      drawer.classList.contains('open') ? fechar() : abrir();
+    });
+    if (closeBtn) closeBtn.addEventListener('click', fechar);
+    backdrop.addEventListener('click', fechar);
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && drawer.classList.contains('open')) fechar();
+    });
+
+    // Botão "Ver os simuladores" do hero — mesmo destino que o
+    // hambúrguer, só um caminho a mais até lá pra quem está lendo a
+    // apresentação e já quer ir direto.
+    var heroBtn = document.getElementById('heroAbrirMenu');
+    if (heroBtn) heroBtn.addEventListener('click', abrir);
+
+    /* Categorias (1º/2º/3º ano + Acessibilidade): clicar expande a
+       lista ali mesmo, dentro da gaveta — clicar de novo recolhe.
+       Não é exclusivo (pode ter mais de uma aberta ao mesmo tempo),
+       igual a um acordeão comum de FAQ. */
+    document.querySelectorAll('.drawer-cat-btn').forEach(function(btn){
+      // #a11yToggle já tem o próprio listener (abre/fecha o painel de
+      // acessibilidade) — aqui só cuida do chevron/aria-expanded dos
+      // 3 anos, pra não duplicar o clique do botão de acessibilidade.
+      if (btn.id === 'a11yToggle') return;
+      btn.addEventListener('click', function(){
+        var listaId = btn.getAttribute('aria-controls');
+        var lista = document.getElementById(listaId);
+        var aberto = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!aberto));
+        if (lista) lista.hidden = aberto;
+      });
+    });
+  })();
+
   /* ---------- saudação por horário ---------- */
   function setGreeting(){
+    var alvo = document.getElementById('greetingText');
+    if (!alvo) return; // home mudou pra página de apresentação — pode não ter mais esse elemento
     var h = new Date().getHours();
     var txt;
     if (h >= 5 && h < 12) txt = 'Bom dia! Qual ano você está cursando?';
     else if (h >= 12 && h < 18) txt = 'Boa tarde! Qual ano você está cursando?';
     else txt = 'Boa noite! Qual ano você está cursando?';
-    document.getElementById('greetingText').textContent = txt;
+    alvo.textContent = txt;
   }
   setGreeting();
 

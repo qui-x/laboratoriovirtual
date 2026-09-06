@@ -185,11 +185,32 @@
       </span>
     </div>
 
-    <div class="top-right-group">
-      <!-- Barra de identidade: some/aparece com a sessão (ver identidade.js).
-           Fica FORA de #conteudo de propósito — o cabeçalho nunca é
-           escondido, então a acessibilidade continua acessível na tela
-           de login. -->
+    <button type="button" class="drawer-toggle" id="drawerToggle"
+            aria-haspopup="true" aria-expanded="false" aria-controls="appDrawer" aria-label="Abrir menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </header>
+
+  <!-- ════════ GAVETA (MENU PRINCIPAL) ════════
+       Reúne o que antes ficava solto no cabeçalho — conta e
+       acessibilidade — e agora também dá acesso direto aos 20
+       simuladores, organizados por ano (mesmo padrão de categoria
+       expansível de um menu de loja: toca no ano, a lista daquele ano
+       abre ali mesmo, sem sair da gaveta). Os links de simulador usam
+       data-file do mesmo jeito que os cards de ano já usavam — ver
+       bindDrawerSimLinks() em script.js: abre respeitando tema,
+       contraste, fonte etc. já escolhidos aqui. -->
+  <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+  <nav class="drawer" id="appDrawer" aria-label="Menu principal" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="drawer-title">Menu</span>
+      <button type="button" class="drawer-close" id="drawerClose" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Barra de identidade: some/aparece com a sessão (ver identidade.js) — mesmos ids de sempre, só mudou de lugar. -->
       <div class="identity-bar hidden" id="identity-bar">
         <span class="identity-status" id="identity-status-texto"></span>
         <button type="button" class="identity-btn" onclick="abrirModalConta()">👤 Minha conta</button>
@@ -197,118 +218,251 @@
         <button type="button" class="identity-btn" onclick="handleLogout()">Sair</button>
       </div>
 
-    <div class="a11y-wrap">
-      <button class="a11y-btn" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-controls="a11yPanel">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 2 7-2M12 10.5v4.5M9 21l3-6 3 6M8.5 13l-3 1.5M15.5 13l3 1.5"/></svg>
-        Acessibilidade
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="width:13px;height:13px;"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
+      <div class="drawer-section">
+        <p class="drawer-section-title">Simuladores</p>
+      <div class="drawer-cat" data-cat="1">
+        <button type="button" class="drawer-cat-btn" aria-expanded="false" aria-controls="drawerCat1">
+          <span class="drawer-cat-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="16" cy="16" r="2.8" fill="currentColor" opacity="0.95"/>
+              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8"/>
+              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(60 16 16)"/>
+              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(120 16 16)"/>
+            </svg></span>
+          <span class="drawer-cat-label">1º Ano</span>
+          <span class="drawer-cat-count">8</span>
+          <svg class="drawer-cat-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <ul class="drawer-cat-list" id="drawerCat1" hidden>
+          <li><a class="drawer-sim-link" href="primeiroano/sime/indexsime.html" data-file="primeiroano/sime/indexsime.html">
+            <span class="drawer-sim-sigla">SIME</span>
+            <span class="drawer-sim-nome">Matéria e Estados</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/sima/indexsima.html" data-file="primeiroano/sima/indexsima.html">
+            <span class="drawer-sim-sigla">SIMA</span>
+            <span class="drawer-sim-nome">Modelos Atômicos</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/sitp/indexsitp.html" data-file="primeiroano/sitp/indexsitp.html">
+            <span class="drawer-sim-sigla">SITP</span>
+            <span class="drawer-sim-nome">Tabela Periódica</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/siem/indexsiem.html" data-file="primeiroano/siem/indexsiem.html">
+            <span class="drawer-sim-sigla">SIEM</span>
+            <span class="drawer-sim-nome">Estrutura da Matéria</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/silq/indexsilq.html" data-file="primeiroano/silq/indexsilq.html">
+            <span class="drawer-sim-sigla">SILQ</span>
+            <span class="drawer-sim-nome">Ligações Químicas</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/sifi/indexsifi.html" data-file="primeiroano/sifi/indexsifi.html">
+            <span class="drawer-sim-sigla">SIFI</span>
+            <span class="drawer-sim-nome">Forças Intermoleculares</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/sie/indexsie.html" data-file="primeiroano/sie/indexsie.html">
+            <span class="drawer-sim-sigla">SIE</span>
+            <span class="drawer-sim-nome">Estequiometria</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="primeiroano/siqi/indexsiqi.html" data-file="primeiroano/siqi/indexsiqi.html">
+            <span class="drawer-sim-sigla">SIQI</span>
+            <span class="drawer-sim-nome">Química Inorgânica</span>
+          </a></li>
+        </ul>
+      </div>
 
-      <div class="a11y-panel" id="a11yPanel" role="menu" aria-label="Opções de acessibilidade">
-        <p class="a11y-panel-title">Aparência</p>
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v1.5M12 19.5V21M4.2 4.2l1.1 1.1M18.7 18.7l1.1 1.1M3 12h1.5M19.5 12H21M4.2 19.8l1.1-1.1M18.7 5.3l1.1-1.1"/><circle cx="12" cy="12" r="4.5"/></svg>
-            Modo escuro
-          </span>
-          <label class="switch">
-            <input type="checkbox" id="themeToggle">
-            <span class="track"><span class="thumb"></span></span>
-          </label>
-        </div>
+      <div class="drawer-cat" data-cat="2">
+        <button type="button" class="drawer-cat-btn" aria-expanded="false" aria-controls="drawerCat2">
+          <span class="drawer-cat-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M10 4 L10 20 Q10 27 16 27 Q22 27 22 20 L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="8" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+              <circle cx="14" cy="18" r="1.5" fill="currentColor"/>
+              <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
+            </svg></span>
+          <span class="drawer-cat-label">2º Ano</span>
+          <span class="drawer-cat-count">7</span>
+          <svg class="drawer-cat-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <ul class="drawer-cat-list" id="drawerCat2" hidden>
+          <li><a class="drawer-sim-link" href="segundoano/gases/index.html" data-file="segundoano/gases/index.html">
+            <span class="drawer-sim-sigla">SIGAS</span>
+            <span class="drawer-sim-nome">Gases</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/solucoes/index.html" data-file="segundoano/solucoes/index.html">
+            <span class="drawer-sim-sigla">SISOL</span>
+            <span class="drawer-sim-nome">Soluções</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/termoquimica/index.html" data-file="segundoano/termoquimica/index.html">
+            <span class="drawer-sim-sigla">SITQ</span>
+            <span class="drawer-sim-nome">Termoquímica</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/cinetica/index.html" data-file="segundoano/cinetica/index.html">
+            <span class="drawer-sim-sigla">SICIN</span>
+            <span class="drawer-sim-nome">Cinética Química</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/equilibrio/index.html" data-file="segundoano/equilibrio/index.html">
+            <span class="drawer-sim-sigla">SIEQ</span>
+            <span class="drawer-sim-nome">Equilíbrio Químico e Iônico</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/eletroquimica/index.html" data-file="segundoano/eletroquimica/index.html">
+            <span class="drawer-sim-sigla">SIELQ</span>
+            <span class="drawer-sim-nome">Eletroquímica</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="segundoano/radioatividade/index.html" data-file="segundoano/radioatividade/index.html">
+            <span class="drawer-sim-sigla">SIRAD</span>
+            <span class="drawer-sim-nome">Radioatividade</span>
+          </a></li>
+        </ul>
+      </div>
 
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
-            Alto contraste
-          </span>
-          <label class="switch">
-            <input type="checkbox" id="contrastToggle">
-            <span class="track"><span class="thumb"></span></span>
-          </label>
-        </div>
+      <div class="drawer-cat" data-cat="3">
+        <button type="button" class="drawer-cat-btn" aria-expanded="false" aria-controls="drawerCat3">
+          <span class="drawer-cat-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M16 6 L23 10 L23 18 L16 22 L9 18 L9 10 Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="16" cy="14" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+            </svg></span>
+          <span class="drawer-cat-label">3º Ano</span>
+          <span class="drawer-cat-count">5</span>
+          <svg class="drawer-cat-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <ul class="drawer-cat-list" id="drawerCat3" hidden>
+          <li><a class="drawer-sim-link" href="terceiroano/indexcarbono.html" data-file="terceiroano/indexcarbono.html">
+            <span class="drawer-sim-sigla">SICAR</span>
+            <span class="drawer-sim-nome">Química do Carbono</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="terceiroano/indexfuncoes.html" data-file="terceiroano/indexfuncoes.html">
+            <span class="drawer-sim-sigla">SIFOR</span>
+            <span class="drawer-sim-nome">Funções Orgânicas</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="terceiroano/indexreacoes.html" data-file="terceiroano/indexreacoes.html">
+            <span class="drawer-sim-sigla">SIREA</span>
+            <span class="drawer-sim-nome">Reações Orgânicas</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="terceiroano/indexambiental.html" data-file="terceiroano/indexambiental.html">
+            <span class="drawer-sim-sigla">SIAMB</span>
+            <span class="drawer-sim-nome">Química Ambiental</span>
+          </a></li>
+          <li><a class="drawer-sim-link" href="terceiroano/indexbioquimica.html" data-file="terceiroano/indexbioquimica.html">
+            <span class="drawer-sim-sigla">SIBIO</span>
+            <span class="drawer-sim-nome">Bioquímica</span>
+          </a></li>
+        </ul>
+      </div>
 
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19h16M5 19l4.5-13h1L15 19M6.8 14.5h6.4"/></svg>
-            Tamanho da fonte
-          </span>
-          <span class="fontstep">
-            <button type="button" class="fontstep-btn" id="fontDec" aria-label="Diminuir tamanho da fonte">A−</button>
-            <span class="fontstep-pct" id="fontPct" aria-live="polite" aria-atomic="true">100%</span>
-            <button type="button" class="fontstep-btn" id="fontInc" aria-label="Aumentar tamanho da fonte">A+</button>
-          </span>
-        </div>
+      </div>
 
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h14"/></svg>
-            Espaçamento de letras
-          </span>
-          <label class="switch">
-            <input type="checkbox" id="spacingToggle">
-            <span class="track"><span class="thumb"></span></span>
-          </label>
-        </div>
+      <div class="drawer-section">
+        <p class="drawer-section-title">Preferências</p>
+        <div class="drawer-cat" data-cat="a11y">
+          <button class="drawer-cat-btn a11y-btn" id="a11yToggle" aria-haspopup="true" aria-expanded="false" aria-controls="a11yPanel">
+            <span class="drawer-cat-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 2 7-2M12 10.5v4.5M9 21l3-6 3 6M8.5 13l-3 1.5M15.5 13l3 1.5"/></svg></span>
+            <span class="drawer-cat-label">Acessibilidade</span>
+            <svg class="drawer-cat-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+          </button>
 
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5h2v5h-2zM12.5 9.5h2v5h-2z"/></svg>
-            Reduzir animações
-          </span>
-          <label class="switch">
-            <input type="checkbox" id="motionToggle">
-            <span class="track"><span class="thumb"></span></span>
-          </label>
-        </div>
+          <div class="a11y-panel" id="a11yPanel" role="menu" aria-label="Opções de acessibilidade">
+            <p class="a11y-panel-title">Aparência</p>
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v1.5M12 19.5V21M4.2 4.2l1.1 1.1M18.7 18.7l1.1 1.1M3 12h1.5M19.5 12H21M4.2 19.8l1.1-1.1M18.7 5.3l1.1-1.1"/><circle cx="12" cy="12" r="4.5"/></svg>
+                Modo escuro
+              </span>
+              <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="track"><span class="thumb"></span></span>
+              </label>
+            </div>
 
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19h16M6 15l4-8 4 8M7.5 12h5"/></svg>
-            Leitura simples
-          </span>
-          <label class="switch">
-            <input type="checkbox" id="readingToggle">
-            <span class="track"><span class="thumb"></span></span>
-          </label>
-        </div>
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18"/></svg>
+                Alto contraste
+              </span>
+              <label class="switch">
+                <input type="checkbox" id="contrastToggle">
+                <span class="track"><span class="thumb"></span></span>
+              </label>
+            </div>
 
-        <hr class="divider">
-        <p class="a11y-panel-title">Visão de cores</p>
-        <div class="a11y-row">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17 4.3 4.3 0 010-8.5 4.3 4.3 0 000-8.5z"/></svg>
-            Daltonismo
-          </span>
-          <select id="colorblindSelect" aria-label="Selecionar espectro do daltonismo">
-            <option value="none">Nenhum</option>
-            <option value="protanopia">Protanopia</option>
-            <option value="deuteranopia">Deuteranopia</option>
-            <option value="tritanopia">Tritanopia</option>
-            <option value="acromatopsia">Acromatopsia</option>
-          </select>
-        </div>
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19h16M5 19l4.5-13h1L15 19M6.8 14.5h6.4"/></svg>
+                Tamanho da fonte
+              </span>
+              <span class="fontstep">
+                <button type="button" class="fontstep-btn" id="fontDec" aria-label="Diminuir tamanho da fonte">A−</button>
+                <span class="fontstep-pct" id="fontPct" aria-live="polite" aria-atomic="true">100%</span>
+                <button type="button" class="fontstep-btn" id="fontInc" aria-label="Aumentar tamanho da fonte">A+</button>
+              </span>
+            </div>
 
-        <hr class="divider">
-        <p class="a11y-panel-title">Outros recursos</p>
-        <div class="a11y-row" style="cursor:default;">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4.5c-3.6 0-6.7 2-8.3 5 1.6 3 4.7 5 8.3 5s6.7-2 8.3-5c-1.6-3-4.7-5-8.3-5z"/><circle cx="12" cy="9.5" r="2.2"/></svg>
-            VLibras (Libras) — script independente nesta página
-          </span>
-          <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">sempre ativo</span>
-        </div>
-        <div class="a11y-row" style="cursor:default;">
-          <span class="a11y-row-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M10.5 10h.01M14 10h.01M17.5 10h.01M7 13.5h10"/></svg>
-            Navegação por teclado
-          </span>
-          <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">sempre ativa</span>
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 6h14M5 12h14M5 18h14"/></svg>
+                Espaçamento de letras
+              </span>
+              <label class="switch">
+                <input type="checkbox" id="spacingToggle">
+                <span class="track"><span class="thumb"></span></span>
+              </label>
+            </div>
+
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5h2v5h-2zM12.5 9.5h2v5h-2z"/></svg>
+                Reduzir animações
+              </span>
+              <label class="switch">
+                <input type="checkbox" id="motionToggle">
+                <span class="track"><span class="thumb"></span></span>
+              </label>
+            </div>
+
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19h16M6 15l4-8 4 8M7.5 12h5"/></svg>
+                Leitura simples
+              </span>
+              <label class="switch">
+                <input type="checkbox" id="readingToggle">
+                <span class="track"><span class="thumb"></span></span>
+              </label>
+            </div>
+
+            <hr class="divider">
+            <p class="a11y-panel-title">Visão de cores</p>
+            <div class="a11y-row">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 010 17 4.3 4.3 0 010-8.5 4.3 4.3 0 000-8.5z"/></svg>
+                Daltonismo
+              </span>
+              <select id="colorblindSelect" aria-label="Selecionar espectro do daltonismo">
+                <option value="none">Nenhum</option>
+                <option value="protanopia">Protanopia</option>
+                <option value="deuteranopia">Deuteranopia</option>
+                <option value="tritanopia">Tritanopia</option>
+                <option value="acromatopsia">Acromatopsia</option>
+              </select>
+            </div>
+
+            <hr class="divider">
+            <p class="a11y-panel-title">Outros recursos</p>
+            <div class="a11y-row" style="cursor:default;">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 4.5c-3.6 0-6.7 2-8.3 5 1.6 3 4.7 5 8.3 5s6.7-2 8.3-5c-1.6-3-4.7-5-8.3-5z"/><circle cx="12" cy="9.5" r="2.2"/></svg>
+                VLibras (Libras) — script independente nesta página
+              </span>
+              <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">sempre ativo</span>
+            </div>
+            <div class="a11y-row" style="cursor:default;">
+              <span class="a11y-row-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h.01M10.5 10h.01M14 10h.01M17.5 10h.01M7 13.5h10"/></svg>
+                Navegação por teclado
+              </span>
+              <span style="font-size:11px; color:var(--muted); font-family:var(--font-mono);">sempre ativa</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    </div><!-- /.top-right-group -->
-  </header>
+  </nav>
 
   <!-- ===================== PORTÃO DE LOGIN ===================== -->
   <!-- Visível por padrão (falha "fechado": se o JS falhar, quem abre
@@ -516,98 +670,103 @@
   </div>
 
   <main id="conteudo" class="hidden">
-    <section class="greeting" aria-live="polite">
-      <h2 id="greetingText">Bom dia! Qual ano você está cursando?</h2>
-      <p>Selecione o ano para abrir o menu de simuladores correspondente. Todas as preferências de acessibilidade ajustadas aqui — tema, contraste, fonte, espaçamento, animações, leitura simples e daltonismo — são aplicadas automaticamente em qualquer painel e simulador que você abrir a seguir.</p>
+
+    <!-- ════════ HERO — apresentação da proposta ════════ -->
+    <section class="hero" aria-labelledby="heroTitle">
+      <p class="hero-eyebrow" id="heroEyebrow">Bem-vindo</p>
+      <h2 class="hero-title" id="heroTitle">Química que dá pra <span>ver, mexer e entender</span></h2>
+      <p class="hero-lead">
+        O QuímiX traduz os conceitos mais abstratos da Química do Ensino Médio — orbitais,
+        equilíbrios, ligações, curvas que só existiam no quadro — em simulações que respondem
+        ao toque, na hora. São <strong>20 simuladores</strong>, cobrindo os <strong>3 anos</strong>
+        do Ensino Médio, pensados desde o início pra funcionar bem pra qualquer estudante.
+      </p>
+      <div class="hero-actions">
+        <button type="button" class="btn-primary" id="heroAbrirMenu">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg> Ver os simuladores
+        </button>
+        <a class="btn-secondary" href="#como-funciona">Como funciona</a>
+      </div>
+      <dl class="hero-stats">
+        <div class="hero-stat"><dt>20</dt><dd>simuladores</dd></div>
+        <div class="hero-stat"><dt>3</dt><dd>anos do Ensino Médio</dd></div>
+        <div class="hero-stat"><dt>7</dt><dd>recursos de acessibilidade</dd></div>
+      </dl>
     </section>
 
-    <section class="ano-grid" id="anoGrid" aria-label="Selecionar ano letivo">
-
-      <!-- ============ 1º ANO ============ -->
-      <a class="tile tile--ano" href="primeiroano/indexprimeiroano.html" data-sim="ano1"
-              data-file="primeiroano/indexprimeiroano.html"
-              aria-label="Abrir simuladores do 1º ano do Ensino Médio">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="16" cy="16" r="2.8" fill="currentColor" opacity="0.95"/>
-              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8"/>
-              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(60 16 16)"/>
-              <ellipse cx="16" cy="16" rx="12" ry="4.2" stroke="currentColor" stroke-width="1.3" opacity="0.8" transform="rotate(120 16 16)"/>
-              <circle cx="28" cy="16" r="1.6" fill="currentColor"/>
-              <circle cx="10" cy="9.3" r="1.6" fill="currentColor" transform="rotate(60 16 16)"/>
-              <circle cx="10" cy="9.3" r="1.6" fill="currentColor" transform="rotate(120 16 16)"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tile-symbol" aria-hidden="true">1º</div>
-        <h3 class="tile-name">1º Ano do Ensino Médio</h3>
-        <p class="tile-desc">Modelos atômicos, tabela periódica, ligações químicas, estequiometria, estados físicos e estrutura da matéria, química inorgânica e atividades de fixação.</p>
-        <span class="tile-cta">Ver simuladores
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-
-      <!-- ============ 2º ANO ============ -->
-      <a class="tile tile--ano" href="segundoano/indexsegundoano.html" data-sim="ano2"
-              data-file="segundoano/indexsegundoano.html"
-              aria-label="2º ano do Ensino Médio">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M10 4 L10 20 Q10 27 16 27 Q22 27 22 20 L22 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <line x1="8" y1="8" x2="24" y2="8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              <circle cx="14" cy="18" r="1.5" fill="currentColor"/>
-              <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
-              <circle cx="16" cy="22" r="1.5" fill="currentColor"/>
-              <circle cx="13" cy="13" r="1" fill="currentColor" opacity="0.5"/>
-              <circle cx="16" cy="11" r="1.2" fill="currentColor" opacity="0.35"/>
-              <circle cx="19" cy="14" r="0.9" fill="currentColor" opacity="0.45"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tile-symbol" aria-hidden="true">2º</div>
-        <h3 class="tile-name">2º Ano do Ensino Médio</h3>
-        <p class="tile-desc">Gases, soluções, termoquímica, cinética química, equílibrio químico e iônico, eletroquímica e radioatividade.</p>
-        <span class="tile-cta">Ver Simuladores
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
-
-      <!-- ============ 3º ANO ============ -->
-      <a class="tile tile--ano" href="terceiroano/indexterceiroano.html" data-sim="ano3"
-              data-file="terceiroano/indexterceiroano.html"
-              aria-label="3º ano do Ensino Médio">
-        <div class="tile-band" aria-hidden="true"></div>
-        <div class="tile-head">
-          <span class="tile-icon" aria-hidden="true">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M16 6 L23 10 L23 18 L16 22 L9 18 L9 10 Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <circle cx="16" cy="14" r="4.5" stroke="currentColor" stroke-width="1.2"/>
-              <path d="M23 10 L27 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              <path d="M9 10 L5 7.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              <path d="M23 18 L27 20.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              <path d="M16 22 L16 27" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
-              <circle cx="27" cy="7.5" r="1.5" fill="currentColor"/>
-              <circle cx="5" cy="7.5" r="1.5" fill="currentColor"/>
-              <circle cx="27" cy="20.5" r="1.5" fill="currentColor"/>
-              <circle cx="16" cy="27" r="1.5" fill="currentColor"/>
-              <circle cx="10" cy="4" r="1" fill="currentColor" opacity="0.5"/>
-              <circle cx="22" cy="4" r="1.2" fill="currentColor" opacity="0.35"/>
-              <circle cx="25" cy="2.5" r="0.8" fill="currentColor" opacity="0.45"/>
-            </svg>
-          </span>
-        </div>
-        <div class="tile-symbol" aria-hidden="true">3º</div>
-        <h3 class="tile-name">3º Ano do Ensino Médio</h3>
-        <p class="tile-desc">Química orgânica, estudo do carbono, cadeias carbônicas, funções orgânicas, isomeria, reações orgânicas e polímeros.</p>
-        <span class="tile-cta">Ver Simuladores
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
+    <!-- ════════ COMO FUNCIONA — guia rápido em 4 passos ════════ -->
+    <section class="guide" id="como-funciona" aria-labelledby="guideTitle">
+      <h2 class="section-title" id="guideTitle">Como funciona</h2>
+      <ol class="guide-steps">
+        <li class="guide-step">
+          <span class="guide-step-num">1</span>
+          <h3>Abra o menu</h3>
+          <p>Toque no ícone <strong>☰</strong>, no canto superior — os simuladores estão organizados por ano.</p>
+        </li>
+        <li class="guide-step">
+          <span class="guide-step-num">2</span>
+          <h3>Escolha um simulador</h3>
+          <p>Cada ano tem os simuladores daquele conteúdo. Escolha o que quiser explorar.</p>
+        </li>
+        <li class="guide-step">
+          <span class="guide-step-num">3</span>
+          <h3>Explore os modos</h3>
+          <p>Cada simulador tem modos ou módulos diferentes — ative um e ajuste os controles.</p>
+        </li>
+        <li class="guide-step">
+          <span class="guide-step-num">4</span>
+          <h3>Veja o resultado na hora</h3>
+          <p>O canvas e os painéis reagem em tempo real ao que você muda — sem esperar, sem recarregar.</p>
+        </li>
+      </ol>
     </section>
+
+    <!-- ════════ DESTAQUES — alguns exemplos, pra dar gosto de explorar ════════ -->
+    <section class="destaques" aria-labelledby="destaquesTitle">
+      <h2 class="section-title" id="destaquesTitle">Alguns exemplos</h2>
+      <div class="destaques-grid">
+        <a class="destaque-card" href="primeiroano/sitp/indexsitp.html" data-file="primeiroano/sitp/indexsitp.html">
+          <span class="destaque-badge">1º Ano</span>
+          <h3>Tabela Periódica</h3>
+          <p>Clique em qualquer elemento e veja fotos reais, raio atômico, distribuição eletrônica, diagramas de Bohr e Lewis.</p>
+          <span class="destaque-cta">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="destaque-card" href="segundoano/equilibrio/index.html" data-file="segundoano/equilibrio/index.html">
+          <span class="destaque-badge">2º Ano</span>
+          <h3>Equilíbrio Químico</h3>
+          <p>Acompanhe reações reversíveis atingindo o equilíbrio, com gráficos de concentração em tempo real.</p>
+          <span class="destaque-cta">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="destaque-card" href="primeiroano/sima/indexsima.html" data-file="primeiroano/sima/indexsima.html">
+          <span class="destaque-badge">1º Ano</span>
+          <h3>Modelos Atômicos</h3>
+          <p>De Dalton ao modelo quântico — veja como a ideia de átomo evoluiu, um modelo de cada vez.</p>
+          <span class="destaque-cta">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="destaque-card" href="terceiroano/indexcarbono.html" data-file="terceiroano/indexcarbono.html">
+          <span class="destaque-badge">3º Ano</span>
+          <h3>Química do Carbono</h3>
+          <p>Hibridizações, geometria molecular e as bases da química orgânica, de forma visual.</p>
+          <span class="destaque-cta">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ════════ ACESSIBILIDADE — diferencial do projeto ════════ -->
+    <section class="a11y-showcase" aria-labelledby="a11yShowcaseTitle">
+      <h2 class="section-title" id="a11yShowcaseTitle">Feito pra todo mundo</h2>
+      <p class="a11y-showcase-lead">Acessibilidade não é um extra aqui — as preferências ajustadas
+        no menu valem em qualquer simulador que você abrir, sem precisar configurar de novo.</p>
+      <ul class="a11y-showcase-list">
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Modo escuro e alto contraste</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Leitura simples</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Ajuste de tamanho de fonte e espaçamento</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Simulação de daltonismo (4 tipos)</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Suporte a Libras (VLibras)</li>
+        <li><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg> Totalmente navegável por teclado</li>
+      </ul>
+    </section>
+
   </main>
 
   <!-- Os 3 modais abaixo ficam DENTRO de .shell de propósito: assim
