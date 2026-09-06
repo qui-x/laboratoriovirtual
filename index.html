@@ -185,7 +185,7 @@
       </span>
     </div>
 
-    <button type="button" class="drawer-toggle" id="drawerToggle" hidden
+    <button type="button" class="drawer-toggle" id="drawerToggle"
             aria-haspopup="true" aria-expanded="false" aria-controls="appDrawer" aria-label="Abrir menu">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
     </button>
@@ -210,6 +210,13 @@
     </div>
 
     <div class="drawer-body">
+      <!-- Conta e Simuladores só fazem sentido depois do login (ver
+           identidade.js: mostrarMenuPrincipal()/esconderMenuPrincipal()
+           alternam este bloco). Acessibilidade fica DE FORA de
+           propósito — precisa continuar disponível mesmo na tela de
+           login, pra quem depende de alto contraste, fonte maior etc.
+           só pra conseguir usar o formulário de entrar. -->
+      <div id="drawerAuthOnlySection" hidden>
       <!-- Barra de identidade: some/aparece com a sessão (ver identidade.js) — mesmos ids de sempre, só mudou de lugar. -->
       <div class="identity-bar hidden" id="identity-bar">
         <span class="identity-status" id="identity-status-texto"></span>
@@ -359,6 +366,7 @@
       </div>
 
       </div>
+      </div><!-- /#drawerAuthOnlySection -->
 
       <div class="drawer-section">
         <p class="drawer-section-title">Preferências</p>
@@ -743,7 +751,7 @@
       <div class="destaques-grid">
         <a class="destaque-card" href="primeiroano/sitp/indexsitp.html" data-file="primeiroano/sitp/indexsitp.html">
           <div class="destaque-preview">
-            <iframe class="destaque-preview-frame" src="primeiroano/sitp/indexsitp.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+            <iframe class="destaque-preview-frame" data-src="primeiroano/sitp/indexsitp.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <span class="destaque-badge">1º Ano</span>
           <h3>Tabela Periódica</h3>
@@ -752,7 +760,7 @@
         </a>
         <a class="destaque-card" href="segundoano/equilibrio/index.html" data-file="segundoano/equilibrio/index.html">
           <div class="destaque-preview">
-            <iframe class="destaque-preview-frame" src="segundoano/equilibrio/index.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+            <iframe class="destaque-preview-frame" data-src="segundoano/equilibrio/index.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <span class="destaque-badge">2º Ano</span>
           <h3>Equilíbrio Químico</h3>
@@ -761,7 +769,7 @@
         </a>
         <a class="destaque-card" href="primeiroano/sima/indexsima.html" data-file="primeiroano/sima/indexsima.html">
           <div class="destaque-preview">
-            <iframe class="destaque-preview-frame" src="primeiroano/sima/indexsima.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+            <iframe class="destaque-preview-frame" data-src="primeiroano/sima/indexsima.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <span class="destaque-badge">1º Ano</span>
           <h3>Modelos Atômicos</h3>
@@ -770,7 +778,7 @@
         </a>
         <a class="destaque-card" href="terceiroano/indexcarbono.html" data-file="terceiroano/indexcarbono.html">
           <div class="destaque-preview">
-            <iframe class="destaque-preview-frame" src="terceiroano/indexcarbono.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
+            <iframe class="destaque-preview-frame" data-src="terceiroano/indexcarbono.html" title="Prévia ao vivo do simulador" tabindex="-1" aria-hidden="true" loading="lazy"></iframe>
           </div>
           <span class="destaque-badge">3º Ano</span>
           <h3>Química do Carbono</h3>

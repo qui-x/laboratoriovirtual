@@ -76,20 +76,28 @@ function encerrarSessaoLocal() {
 // existir ainda dependendo da ordem de carregamento dos scripts —
 // por isso os elementos são buscados de novo aqui, sem cache.
 function mostrarMenuPrincipal() {
-  var btn = document.getElementById('drawerToggle');
-  if (btn) btn.hidden = false;
+  // O botão em si (#drawerToggle) fica SEMPRE visível, mesmo na tela
+  // de login — é o único jeito de chegar em Acessibilidade antes de
+  // entrar, e isso precisa continuar funcionando pra quem depende de
+  // alto contraste/fonte maior só pra conseguir ler o formulário.
+  // Só a parte de Conta+Simuladores (que não faz sentido pré-login)
+  // liga/desliga aqui — ver #drawerAuthOnlySection no HTML.
+  var authOnly = document.getElementById('drawerAuthOnlySection');
+  if (authOnly) authOnly.hidden = false;
   // Aviso pra quem quiser reagir ao menu ficar disponível (hoje, só
   // o tour guiado da home — ver script.js) sem acoplar os dois
   // arquivos diretamente.
   window.dispatchEvent(new CustomEvent('quimix:menu-liberado'));
 }
 function esconderMenuPrincipal() {
-  var btn = document.getElementById('drawerToggle');
+  var authOnly = document.getElementById('drawerAuthOnlySection');
   var drawer = document.getElementById('appDrawer');
   var backdrop = document.getElementById('drawerBackdrop');
   if (drawer) { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); }
   if (backdrop) { backdrop.classList.remove('open'); backdrop.hidden = true; }
-  if (btn) { btn.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+  if (authOnly) authOnly.hidden = true;
+  var toggle = document.getElementById('drawerToggle');
+  if (toggle) toggle.setAttribute('aria-expanded', 'false');
 }
 
 // Esconde/mostra tudo que tem [data-papel="administrador"] — hoje

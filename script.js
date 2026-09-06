@@ -74,6 +74,19 @@
 
   function savePrefs(){
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+    atualizarPreviasIframe();
+  }
+
+  /* As prévias "ao vivo" da seção Alguns exemplos (iframes) carregam
+     o simulador de verdade — sem os parâmetros de acessibilidade na
+     URL, cada uma abria sempre no padrão (tema escuro), ignorando o
+     que a pessoa tinha acabado de escolher aqui. src fica vazio no
+     HTML de propósito (ver data-src) até essa função rodar, pra
+     nunca carregar com o estado errado primeiro pra só depois trocar. */
+  function atualizarPreviasIframe(){
+    document.querySelectorAll('.destaque-preview-frame[data-src]').forEach(function(frame){
+      frame.src = buildUrl(frame.dataset.src);
+    });
   }
   function loadPrefs(){
     try {
@@ -104,6 +117,7 @@
   html.setAttribute('data-colorblind', state.colorblind);
   html.style.setProperty('--font-scale', state.fontScale);
   applyColorblindFilter();
+  atualizarPreviasIframe();
 
   /* ---------- daltonismo: aplicado numa camada separada, não no body ---------- */
   function applyColorblindFilter(){
